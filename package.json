@@ -1,0 +1,19 @@
+{
+  "name": "library-ui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "nodemon --watch . --exec electron ."
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "electron": "^33.0.1",
+    "express": "^4.21.1",
+    "path": "^0.12.7"
+  }
+}
