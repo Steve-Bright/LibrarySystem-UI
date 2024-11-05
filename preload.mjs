@@ -1,7 +1,18 @@
 import{ contextBridge, ipcRenderer } from "electron";
 
-// Expose protected methods that allow the renderer process to use
-// the ipcRenderer without exposing the entire object
-contextBridge.exposeInMainWorld("windowapi", {
-    sendMessage: (channel, page) => ipcRenderer.send('navigate-to-page', "signIn.html")
-})
+const navigationFunction = {
+    toAnotherPage: (page) => ipcRenderer.send("navigate-to-page", page),
+}
+
+const alertBoxFunction = {
+    alertMsg: (message) => ipcRenderer.send("alertBox", message)
+}
+
+const sharingDataFunction = {
+    receiveData: ()=> ipcRenderer.sendSync("passingData"),
+    sendData: (data)=> ipcRenderer.send("sendingData", data)
+}
+
+contextBridge.exposeInMainWorld("navigationApi", navigationFunction)
+contextBridge.exposeInMainWorld("showMessageApi", alertBoxFunction)
+contextBridge.exposeInMainWorld("sharingDataApi", sharingDataFunction)

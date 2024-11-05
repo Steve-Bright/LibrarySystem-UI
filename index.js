@@ -1,12 +1,13 @@
-import {app, BrowserWindow, ipcMain} from "electron"
+import {app, BrowserWindow, ipcMain, dialog} from "electron"
 import path from "path"
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+let win;
 const createWindow = () => {
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
       width: 800,
       height: 600,
       webPreferences: {
@@ -15,27 +16,35 @@ const createWindow = () => {
         preload: path.join(__dirname, "preload.mjs")
       }
     })
-  
     win.loadFile('index.html')
-
-
     // win.removeMenu();
-    // win.webContents.openDevTools();
-  }
+    win.webContents.openDevTools();
+}
 
-  app.whenReady().then(() => {createWindow() })
-  console.log(__dirname)
+app.whenReady().then(() => {createWindow() })
   
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
 
 ipcMain.on('navigate-to-page', (event, page) => {
-  let win = BrowserWindow.getFocusedWindow()
-  win.loadFile(path.join(__dirname, "auth/signIn.html"))
-  // mainWindow.webContents.loadURL(`file://${__dirname}/auth/${page}`);
+  win = BrowserWindow.getFocusedWindow()
+  win.loadFile(path.join(__dirname, page))
 });
 
-const goToAnotherPage = () => {
-  
-}
+let sharedData; 
+
+ipcMain.on("sendingData", (event, data) => {
+  sharedData = data;
+})
+
+
+ipcMain.on("passingData", (event, args) => {
+  event.returnValue = sharedData
+})
+
+
+ipcMain.on("alertBox", (event, message) => {
+  win = BrowserWindow.getFocusedWindow();
+  dialog.showMessageBoxSync(win, {message: message})
+})

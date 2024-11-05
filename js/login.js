@@ -6,10 +6,14 @@ loginForm.addEventListener("submit", async(e) => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const {statusCode, response} = await login(email, password)
-    alert(response.msg)
-    if(statusCode == 200){
-        
+    window.showMessageApi.alertMsg(response.msg)
+
+    if(statusCode === 200){
+        // window.navigationApi.sendData("swamhtet-testing123")
+        window.sharingDataApi.sendData(email)
+        window.navigationApi.toAnotherPage("homepage.html")
     }
+ 
 })
 
 async function login(email, password){
