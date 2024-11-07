@@ -9,9 +9,9 @@ loginForm.addEventListener("submit", async(e) => {
     window.showMessageApi.alertMsg(response.msg)
 
     if(statusCode === 200){
-        // window.navigationApi.sendData("swamhtet-testing123")
+        window.cookieApi.setCookie(response.result.token)
         window.sharingDataApi.sendData(email)
-        window.navigationApi.toAnotherPage("homepage.html")
+        window.navigationApi.toAnotherPage("index.html")
     }
  
 })
