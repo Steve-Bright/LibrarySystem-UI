@@ -1,12 +1,16 @@
 const navigationPanel = document.getElementById('navigationPanel')
 
 navigationPanel.innerHTML = `
-    <span id="dashboardPage">Dashboard</span>
-    <span id="collectionPage">Collection</span>
-    <span id="membersPage">Members</span>
-    <span id="listsPage">Lists</span>
-    <span id="settingsPage">Settings</span>
-    <span id="signOut">SignOut</span>
+    <div id="logoTitle">Kayin Gyi <br> Library</div>
+    <div id="navigationPages">
+        <div class="navigationTitle">Dashboard</div>
+        <div class="navigationTitle">Collection</div>
+        <div class="navigationTitle">Members</div>
+        <div class="navigationTitle">Lists</div>
+        <div class="navigationTitle">Settings</div>
+        <div class="navigationTitle">SignOut</div>
+    </div>
+    <div id="whiteSpace"></div>
 `
 
 
