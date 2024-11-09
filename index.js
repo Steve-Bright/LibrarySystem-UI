@@ -11,7 +11,10 @@ const createWindow = () => {
     win = new BrowserWindow({
       // width: 800,
       // height: 600,
-      maximizable: false,
+      resizable: false,  
+      titleBarStyle: 'hidden', // or 'hiddenInset' if you want a slimmer title bar
+      frame: false,             // This removes the default frame, making it non-resizable.
+      resizable: false  ,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: true,
