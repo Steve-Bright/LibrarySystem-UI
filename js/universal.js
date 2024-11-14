@@ -39,7 +39,9 @@ navigationPanel.innerHTML = `
             SignOut
         </div>
     </div>
-    <div id="whiteSpace"></div>
+    <div id="whiteSpace">
+        Server Status
+    </div>
 `
 
 const pageIds = [

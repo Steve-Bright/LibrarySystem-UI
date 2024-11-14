@@ -4,8 +4,112 @@
     </head>
 
     <body>
-        <p id="navigationPanel"  class="loansSelector"></p>
-        <h1>This is loan page</h1>
+        <div id="navigationPanel"  class="loansSelector"></div>
+        <main>
+            <h1>Book Loan</h1>
+
+            <div class="subTitle">
+                <h2>Search Loan</h2>
+                <button>Borrow</button>
+            </div>
+
+            <div id="searchLoanDiv">
+                <form>
+                    <label for="accNo">Account No.</label>
+                    <input type="text" name="accNoInput">
+                    
+                    <label for="memberId">Member Id</label>
+                    <input type="text" name="memberIdInput">
+
+                    <br>
+
+                    <label for="bookName">Book Name</label>
+                    <input type="text" name="bookNameInput">
+
+                    <label for="memberName">Member Name</label>
+                    <input type="text" name="memberNameInput">
+
+                    <br>
+
+                    <label for="borrowDate">Borrow Date</label>
+                    <input type="text" name="borrowDateInput">
+
+                    <label for="dueDate">Due Date</label>
+                    <input type="text" name="dueDateInput">
+
+                    <br>
+
+                    <input type="reset" value="Clear All">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+
+            <div>
+                <h2>Overdue (999)</h2>
+                <table>
+                    <tr>
+                        <th>Member Id</th>
+                        <th>Member Name</th>
+                        <th>Book Category</th>
+                        <th>Book Name</th>
+                        <th>Call No</th>
+                        <th>Borrow Date</th>
+                        <th>Due Date</th>
+                        <th></th>
+                    </tr>
+
+                    <div id="loanOverdueData">
+                        <tr>
+                            <td colspan="7">No loan that are overdue today</td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+
+            <div>
+                <h2>Today Deadline (999)</h2>
+                <table>
+                    <tr>
+                        <th>Member Id</th>
+                        <th>Member Name</th>
+                        <th>Book Category</th>
+                        <th>Book Name</th>
+                        <th>Call No</th>
+                        <th>Borrow Date</th>
+                        <th>Due Date</th>
+                        <th></th>
+                    </tr>
+
+                    <div id="loanDeadlineData">
+                        <tr>
+                            <td colspan="7">No loan that are deadline today</td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+
+            <div>
+                <h2>Total Loans (999)</h2>
+                <table>
+                    <tr>
+                        <th>Member Id</th>
+                        <th>Member Name</th>
+                        <th>Book Category</th>
+                        <th>Book Name</th>
+                        <th>Call No</th>
+                        <th>Borrow Date</th>
+                        <th>Due Date</th>
+                        <th></th>
+                    </tr>
+
+                    <div id="loanOverdueData">
+                        <tr>
+                            <td colspan="7">No loans at the moment</td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+        </main>
 
     </body>
 

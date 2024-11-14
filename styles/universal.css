@@ -28,6 +28,11 @@ body{
     font-family: 'Inria_Sans';
 }
 
+main{
+    max-width: 70vh;
+    margin: 3em 0 0 1em
+}
+
 #logoTitle{
     text-align: left;
     font-weight: bold;

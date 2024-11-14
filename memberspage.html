@@ -4,8 +4,71 @@
     </head>
 
     <body>
-        <p id="navigationPanel" class="membersSelector"></p>
-        <h1>This is members page</h1>
+        <div id="navigationPanel" class="membersSelector"></div>
+        <main>
+            <h1>Members</h1>
+
+            <div class="subTitle">
+                <h2>Search Members</h2>
+                <button>Add Member</button>
+            </div>
+
+            <div id="searchMemberDiv">
+                <form>
+                    <label for="memberName">Name</label>
+                    <input type="text" name="memberNameInput">
+                    
+                    <label for="memberType">Member Type</label>
+                    <select name="memberTypeSelect">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="operation">Operation</option>
+                    </select>
+
+                    <br>
+
+                    <label for="memberId">Member Id</label>
+                    <input type="text" name="memberIdInput">
+
+                    <label for="grade">Grade</label>
+                    <input type="text" name="gradeInput">
+
+                    <br>
+
+                    <input type="reset" value="Clear All">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+
+            <div id="filterDiv">
+                <span>Filter -</span>
+                <div>All</div>
+                <div>Teacher</div>
+                <div>Operation</div>
+            </div>
+
+            <div>
+                <h2>Members (999)</h2>
+                <table>
+                    <tr>
+                        <th>Member Id</th>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Role</th>
+                        <th>Phone</th>
+                        <th>Expire Date</th>
+                        <th></th>
+                    </tr>
+
+                    <div id="memberData">
+                        <tr>
+                            <td colspan="7">No Members at the moment. please add first</td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+        </main>
 
     </body>
 
