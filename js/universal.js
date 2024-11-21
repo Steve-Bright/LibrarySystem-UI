@@ -39,7 +39,9 @@ navigationPanel.innerHTML = `
             SignOut
         </div>
     </div>
-    <div id="whiteSpace"></div>
+    <div id="whiteSpace">
+        Server Status
+    </div>
 `
 
 const pageIds = [
@@ -66,7 +68,7 @@ const pageSelectors = [
 
 pageIds.forEach((pageId, i) => {
     const pageButton = document.getElementById(pageId)
-    console.log(pageId, pageButton); 
+    // console.log(pageId, pageButton); 
     pageButton.addEventListener("click", ()=> {
         window.navigationApi.toAnotherPage(pageHtmls[i])
     })
@@ -85,14 +87,16 @@ signOutButton.addEventListener('click', ()=> {
         window.location.reload();
         window.cookieApi.signOut();
     })
-
+let token;
 document.addEventListener("DOMContentLoaded", async() => {
     const {statusCode} = window.cookieApi.checkCookie();
-    console.log("This is your status code " + statusCode)
     if(statusCode == 200){
+        token = await window.cookieApi.getCookie()
         // window.showMessageApi.alertMsg("you have a token")
     }else{
         // window.showMessageApi.alertMsg("you don't have a token")
         window.navigationApi.toAnotherPage("signIn.html")
     }
 })
+
+export default token;

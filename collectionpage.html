@@ -1,14 +1,75 @@
 <!DOCTYPE html> 
     <head>
         <link rel="stylesheet" href="styles/universal.css">
+        <link rel="stylesheet" href="styles/collection.css">
     </head>
 
     <body>
-        <p id="navigationPanel" class="collectionSelector"></p>
-        <h1>This is collection page</h1>
+        <div id="navigationPanel" class="collectionSelector"></div>
+        
+        <main>
+            <h1>Collections</h1>
+            <select name="collection-type" id="collectionCategory">
+                <option value="english">English</option>
+                <option value="myanmar">Myanmar</option>
+            </select>
 
+            <div class="subTitle">
+                <h2>Search Book</h2>
+                <button onclick="window.print()">Call No.</button>
+                <button id="addBookBtn">Add Book</button>
+            </div>
+            
+            <div id="searchBookDiv">
+                <form>
+                    <label for="bookTitle">Book Title</label>
+                    <input type="text" name="bookTitleInput">
+                    
+                    <label for="accNo">Acc No</label>
+                    <input type="text" name="accNoInput">
+
+                    <br>
+
+                    <label for="author">Author</label>
+                    <input type="text" name="authorInput">
+
+                    <label for="isbn">ISBN</label>
+                    <input type="text" name="isbnInput">
+
+                    <br>
+
+                    <label for="classNo">Class No</label>
+                    <input type="text" name="classNoInput">
+
+                    <label for="publisher">Publisher</label>
+                    <input type="text" name="publisherInput">
+
+                    <input type="reset" value="Clear All">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+
+            <div class="tableFormat">
+                <div class="tableTitle">
+                    <h2>Books (999)</h2>
+                    <div>
+                        <img src="./assets/arrow.png" class="backButton">
+                        <img src="./assets/arrow_right.png" class="backButton">
+                    </div>
+                </div>
+                
+                <table>
+                    <thead id="bookDataHeadings">
+                    </thead>
+
+                    <tbody id="bookData">
+                    </tbody>
+                </table>
+            </div>
+        </main>
     </body>
 
-    <script src="./js/universal.js" defer></script>
+    <script src="./js/universal.js" defer type="module"></script>
+    <script src="./js/collectionpage.js" defer type="module"></script>
     
 </html>

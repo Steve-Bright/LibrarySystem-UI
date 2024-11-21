@@ -1,0 +1,13 @@
+.tableFormat th:nth-child(2) {
+    width: 10em;
+    border: 1px solid black;
+}
+
+.tableFormat td {
+    min-height: 20em;
+    box-sizing: border-box;
+}
+
+.displayBookCover{
+    width: 95%;
+}

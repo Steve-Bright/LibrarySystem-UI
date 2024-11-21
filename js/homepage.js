@@ -1,3 +1,3 @@
 
 const borrowsEl = document.getElementById("borrows")
-// borrowsEl.innerHTML = window.sharingDataApi.receiveData();
+// console.log("home page data: " +  JSON.stringify(await window.cookieApi.getCookie())) 
