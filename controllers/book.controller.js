@@ -15,8 +15,8 @@ export async function addBookFunction(BookFormatData){
     return (await res.json());
 }
 
-export async function getAllBooksFunction(category){
-    const res = await fetch(getBookEndpoint(category), {
+export async function getAllBooksFunction(category, page){
+    const res = await fetch(getBookEndpoint(category, page), {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -9,9 +9,15 @@ const collectionCategory = document.getElementById("collectionCategory")
 const bookDataHeadings = document.getElementById("bookDataHeadings")
 const categorySelect = document.getElementById("category")
 const filePath = window.imagePaths.shareFilePath();
+const collectionNavigationArea = document.getElementById("collectionNavigationArea")
+
+const totalData = document.getElementById("totalData")
 
 let category = true
 let addBookCategory = true;
+let index = 1;
+
+
 if(bookDataHeadings){
     updateBookData(category)
 }
@@ -59,7 +65,6 @@ if(backToCollection){
 
 if(addBookFormEl){
     addBookFormEl.addEventListener("submit", async(e)=> {
-        const imagePlaceholderEl = document.getElementById("imagePlaceholder")
         e.preventDefault();
         const myBook = new Book({
             bookCover: document.getElementById("bookCover").files[0],
@@ -91,9 +96,9 @@ if(addBookFormEl){
     })
 }
 
-async function updateBookData(booleanValue){
+async function updateBookData(booleanValue, page = 1){
     let categoryData = booleanValue ? "english" : "myanmar"; 
-    let result = await getAllBooksFunction(categoryData)
+    let result = await getAllBooksFunction(categoryData, page)
     if(categoryData == "english"){
         bookDataHeadings.innerHTML = `
             <tr>
@@ -121,6 +126,27 @@ async function updateBookData(booleanValue){
         `
     }
 
+    let totalLength = result.result.totalItems;
+    let totalPages = result.result.totalPages;
+    totalData.innerHTML = `Books (${totalLength})`
+
+    
+    if(totalPages > 1) {
+        if(page == 1){
+            buildCollectionNavigation(collectionNavigationArea, false, true)
+        }else if(page === totalPages){
+            console.log("Does this condition work?")
+            buildCollectionNavigation(collectionNavigationArea, true, false)
+        }else{
+            console.log("Total pagess from server " + typeof totalPages + "current page: " + typeof page)
+            buildCollectionNavigation(collectionNavigationArea, true, true)
+        }
+    }else{
+        buildCollectionNavigation(collectionNavigationArea, false, false)
+    }
+
+    
+
     let totalBookData = result.result.items;
     if (totalBookData.length > 0 ){
         bookDataEl.innerHTML= ``
@@ -130,7 +156,6 @@ async function updateBookData(booleanValue){
             newRow.innerHTML = 
                 `
                     <td>${eachBook.accNo}</td>
-                    <!-- <td>image here </td> -->
                     <td><img src="${imagePath}" class="displayBookCover"></td> 
                     <td>${eachBook.bookTitle}
                     <td>${eachBook.sor}</td>
@@ -145,6 +170,44 @@ async function updateBookData(booleanValue){
         bookDataEl.innerHTML = `
             <tr> <td colspan="7"> There are no books at the moment </td> </tr>
         `
+    }
+    
+}
+
+function buildCollectionNavigation(area, backward, forward){
+    area.innerHTML = ``
+
+    if(backward == true){
+        const backwardButton = document.createElement("img")
+        backwardButton.src = "./assets/arrow.png"
+        backwardButton.classList.add("backButton")
+        backwardButton.id = "collectionBackward"
+        area.appendChild(backwardButton)
+    } 
+
+    if(forward == true){
+        const forwardButton = document.createElement("img")
+        forwardButton.src = "./assets/arrow_right.png"
+        forwardButton.classList.add("backButton")
+        forwardButton.id = "collectionForward"
+        area.appendChild(forwardButton)
+    }
+
+    const collectionBackward = document.getElementById("collectionBackward")
+    const collectionForward = document.getElementById("collectionForward")
+    
+    if(collectionForward){
+        collectionForward.addEventListener("click", () => {
+            index++;
+            updateBookData(category, index)
+        })
+    }
+    
+    if(collectionBackward){
+        collectionBackward.addEventListener("click", () => {
+            index --;
+            updateBookData(category, index)
+        })
     }
     
 }
