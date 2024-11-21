@@ -1,12 +1,17 @@
 // ipcHandlers.js
 import { ipcMain, dialog, session, BrowserWindow } from "electron";
 import path from "path";
+import os from "os"
 import { fileURLToPath } from 'url';
 import { mainWebsite } from "./utils/links.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 let sharedData;
+
+// const kayinGyiDirectory = os.homedir() + "/KayinGyi/";
+// const kayinGyiBooks = kayinGyiDirectory + "books/";
+// const kayinGyiMembers = kayinGyiDirectory + "members/"
 
 export default function setupIpcHandlers(win) {
   ipcMain.on("navigate-to-page", (event, page) => {
@@ -17,6 +22,10 @@ export default function setupIpcHandlers(win) {
   ipcMain.on("sendingData", (event, data) => {
     sharedData = data;
   });
+
+  ipcMain.on("sharingPath", (event, data) => {
+    event.returnValue = os.homedir();
+  })
 
   ipcMain.on("passingData", (event, args) => {
     event.returnValue = sharedData;
@@ -39,6 +48,14 @@ export default function setupIpcHandlers(win) {
       });
   });
 
+  ipcMain.on("getCookies", (event, data) => {
+    session.defaultSession.cookies.get({url: mainWebsite, name: "token"})
+      .then((cookies) => {
+        event.reply("getCookiesResponse", cookies);
+      })
+    
+  })
+
   ipcMain.on("checkCookies", (event, data) => {
     session.defaultSession.cookies
       .get({ url: mainWebsite, name: "token" })
@@ -46,7 +63,6 @@ export default function setupIpcHandlers(win) {
         if(cookies.length === 0){
             event.returnValue = { statusCode: 403}
         }else{
-            console.log("This is the cookie " + JSON.stringify(cookies))
             event.returnValue = { statusCode: 200}
         }
       })

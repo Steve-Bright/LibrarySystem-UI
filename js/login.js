@@ -10,7 +10,7 @@ loginForm.addEventListener("submit", async(e) => {
 
     if(statusCode === 200){
         window.cookieApi.setCookie(response.result.token)
-        window.sharingDataApi.sendData(email)
+        window.sharingDataApi.sendData(response.result.userData)
         window.navigationApi.toAnotherPage("index.html")
     }
  

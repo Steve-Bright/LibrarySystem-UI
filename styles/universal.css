@@ -18,7 +18,7 @@ body{
 }
 
 #navigationPanel{
-    width: 30vh;
+    width: 17%;
     height: 100vh;
     display: grid;
     grid-template-rows: 0.7fr 3fr 1fr;
@@ -26,11 +26,13 @@ body{
     background-color: #1E3FAD;
     color: var(--navigation-color);
     font-family: 'Inria_Sans';
+    position: fixed;
 }
 
 main{
-    max-width: 70vh;
-    margin: 3em 0 0 1em
+    width: 100%;
+    min-height: 100vh;
+    padding: 3em 0 0 15em
 }
 
 #logoTitle{
@@ -67,4 +69,36 @@ main{
 .navigationTitle:hover{
     cursor: pointer;
     background-color: #153399;
+}
+
+.backButton{
+    width: 4vh
+}
+
+.backButton:hover{
+    cursor: pointer;
+}
+
+.tableFormat{
+    width: 100%;
+    border: 3px;
+}
+
+.tableFormat table{
+    width: 100%;
+}
+
+.tableTitle {
+    display: flex;
+}
+
+.tableTitle h2{
+    background-color: red;
+    float: left;
+}
+
+.tableTitle div{
+    margin-left: auto;
+    margin-right: 1em;
+    align-items: flex-end;
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html> 
     <head>
         <link rel="stylesheet" href="styles/universal.css">
+        <link rel="stylesheet" href="styles/collection.css">
     </head>
 
     <body>
@@ -8,14 +9,15 @@
         
         <main>
             <h1>Collections</h1>
-            <select name="collection-type">
+            <select name="collection-type" id="collectionCategory">
                 <option value="english">English</option>
                 <option value="myanmar">Myanmar</option>
             </select>
 
             <div class="subTitle">
                 <h2>Search Book</h2>
-                <button>Add Book</button>
+                <button onclick="window.print()">Call No.</button>
+                <button id="addBookBtn">Add Book</button>
             </div>
             
             <div id="searchBookDiv">
@@ -47,30 +49,27 @@
                 </form>
             </div>
 
-            <div>
-                <h2>Books (999)</h2>
-                <table>
-                    <tr>
-                        <th>Acc No.</th>
-                        <th>Book Cover</th>
-                        <th>Book Title</th>
-                        <th>Author</th>
-                        <th>Class No</th>
-                        <th>ISBN</th>
-                        <th>Publisher</th>
-                        <th></th>
-                    </tr>
-
-                    <div id="bookData">
-                        <tr>
-                            <td colspan="7">No Books at the moment. please add first</td>
-                        </tr>
+            <div class="tableFormat">
+                <div class="tableTitle">
+                    <h2>Books (999)</h2>
+                    <div>
+                        <img src="./assets/arrow.png" class="backButton">
+                        <img src="./assets/arrow_right.png" class="backButton">
                     </div>
+                </div>
+                
+                <table>
+                    <thead id="bookDataHeadings">
+                    </thead>
+
+                    <tbody id="bookData">
+                    </tbody>
                 </table>
             </div>
         </main>
     </body>
 
-    <script src="./js/universal.js" defer></script>
+    <script src="./js/universal.js" defer type="module"></script>
+    <script src="./js/collectionpage.js" defer type="module"></script>
     
 </html>
