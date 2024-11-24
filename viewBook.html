@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="styles/universal.css">
+        <link rel="stylesheet" href="styles/collection.css">
+    </head>
+
+    <body>
+        <div id="navigationPanel" class="collectionSelector"></div>
+        <main>
+            <div id="backToCollection">
+                <img src="./assets/arrow.png" class="backButton">
+            </div>
+            
+            <h2>Collection / Book Details</h2>
+
+            <form id="viewBookForm">
+                <label for="bookCover">Book Cover</label>
+                <!-- <input type="file" id="bookCover"> -->
+                <img alt="image-preview" id="viewBookCover">
+
+                <label for="category">Category</label>
+                <input type="text" id="category">
+                <br>
+            
+                <label for="accNo">Acc No.</label>
+                <input type="text" id="accNo" name="accNo">
+                <br>
+            
+                <label for="bookTitle">Book Title</label>
+                <input type="text" id="bookTitle" name="bookTitle">
+                <br>
+            
+                <label for="subTitle">Sub Title</label>
+                <input type="text" id="subTitle" name="subTitle">
+                <br>
+            
+                <label for="parallelTitle">Parallel Title</label>
+                <input type="text" id="parallelTitle" name="parallelTitle">
+                <br>
+            
+                <label for="initial">Initial</label>
+                <input type="text" id="initial" name="initial">
+                <br>
+            
+                <label for="classNo">Class No.</label>
+                <input type="text" id="classNo" name="classNo">
+                <br>
+            
+                <label for="callNo">Call No.</label>
+                <input type="text" id="callNo" name="callNo">
+                <br>
+
+                <div id="isbnArea">
+                    
+                </div>
+            
+                <label for="statementOfResponsibility">Statement of Responsibility</label>
+                <input type="text" id="statementOfResponsibility" name="statementOfResponsibility">
+                <br>
+            
+                <label for="author1">Author 1</label>
+                <input type="text" id="author1" name="author1">
+                <br>
+            
+                <label for="author2">Author 2</label>
+                <input type="text" id="author2" name="author2">
+                <br>
+            
+                <label for="author3">Author 3</label>
+                <input type="text" id="author3" name="author3">
+                <br>
+            
+                <label for="other">Other</label>
+                <input type="text" id="other" name="other">
+                <br>
+            
+                <label for="translator">Translator</label>
+                <input type="text" id="translator" name="translator">
+                <br>
+            
+                <label for="pagination">Pagination</label>
+                <input type="text" id="pagination" name="pagination">
+                <br>
+            
+                <label for="size">Size</label>
+                <input type="text" id="size" name="size">
+                <br>
+            
+                <label for="illustrationType">Illustration Type</label>
+                <input type="text" id="illustrationType" name="illustrationType">
+                <br>
+            
+                <label for="seriesTitle">Series Title</label>
+                <input type="text" id="seriesTitle" name="seriesTitle">
+                <br>
+            
+                <label for="seriesNo">Series No.</label>
+                <input type="text" id="seriesNo" name="seriesNo">
+                <br>
+            
+                <label for="cdDvd">Included CD/DVD</label>
+                <input type="text" id="cdDvd" name="cdDvd">
+                <br>
+            
+                <label for="subjectHeadings">Subject Headings</label>
+                <input type="text" id="subjectHeadings" name="subjectHeadings">
+                <br>
+            
+                <label for="edition">Edition</label>
+                <input type="text" id="edition" name="edition">
+                <br>
+            
+                <label for="editor">Editor</label>
+                <input type="text" id="editor" name="editor">
+                <br>
+            
+                <label for="place">Place</label>
+                <input type="text" id="place" name="place">
+                <br>
+            
+                <label for="publisher">Publisher</label>
+                <input type="text" id="publisher" name="publisher">
+                <br>
+            
+                <label for="year">Year</label>
+                <input type="text" id="year" name="year">
+                <br>
+            
+                <label for="keywords">Keywords</label>
+                <input type="text" id="keywords" name="keywords">
+                <br>
+            
+                <label for="summary">Summary</label>
+                <textarea id="summary" name="summary"></textarea>
+                <br>
+            
+                <label for="notes">Notes</label>
+                <textarea id="notes" name="notes"></textarea>
+                <br>
+            
+                <label for="source">Source</label>
+                <input type="text" id="source" name="source">
+                <br>
+            
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price">
+                <br>
+            
+                <label for="donor">Donor of this book</label>
+                <input type="text" id="donor" name="donor">
+                <br>
+            
+                <label for="catalogOwner">Catalog Owner</label>
+                <input type="text" id="catalogOwner" name="catalogOwner">
+                <br>
+        
+            </form>
+            <button>Loan History</button>
+               
+            <button>Borrow</button>
+
+            <button>Delete Book</button>
+
+            <button>Edit Book</button>
+        </main>
+        <script src="./js/universal.js" defer type="module"></script>
+        <script src="./js/collectionpage.js" defer type="module"></script>
+    </body>
+</html>

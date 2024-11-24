@@ -11,3 +11,10 @@
 .displayBookCover{
     width: 95%;
 }
+#viewBookCover{
+    width: 100px;
+}
+
+#viewBookForm input, textarea{
+    border: none;
+}

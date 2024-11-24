@@ -7,5 +7,6 @@ export const checkCookieEndpoint = apiEndpoint + "cookie/check"
 //book related functions
 export const addBookEndpoint = `${apiEndpoint}book/addBook`
 export const editBookEndpoint = `${apiEndpoint}book/editBook`
-export const getBookEndpoint = (category, page) =>  `${apiEndpoint}book/getBook?category=${category}&page=${page}`
+export const getBookDetailEndpoint = (category, bookId) => `${apiEndpoint}book/getBook?category=${category}&bookId=${bookId}`
+export const getBookEndpoint = (category, page) =>  `${apiEndpoint}book/getAllBooks?category=${category}&page=${page}`
 export const deleteBookEndpoint = (category, bookId) => `${apiEndpoint}book/deleteBook/?category=${category}&bookId=${bookId}`
