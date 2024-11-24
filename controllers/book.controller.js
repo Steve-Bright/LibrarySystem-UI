@@ -1,4 +1,4 @@
-import {addBookEndpoint, getBookEndpoint} from "../utils/links.js"
+import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint} from "../utils/links.js"
 
 const token = await window.cookieApi.getCookie()
 
@@ -22,6 +22,18 @@ export async function getAllBooksFunction(category, page){
             "Content-Type": "application/json",
             authorization: `Bearer ${token[0].value}`,
         }
+    })
+
+    return (await res.json())
+}
+
+export async function getDetailedBook(category, bookId){
+    const res = await fetch(getBookDetailEndpoint(category, bookId), {
+        method: "GET", 
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`,
+        },
     })
 
     return (await res.json())
