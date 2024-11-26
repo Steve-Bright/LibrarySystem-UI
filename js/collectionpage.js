@@ -1,5 +1,5 @@
 import Book from "../utils/book.model.mjs"
-import {addBookFunction, getAllBooksFunction, getDetailedBook} from "../controllers/book.controller.js"
+import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook} from "../controllers/book.controller.js"
 
 const addBookBtn = document.getElementById("addBookBtn")
 const backToCollection = document.getElementById("backToCollection")
@@ -13,9 +13,11 @@ const collectionNavigationArea = document.getElementById("collectionNavigationAr
 const viewBookForm = document.getElementById("viewBookForm")
 // const viewBookFormField = document.querySelectorAll("#viewBookForm input,  textarea")
 const viewBookCover = document.getElementById("viewBookCover")
-
+const imagePreviewArea = document.getElementById("imagePreviewArea")
+const editBookButton = document.getElementById("editBookButton")
+const editButtonsArea = document.getElementById("editButtonsArea")
 const totalData = document.getElementById("totalData")
-
+const deleteBookButton = document.getElementById("deleteBookButton")
 let category = true
 let addBookCategory = true;
 let index = 1;
@@ -36,6 +38,30 @@ if(backToCollection){
     console.log("doesnt this catch this function as well?")
     backToCollection.addEventListener("click", () => {
         window.navigationApi.toAnotherPage("collectionpage.html")
+    })
+}
+
+if(deleteBookButton){
+    deleteBookButton.addEventListener('click', () =>{
+        // let result
+         window.showMessageApi.confirmMsg("Do you really want to delete?")
+    })
+
+    window.showMessageApi.dialogResponse(async(event, response) =>{
+        // console.log("this is their response "+ response)
+        let bookDetail = localStorage.getItem("detailedBookData")
+        bookDetail = JSON.parse(bookDetail)
+        if(!response){
+            const result = await deleteBook(bookDetail.category, bookDetail._id)
+            window.showMessageApi.alertMsg(result.msg)
+        }
+    })
+}
+
+if(editBookButton){
+    editBookButton.addEventListener("click", () => {
+        updateEditBookUi();
+        // window.navigationApi.toAnotherPage("editBook.html")
     })
 }
 
@@ -102,10 +128,6 @@ if(addBookFormEl){
     
     })
 }
-
-
-
-
 
 async function updateBookData(booleanValue, page = 1){
     let categoryData = booleanValue ? "english" : "myanmar"; 
@@ -240,7 +262,7 @@ function viewDetailedBookFunction(category, bookIds){
 function updateBookDetail(){
     let bookDetail = localStorage.getItem("detailedBookData")
     let myBook = new Book(JSON.parse(bookDetail))
-    delete myBook.id;
+    delete myBook.bookId;
     if(myBook["category"] == "english"){
         isbnArea.innerHTML = `
                     <label for="isbn">ISBN</label>
@@ -248,18 +270,85 @@ function updateBookDetail(){
                     <br>
                     `
     }
-    const viewInputs = document.querySelectorAll("#viewBookForm input, textarea")
+    const viewInputs = document.querySelectorAll("#viewBookForm input, #viewInputs textarea")
+    
     let index = 0;
+    // console.log(JSON.stringify(myBook))
 
         Object.keys(myBook).forEach((eachKey) => {
              if(eachKey == "bookCover"){
                 viewBookCover.src=filePath + myBook[eachKey]
                 
-            }else{
+            }else if(eachKey == "isbn"){
+                const isbnInput = document.getElementById("isbn")
+                isbnInput.value = myBook[eachKey]
+                index++
+            }
+            else{
                 viewInputs[index].value = myBook[eachKey] ? myBook[eachKey] : "-"
                 index++
             }
 
 
         })
+}
+
+function updateEditBookUi(){
+    viewBookForm.id = ""
+    viewBookForm.id = "editBookForm"
+
+    editButtonsArea.innerHTML = `<button type="submit">Edit</button>`
+    const removeImageButton = document.createElement("button");
+    removeImageButton.id = "removeImage";
+    removeImageButton.textContent = "remove";
+    imagePreviewArea.appendChild(removeImageButton);
+
+    const editBookForm = document.getElementById("editBookForm")
+    const removeImage = document.getElementById("removeImage")
+    const editBookFormField = document.querySelectorAll("#editBookForm input,  textarea")
+    let newBook = new Book({})
+    delete newBook.bookId;
+    delete newBook.bookCover;
+
+    const bookKeys =  Object.keys(newBook);
+
+    removeImage.addEventListener('click', () => {
+        viewBookCover.remove();
+        imagePreviewArea.innerHTML = `
+             <input type="file" id="bookCover"> 
+        `
+        const bookCoverImage = document.getElementById("bookCover")
+        bookCoverImage.addEventListener('change', () => {
+            newBook.bookCover = filePath + bookCoverImage.files[0]
+        })
+    })
+
+    editBookFormField.forEach((eachInput, i ) => {
+        eachInput.addEventListener("change", () => {
+            // console.log("input is detected")
+            newBook[bookKeys[i]] = eachInput.value;
+        })
+    })
+
+    let bookDetail = localStorage.getItem("detailedBookData")
+    bookDetail = JSON.parse(bookDetail)
+    newBook.category = bookDetail.category
+    newBook.bookId = bookDetail._id
+
+    editBookForm.addEventListener("submit", async(e) => {
+        e.preventDefault();
+        const formData = new FormData()
+        // console.log("This is testing little bro "  + JSON.stringify(newBook))
+        for(let key in newBook){
+            
+            if(newBook.hasOwnProperty(key)){
+                if(newBook[key] !== undefined){
+                    // console.log("each key: " + key + " and value: " + newBook[key])
+                    formData.append(key, newBook[key])
+                }
+            }
+        }
+        let result = await editBook(formData)
+        window.showMessageApi.alertMsg(result.msg)
+    })
 }

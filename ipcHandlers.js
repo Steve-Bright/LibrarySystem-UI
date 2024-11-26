@@ -36,6 +36,21 @@ export default function setupIpcHandlers(win) {
     dialog.showMessageBoxSync(currentWindow, { message: message });
   });
 
+  ipcMain.on("openDialog", (event, message) =>{
+    const currentWindow = win || BrowserWindow.getFocusedWindow();
+    dialog.showMessageBox(currentWindow, 
+      {message: message,
+        buttons: ["yes", "no"]
+      })
+  .then((result) => {
+    try{
+      console.log("this is the result: " + JSON.stringify(result))
+      event.sender.send("dialogResponse", result.response);
+    }catch(error){
+      console.log("error in openDialog ipcMain: " + error)
+    }
+  })})
+
   ipcMain.on("setCookies", (event, data) => {
     const cookie = { url: mainWebsite, name: "token", value: data, expirationDate: (Date.now() / 1000) + (7 * 24 * 60 * 60), httpOnly: true, secure: false};
     session.defaultSession.cookies

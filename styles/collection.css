@@ -15,6 +15,7 @@
     width: 100px;
 }
 
-#viewBookForm input, textarea{
+#viewBookForm input, #viewBookForm textarea{
     border: none;
+    pointer-events: none;
 }

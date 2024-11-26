@@ -15,8 +15,11 @@
 
             <form id="viewBookForm">
                 <label for="bookCover">Book Cover</label>
-                <!-- <input type="file" id="bookCover"> -->
-                <img alt="image-preview" id="viewBookCover">
+                
+                <div id="imagePreviewArea">
+                    <!-- <input type="file" id="bookCover"> -->
+                    <img alt="image-preview" id="viewBookCover">
+                </div>
 
                 <label for="category">Category</label>
                 <input type="text" id="category">
@@ -49,14 +52,14 @@
                 <label for="callNo">Call No.</label>
                 <input type="text" id="callNo" name="callNo">
                 <br>
-
-                <div id="isbnArea">
-                    
-                </div>
             
                 <label for="statementOfResponsibility">Statement of Responsibility</label>
                 <input type="text" id="statementOfResponsibility" name="statementOfResponsibility">
                 <br>
+
+                <div id="isbnArea">
+                    
+                </div>
             
                 <label for="author1">Author 1</label>
                 <input type="text" id="author1" name="author1">
@@ -153,15 +156,20 @@
                 <label for="catalogOwner">Catalog Owner</label>
                 <input type="text" id="catalogOwner" name="catalogOwner">
                 <br>
+
+                <div id="editButtonsArea">
+                    <button>Loan History</button>
+                   
+                    <button>Borrow</button>
+    
+                    <button id="deleteBookButton">Delete Book</button>
+    
+                    <button id="editBookButton">Edit Book</button>
+                </div>
         
             </form>
-            <button>Loan History</button>
-               
-            <button>Borrow</button>
-
-            <button>Delete Book</button>
-
-            <button>Edit Book</button>
+            
+            
         </main>
         <script src="./js/universal.js" defer type="module"></script>
         <script src="./js/collectionpage.js" defer type="module"></script>
