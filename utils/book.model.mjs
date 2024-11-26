@@ -1,7 +1,7 @@
 class Book {
     constructor({
       category,
-      id,
+      bookId,
       accNo,
       bookTitle,
       subTitle,
@@ -38,7 +38,7 @@ class Book {
       catalogOwner
     }) {
       this.category = category;
-      this.id = id;
+      this.bookId = bookId;
       this.accNo = accNo;
       this.bookTitle = bookTitle;
       this.subTitle = subTitle;

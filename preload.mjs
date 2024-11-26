@@ -5,7 +5,9 @@ const navigationFunction = {
 }
 
 const alertBoxFunction = {
-    alertMsg: (message) => ipcRenderer.send("alertBox", message)
+    alertMsg: (message) => ipcRenderer.send("alertBox", message),
+    confirmMsg: (message) => ipcRenderer.send("openDialog", message),
+    dialogResponse: (message) => ipcRenderer.on("dialogResponse", message)
 }
 
 const sharingDataFunction = {
