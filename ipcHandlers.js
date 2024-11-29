@@ -2,6 +2,7 @@
 import { ipcMain, dialog, session, BrowserWindow } from "electron";
 import path from "path";
 import os from "os"
+import JsBarCode from "jsbarcode"
 import { fileURLToPath } from 'url';
 import { mainWebsite } from "./utils/links.js";
 
@@ -44,10 +45,10 @@ export default function setupIpcHandlers(win) {
       })
   .then((result) => {
     try{
-      console.log("this is the result: " + JSON.stringify(result))
+      // console.log("this is the result: " + JSON.stringify(result))
       event.sender.send("dialogResponse", result.response);
     }catch(error){
-      console.log("error in openDialog ipcMain: " + error)
+      // console.log("error in openDialog ipcMain: " + error)
     }
   })})
 

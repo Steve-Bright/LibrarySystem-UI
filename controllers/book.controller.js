@@ -1,4 +1,4 @@
-import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint} from "../utils/links.js"
+import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint} from "../utils/links.js"
 
 const token = await window.cookieApi.getCookie()
 
@@ -61,4 +61,38 @@ export async function deleteBook(category, bookId){
         }
     })
     return (await res.json())
+}
+
+export async function getLatestAccNo(category){
+    const res = await fetch(getLatestAccNoEndpoint(category), {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        }
+    })
+    const response = await res.json()
+    return response.result;
+}
+
+export async function generateBarCode(category, accNo){
+    return new Promise((resolve, reject) => {
+        const canvas = document.createElement('canvas');
+        let storedData = { category, accNo };
+        console.log("stored data: " + JSON.stringify(storedData));
+
+        // Uncomment this when JsBarcode is ready
+        JsBarcode(canvas, storedData, { displayValue: false });
+
+        canvas.toBlob((blob) => {
+            if (blob) {
+                // const url = URL.createObjectURL(blob);
+                const file = new File([blob], `${category}-${accNo}.png`, { type: "image/png" });
+                // imagePlaceholder.src = url;
+                resolve(file); // Resolves the Promise with the URL
+            } else {
+                reject(new Error("Failed to create Blob from canvas."));
+            }
+        });
+    });
 }

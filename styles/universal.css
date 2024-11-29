@@ -3,8 +3,13 @@
     src: url('../fonts/Inria_Sans/InriaSans-Regular.ttf'); /*URL to font*/
 }
 
+@font-face {
+    font-family: "Kadwa";
+    src: url("../fonts/Kadwa/Kadwa-Regular.ttf")
+}
 
 *{
+    /* font-family: "Kadwa"; */
     margin: 0;
     padding: 0;
 }
@@ -21,7 +26,7 @@ body{
     width: 17%;
     height: 100vh;
     display: grid;
-    grid-template-rows: 0.7fr 3fr 1fr;
+    grid-template-rows: 0.7fr 3fr 0.7fr;
     place-items: center;
     background-color: #1E3FAD;
     color: var(--navigation-color);
@@ -30,9 +35,10 @@ body{
 }
 
 main{
+    font-family: "Kadwa";
     width: 100%;
     min-height: 100vh;
-    padding: 3em 0 0 15em
+    padding: 1.5em 0 0 15em
 }
 
 #logoTitle{
@@ -86,6 +92,16 @@ main{
 
 .tableFormat table{
     width: 100%;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.tableFormat table th{
+    font-size: 1.2em;
+}
+
+.tableFormat table, th, td{
+    border: 1px solid black;
 }
 
 .tableTitle {
@@ -94,10 +110,28 @@ main{
 
 .tableTitle h2{
     float: left;
+    width: 92%;
 }
 
-.tableTitle div{
-    margin-left: auto;
-    margin-right: 1em;
-    align-items: flex-end;
+#collectionNavigationArea {
+    width: 8%;
+    display: flex;
+    height: 60%;
+    margin:auto;
+    justify-content: flex-end;
+}
+
+#collectionBackward{
+    margin-right: auto;
+}
+
+button{
+    background-color: #1E3FAD;
+    border: none;
+    color: white;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #153399 
 }

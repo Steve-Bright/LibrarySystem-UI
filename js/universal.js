@@ -5,6 +5,11 @@ const navigationPanel = document.getElementById('navigationPanel')
 navigationPanel.innerHTML = `
     <div id="logoTitle">KayinGyi <br> Library</div>
     <div id="navigationPages">
+        <div id="scannerPage" class="navigationTitle">
+            <div class="imageDiv"> <img src="./assets/barcode-scan.png"></div> 
+            Scanner
+        </div>
+
         <div id="dashboardPage" class="navigationTitle">
             <div class="imageDiv"><img src="./assets/dashboard.png"></div>
             <div>Dashboard</div>
@@ -45,6 +50,7 @@ navigationPanel.innerHTML = `
 `
 
 const pageIds = [
+    "scannerPage",
     "dashboardPage",
     "collectionPage",
     "membersPage",
@@ -52,6 +58,7 @@ const pageIds = [
     "settingsPage",
 ];
 const pageHtmls = [
+    "scannerpage.html",
     "index.html",
     "collectionpage.html",
     "memberspage.html",
@@ -59,6 +66,7 @@ const pageHtmls = [
     "settingspage.html"
 ]
 const pageSelectors = [
+    ".scannerSelector",
     ".dashboardSelector",
     ".collectionSelector",
     ".membersSelector",

@@ -1,5 +1,6 @@
 import Book from "../utils/book.model.mjs"
-import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook} from "../controllers/book.controller.js"
+import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook, getLatestAccNo, generateBarCode} from "../controllers/book.controller.js"
+const JsBarcode = window.JsBarcode;
 
 const addBookBtn = document.getElementById("addBookBtn")
 const backToCollection = document.getElementById("backToCollection")
@@ -18,10 +19,20 @@ const editBookButton = document.getElementById("editBookButton")
 const editButtonsArea = document.getElementById("editButtonsArea")
 const totalData = document.getElementById("totalData")
 const deleteBookButton = document.getElementById("deleteBookButton")
+// const bookBarCode = document.getElementById("bookBarCode")
+const imagePlaceholder = document.getElementById("imagePlaceholder")
+const accNoInput = document.getElementById("accNo")
+const categoryInput = document.getElementById("category")
 let category = true
 let addBookCategory = true;
 let index = 1;
 
+// if(bookBarCode){
+//     let storedData = {category: "myanmar", bookId: "67409e4274ee3d5f77432273"}
+//     JsBarcode("#bookBarCode", storedData, {
+//         displayValue: false
+//     })
+// }
 
 if(bookDataHeadings){
     updateBookData(category)
@@ -35,7 +46,7 @@ if(collectionCategory){
 }
 
 if(backToCollection){
-    console.log("doesnt this catch this function as well?")
+    // console.log("doesnt this catch this function as well?")
     backToCollection.addEventListener("click", () => {
         window.navigationApi.toAnotherPage("collectionpage.html")
     })
@@ -72,11 +83,13 @@ if(viewBookForm){
 
 if(categorySelect){
     const isbnArea = document.getElementById("isbnArea");
-    categorySelect.addEventListener("change", () => {
+    categorySelect.addEventListener("change", async() => {
         addBookCategory = !addBookCategory
+        accNoInput.value = await getLatestAccNo(categoryInput.value)
         toggleISBN(addBookCategory)
     })
 
+    accNoInput.value = await getLatestAccNo(categoryInput.value)
     toggleISBN(addBookCategory)
 
     function toggleISBN(addCategory){
@@ -99,20 +112,29 @@ if(addBookBtn){
 }
 
 
-if(addBookFormEl){
+if(addBookFormEl){    
     addBookFormEl.addEventListener("submit", async(e)=> {
         e.preventDefault();
+        let bookCategory = e.target.category.value;
+        let bookAccNo = e.target.accNo.value;
+        let barcodeImage = await generateBarCode(bookCategory, bookAccNo)
+
         const myBook = new Book({
-            bookCover: document.getElementById("bookCover").files[0],
-            category: e.target.category.value,
-            accNo: e.target.accNo.value,
+            // bookCover: document.getElementById("bookCover").files[0],
+            bookCover: barcodeImage,
+            category: bookCategory,
+            accNo: bookAccNo,
             bookTitle: e.target.bookTitle.value,
             initial: e.target.initial.value,
             classNo: e.target.classNo.value,
             callNo: e.target.callNo.value,
             sor: e.target.statementOfResponsibility.value,
-            isbn: e.target.isbn.value,
+            // isbn: e.target.isbn.value,
         })
+
+        if(e.target.isbn){
+            myBook.isbn = e.target.isbn.value;
+        }
     
         const formData = new FormData()
     
@@ -125,7 +147,8 @@ if(addBookFormEl){
         }
         const result = await addBookFunction(formData)
         window.showMessageApi.alertMsg(result.msg)
-    
+        imagePlaceholder.src = barcodeImage;
+        // window.location.reload();
     })
 }
 
@@ -270,7 +293,7 @@ function updateBookDetail(){
                     <br>
                     `
     }
-    const viewInputs = document.querySelectorAll("#viewBookForm input, #viewInputs textarea")
+    const viewInputs = document.querySelectorAll("#viewBookForm input, #viewBookForm textarea")
     
     let index = 0;
     // console.log(JSON.stringify(myBook))
@@ -343,7 +366,6 @@ function updateEditBookUi(){
             
             if(newBook.hasOwnProperty(key)){
                 if(newBook[key] !== undefined){
-                    // console.log("each key: " + key + " and value: " + newBook[key])
                     formData.append(key, newBook[key])
                 }
             }
