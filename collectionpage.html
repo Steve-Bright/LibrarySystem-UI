@@ -8,44 +8,69 @@
         <div id="navigationPanel" class="collectionSelector"></div>
         
         <main>
-            <h1>Collections</h1>
-            <select name="collection-type" id="collectionCategory">
-                <option value="english">English</option>
-                <option value="myanmar">Myanmar</option>
-            </select>
+            <div class="mainTitle">
+                <h1>Collections</h1>
+                <div>
+                    <select name="collection-type" id="collectionCategory" size="1">
+                        <option value="english">English</option>
+                        <option value="myanmar">Myanmar</option>
+                    </select>
+                </div>
+                
+            </div>
+            
 
             <div class="subTitle">
                 <h2>Search Book</h2>
-                <button onclick="window.print()">Call No.</button>
-                <button id="addBookBtn">Add Book</button>
+                <div>
+                    <button onclick="window.print()">Call No.</button>
+                    <button id="addBookBtn">Add Book</button>
+                </div>
+                
             </div>
             
             <div id="searchBookDiv">
                 <form>
-                    <label for="bookTitle">Book Title</label>
-                    <input type="text" name="bookTitleInput">
+                    <div>
+                        <div>
+                            <label for="bookTitle">Book Title</label>
+                            <input type="text" name="bookTitleInput">
+                        </div>
+                        
+                        <div>
+                            <label for="accNo">Acc No</label>
+                            <input type="text" name="accNoInput">
+                        </div>
+                    </div>
                     
-                    <label for="accNo">Acc No</label>
-                    <input type="text" name="accNoInput">
+                    <div>
+                        <div>
+                            <label for="author">Author</label>
+                            <input type="text" name="authorInput">
+                        </div>
 
-                    <br>
+                        <div>
+                            <label for="isbn">ISBN</label>
+                            <input type="text" name="isbnInput">
+                        </div>
+                    </div>  
 
-                    <label for="author">Author</label>
-                    <input type="text" name="authorInput">
+                    <div>
+                        <div>
+                            <label for="classNo">Class No</label>
+                            <input type="text" name="classNoInput">
+                        </div>
 
-                    <label for="isbn">ISBN</label>
-                    <input type="text" name="isbnInput">
+                        <div>
+                            <label for="publisher">Publisher</label>
+                            <input type="text" name="publisherInput">
+                        </div>
+                    </div>
 
-                    <br>
-
-                    <label for="classNo">Class No</label>
-                    <input type="text" name="classNoInput">
-
-                    <label for="publisher">Publisher</label>
-                    <input type="text" name="publisherInput">
-
-                    <input type="reset" value="Clear All">
-                    <input type="submit" value="Search">
+                    <div id="searchButtonsDiv">
+                        <input type="reset" value="Clear All">
+                        <input type="submit" value="Search">
+                    </div>
                 </form>
             </div>
 

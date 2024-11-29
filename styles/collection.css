@@ -1,6 +1,5 @@
 .tableFormat th:nth-child(2) {
     width: 10em;
-    border: 1px solid black;
 }
 
 .tableFormat td {
@@ -11,6 +10,96 @@
 .displayBookCover{
     width: 95%;
 }
+
+.mainTitle{
+    width: 100%;
+    display: flex;
+}
+
+.mainTitle h1{
+    width: 18%;
+}
+
+.mainTitle div{
+    width: 82%;
+    margin: auto;
+}
+
+.mainTitle select{
+    height: 2em;
+    width: 8em;
+}
+
+.subTitle{
+    display: flex;
+    width: 100%;
+}
+
+.subTitle h1{
+    width: 20%;
+}
+
+.subTitle div{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.subTitle button{
+    margin: 0 0.3em;
+    height: 2.1em;
+    width: 8em;
+}
+
+#searchBookDiv{
+    min-height: 10em;
+    width: 85%;
+    /* margin: 0.4 2em; */
+    margin: auto auto 2em auto;
+    box-sizing: border-box;
+    padding: 0.7em;
+    background-color: #D9D9D9;  
+}
+
+#searchBookDiv form > div:nth-child(n){
+    display: flex;
+    margin-top: 1em;
+}
+
+#searchBookDiv form > div:nth-child(n) > div > label{
+    /* background-color: red; */
+    font-weight: lighter;
+    text-align: center;
+    display: inline-block;
+    width: 13em;
+}
+
+#searchBookDiv form > div:nth-child(n) > div > input{
+    width: 17em;
+    height: 1.7em;
+}
+
+#searchButtonsDiv{
+    min-height: 1.9em;
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+#searchButtonsDiv input{
+    width: 7em;
+    margin: 0 1em;
+    background-color: #1E3FAD;
+    color: white;
+    border: none;
+    /* height: 100 */
+}
+
+#searchButtonsDiv input:hover{
+    background-color: #153399;
+    cursor: pointer;
+}
+
 #viewBookCover{
     width: 100px;
 }
@@ -18,4 +107,9 @@
 #viewBookForm input, #viewBookForm textarea{
     border: none;
     pointer-events: none;
+}
+
+.detailedBook{
+    width: 7em;
+    height: 2.2em;
 }
