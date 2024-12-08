@@ -35,7 +35,8 @@ class Book {
       source,
       price,
       donor,
-      catalogOwner
+      catalogOwner,
+      barcode
     }) {
       this.category = category;
       this.bookId = bookId;
@@ -73,6 +74,7 @@ class Book {
       this.price = price;
       this.donor = donor;
       this.catalogOwner = catalogOwner;
+      this.barcode = barcode
     }
   
   }

@@ -120,18 +120,46 @@ if(addBookFormEl){
         let barcodeImage = await generateBarCode(bookCategory, bookAccNo)
 
         const myBook = new Book({
-            // bookCover: document.getElementById("bookCover").files[0],
-            bookCover: barcodeImage,
+            bookCover: document.getElementById("bookCover").files[0],
+            // bookCover: barcodeImage,
             category: bookCategory,
             accNo: bookAccNo,
             bookTitle: e.target.bookTitle.value,
+            subTitle: e.target.subTitle.value,
+            parallelTitle: e.target.parallelTitle.value,
             initial: e.target.initial.value,
             classNo: e.target.classNo.value,
             callNo: e.target.callNo.value,
             sor: e.target.statementOfResponsibility.value,
+            authorOne: e.target.author1.value,
+            authorTwo: e.target.author2.value,
+            authorThree: e.target.author3.value,
+            other: e.target.other.value,
+            translator: e.target.translator.value,
+            pagination: e.target.pagination.value,
+            size: e.target.size.value,
+            illustrationType: e.target.illustrationType.value,
+            seriesTitle: e.target.seriesTitle.value,
+            seriesNo: e.target.seriesNo.value,
+            includeCD: e.target.cdDvd.value,
+            subjectHeadings: e.target.subjectHeadings.value,
+            edition: e.target.edition.value,
+            editor: e.target.editor.value,
+            place: e.target.place.value,
+            publisher: e.target.publisher.value,
+            year: e.target.year.value,
+            keywords: e.target.keywords.value,
+            summary: e.target.summary.value,
+            notes: e.target.notes.value,
+            source: e.target.source.value,
+            price: e.target.price.value,
+            donor: e.target.donor.value,
+            catalogOwner: e.target.catalogOwner.value,
+            barcode: barcodeImage
             // isbn: e.target.isbn.value,
         })
-
+        console.log("this is just pagination " + e.target.pagination.value)
+        console.log("this is book " + JSON.stringify(myBook))
         if(e.target.isbn){
             myBook.isbn = e.target.isbn.value;
         }
@@ -146,6 +174,7 @@ if(addBookFormEl){
             }
         }
         const result = await addBookFunction(formData)
+        console.log("this is result " + JSON.stringify(result))
         window.showMessageApi.alertMsg(result.msg)
         imagePlaceholder.src = barcodeImage;
         // window.location.reload();
@@ -285,35 +314,46 @@ function viewDetailedBookFunction(category, bookIds){
 function updateBookDetail(){
     let bookDetail = localStorage.getItem("detailedBookData")
     let myBook = new Book(JSON.parse(bookDetail))
+    const isbnViewArea = document.getElementById("viewIsbnArea")
     delete myBook.bookId;
+    delete myBook.barcode;
+    isbnViewArea.innerHTML = ``
     if(myBook["category"] == "english"){
-        isbnArea.innerHTML = `
+        console.log("there is isbn in view detail")
+        isbnViewArea.innerHTML = `
                     <label for="isbn">ISBN</label>
                     <input type="text" id="isbn" name="isbn">
                     <br>
                     `
+    }else{
+        delete myBook.isbn;
     }
     const viewInputs = document.querySelectorAll("#viewBookForm input, #viewBookForm textarea")
-    
     let index = 0;
-    // console.log(JSON.stringify(myBook))
+    console.log("viewinputs length " + JSON.stringify(viewInputs))
 
-        Object.keys(myBook).forEach((eachKey) => {
-             if(eachKey == "bookCover"){
-                viewBookCover.src=filePath + myBook[eachKey]
-                
-            }else if(eachKey == "isbn"){
-                const isbnInput = document.getElementById("isbn")
-                isbnInput.value = myBook[eachKey]
-                index++
-            }
-            else{
-                viewInputs[index].value = myBook[eachKey] ? myBook[eachKey] : "-"
-                index++
-            }
-
-
-        })
+    
+    console.log("this is my book " + JSON.stringify(myBook))
+        setTimeout(() => {
+            Object.keys(myBook).forEach((eachKey) => {
+                console.log("this is index number " + index + " and each key " + eachKey + " eachInput: " + viewInputs.length)
+                if(eachKey == "bookCover"){
+                   viewBookCover.src=filePath + myBook[eachKey]
+                   
+               }else if(eachKey == "isbn"){
+                    console.log("isbn condition? ")
+                   const isbnInput = document.getElementById("isbn")
+                   isbnInput.value = myBook[eachKey]
+                   index++
+               }
+               else{
+                   viewInputs[index].value = myBook[eachKey] ? myBook[eachKey] : "-"
+                   index++
+               }
+   
+   
+           })
+        }, 300)
 }
 
 function updateEditBookUi(){
@@ -332,6 +372,7 @@ function updateEditBookUi(){
     let newBook = new Book({})
     delete newBook.bookId;
     delete newBook.bookCover;
+    delete newBook.barcode;
 
     const bookKeys =  Object.keys(newBook);
 
@@ -342,7 +383,7 @@ function updateEditBookUi(){
         `
         const bookCoverImage = document.getElementById("bookCover")
         bookCoverImage.addEventListener('change', () => {
-            newBook.bookCover = filePath + bookCoverImage.files[0]
+            newBook.bookCover = bookCoverImage.files[0]
         })
     })
 
@@ -361,7 +402,7 @@ function updateEditBookUi(){
     editBookForm.addEventListener("submit", async(e) => {
         e.preventDefault();
         const formData = new FormData()
-        // console.log("This is testing little bro "  + JSON.stringify(newBook))
+        console.log("This is testing little bro "  + JSON.stringify(newBook))
         for(let key in newBook){
             
             if(newBook.hasOwnProperty(key)){
