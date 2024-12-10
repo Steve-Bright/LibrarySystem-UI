@@ -23,16 +23,17 @@ const deleteBookButton = document.getElementById("deleteBookButton")
 const imagePlaceholder = document.getElementById("imagePlaceholder")
 const accNoInput = document.getElementById("accNo")
 const categoryInput = document.getElementById("category")
+const callNoBtn = document.getElementById('callNoBtn')
+
 let category = true
 let addBookCategory = true;
 let index = 1;
 
-// if(bookBarCode){
-//     let storedData = {category: "myanmar", bookId: "67409e4274ee3d5f77432273"}
-//     JsBarcode("#bookBarCode", storedData, {
-//         displayValue: false
-//     })
-// }
+if(callNoBtn){
+    callNoBtn.addEventListener("click", () => {
+        window.navigationApi.toAnotherPage("bookCallNo.html")
+    })
+}
 
 if(bookDataHeadings){
     updateBookData(category)

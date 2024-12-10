@@ -1,30 +1,23 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
     <head>
         <link rel="stylesheet" href="styles/universal.css">
-        <link rel="stylesheet" href="styles/collection.css">
+        <link rel="stylesheet" href="styles/callNumber.css">
     </head>
 
     <body>
         <div id="navigationPanel" class="collectionSelector"></div>
-        
         <main>
+            <div id="backToCollection">
+                <img src="./assets/arrow.png" class="backButton">
+            </div>
+
             <div class="mainTitle">
-                <h1>Collections</h1>
+                <h1>Call Numbers</h1>
                 <div>
                     <select name="collection-type" id="collectionCategory" size="1">
                         <option value="english">English</option>
                         <option value="myanmar">Myanmar</option>
                     </select>
-                </div>
-                
-            </div>
-            
-
-            <div class="subTitle">
-                <h2>Search Book</h2>
-                <div>
-                    <button id="callNoBtn">Call No.</button>
-                    <button id="addBookBtn">Add Book</button>
                 </div>
                 
             </div>
@@ -50,8 +43,8 @@
                         </div>
 
                         <div>
-                            <label for="isbn">ISBN</label>
-                            <input type="text" name="isbnInput">
+                            <label for="isbn">Publisher</label>
+                            <input type="text" name="publisherInput">
                         </div>
                     </div>  
 
@@ -60,16 +53,11 @@
                             <label for="classNo">Class No</label>
                             <input type="text" name="classNoInput">
                         </div>
-
-                        <div>
-                            <label for="publisher">Publisher</label>
-                            <input type="text" name="publisherInput">
-                        </div>
                     </div>
 
                     <div id="searchButtonsDiv">
-                        <input type="reset" value="Clear All">
-                        <input type="submit" value="Search">
+                        <button type="reset" > Clear All</button>
+                        <button type="submit" value="Search"> Search </button>
                     </div>
                 </form>
             </div>
@@ -84,10 +72,23 @@
                 </div>
                 
                 <table>
-                    <thead id="bookDataHeadings">
-                    </thead>
-
-                    <tbody id="bookData">
+                    <tbody id="barcodeData">
+                        <!-- <tr>
+                            <td>
+                                <div class="eachBookCallNo">
+                                    <div class="callNo">
+                                        Acc No 00001 <br>
+                                        St <br>
+                                        Class No 100 
+                                    </div>
+                                    <div class="barcode">
+                                        <img src="./assets/dummy-barcode.png"
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Testing</td>
+                            <td>Testing</td>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -95,6 +96,5 @@
     </body>
 
     <script src="./js/universal.js" defer type="module"></script>
-    <script src="./js/collectionpage.js" defer type="module"></script>
-    
+    <script src="./js/callNumber.js" defer type="module"></script>
 </html>
