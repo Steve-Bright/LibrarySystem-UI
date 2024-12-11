@@ -33,8 +33,13 @@ const cookieFunction = {
     signOut: ()=> ipcRenderer.send("clearCookies")
 }
 
+const printFunction = {
+    printPage: () => ipcRenderer.send("printPage")
+}
+
 contextBridge.exposeInMainWorld("navigationApi", navigationFunction)
 contextBridge.exposeInMainWorld("showMessageApi", alertBoxFunction)
 contextBridge.exposeInMainWorld("sharingDataApi", sharingDataFunction)
 contextBridge.exposeInMainWorld("cookieApi", cookieFunction)
 contextBridge.exposeInMainWorld("imagePaths", fileSharingFunction)
+contextBridge.exposeInMainWorld("printApi", printFunction)

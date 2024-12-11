@@ -97,4 +97,28 @@ export default function setupIpcHandlers(win) {
         console.error(error);
       });
   });
+
+  ipcMain.on("printPage", (event, data) => {
+      let currentWindow = win || BrowserWindow.getFocusedWindow();
+      let options = {
+        silent: false,
+        printBackground: true,
+        color: false,
+        margin: {
+            marginType: 'printableArea'
+        },
+        landscape: false,
+        pagesPerSheet: 1,
+        collate: false,
+        copies: 1,
+        header: 'Header of the Page',
+        footer: 'Footer of the Page'
+    }
+    
+      currentWindow.webContents.print(options, (success, errorType) => {
+        if (!success) console.error(errorType);
+        console.log("print initiated")
+      });
+      
+  })
 }

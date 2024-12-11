@@ -14,8 +14,13 @@
     box-sizing: border-box;
 }
 
-.mainTitle div{
-    width:  75%;
+.mainTitle div:nth-child(2){
+    width:  60%;
+    margin: auto;
+}
+
+.mainTitle div:nth-child(3){
+    width: 15%;
     margin: auto;
 }
 
@@ -59,8 +64,9 @@
     margin-top: 1em;
 }
 
-#searchButtonsDiv > button {
+button {
     width: 7em;
+    height: 1.9em;
     margin: 0 1em;
 }
 
@@ -81,6 +87,11 @@
 .eachBookCallNo{
     height: 100%;
     display: flex;
+    cursor: pointer;
+}
+
+.selectedCallNo {
+    border: 4px solid #007BFF; 
 }
 
 .callNo{
@@ -102,4 +113,10 @@
 
 .barcode img{
     width: 100%;
+}
+
+@media print{
+    body * {
+        display: block
+    }
 }

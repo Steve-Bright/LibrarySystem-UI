@@ -1,10 +1,15 @@
 import { getAllBooksFunction } from "../controllers/book.controller.js"
+import {buildCollectionNavigation} from "../utils/extra.js"
 const backToCollection = document.getElementById("backToCollection")
 const totalData = document.getElementById("totalData")
 const collectionCategory = document.getElementById("collectionCategory")
 const barcodeData = document.getElementById("barcodeData")
+const barcodeNavigationArea = document.getElementById("barcodeNavigationArea")
+const printPreview = document.getElementById("printPreview")
 
 let category = true
+let index = 1;
+let selectedCallNums = [];
 
 updateBookData(category)
 
@@ -16,16 +21,18 @@ if(collectionCategory){
 }
 
 if(backToCollection){
-    // console.log("doesnt this catch this function as well?")
     backToCollection.addEventListener("click", () => {
         window.navigationApi.toAnotherPage("collectionpage.html")
     })
 }
 
+printPreview.addEventListener("click", () => {
+    window.printApi.printPage();
+})
+
 async function updateBookData(booleanValue, page = 1){
     let categoryData = booleanValue ? "english" : "myanmar"; 
     let result = await getAllBooksFunction(categoryData, page)
-    console.log(JSON.stringify(result.result))
     let totalLength = result.result.totalItems;
     let eachBookData = result.result.items;
     let totalPages = result.result.totalPages;
@@ -35,15 +42,15 @@ async function updateBookData(booleanValue, page = 1){
     let j = 0;
     let tr;
     let trArrays = [];
+    let barcodes = [];
     for(let i = 0; i < eachBookData.length; i++){
-        // console.log("each book " + JSON.stringify(eachBookData[i].accNo))
         if(j == 0){
             tr = document.createElement("tr")
         }
 
         let td = document.createElement("td")
-        td.innerHTML = `
-            <div class="eachBookCallNo">
+        let barcode = `
+            <div class="eachBookCallNo" id=${eachBookData[i].accNo}>
                 <div class="callNo">
                     Acc No ${eachBookData[i].accNo} <br>
                     ${eachBookData[i].initial}<br>
@@ -54,7 +61,8 @@ async function updateBookData(booleanValue, page = 1){
                 </div>
             </div>
         `
-
+        td.innerHTML = barcode;
+        barcodes.push(barcode)
         tr.appendChild(td)
         if(j == 1){
             j = 0;
@@ -68,5 +76,41 @@ async function updateBookData(booleanValue, page = 1){
         
     }
     trArrays.forEach((eachBarcode) => barcodeData.appendChild(eachBarcode))
-    // barcodeData.appendChild(trArrays[0])
+
+    if(totalPages > 1) {
+        if(page == 1){
+            buildCollectionNavigation(barcodeNavigationArea, false, true, index, category, updateBookData, updateNewIndex)
+        }else if(page === totalPages){
+            buildCollectionNavigation(barcodeNavigationArea, true, false, index, category, updateBookData, updateNewIndex)
+        }else{
+            buildCollectionNavigation(barcodeNavigationArea, true, true, index, category, updateBookData, updateNewIndex)
+        }
+    }else{
+        buildCollectionNavigation(barcodeNavigationArea, false, false, index, category, updateBookData, updateNewIndex)
+    }
+
+    barcodeSelection()
+
+}
+
+function updateNewIndex(newIndex){
+    index = newIndex;
+}
+
+function barcodeSelection(){
+    let allCallNums = document.querySelectorAll(".eachBookCallNo")
+
+    allCallNums.forEach((eachCallNum) => {
+        eachCallNum.addEventListener('click', ()=> {
+            if(selectedCallNums.includes(eachCallNum.id)){
+                eachCallNum.classList.remove("selectedCallNo")
+                selectedCallNums.pop(eachCallNum.id)
+            }else{
+                eachCallNum.classList.add("selectedCallNo")
+                selectedCallNums.push(eachCallNum.id)
+            }
+            
+            console.log("this is all the call numbers " + selectedCallNums)
+        })
+    })
 }
