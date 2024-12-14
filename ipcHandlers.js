@@ -10,9 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 let sharedData;
 
-// const kayinGyiDirectory = os.homedir() + "/KayinGyi/";
-// const kayinGyiBooks = kayinGyiDirectory + "books/";
-// const kayinGyiMembers = kayinGyiDirectory + "members/"
+console.log("current file name " + __filename + " and dir name " + __dirname)
 
 export default function setupIpcHandlers(win) {
   ipcMain.on("navigate-to-page", (event, page) => {
@@ -26,6 +24,10 @@ export default function setupIpcHandlers(win) {
 
   ipcMain.on("sharingPath", (event, data) => {
     event.returnValue = os.homedir();
+  })
+  
+  ipcMain.on("currentFilePath", (event, data) => {
+    event.returnValue = __dirname;
   })
 
   ipcMain.on("passingData", (event, args) => {
@@ -98,26 +100,15 @@ export default function setupIpcHandlers(win) {
       });
   });
 
-  ipcMain.on("printPage", (event, data) => {
+  ipcMain.handle("printPage", async (event, data) => {
       let currentWindow = win || BrowserWindow.getFocusedWindow();
       let options = {
         silent: false,
         printBackground: true,
-        color: false,
-        margin: {
-            marginType: 'printableArea'
-        },
-        landscape: false,
-        pagesPerSheet: 1,
-        collate: false,
-        copies: 1,
-        header: 'Header of the Page',
-        footer: 'Footer of the Page'
     }
     
       currentWindow.webContents.print(options, (success, errorType) => {
         if (!success) console.error(errorType);
-        console.log("print initiated")
       });
       
   })

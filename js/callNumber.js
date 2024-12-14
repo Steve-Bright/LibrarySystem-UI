@@ -7,6 +7,9 @@ const barcodeData = document.getElementById("barcodeData")
 const barcodeNavigationArea = document.getElementById("barcodeNavigationArea")
 const printPreview = document.getElementById("printPreview")
 
+// const filePath = window.imagePaths.shareFilePath();
+const currentFile = window.imagePaths.shareCurrentFile();
+localStorage.removeItem("toPrintBarcode");
 let category = true
 let index = 1;
 let selectedCallNums = [];
@@ -27,7 +30,16 @@ if(backToCollection){
 }
 
 printPreview.addEventListener("click", () => {
-    window.printApi.printPage();
+    localStorage.setItem("toPrintBarcode", selectedCallNums) 
+    let windowFeatures = `
+        width=794,
+        height=1123,
+        resizable=0,
+        scrollbars=no,toolbar=no,menubar=no,status=no,titlebar=no
+
+    `
+    let previewWindow = window.open(currentFile+"/printpreview.html", "Print Window", windowFeatures);
+    document.close()
 })
 
 async function updateBookData(booleanValue, page = 1){
