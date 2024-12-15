@@ -1,14 +1,7 @@
-.tableFormat th:nth-child(2) {
-    width: 10em;
-}
-
 .tableFormat td {
+    
     min-height: 20em;
     box-sizing: border-box;
-}
-
-.displayBookCover{
-    width: 95%;
 }
 
 .mainTitle{
@@ -17,38 +10,22 @@
 }
 
 .mainTitle h1{
-    width: 18%;
+    width: 25%;
     box-sizing: border-box;
 }
 
-.mainTitle div{
-    width: 82%;
+.mainTitle div:nth-child(2){
+    width:  60%;
+    margin: auto;
+}
+
+.mainTitle div:nth-child(3){
+    width: 15%;
     margin: auto;
 }
 
 .mainTitle select{
     height: 2em;
-    width: 8em;
-}
-
-.subTitle{
-    display: flex;
-    width: 100%;
-}
-
-.subTitle h1{
-    width: 20%;
-}
-
-.subTitle div{
-    width: 80%;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.subTitle button{
-    margin: 0 0.3em;
-    height: 2.1em;
     width: 8em;
 }
 
@@ -87,30 +64,59 @@
     margin-top: 1em;
 }
 
-#searchButtonsDiv input{
+button {
     width: 7em;
+    height: 1.9em;
     margin: 0 1em;
-    background-color: #1E3FAD;
-    color: white;
-    border: none;
-    /* height: 100 */
 }
 
-#searchButtonsDiv input:hover{
-    background-color: #153399;
+.tableFormat table {
+    border: none;
+}
+
+.tableFormat table td{
+    height: 7.5em;
+    width: 33%;
+    border: 2.5px black solid;
+}
+
+/* .tableFormat table tr{
+    height: 10em;
+} */
+
+.eachBookCallNo{
+    height: 100%;
+    display: flex;
     cursor: pointer;
 }
 
-#viewBookCover{
-    width: 100px;
+.selectedCallNo {
+    border: 4px solid #007BFF; 
 }
 
-#viewBookForm input, #viewBookForm textarea{
-    border: none;
-    pointer-events: none;
+.callNo{
+    height: 100%;
+    width: 30%;
+    text-align: center;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    line-height: 18px;
+    /* text-align: center;  */
+}
+.barcode{
+    width: 70%; 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
 }
 
-.detailedBook{
-    width: 7em;
-    height: 2.2em;
+.barcode img{
+    width: 100%;
+}
+
+@media print{
+    body * {
+        display: block
+    }
 }

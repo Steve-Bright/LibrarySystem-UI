@@ -16,7 +16,8 @@ const sharingDataFunction = {
 }
 
 const fileSharingFunction = {
-    shareFilePath: () => ipcRenderer.sendSync("sharingPath")
+    shareFilePath: () => ipcRenderer.sendSync("sharingPath"),
+    shareCurrentFile: () => ipcRenderer.sendSync("currentFilePath")
 }
 
 const cookieFunction = {
@@ -33,8 +34,13 @@ const cookieFunction = {
     signOut: ()=> ipcRenderer.send("clearCookies")
 }
 
+const printFunction = {
+    printPage: () => ipcRenderer.invoke("printPage")
+}
+
 contextBridge.exposeInMainWorld("navigationApi", navigationFunction)
 contextBridge.exposeInMainWorld("showMessageApi", alertBoxFunction)
 contextBridge.exposeInMainWorld("sharingDataApi", sharingDataFunction)
 contextBridge.exposeInMainWorld("cookieApi", cookieFunction)
 contextBridge.exposeInMainWorld("imagePaths", fileSharingFunction)
+contextBridge.exposeInMainWorld("printApi", printFunction)

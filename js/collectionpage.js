@@ -1,5 +1,6 @@
 import Book from "../utils/book.model.mjs"
 import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook, getLatestAccNo, generateBarCode} from "../controllers/book.controller.js"
+import {buildCollectionNavigation} from "../utils/extra.js"
 const JsBarcode = window.JsBarcode;
 
 const addBookBtn = document.getElementById("addBookBtn")
@@ -23,16 +24,17 @@ const deleteBookButton = document.getElementById("deleteBookButton")
 const imagePlaceholder = document.getElementById("imagePlaceholder")
 const accNoInput = document.getElementById("accNo")
 const categoryInput = document.getElementById("category")
+const callNoBtn = document.getElementById('callNoBtn')
+
 let category = true
 let addBookCategory = true;
 let index = 1;
 
-// if(bookBarCode){
-//     let storedData = {category: "myanmar", bookId: "67409e4274ee3d5f77432273"}
-//     JsBarcode("#bookBarCode", storedData, {
-//         displayValue: false
-//     })
-// }
+if(callNoBtn){
+    callNoBtn.addEventListener("click", () => {
+        window.navigationApi.toAnotherPage("bookCallNo.html")
+    })
+}
 
 if(bookDataHeadings){
     updateBookData(category)
@@ -218,14 +220,14 @@ async function updateBookData(booleanValue, page = 1){
     
     if(totalPages > 1) {
         if(page == 1){
-            buildCollectionNavigation(collectionNavigationArea, false, true)
+            buildCollectionNavigation(collectionNavigationArea, false, true, index, category, updateBookData, updateNewIndex)
         }else if(page === totalPages){
-            buildCollectionNavigation(collectionNavigationArea, true, false)
+            buildCollectionNavigation(collectionNavigationArea, true, false, index, category, updateBookData, updateNewIndex)
         }else{
-            buildCollectionNavigation(collectionNavigationArea, true, true)
+            buildCollectionNavigation(collectionNavigationArea, true, true, index, category, updateBookData, updateNewIndex)
         }
     }else{
-        buildCollectionNavigation(collectionNavigationArea, false, false)
+        buildCollectionNavigation(collectionNavigationArea, false, false, index, category, updateBookData, updateNewIndex)
     }
 
     
@@ -262,42 +264,8 @@ async function updateBookData(booleanValue, page = 1){
     
 }
 
-async function buildCollectionNavigation(area, backward, forward){
-    area.innerHTML = ``
-
-    if(backward == true){
-        const backwardButton = document.createElement("img")
-        backwardButton.src = "./assets/arrow.png"
-        backwardButton.classList.add("backButton")
-        backwardButton.id = "collectionBackward"
-        area.appendChild(backwardButton)
-    } 
-
-    if(forward == true){
-        const forwardButton = document.createElement("img")
-        forwardButton.src = "./assets/arrow_right.png"
-        forwardButton.classList.add("backButton")
-        forwardButton.id = "collectionForward"
-        area.appendChild(forwardButton)
-    }
-
-    const collectionBackward = document.getElementById("collectionBackward")
-    const collectionForward = document.getElementById("collectionForward")
-    
-    if(collectionForward){
-        collectionForward.addEventListener("click", () => {
-            index++;
-            updateBookData(category, index)
-        })
-    }
-    
-    if(collectionBackward){
-        collectionBackward.addEventListener("click", () => {
-            index --;
-            updateBookData(category, index)
-        })
-    }
-    
+function updateNewIndex(newIndex){
+    index = newIndex;
 }
 
 function viewDetailedBookFunction(category, bookIds){
