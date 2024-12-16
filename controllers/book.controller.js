@@ -1,4 +1,4 @@
-import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint} from "../utils/links.js"
+import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint} from "../utils/links.js"
 
 const token = await window.cookieApi.getCookie()
 
@@ -36,6 +36,17 @@ export async function getDetailedBook(category, bookId){
         },
     })
 
+    return (await res.json())
+}
+
+export async function getDetailedBookFromAccNo(category, accNo){
+    const res = await fetch(getBookFromAccNoEndpoint(category, accNo), {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`,
+        }
+    })
     return (await res.json())
 }
 
@@ -78,8 +89,7 @@ export async function getLatestAccNo(category){
 export async function generateBarCode(category, accNo){
     return new Promise((resolve, reject) => {
         const canvas = document.createElement('canvas');
-        let storedData = { category, accNo };
-        console.log("stored data: " + JSON.stringify(storedData));
+        let storedData = JSON.stringify({ category, accNo });
 
         // Uncomment this when JsBarcode is ready
         JsBarcode(canvas, storedData, { displayValue: false });
