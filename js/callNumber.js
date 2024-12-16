@@ -34,10 +34,8 @@ if(backToCollection){
 
 printPreview.addEventListener("click", () => {
     if(selectedCallNums != []){
-        console.log("it does not contain anymore")
         localStorage.setItem("toPrintBarcode", selectedCallNums)
     }else{
-        console.log("it contains data")
         localStorage.removeItem("toPrintBarcode")
     }
      
@@ -97,7 +95,7 @@ function barcodeSelection(category){
     let allCallNums = document.querySelectorAll(".eachBookCallNo")
 
     allCallNums.forEach((eachCallNum) => {
-        eachCallNum.addEventListener('click', ()=> {
+        eachCallNum.addEventListener('pointerdown', ()=> {
             let objectData = JSON.stringify({
                 category,
                 "accNo": eachCallNum.id

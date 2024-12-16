@@ -89,16 +89,20 @@ export async function getLatestAccNo(category){
 export async function generateBarCode(category, accNo){
     return new Promise((resolve, reject) => {
         const canvas = document.createElement('canvas');
-        let storedData = JSON.stringify({ category, accNo });
-
-        // Uncomment this when JsBarcode is ready
+        // let bookCategory;
+        // if(category == "english"){
+        //     bookCategory = "eng"   
+        // }else{
+        //     bookCategory = "mm"
+        // }
+        // let storedData = `${ bookCategory +","+ accNo }`;
+        let storedData = `${ category +","+ accNo }`;
+        
         JsBarcode(canvas, storedData, { displayValue: false });
 
         canvas.toBlob((blob) => {
             if (blob) {
-                // const url = URL.createObjectURL(blob);
                 const file = new File([blob], `${category}-${accNo}.png`, { type: "image/png" });
-                // imagePlaceholder.src = url;
                 resolve(file); // Resolves the Promise with the URL
             } else {
                 reject(new Error("Failed to create Blob from canvas."));
