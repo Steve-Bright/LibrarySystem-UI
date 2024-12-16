@@ -1,5 +1,5 @@
 import { getAllBooksFunction } from "../controllers/book.controller.js"
-import {buildCollectionNavigation} from "../utils/extra.js"
+import {buildCollectionNavigation, buildBarcodeCollectionView} from "../utils/extra.js"
 const backToCollection = document.getElementById("backToCollection")
 const totalData = document.getElementById("totalData")
 const collectionCategory = document.getElementById("collectionCategory")
@@ -7,12 +7,15 @@ const barcodeData = document.getElementById("barcodeData")
 const barcodeNavigationArea = document.getElementById("barcodeNavigationArea")
 const printPreview = document.getElementById("printPreview")
 
-// const filePath = window.imagePaths.shareFilePath();
+const filePath = window.imagePaths.shareFilePath();
 const currentFile = window.imagePaths.shareCurrentFile();
-localStorage.removeItem("toPrintBarcode");
+// localStorage.removeItem("toPrintBarcode");
 let category = true
 let index = 1;
 let selectedCallNums = [];
+
+
+    localStorage.removeItem("toPrintBarcode");
 
 updateBookData(category)
 
@@ -30,15 +33,27 @@ if(backToCollection){
 }
 
 printPreview.addEventListener("click", () => {
-    localStorage.setItem("toPrintBarcode", selectedCallNums) 
-    let windowFeatures = `
-        width=794,
-        height=1123,
-        resizable=0,
-        scrollbars=no,toolbar=no,menubar=no,status=no,titlebar=no
+    if(selectedCallNums != []){
+        console.log("it does not contain anymore")
+        localStorage.setItem("toPrintBarcode", selectedCallNums)
+    }else{
+        console.log("it contains data")
+        localStorage.removeItem("toPrintBarcode")
+    }
+     
+    let windowFeatures = {
+        "width":794,
+        "height":1123,
+        "alwaysOnTop": true
 
-    `
-    let previewWindow = window.open(currentFile+"/printpreview.html", "Print Window", windowFeatures);
+    }
+    let data = {
+        "fileName": currentFile+"/printpreview.html",
+        "name": "Print Window",
+        "windowFeatures": windowFeatures
+    }
+    window.navigationApi.openWindow(data);
+    // let previewWindow = window.open(currentFile+"/printpreview.html", "Print Window", windowFeatures);
     document.close()
 })
 
@@ -50,44 +65,13 @@ async function updateBookData(booleanValue, page = 1){
     let totalPages = result.result.totalPages;
     totalData.innerHTML = `Books (${totalLength})`
 
-    barcodeData.innerHTML = ``;
-    let j = 0;
+    barcodeData.innerHTML = ``
     let tr;
+    let td;
     let trArrays = [];
-    let barcodes = [];
-    for(let i = 0; i < eachBookData.length; i++){
-        if(j == 0){
-            tr = document.createElement("tr")
-        }
 
-        let td = document.createElement("td")
-        let barcode = `
-            <div class="eachBookCallNo" id=${eachBookData[i].accNo}>
-                <div class="callNo">
-                    Acc No ${eachBookData[i].accNo} <br>
-                    ${eachBookData[i].initial}<br>
-                    Class No ${eachBookData[i].classNo}
-                </div>
-                <div class="barcode">
-                    <img src="./assets/dummy-barcode.png"
-                </div>
-            </div>
-        `
-        td.innerHTML = barcode;
-        barcodes.push(barcode)
-        tr.appendChild(td)
-        if(j == 1){
-            j = 0;
-            trArrays.push(tr)
-        }else{
-            j++;
-            if(i == totalLength - 1){
-                trArrays.push(tr)
-            }
-        }        
-        
-    }
-    trArrays.forEach((eachBarcode) => barcodeData.appendChild(eachBarcode))
+    let rowData = buildBarcodeCollectionView(2, eachBookData, tr, td, trArrays)
+    rowData.forEach((eachBarcode) => barcodeData.appendChild(eachBarcode))
 
     if(totalPages > 1) {
         if(page == 1){
@@ -101,7 +85,7 @@ async function updateBookData(booleanValue, page = 1){
         buildCollectionNavigation(barcodeNavigationArea, false, false, index, category, updateBookData, updateNewIndex)
     }
 
-    barcodeSelection()
+    barcodeSelection(categoryData)
 
 }
 
@@ -109,17 +93,21 @@ function updateNewIndex(newIndex){
     index = newIndex;
 }
 
-function barcodeSelection(){
+function barcodeSelection(category){
     let allCallNums = document.querySelectorAll(".eachBookCallNo")
 
     allCallNums.forEach((eachCallNum) => {
         eachCallNum.addEventListener('click', ()=> {
-            if(selectedCallNums.includes(eachCallNum.id)){
+            let objectData = JSON.stringify({
+                category,
+                "accNo": eachCallNum.id
+            })
+            if(selectedCallNums.includes(objectData)){
                 eachCallNum.classList.remove("selectedCallNo")
-                selectedCallNums.pop(eachCallNum.id)
+                selectedCallNums.pop(objectData)
             }else{
                 eachCallNum.classList.add("selectedCallNo")
-                selectedCallNums.push(eachCallNum.id)
+                selectedCallNums.push(objectData)
             }
             
             console.log("this is all the call numbers " + selectedCallNums)

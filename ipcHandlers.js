@@ -54,6 +54,22 @@ export default function setupIpcHandlers(win) {
     }
   })})
 
+  ipcMain.on("open-window", (event, arg) => {
+    let fileName = arg.fileName;
+    let windowFeatures = arg.windowFeatures
+    let windowName = arg.name;
+    const newWindow = new BrowserWindow({
+      ...windowFeatures,
+      webPreferences: {
+        nodeIntegration: true, // If needed
+        contextIsolation: true, // If using nodeIntegration
+        preload: path.join(__dirname, "preload.mjs")
+      },
+    })
+    newWindow.loadFile(fileName)
+    // window.open(fileName, windowName, windowFeatures)
+  })
+
   ipcMain.on("setCookies", (event, data) => {
     const cookie = { url: mainWebsite, name: "token", value: data, expirationDate: (Date.now() / 1000) + (7 * 24 * 60 * 60), httpOnly: true, secure: false};
     session.defaultSession.cookies
