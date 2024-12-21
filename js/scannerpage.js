@@ -16,8 +16,12 @@ inputField.addEventListener("change", async () => {
     let category = searchData[0]
     let accNo = searchData[1]
 
-    let detailedBook = await getDetailedBookFromAccNo(category, accNo)
-    console.log("searched data " + JSON.stringify(detailedBook))
-    localStorage.setItem("detailedBookData", JSON.stringify(detailedBook.result)) 
-    window.navigationApi.toAnotherPage("viewBook.html")
+    
+    if(category && accNo){
+        let detailedBook = await getDetailedBookFromAccNo(category, accNo)
+        console.log("searched data " + JSON.stringify(detailedBook))
+        localStorage.setItem("detailedBookData", JSON.stringify(detailedBook.result)) 
+        window.navigationApi.toAnotherPage("viewBook.html")
+    }
+    
 });
