@@ -12,3 +12,13 @@ export const getBookFromAccNoEndpoint = (category, accNo) => `${apiEndpoint}book
 export const getBookEndpoint = (category, page) =>  `${apiEndpoint}book/getAllBooks?category=${category}&page=${page}`
 export const deleteBookEndpoint = (category, bookId) => `${apiEndpoint}book/deleteBook/?category=${category}&bookId=${bookId}`
 export const getLatestAccNoEndpoint = (category) => `${apiEndpoint}book/getLatestAccNo/${category}`
+
+export const addMemberEndpoint = `${apiEndpoint}member/addMember`
+export const editMemberEndpoint = `${apiEndpoint}member/editMember`
+export const getMemberDetailEndpoint = (memberDatabaseId, memberId, personalId) => `${apiEndpoint}member/getMember?memberDatabaseId=${memberDatabaseId}&memberId=${memberId}&personalId=${personalId}`
+export const getAllMembersEndpoint = (page) => `${apiEndpoint}member/getAllMembers?page=${page}`
+export const getSpecificMembersEndpoint = (memberType, page) => `${apiEndpoint}member/getAllMembers?memberType=${memberType}page=${page}`
+export const deleteMemberEndpoint = (memberDatabaseId) => `${apiEndpoint}member/deleteMember/?memberDatabaseId=${memberDatabaseId}`
+export const getLatestMemberIdEndpoint = (memberType) => `${apiEndpoint}member/getLatestMemberId/${memberType}`
+export const banMemberEndpoint = (memberDatabaseId, block) => `${apiEndpoint}member/banMember?memberDatabaseId=${memberDatabaseId}&block=${block}`
+export const extendMembershipEndpoint = (memberDatabaseId) => `${apiEndpoint}member/extendMembership/${memberDatabaseId}`

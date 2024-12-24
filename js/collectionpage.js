@@ -1,7 +1,6 @@
 import Book from "../utils/book.model.mjs"
 import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook, getLatestAccNo, generateBarCode} from "../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../utils/extra.js"
-const JsBarcode = window.JsBarcode;
 
 const addBookBtn = document.getElementById("addBookBtn")
 const backToCollection = document.getElementById("backToCollection")
@@ -285,6 +284,7 @@ function updateBookDetail(){
     const isbnViewArea = document.getElementById("viewIsbnArea")
     delete myBook.bookId;
     delete myBook.barcode;
+    delete myBook.loanStatus;
     isbnViewArea.innerHTML = ``
     if(myBook["category"] == "english"){
         console.log("there is isbn in view detail")
@@ -341,6 +341,7 @@ function updateEditBookUi(){
     delete newBook.bookId;
     delete newBook.bookCover;
     delete newBook.barcode;
+    delete newBook.loanStatus;
 
     const bookKeys =  Object.keys(newBook);
 

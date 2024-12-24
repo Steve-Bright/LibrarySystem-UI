@@ -1,6 +1,7 @@
 <!DOCTYPE html> 
     <head>
         <link rel="stylesheet" href="styles/universal.css">
+        <link rel="stylesheet" href="styles/members.css">
     </head>
 
     <body>
@@ -10,63 +11,91 @@
 
             <div class="subTitle">
                 <h2>Search Members</h2>
-                <button>Member cards</button>
-                <button>Add Member</button>
+                <div>
+                    <button>Member cards</button>
+                    <button id="addMemberBtn">Add Member</button>
+                </div>
             </div>
 
             <div id="searchMemberDiv">
                 <form>
-                    <label for="memberName">Name</label>
-                    <input type="text" name="memberNameInput">
+                    <div>
+                        <div>
+                            <label for="memberName">Name</label>
+                            <input type="text" name="memberNameInput">
+                        </div>
+                        
+                        <div>
+                            <label for="memberType">Member Type</label>
+                            <select name="memberTypeSelect">
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="operation">Operation</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <div>
+                            <label for="memberId">Member Id</label>
+                            <input type="text" name="memberIdInput">
+                        </div>
+                        
+                        <div>
+                            <label for="grade">Grade</label>
+                            <input type="text" name="gradeInput">
+                        </div>
+                    </div>
+
+                    <br>
                     
-                    <label for="memberType">Member Type</label>
-                    <select name="memberTypeSelect">
-                        <option value="student">Student</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="operation">Operation</option>
-                    </select>
+                    <div  id="searchMemButtonsDiv">
+                        <input type="reset" value="Clear All">
+                        <input type="submit" value="Search">
+                    </div>
 
-                    <br>
-
-                    <label for="memberId">Member Id</label>
-                    <input type="text" name="memberIdInput">
-
-                    <label for="grade">Grade</label>
-                    <input type="text" name="gradeInput">
-
-                    <br>
-
-                    <input type="reset" value="Clear All">
-                    <input type="submit" value="Search">
+                    
                 </form>
             </div>
 
-            <div id="filterDiv">
-                <span>Filter -</span>
-                <div>All</div>
-                <div>Teacher</div>
-                <div>Operation</div>
-            </div>
+            
 
-            <div>
-                <h2>Members (999)</h2>
-                <table>
-                    <tr>
-                        <th>Member Id</th>
-                        <th>Photo</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Role</th>
-                        <th>Phone</th>
-                        <th>Expire Date</th>
-                        <th></th>
-                    </tr>
-
-                    <div id="memberData">
-                        <tr>
-                            <td colspan="7">No Members at the moment. please add first</td>
-                        </tr>
+            <div class="tableFormat">
+                <div class="tableTitle">
+                    <div id="memberTitle">
+                        <div>
+                            <h2 id="totalData">Total Members</h2>
+                        </div>
+                        <div id="filterDiv">
+                            <span>Filter -</span>
+                            <div>All</div>
+                            <div>Teacher</div>
+                            <div>Operation</div>
+                        </div>
+                        <div id="memberNavigationArea">
+                            
+                        </div>
                     </div>
+                </div>
+                <table>
+                    <thead id="memberDataHeadings">
+                        <tr>
+                            <th>Member Id</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Role</th>
+                            <th>Phone</th>
+                            <th>Expire Date</th>
+                            <th></th>
+                        </tr>   
+                    </thead>
+                    <tbody id="memberData">
+                    </tbody>
+
+                    
                 </table>
             </div>
         </main>
@@ -74,5 +103,6 @@
     </body>
 
     <script src="./js/universal.js" defer type="module"></script>
+    <script src="./js/memberspage.js" defer type="module"></script>
     
 </html>

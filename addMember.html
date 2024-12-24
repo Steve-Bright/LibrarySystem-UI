@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="styles/universal.css">
+    </head>
+    <body>
+        <div id="navigationPanel" class="collectionSelector"></div>
+        <main>
+            <div id="backToCollection">
+                <img src="./assets/arrow.png" class="backButton">
+            </div>
+            <h2>Add Member</h2>
+
+            <form id="addMemberForm">
+                <label for="memberType">Member Type</label>
+                <input type="text" id="memberType" name="memberType" required>
+                <br>
+
+                <label for="department">Department</label>
+                <select id="department" name="department">
+                    <option value="chinese">Chinese</option>
+                    <option value="english">English</option>
+                </select>
+
+                <br>
+
+                <label for="personalId">Personal Id</label>
+                <input type="text" id="personalId" name="personalId" required>
+                <br>
+
+                <label for="memberId">Member Id</label>
+                <input type="text" id="memberId" name="memberId" required>
+                <br>
+
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+
+                <label for="nrc">Nrc</label>
+                <input type="text" id="nrc" name="nrc" required>
+                <br>
+
+                <label for="gradeLabel">Gender: </label>
+                
+                <input type="radio" id="maleRadio" name="grade" value="male" required>
+                <label for="maleRadio">Male</label>
+    
+                <input type="radio" id="femaleRadio" name="grade" value="female" required>
+                <label for="femaleRadio">Female</label>
+            </form>
+        </main>
+    </body>
+    <script src="./js/universal.js" defer type="module"></script>
+</html>
