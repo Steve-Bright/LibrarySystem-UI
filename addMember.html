@@ -3,7 +3,7 @@
         <link rel="stylesheet" href="styles/universal.css">
     </head>
     <body>
-        <div id="navigationPanel" class="collectionSelector"></div>
+        <div id="navigationPanel" class="membersSelector"></div>
         <main>
             <div id="backToCollection">
                 <img src="./assets/arrow.png" class="backButton">
@@ -12,7 +12,12 @@
 
             <form id="addMemberForm">
                 <label for="memberType">Member Type</label>
-                <input type="text" id="memberType" name="memberType" required>
+                <!-- <input type="text" id="memberType" name="memberType" required> -->
+                <select id="memberType" name="memberType">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="staff">Staff</option>
+                </select>
                 <br>
 
                 <label for="department">Department</label>
@@ -46,8 +51,44 @@
     
                 <input type="radio" id="femaleRadio" name="grade" value="female" required>
                 <label for="femaleRadio">Female</label>
+
+                <br>
+
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <br>
+
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required>
+
+                <br>
+
+                <label for="permanentAddress">Permanent Address</label>
+                <textarea id="permanentAddress" name="permanentAddress" required></textarea>
+
+                <br>
+
+                <label for="temporaryAddress">Temporary Address</label>
+                <textarea id="temporaryAddress" name="temporaryAddress" required></textarea>
+
+                <br>
+
+                <label for="note">Note</label>
+                <textarea id="note" name="note" required></textarea>
+
+                <br>
+
+                <label for="photo">Photo</label>
+                <input type="file" id="photo" name="photo" required>
+
+                <br>
+                <button type="reset">Reset</button>
+                <button type="submit">Add Book</button>
+                <button type="button">Cancel</button>
             </form>
         </main>
     </body>
     <script src="./js/universal.js" defer type="module"></script>
+    <script src="./js/memberspage.js" defer type="module"></script>
 </html>

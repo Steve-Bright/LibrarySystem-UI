@@ -2,6 +2,7 @@ import { getAllMembersFunction } from "../controllers/member.controller.js";
 import Member from "../utils/member.model.js";
 import {buildMemberNavigation} from "../utils/extra.js"
 const filePath = window.imagePaths.shareFilePath();
+const backToCollection = document.getElementById("backToCollection")
 const memberNavigationArea = document.getElementById("memberNavigationArea");
 const totalData = document.getElementById("totalData");
 const addMemberBtn = document.getElementById("addMemberBtn");
@@ -13,6 +14,13 @@ updateMemberData()
 if(addMemberBtn){
     addMemberBtn.addEventListener("click", () => {
         window.navigationApi.toAnotherPage("addMember.html")
+    })
+}
+
+if(backToCollection){
+    // console.log("doesnt this catch this function as well?")
+    backToCollection.addEventListener("click", () => {
+        window.navigationApi.toAnotherPage("memberspage.html")
     })
 }
 
