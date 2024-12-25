@@ -1,4 +1,4 @@
-import { getAllMembersFunction, addMemberFunction, generateBarCode, getLatestMemberId, getDetailedMember } from "../controllers/member.controller.js";
+import { getAllMembersFunction, addMemberFunction, generateBarCode, getLatestMemberId, getDetailedMember, deleteMember } from "../controllers/member.controller.js";
 import Member from "../utils/member.model.js";
 import {buildMemberNavigation} from "../utils/extra.js"
 const filePath = window.imagePaths.shareFilePath();
@@ -14,6 +14,8 @@ const departmentArea = document.getElementById("departmentArea")
 const viewMemberForm = document.getElementById("viewMemberForm")
 const photoArea = document.getElementById("photoArea")
 const viewMemberPhoto = document.getElementById("viewMemberPhoto")
+const deleteMemberButton = document.getElementById("deleteMemberButton")
+const editMemberButton = document.getElementById("editMemberButton")
 
 let index = 1;
 if(totalData){
@@ -36,6 +38,22 @@ if(backToCollection){
     backToCollection.addEventListener("click", () => {
         window.navigationApi.toAnotherPage("memberspage.html")
     })
+}
+
+if(deleteMemberButton){
+    deleteMemberButton.addEventListener("click", async() => {
+        window.showMessageApi.confirmMsg("Are you sure you want to delete this member?")
+    })
+
+    window.showMessageApi.dialogResponse(async(event, response) =>{
+            // console.log("this is their response "+ response)
+            let memberDetail = localStorage.getItem("detailedMemberData")
+            memberDetail = JSON.parse(memberDetail)
+            if(!response){
+                const result = await deleteMember(memberDetail._id)
+                window.showMessageApi.alertMsg(result.msg)
+            }
+        })
 }
 
 if(addMemberFormEl){

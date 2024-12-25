@@ -1,4 +1,4 @@
-import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint } from "../utils/links.js";
+import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint } from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -75,4 +75,15 @@ export async function generateBarCode(memberId){
             }
         });
     });
+}
+
+export async function deleteMember(memberDatabaseId){
+    const res = await fetch(deleteMemberEndpoint(memberDatabaseId), {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        }
+    })
+    return (await res.json())
 }
