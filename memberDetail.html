@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="styles/universal.css">
+        <link rel="stylesheet" href="styles/members.css">
+    </head>
+
+    <body>
+        <div id="navigationPanel" class="membersSelector"></div>
+        <main>
+            <div id="backToCollection">
+                <img src="./assets/arrow.png" class="backButton">
+            </div>
+            <h2>Members / Member Detail</h2>
+
+            <form id="viewMemberForm">
+                <label for="memberType">Member Type</label>
+                <input type="text" id="memberType" name="memberType">
+
+                <div id="viewDepartmentArea">
+
+                </div>
+                <!-- <label for="department">Department</label>
+                <select id="department" name="department">
+                    <option value="chinese">Chinese</option>
+                    <option value="english">English</option>
+                </select> -->
+
+
+                <label for="personalId">Personal Id</label>
+                <input type="text" id="personalId" name="personalId">
+                <br>
+
+                <label for="memberId">Member Id</label>
+                <input type="text" id="memberId" name="memberId">
+                <br>
+
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+                <br>
+
+                <label for="nrc">Nrc</label>
+                <input type="text" id="nrc" name="nrc">
+                <br>
+
+                <label for="genderLabel">Gender: </label>
+                <input type="text" id="gender"name="gender" >
+
+                <br>
+
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone">
+
+                <br>
+
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+
+                <br>
+
+                <label for="permanentAddress">Permanent Address</label>
+                <textarea id="permanentAddress" name="permanentAddress"></textarea>
+
+                <br>
+
+                <label for="currentAddress">Current Address</label>
+                <textarea id="currentAddress" name="currentAddress"></textarea>
+
+                <br>
+
+                <label for="note">Note</label>
+                <textarea id="note" name="note"></textarea>
+
+                <br>
+
+                <label for="photo">Member Photo</label>
+                <div id="photoArea">
+                    <img id="viewMemberPhoto">
+                </div>
+
+
+                <label for="issueDate">IssueDate</label>
+                <input type="text" id="issueDate" name="issueDate">
+
+                <br>
+                <label for="extendDate">Extend Date</label>
+                <input type="text" id="extendDate" name="extendDate">
+
+                <br>
+                <label for="expireDate">ExpireDate</label>
+                <input type="text" id="expireDate" name="expireDate">
+
+
+                <div id="editButtonsArea">
+                    <button>Loan History</button>
+                   
+                    <button>Borrow</button>
+    
+                    <button id="deleteMemberButton">Delete Member</button>
+    
+                    <button id="editMemberButton">Edit Member</button>
+                </div>
+
+            </form>
+        </main>
+    </body>
+
+    <script src="./utils/JsBarcode.all.min.js" type="module"></script>
+        <script src="./js/universal.js" defer type="module"></script>
+        <script src="./js/memberspage.js" defer type="module"></script>
+</html>

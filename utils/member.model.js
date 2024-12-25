@@ -12,11 +12,11 @@ class Member {
         email,
         permanentAddress,
         currentAddress,
+        note,
         photo,
         issueDate,
         extendDate,
         expiryDate,
-        note,
         block,
         barcode,
         loanBooks = 0
@@ -34,10 +34,10 @@ class Member {
         this.permanentAddress = permanentAddress;
         this.currentAddress = currentAddress;
         this.photo = photo;
+        this.note = note;
         this.issueDate = issueDate;
         this.extendDate = extendDate;
         this.expiryDate = expiryDate;
-        this.note = note;
         this.block = block;
         this.barcode = barcode;
         this.loanBooks = loanBooks;

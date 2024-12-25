@@ -15,7 +15,7 @@ export const getLatestAccNoEndpoint = (category) => `${apiEndpoint}book/getLates
 
 export const addMemberEndpoint = `${apiEndpoint}member/addMember`
 export const editMemberEndpoint = `${apiEndpoint}member/editMember`
-export const getMemberDetailEndpoint = (memberDatabaseId, memberId, personalId) => `${apiEndpoint}member/getMember?memberDatabaseId=${memberDatabaseId}&memberId=${memberId}&personalId=${personalId}`
+export const getMemberDetailEndpoint = (memberDatabaseId) => `${apiEndpoint}member/getMember?memberDatabaseId=${memberDatabaseId}`
 export const getAllMembersEndpoint = (page) => `${apiEndpoint}member/getAllMembers?page=${page}`
 export const getSpecificMembersEndpoint = (memberType, page) => `${apiEndpoint}member/getAllMembers?memberType=${memberType}page=${page}`
 export const deleteMemberEndpoint = (memberDatabaseId) => `${apiEndpoint}member/deleteMember/?memberDatabaseId=${memberDatabaseId}`

@@ -1,4 +1,4 @@
-import { getAllMembersFunction } from "../controllers/member.controller.js";
+import { getAllMembersFunction, addMemberFunction, generateBarCode, getLatestMemberId, getDetailedMember } from "../controllers/member.controller.js";
 import Member from "../utils/member.model.js";
 import {buildMemberNavigation} from "../utils/extra.js"
 const filePath = window.imagePaths.shareFilePath();
@@ -7,9 +7,23 @@ const memberNavigationArea = document.getElementById("memberNavigationArea");
 const totalData = document.getElementById("totalData");
 const addMemberBtn = document.getElementById("addMemberBtn");
 const memberDataEl = document.getElementById("memberData");
+const addMemberFormEl = document.getElementById("addMemberForm")
+const memberType = document.getElementById("memberType");
+const memberId = document.getElementById("memberId")
+const departmentArea = document.getElementById("departmentArea")
+const viewMemberForm = document.getElementById("viewMemberForm")
+const photoArea = document.getElementById("photoArea")
+const viewMemberPhoto = document.getElementById("viewMemberPhoto")
 
 let index = 1;
-updateMemberData()
+if(totalData){
+    localStorage.removeItem("detailedMemberData")
+    updateMemberData()
+}
+
+if(viewMemberForm){
+    updateMemberDetail()
+}
 
 if(addMemberBtn){
     addMemberBtn.addEventListener("click", () => {
@@ -22,6 +36,78 @@ if(backToCollection){
     backToCollection.addEventListener("click", () => {
         window.navigationApi.toAnotherPage("memberspage.html")
     })
+}
+
+if(addMemberFormEl){
+
+    let memberTypeValue = "student";
+    let memberIdValue;
+    memberType.addEventListener("change", async(e) => {
+        // console.log("member is changed " + memberType.value)
+        memberTypeValue = memberType.value;
+        memberIdValue = await updateMemberId(memberTypeValue)
+        memberId.value = memberIdValue;
+
+        if(memberTypeValue != "student"){
+            departmentArea.innerHTML = `
+                <label for="department">Department</label>
+                <select id="department" name="department">
+                    <option value="Chinese">Chinese</option>
+                    <option value="English">English</option>
+                </select> 
+            `
+        }else{
+            departmentArea.innerHTML = "";
+        }
+    })
+
+    memberIdValue = await updateMemberId(memberTypeValue)
+    memberId.value = memberIdValue;
+    addMemberFormEl.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        let barcodeImage = await generateBarCode(e.target.memberId.value);
+        const newMember = new Member({
+            photo: document.getElementById("photo").files[0],
+            memberType:e.target.memberType.value,
+
+            personalId:e.target.personalId.value,
+            memberId:e.target.memberId.value,
+            name:e.target.name.value,
+            nrc:e.target.nrc.value,
+            gender:e.target.gender.value,
+            phone:e.target.phone.value,
+            email:e.target.email.value,
+            permanentAddress:e.target.permanentAddress.value,
+            currentAddress:e.target.currentAddress.value,
+            note:e.target.note.value,
+            barcode:barcodeImage
+        })
+
+        if(e.target.department){
+            newMember.department = e.target.department.value;
+        }
+
+        delete newMember.loanBooks
+       
+        const formData = new FormData();
+
+        for(let key in newMember){
+            if(newMember.hasOwnProperty(key)){
+                if(newMember[key] !== undefined){
+                    formData.append(key, newMember[key]);
+                }
+            }
+        }
+
+        for (let key of formData.keys()) {
+            console.log("value of " + key + " is " + formData.get(key));
+        }
+
+        const result = await addMemberFunction(formData);
+        window.showMessageApi.alertMsg(result.msg)
+
+    } )  
 }
 
 async function updateMemberData(page=1){
@@ -49,7 +135,7 @@ async function updateMemberData(page=1){
         memberDataEl.innerHTML = ``;
         totalMemeberData.forEach((eachMember) => {
             // let memberData = new Member(eachMember);
-            memberIds.push(eachMember.memberDatabaseId);
+            memberIds.push(eachMember._id);
             const newRow = document.createElement("tr");
             let imagePath = filePath + eachMember.photo;
             let expiryDate = new Date(eachMember.expiryDate);
@@ -70,6 +156,8 @@ async function updateMemberData(page=1){
                 `
             memberDataEl.appendChild(newRow);
         })
+        viewDetailedMemberFunction(memberIds);
+        console.log("member ids " + memberIds)
     }else{
         memberDataEl.innerHTML = `
         <tr>
@@ -83,4 +171,57 @@ async function updateMemberData(page=1){
 
 function updateNewIndex(newIndex){
     index = newIndex;
+}
+
+function viewDetailedMemberFunction(memberIds){
+    const detailedButtons = document.querySelectorAll(".detailedMember");
+    detailedButtons.forEach((eachButton, index) => {
+        eachButton.addEventListener("click", async() => {
+            let detailedMemberData = await getDetailedMember(memberIds[index]);
+            console.log("detailed member data " + JSON.stringify(detailedMemberData.result))
+            localStorage.setItem("detailedMemberData", JSON.stringify(detailedMemberData.result));
+            window.navigationApi.toAnotherPage("memberDetail.html", memberIds[index])
+        })
+    })
+}
+
+async function updateMemberId(memberType){
+    let result = await getLatestMemberId(memberType);
+    return result.result;
+}
+
+function updateMemberDetail(){
+    let memberDetail = localStorage.getItem("detailedMemberData");
+    let memberData = new Member(JSON.parse(memberDetail));
+    const memberDepartment = document.getElementById("viewDepartmentArea");
+    delete memberData.memberDatabaseId
+    delete memberData.block;
+    delete memberData.barcode;
+    delete memberData.loanBooks;
+    if(memberData.memberType != "student"){
+        memberDepartment.innerHTML = `
+            <label for="department">Department</label>
+            <input type="text" name="department" value="${memberData.department}" disabled>
+        `
+    }else{
+        delete memberData.department;
+    }
+    const viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea")
+    let index = 0;
+    setTimeout(() => {
+        Object.keys(memberData).forEach((eachKey) => {
+            console.log("each key and value " + eachKey + " " + memberData[eachKey])
+            if(eachKey == "photo"){
+                viewMemberPhoto.src=filePath + memberData[eachKey];
+            }else if(eachKey == "department"){
+                const department = document.getElementById("viewDepartmentArea");
+                department.value = memberData
+                index++
+            }
+            else{
+                viewInputs[index].value = memberData[eachKey] ? memberData[eachKey] : "-";
+                index++;
+            }
+        })
+    }, 300)
 }

@@ -18,15 +18,16 @@
                     <option value="teacher">Teacher</option>
                     <option value="staff">Staff</option>
                 </select>
-                <br>
 
-                <label for="department">Department</label>
+                <div id="departmentArea">
+
+                </div>
+                <!-- <label for="department">Department</label>
                 <select id="department" name="department">
                     <option value="chinese">Chinese</option>
                     <option value="english">English</option>
-                </select>
+                </select> -->
 
-                <br>
 
                 <label for="personalId">Personal Id</label>
                 <input type="text" id="personalId" name="personalId" required>
@@ -41,15 +42,15 @@
                 <br>
 
                 <label for="nrc">Nrc</label>
-                <input type="text" id="nrc" name="nrc" required>
+                <input type="text" id="nrc" name="nrc">
                 <br>
 
-                <label for="gradeLabel">Gender: </label>
+                <label for="genderLabel">Gender: </label>
                 
-                <input type="radio" id="maleRadio" name="grade" value="male" required>
+                <input type="radio" id="maleRadio" name="gender" value="male" required>
                 <label for="maleRadio">Male</label>
     
-                <input type="radio" id="femaleRadio" name="grade" value="female" required>
+                <input type="radio" id="femaleRadio" name="gender" value="female" required>
                 <label for="femaleRadio">Female</label>
 
                 <br>
@@ -69,13 +70,13 @@
 
                 <br>
 
-                <label for="temporaryAddress">Temporary Address</label>
-                <textarea id="temporaryAddress" name="temporaryAddress" required></textarea>
+                <label for="currentAddress">Current Address</label>
+                <textarea id="currentAddress" name="currentAddress" required></textarea>
 
                 <br>
 
                 <label for="note">Note</label>
-                <textarea id="note" name="note" required></textarea>
+                <textarea id="note" name="note"></textarea>
 
                 <br>
 
@@ -89,6 +90,7 @@
             </form>
         </main>
     </body>
+    <script src="./utils/JsBarcode.all.min.js" type="module"></script>
     <script src="./js/universal.js" defer type="module"></script>
     <script src="./js/memberspage.js" defer type="module"></script>
 </html>

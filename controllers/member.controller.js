@@ -1,4 +1,4 @@
-import { getAllMembersEndpoint } from "../utils/links.js";
+import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint } from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -12,4 +12,67 @@ export async function getAllMembersFunction(page){
     })
 
     return (await res.json())
+}
+
+export async function getLatestMemberId(memberType){
+    const res = await fetch(getLatestMemberIdEndpoint(memberType), {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`,
+        }
+    })
+
+    return (await res.json())
+}
+
+export async function getDetailedMember(memberDatabaseId){
+    const res = await fetch(getMemberDetailEndpoint(memberDatabaseId), {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`,
+        }
+    })
+
+    return (await res.json())
+}
+
+export async function addMemberFunction(MemberFormatData){
+    const res = await fetch(addMemberEndpoint, {
+        method: "POST",
+        headers: {
+            // "Content-Type": "application/json",
+             authorization: `Bearer ${token[0].value}`,
+        },
+        body: MemberFormatData
+    })
+
+    return (await res.json());
+    
+}
+
+export async function generateBarCode(memberId){
+    return new Promise((resolve, reject) => {
+        const canvas = document.createElement('canvas');
+        // let bookCategory;
+        // if(category == "english"){
+        //     bookCategory = "eng"   
+        // }else{
+        //     bookCategory = "mm"
+        // }
+        // let storedData = `${ bookCategory +","+ accNo }`;
+        let storedData = `${ memberId }`;
+        
+        JsBarcode(canvas, storedData, { displayValue: false });
+
+        canvas.toBlob((blob) => {
+            if (blob) {
+                const file = new File([blob], `${memberId}.png`, { type: "image/png" });
+                resolve(file); // Resolves the Promise with the URL
+            } else {
+                reject(new Error("Failed to create Blob from canvas."));
+            }
+        });
+    });
 }

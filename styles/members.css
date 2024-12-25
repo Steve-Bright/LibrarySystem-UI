@@ -116,3 +116,12 @@
 .member-photo{
     width: 95%;
 }
+
+#viewMemberForm input, #viewMemberForm textarea{
+    border: none;
+    pointer-events: none;
+}
+
+#viewMemberPhoto{
+    width: 100px;
+}
