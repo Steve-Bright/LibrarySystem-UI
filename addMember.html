@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="styles/universal.css">
+    </head>
+    <body>
+        <div id="navigationPanel" class="membersSelector"></div>
+        <main>
+            <div id="backToCollection">
+                <img src="./assets/arrow.png" class="backButton">
+            </div>
+            <h2>Add Member</h2>
+
+            <form id="addMemberForm">
+                <label for="memberType">Member Type</label>
+                <!-- <input type="text" id="memberType" name="memberType" required> -->
+                <select id="memberType" name="memberType">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="staff">Staff</option>
+                </select>
+
+                <div id="departmentArea">
+                    <label for="Grade">Grade</label>
+                    <input type="text" name="grade" id="grade">
+                </div>
+                <!-- <label for="department">Department</label>
+                <select id="department" name="department">
+                    <option value="chinese">Chinese</option>
+                    <option value="english">English</option>
+                </select> -->
+
+
+                <label for="personalId">Personal Id</label>
+                <input type="text" id="personalId" name="personalId" required>
+                <br>
+
+                <label for="memberId">Member Id</label>
+                <input type="text" id="memberId" name="memberId" required>
+                <br>
+
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+
+                <label for="nrc">Nrc</label>
+                <input type="text" id="nrc" name="nrc">
+                <br>
+
+                <label for="genderLabel">Gender: </label>
+                
+                <input type="radio" id="maleRadio" name="gender" value="male" required>
+                <label for="maleRadio">Male</label>
+    
+                <input type="radio" id="femaleRadio" name="gender" value="female" required>
+                <label for="femaleRadio">Female</label>
+
+                <br>
+
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <br>
+
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required>
+
+                <br>
+
+                <label for="permanentAddress">Permanent Address</label>
+                <textarea id="permanentAddress" name="permanentAddress" required></textarea>
+
+                <br>
+
+                <label for="currentAddress">Current Address</label>
+                <textarea id="currentAddress" name="currentAddress" required></textarea>
+
+                <br>
+
+                <label for="note">Note</label>
+                <textarea id="note" name="note"></textarea>
+
+                <br>
+
+                <label for="photo">Photo</label>
+                <input type="file" id="photo" name="photo" required>
+
+                <br>
+                <button type="reset">Reset</button>
+                <button type="submit">Add Book</button>
+                <button type="button">Cancel</button>
+            </form>
+        </main>
+    </body>
+    <script src="./utils/JsBarcode.all.min.js" type="module"></script>
+    <script src="./js/universal.js" defer type="module"></script>
+    <script src="./js/memberspage.js" defer type="module"></script>
+</html>
