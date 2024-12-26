@@ -17,6 +17,7 @@ const viewMemberPhoto = document.getElementById("viewMemberPhoto")
 const deleteMemberButton = document.getElementById("deleteMemberButton")
 const editMemberButton = document.getElementById("editMemberButton")
 const editButtonsArea = document.getElementById("editButtonsArea")
+const memberCards = document.getElementById("memberCards")
 
 let index = 1;
 if(totalData){
@@ -62,6 +63,12 @@ if(editMemberButton){
     })
 }
 
+if(memberCards){
+    memberCards.addEventListener("click", (e) => {  
+        window.navigationApi.toAnotherPage("memberCards.html")
+    })
+}
+
 if(addMemberFormEl){
 
     let memberTypeValue = "student";
@@ -81,7 +88,10 @@ if(addMemberFormEl){
                 </select> 
             `
         }else{
-            departmentArea.innerHTML = "";
+            departmentArea.innerHTML = `
+                <label for="Grade">Grade</label>
+                <input type="text" name="grade" id="grade">
+            `;
         }
     })
 
@@ -110,6 +120,10 @@ if(addMemberFormEl){
 
         if(e.target.department){
             newMember.department = e.target.department.value;
+        }
+
+        if(e.target.grade){
+            newMember.grade = e.target.grade.value;
         }
 
         delete newMember.loanBooks
@@ -223,12 +237,17 @@ function updateMemberDetail(){
     delete memberData.barcode;
     delete memberData.loanBooks;
     if(memberData.memberType != "student"){
+        delete memberData.grade;
         memberDepartment.innerHTML = `
             <label for="department">Department</label>
-            <input type="text" name="department" value="${memberData.department}" disabled>
+            <input type="text" name="department" value="${memberData.department}">
         `
     }else{
         delete memberData.department;
+        memberDepartment.innerHTML = `
+            <label for="Grade">Grade</label>
+            <input type="text" name="grade" value="${memberData.grade}">
+        `;
     }
     const viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea")
     let index = 0;
@@ -239,7 +258,11 @@ function updateMemberDetail(){
                 viewMemberPhoto.src=filePath + memberData[eachKey];
             }else if(eachKey == "department"){
                 const department = document.getElementById("viewDepartmentArea");
-                department.value = memberData
+                department.value = memberData[eachKey]
+                index++
+            }else if(eachKey == "grade"){
+                const department = document.getElementById("viewDepartmentArea");
+                department.value = memberData[eachKey]
                 index++
             }
             else{
@@ -270,6 +293,18 @@ function updateEditMemberUi(){
     delete newMember.barcode;
     delete newMember.loanBooks;
 
+    
+    let memberDetail = localStorage.getItem("detailedMemberData");
+    memberDetail = JSON.parse(memberDetail)
+    newMember.memberDatabaseId = memberDetail._id;
+    newMember.memberType = memberDetail.memberType;
+    if(newMember.memberType != "student"){
+        delete newMember.grade
+    }else{
+        delete newMember.department
+    }
+
+
     const memberKeys = Object.keys(newMember)
 
     
@@ -289,10 +324,6 @@ function updateEditMemberUi(){
        })
     })
 
-    let memberDetail = localStorage.getItem("detailedMemberData");
-    memberDetail = JSON.parse(memberDetail)
-    newMember.memberDatabaseId = memberDetail._id;
-    newMember.memberType = memberDetail.memberType;
 
     editMemberForm.addEventListener("submit", async(e) => {
         // console.log("edit member form " + JSON.stringify(newMember))
@@ -306,7 +337,7 @@ function updateEditMemberUi(){
             }
         }
         for (let key of formData.keys()) {
-            console.log("value of " + key + " is " + formData.get(key));
+            console.log("While editing, the value of " + key + " is " + formData.get(key));
         }
         let result = await editMember(formData);
         window.showMessageApi.alertMsg(result.msg)

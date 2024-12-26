@@ -3,6 +3,7 @@ class Member {
         memberDatabaseId,
         memberType,
         department,
+        grade,
         personalId,
         memberId,
         name,
@@ -24,6 +25,7 @@ class Member {
         this.memberDatabaseId = memberDatabaseId;
         this.memberType = memberType;
         this.department = department;
+        this.grade = grade;
         this.personalId = personalId;
         this.memberId = memberId;
         this.name = name;
