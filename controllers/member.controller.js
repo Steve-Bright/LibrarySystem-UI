@@ -1,4 +1,4 @@
-import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint } from "../utils/links.js";
+import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint } from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -85,5 +85,18 @@ export async function deleteMember(memberDatabaseId){
             authorization: `Bearer ${token[0].value}`
         }
     })
+    return (await res.json())
+}
+
+export async function editMember(memberFormatData){
+    const res = await fetch(editMemberEndpoint, {
+        method: "PUT", 
+        headers: {
+            // "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        },
+        body: memberFormatData
+    })
+
     return (await res.json())
 }

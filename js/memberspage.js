@@ -1,4 +1,4 @@
-import { getAllMembersFunction, addMemberFunction, generateBarCode, getLatestMemberId, getDetailedMember, deleteMember } from "../controllers/member.controller.js";
+import { getAllMembersFunction, addMemberFunction, generateBarCode, getLatestMemberId, getDetailedMember, deleteMember, editMember } from "../controllers/member.controller.js";
 import Member from "../utils/member.model.js";
 import {buildMemberNavigation} from "../utils/extra.js"
 const filePath = window.imagePaths.shareFilePath();
@@ -16,6 +16,7 @@ const photoArea = document.getElementById("photoArea")
 const viewMemberPhoto = document.getElementById("viewMemberPhoto")
 const deleteMemberButton = document.getElementById("deleteMemberButton")
 const editMemberButton = document.getElementById("editMemberButton")
+const editButtonsArea = document.getElementById("editButtonsArea")
 
 let index = 1;
 if(totalData){
@@ -54,6 +55,11 @@ if(deleteMemberButton){
                 window.showMessageApi.alertMsg(result.msg)
             }
         })
+}
+if(editMemberButton){
+    editMemberButton.addEventListener("click", () => {
+        updateEditMemberUi();
+    })
 }
 
 if(addMemberFormEl){
@@ -242,4 +248,68 @@ function updateMemberDetail(){
             }
         })
     }, 300)
+}
+
+function updateEditMemberUi(){
+    viewMemberForm.id=""
+    viewMemberForm.id = "editMemberForm"
+
+    editButtonsArea.innerHTML = `<button type="submit">Edit</button>`
+    const removeImageButton = document.createElement("button");
+    removeImageButton.id = "removeImage";
+    removeImageButton.textContent = "remove";
+    photoArea.appendChild(removeImageButton);
+
+    const editMemberForm = document.getElementById("editMemberForm");
+    const removeImage = document.getElementById("removeImage")
+    const editMemberFormField = document.querySelectorAll("#editMemberForm input,  textarea")
+
+    let newMember = new Member({})
+    delete newMember.memberDatabaseId
+    delete newMember.photo;
+    delete newMember.barcode;
+    delete newMember.loanBooks;
+
+    const memberKeys = Object.keys(newMember)
+
+    
+    removeImage.addEventListener("click", () => {
+        viewMemberPhoto.remove()
+        photoArea.innerHTML = `<input type="file" name="photo" id="photo">`
+
+        const memberPhoto = document.getElementById("photo")
+        memberPhoto.addEventListener("change", () => {
+            newMember.photo = memberPhoto.files[0];
+        })
+    })
+
+    editMemberFormField.forEach((eachInput, i) => {
+       eachInput.addEventListener("change", () => {
+            newMember[memberKeys[i]] = eachInput.value;
+       })
+    })
+
+    let memberDetail = localStorage.getItem("detailedMemberData");
+    memberDetail = JSON.parse(memberDetail)
+    newMember.memberDatabaseId = memberDetail._id;
+    newMember.memberType = memberDetail.memberType;
+
+    editMemberForm.addEventListener("submit", async(e) => {
+        // console.log("edit member form " + JSON.stringify(newMember))
+        e.preventDefault()
+        const formData = new FormData();
+        for(let key in newMember){
+            if(newMember.hasOwnProperty(key)){
+                if(newMember[key] !== undefined){
+                    formData.append(key, newMember[key]);
+                }
+            }
+        }
+        for (let key of formData.keys()) {
+            console.log("value of " + key + " is " + formData.get(key));
+        }
+        let result = await editMember(formData);
+        window.showMessageApi.alertMsg(result.msg)
+    })
+
 }
