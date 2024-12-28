@@ -1,112 +1,110 @@
 <!DOCTYPE html> 
     <head>
         <link rel="stylesheet" href="styles/universal.css">
+        <link rel="stylesheet" href="styles/loans.css">
     </head>
 
     <body>
         <div id="navigationPanel"  class="loansSelector"></div>
         <main>
-            <h1>Book Loan</h1>
+            <div class="mainTitle">
+                <h1>Book Loan</h1>
+
+            </div>
 
             <div class="subTitle">
                 <h2>Search Loan</h2>
-                <button>Borrow</button>
+                <div>
+                    <button id="borrowBook">Borrow</button>
+                </div>
+                
             </div>
 
             <div id="searchLoanDiv">
                 <form>
-                    <label for="accNo">Account No.</label>
-                    <input type="text" name="accNoInput">
-                    
-                    <label for="memberId">Member Id</label>
-                    <input type="text" name="memberIdInput">
+                    <div>
+                        <div>
+                            <label for="accNo">Account No.</label>
+                            <input type="text" name="accNoInput">
+                        </div>
+                        
+                        <div>
+                            <label for="memberId">Member Id</label>
+                            <input type="text" name="memberIdInput">
+                        </div>
+                    </div>
 
-                    <br>
+                    <div>
+                        <div>
+                            <label for="bookName">Book Name</label>
+                            <input type="text" name="bookNameInput">
+                        </div>
 
-                    <label for="bookName">Book Name</label>
-                    <input type="text" name="bookNameInput">
+                        <div>
+                            <label for="memberName">Member Name</label>
+                            <input type="text" name="memberNameInput">
+                        </div>
+                    </div>
 
-                    <label for="memberName">Member Name</label>
-                    <input type="text" name="memberNameInput">
 
-                    <br>
+                    <div>
+                        <div>
+                            <label for="borrowDate">Borrow Date</label>
+                            <input type="text" name="borrowDateInput">
+                        </div>
+                        
+                        <div>
+                            <label for="dueDate">Due Date</label>
+                            <input type="text" name="dueDateInput">
+                        </div>
+                       
+                    </div>
 
-                    <label for="borrowDate">Borrow Date</label>
-                    <input type="text" name="borrowDateInput">
 
-                    <label for="dueDate">Due Date</label>
-                    <input type="text" name="dueDateInput">
+                    <div id="searchLoanButtonsDiv">
+                        <input type="reset" value="Clear All">
+                        <input type="submit" value="Search">
 
-                    <br>
-
-                    <input type="reset" value="Clear All">
-                    <input type="submit" value="Search">
+                    </div>
                 </form>
             </div>
 
-            <div>
-                <h2>Overdue (999)</h2>
-                <table>
-                    <tr>
-                        <th>Member Id</th>
-                        <th>Member Name</th>
-                        <th>Book Category</th>
-                        <th>Book Name</th>
-                        <th>Call No</th>
-                        <th>Borrow Date</th>
-                        <th>Due Date</th>
-                        <th></th>
-                    </tr>
+            <div class="tableFormat">
+                <div class="tableTitle">
+                    <div id="loanTitle">
+                        <div>
+                            <h2 id="totalData">Total Loans</h2>
+                        </div>
+                        <div id="filterDiv">
+                            <span>Filter -</span>
+                            <div>All</div>
+                            <div>Overdue</div>
+                            <div>Today Deadline</div>
+                            <div>Other</div>
+                        </div>
 
-                    <div id="loanOverdueData">
-                        <tr>
-                            <td colspan="7">No loan that are overdue today</td>
-                        </tr>
+                        <div id="loanNavigationArea">
+
+                        </div>
                     </div>
-                </table>
-            </div>
 
-            <div>
-                <h2>Today Deadline (999)</h2>
+                </div>
                 <table>
-                    <tr>
-                        <th>Member Id</th>
-                        <th>Member Name</th>
-                        <th>Book Category</th>
-                        <th>Book Name</th>
-                        <th>Call No</th>
-                        <th>Borrow Date</th>
-                        <th>Due Date</th>
-                        <th></th>
-                    </tr>
-
-                    <div id="loanDeadlineData">
+                    <thead id="loanDataHeadings">
                         <tr>
-                            <td colspan="7">No loan that are deadline today</td>
+                            <th>Member Id</th>
+                            <th>Member Name</th>
+                            <th>Book Category</th>
+                            <th>Book Name</th>
+                            <th>Call No</th>
+                            <th>Borrow Date</th>
+                            <th>Due Date</th>
+                            <th></th>
                         </tr>
-                    </div>
-                </table>
-            </div>
+                    </thead>
 
-            <div>
-                <h2>Total Loans (999)</h2>
-                <table>
-                    <tr>
-                        <th>Member Id</th>
-                        <th>Member Name</th>
-                        <th>Book Category</th>
-                        <th>Book Name</th>
-                        <th>Call No</th>
-                        <th>Borrow Date</th>
-                        <th>Due Date</th>
-                        <th></th>
-                    </tr>
-
-                    <div id="loanOverdueData">
-                        <tr>
-                            <td colspan="7">No loans at the moment</td>
-                        </tr>
-                    </div>
+                    <tbody id="loanData">
+                    </tbody>
                 </table>
             </div>
         </main>
@@ -114,5 +112,6 @@
     </body>
 
     <script src="./js/universal.js" defer type="module"></script>
+    <script src="./js/loanpage.js" defer type="module"></script>
     
 </html>

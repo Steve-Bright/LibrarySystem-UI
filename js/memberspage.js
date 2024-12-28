@@ -167,11 +167,11 @@ async function updateMemberData(page=1){
     }
 
     let memberIds = [];
-    let totalMemeberData = result.result.items
+    let totalMemberData = result.result.items
     
-    if(totalMemeberData.length > 0){
+    if(totalMemberData.length > 0){
         memberDataEl.innerHTML = ``;
-        totalMemeberData.forEach((eachMember) => {
+        totalMemberData.forEach((eachMember) => {
             // let memberData = new Member(eachMember);
             memberIds.push(eachMember._id);
             const newRow = document.createElement("tr");
@@ -218,7 +218,7 @@ function viewDetailedMemberFunction(memberIds){
             let detailedMemberData = await getDetailedMember(memberIds[index]);
             console.log("detailed member data " + JSON.stringify(detailedMemberData.result))
             localStorage.setItem("detailedMemberData", JSON.stringify(detailedMemberData.result));
-            window.navigationApi.toAnotherPage("memberDetail.html", memberIds[index])
+            window.navigationApi.toAnotherPage("memberDetail.html")
         })
     })
 }
