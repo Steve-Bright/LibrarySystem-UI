@@ -136,3 +136,7 @@
     border: none;
     pointer-events: none;
 }
+
+#viewBookCover, #viewMemberPhoto{
+    width: 100px;
+}

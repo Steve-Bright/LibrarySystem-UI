@@ -1,4 +1,4 @@
-import { getAllLoansEndpoint, getLoanDetailEndpoint } from "../utils/links.js";
+import { deleteLoanEndpoint, extendLoanEndpoint, getAllLoansEndpoint, getLoanDetailEndpoint, returnLoanEndpoint } from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -20,6 +20,42 @@ export async function getDetailedLoanFunction(loanId){
         headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${token[0].value}`,
+        }
+    })
+
+    return (await res.json())
+}
+
+export async function extendLoanFunction(loanId){
+    const res = await fetch(extendLoanEndpoint(loanId), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        }
+    })
+
+    return (await res.json())
+}
+
+export async function returnLoanFunction(loanId){
+    const res = await fetch(returnLoanEndpoint(loanId), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        }
+    })
+
+    return (await res.json())
+}
+
+export async function deleteLoanFunction(loanId){
+    const res = await fetch(deleteLoanEndpoint(loanId), {
+        method: "DELETE", 
+        headers: {
+             "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
         }
     })
 

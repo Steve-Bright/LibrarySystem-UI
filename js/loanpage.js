@@ -1,4 +1,4 @@
-import { getAllLoansFunction, getDetailedLoanFunction} from "../controllers/loan.controller.js";
+import { deleteLoanFunction, extendLoanFunction, getAllLoansFunction, getDetailedLoanFunction, returnLoanFunction} from "../controllers/loan.controller.js";
 import Book from "../utils/book.model.mjs";
 import { buildMemberNavigation } from "../utils/extra.js";
 import Loan from "../utils/loan.model.mjs";
@@ -12,6 +12,9 @@ const loanDetailForm = document.getElementById("loanDetailForm");
 const viewBookCover = document.getElementById("viewBookCover")
 const viewMemberPhoto = document.getElementById('viewMemberPhoto')
 const borrowButton = document.getElementById("borrowButton")
+const deleteLoanBtn = document.getElementById("deleteLoanBtn")
+const extendLoanBtn = document.getElementById("extendLoanBtn")
+const returnLoanBtn = document.getElementById("returnLoanBtn")
 let index = 1;
 
 if(backToCollection){
@@ -26,6 +29,60 @@ if(borrowButton){
         window.navigationApi.toAnotherPage("")
     })
 }
+
+let buttonClick;
+
+if(deleteLoanBtn){
+    deleteLoanBtn.addEventListener("click", ()=>{
+        window.showMessageApi.confirmMsg("Are you sure you want to delete the loan?")
+    })
+            window.showMessageApi.dialogResponse(async(event, response) => {
+                // console.log("this is button click " + buttonClick)
+                let loanDetail = localStorage.getItem("loanDetail")
+                loanDetail = JSON.parse(loanDetail)
+                if(!response){
+                    const result = await deleteLoanFunction(loanDetail._id)
+                    window.showMessageApi.alertMsg(result.msg)
+                }
+    
+            })
+
+}
+
+
+
+
+if(extendLoanBtn){
+    extendLoanBtn.addEventListener("click", ()=>{
+        window.showMessageApi.confirmMsg2("Are you sure you want to extend the loan?")
+    })
+            window.showMessageApi.dialogResponse2(async(event, response) => {
+                // console.log("this is button click " + buttonClick)
+                let loanDetail = localStorage.getItem("loanDetail")
+                loanDetail = JSON.parse(loanDetail)
+                if(!response){
+                    const result = await extendLoanFunction(loanDetail._id)
+                    window.showMessageApi.alertMsg(result.msg)
+                }
+    
+            })
+}
+
+if(returnLoanBtn){
+    returnLoanBtn.addEventListener("click", () => {
+        window.showMessageApi.confirmMsg3("Are you sure you want to return the loan?")
+    })
+
+    window.showMessageApi.dialogResponse3(async(event, response) => {
+        let loanDetail = localStorage.getItem("loanDetail")
+        loanDetail = JSON.parse(loanDetail)
+        if(!response){
+            const result = await returnLoanFunction(loanDetail._id)
+            window.showMessageApi.alertMsg(result.msg)
+        } 
+    })
+}
+
 
 if(totalDataEl){
     updateLoanData()
@@ -87,7 +144,7 @@ async function updateLoanData(page = 1){
             loanDataEl.appendChild(newRow)
         })
 
-        console.log("loan Ids", loanIds)
+        // console.log("loan Ids", loanIds)
         viewDetailedMemberFunction(loanIds)
     }else{
         loanDataEl.innerHTML = `
@@ -121,14 +178,14 @@ function updateLoanDetail(){
     let loanBook = new Book(loan.bookId)
     // console.log("this is loan detail " + JSON.stringify(Object.keys(loanBook)))
     let loanMember = new Member(loan.memberId)
-    console.log("this is loan detail " + JSON.stringify(loanMember))
+    // console.log("this is loan detail " + JSON.stringify(loanMember))
     delete loan.memberId
     delete loan.bookModel
     delete loan.bookId
     delete loan.overdue
     delete loanMember.loanBooks;
     delete loanBook.loanStatus;
-    console.log("this is loan detail " + JSON.stringify(loan))
+    // console.log("this is loan detail " + JSON.stringify(loan))
 
     const viewBook = document.querySelectorAll("#bookInfo input")
     const viewMember = document.querySelectorAll("#memberInfo input")
@@ -143,7 +200,7 @@ function updateLoanDetail(){
             if(eachKey == "photo"){
                 viewMemberPhoto.src = filePath +loanMember[eachKey]
             }else if(loanMember[eachKey] != undefined && eachKey != "photo"){
-                console.log("helo? " + eachKey)
+                // console.log("helo? " + eachKey)
                 viewMember[memberIndex].value = loanMember[eachKey]
                 memberIndex++
             }
@@ -152,14 +209,14 @@ function updateLoanDetail(){
             if(eachKey == "bookCover"){
                 viewBookCover.src = filePath + loanBook[eachKey]
             }else if(loanBook[eachKey] != undefined && eachKey != "bookCover"){
-                console.log("view book " + eachKey)
+                // console.log("view book " + eachKey)
                 viewBook[bookIndex].value = loanBook[eachKey]
                 bookIndex++
             }
         })
 
         Object.keys(loan).forEach((eachKey) => {
-            console.log("each key " + eachKey)
+            // console.log("each key " + eachKey)
             if(loan[eachKey] != undefined){
                 viewLoan[loanIndex].value = loan[eachKey]
                 loanIndex++

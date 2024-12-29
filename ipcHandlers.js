@@ -54,6 +54,61 @@ export default function setupIpcHandlers(win) {
     }
   })})
 
+  ipcMain.on("openDialog2", (event, message) =>{
+    const currentWindow = win || BrowserWindow.getFocusedWindow();
+    dialog.showMessageBox(currentWindow, 
+      {message: message,
+        buttons: ["yes", "no"]
+      })
+  .then((result) => {
+    try{
+      // console.log("this is the result: " + JSON.stringify(result))
+      event.sender.send("dialogResponse2", result.response);
+    }catch(error){
+      // console.log("error in openDialog ipcMain: " + error)
+    }
+  })})
+
+  ipcMain.on("openDialog3", (event, message) =>{
+    const currentWindow = win || BrowserWindow.getFocusedWindow();
+    dialog.showMessageBox(currentWindow, 
+      {message: message,
+        buttons: ["yes", "no"]
+      })
+  .then((result) => {
+    try{
+      // console.log("this is the result: " + JSON.stringify(result))
+      event.sender.send("dialogResponse3", result.response);
+    }catch(error){
+      // console.log("error in openDialog ipcMain: " + error)
+    }
+  })})
+
+  // ipcMain.on("openDialog", (event, dialogOptions) => {
+  //   try {
+  //     const currentWindow = win || BrowserWindow.getFocusedWindow();
+  
+  //     // Use dialogOptions to dynamically set the dialog properties
+  //     dialog
+  //       .showMessageBox(currentWindow, {
+  //         type: dialogOptions.type || "info", // Default type is 'info'
+  //         title: dialogOptions.title || "Confirm", // Default title
+  //         message: dialogOptions.message || "Are you sure?", // Default message
+  //         buttons: dialogOptions.buttons || ["Yes", "No"], // Default buttons
+  //         defaultId: dialogOptions.defaultId || 0, // Default selected button
+  //         cancelId: dialogOptions.cancelId || 1, // Default cancel button
+  //         detail: dialogOptions.detail || "", // Additional details if any
+  //       })
+  //       .then((result) => {
+  //         event.sender.send(dialogOptions.responseChannel || "dialogResponse", result.response); // Dynamic response channel
+  //       });
+  //   } catch (error) {
+  //     console.error("Error in openDialog ipcMain:", error);
+  //     event.sender.send(dialogOptions.responseChannel || "dialogResponse", { error: error.message });
+  //   }
+  // });
+  
+
   ipcMain.on("open-window", (event, arg) => {
     let fileName = arg.fileName;
     let windowFeatures = arg.windowFeatures
