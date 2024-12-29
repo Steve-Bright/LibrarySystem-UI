@@ -1,0 +1,212 @@
+<!DCOTYPE html>
+    <head>
+        <style>
+            
+            .tableFormat{
+                width: 100%;
+                border: 3px;
+            }
+
+            .tableFormat table{
+                width: 100%;
+                font-size: 0.8em;
+                text-align: center;
+            }
+
+            .displayBookCover{
+                width: 95%;
+            }
+
+            .tableFormat table th{
+                font-size: 1.2em;
+            }
+
+            .tableFormat table, th, td{
+                border: 1px solid black;
+            }
+
+            #scanBook{
+                border: none;
+                opacity: 0
+            }
+
+            .tableFormat th:nth-child(3) {
+                width: 10em;
+            }
+
+            .tableFormat td {
+                min-height: 20em;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="scanBookBtn">Scan Book</button>
+        <div id="errorMessage">
+
+        </div>
+        
+        <div>
+            <!-- Scan the book  -->
+            
+            <div id="scanMessage"></div>
+            <input id="scanBook"> 
+
+        </div>
+
+        <div>
+            <form id="searchBookForm">
+                <label for="bookAccNo">Enter book acc no</label>
+                <input type="text" name="bookAccNo" id="bookAccNo">
+
+                <select name="collection" id="collectionCategory" size="1">
+                    <option value="english">English</option>
+                    <option value="myanmar">Myanmar</option>
+                </select>
+
+                <button id="submit">Search</button>
+            </form>
+        </div>
+
+
+        <div class="tableFormat">
+            <table id="bookResults">
+                <thead id="bookHeadings">
+    
+                </thead>
+    
+                <tbody id="bookData">
+    
+                </tbody>
+            </table>
+        </div>
+
+        
+        <button id="selectBookBtn">Select a book</button>
+    </body>
+
+    <script type="module" defer>
+        import {getDetailedBookFromAccNo} from "./controllers/book.controller.js"
+        const bookDataEl = document.getElementById("bookData")
+        const scanBookBtn = document.getElementById("scanBookBtn")
+        const inputField = document.getElementById("scanBook");
+        const scanMessage = document.getElementById("scanMessage")
+        const filePath = window.imagePaths.shareFilePath();
+        const selectBookBtn = document.getElementById('selectBookBtn')
+        // const manualSearch = document.getElementById("manualSearch")
+        // const searchField = document.getElementById("searchField")
+        const searchBookForm = document.getElementById("searchBookForm")
+        scanBookBtn.addEventListener("click",() => {
+            inputField.focus();
+        })
+
+        inputField.addEventListener("focus", () => {
+            scanMessage.innerHTML = `Scanning....`
+            // window.showMessageApi.alertMsg("focused")
+        })
+
+        searchBookForm.addEventListener("submit", async(e)=> {
+            e.preventDefault();
+            let bookAccNo = e.target.bookAccNo.value;
+            let category = e.target.collection.value;
+            let detailedBook = await getDetailedBookFromAccNo(category, bookAccNo)
+            if(detailedBook.result){
+                showResults(detailedBook.result)
+            }else{
+                bookDataEl.innerHTML = "No Data Found"
+            }
+        })
+        
+        inputField.addEventListener("change", async () => {
+           
+            let searchData = inputField.value.split(",")
+            let category = searchData[0]
+            let accNo = searchData[1]
+
+            //PLEASE FIX ERROR
+            console.log("category " + category  + "accNo " + accNo)
+
+                
+            if(category && accNo){
+                let detailedBook = await getDetailedBookFromAccNo(category, accNo)
+                if(detailedBook.result){
+                    showResults(detailedBook.result)
+                }
+                
+                // window.showMessageApi.alertMsg(JSON.stringify(detailedBook))
+                // localStorage.setItem("detailedBookData", JSON.stringify(detailedBook.result)) 
+                // myanmar,CC-00006window.navigationApi.toAnotherPage("viewBook.html")
+                inputField.blur()
+                scanMessage.innerHTML = `Scan Complete`
+                inputField.value = "";
+            }
+                
+        });      
+
+        function showResults(bookData){
+            const bookHeadings = document.getElementById("bookHeadings")
+            
+            console.log("show results appeared " +JSON.stringify(bookData))
+            console.log(bookData.category)
+            
+            let imagePath = filePath+ bookData.bookCover
+            if(bookData.category == "english"){
+                // console.log("this is english category")
+                bookHeadings.innerHTML = `
+                    <tr>
+                        <th></th>
+                        <th>Acc No.</th>
+                        <th>Book Cover</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Class No</th>
+                        <th>ISBN</th>
+                        <th>Publisher</th>
+                    </tr>
+                `
+
+                bookDataEl.innerHTML = `
+                    <tr>
+                        <td>
+                            <input type="checkbox" value=true id="selectBookCheckBox">
+                        </td>
+                        <td>${bookData.accNo}</td>
+                        <td><img src="${imagePath}" class="displayBookCover"</td>
+                        <td>${bookData.bookTitle}</td>
+                        <td>${bookData.sor}</td>
+                        <td>${bookData.classNo}</td>
+                        <td>${bookData.isbn}</td>
+                        <td>${bookData.publisher || "-" }</td>
+                    </tr>
+                `
+            }else if(bookData.category == "myanmar"){
+                // console.log("this is myanmar category")
+                bookHeadings.innerHTML = `
+                    <tr>
+                        <th></th>
+                        <th>Acc No.</th>
+                        <th>Book Cover</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Class No</th>
+                        <th>Publisher</th>
+                    </tr>
+                `
+            }
+
+            const selectBookCheckBox = document.getElementById("selectBookCheckBox")
+            selectBookCheckBox.focus()
+            const errorMessage = document.getElementById('errorMessage')
+            selectBookBtn.addEventListener("click", () => {
+                if(selectBookCheckBox.checked === true){
+                    localStorage.setItem("borrowBook", JSON.stringify(bookData))
+                    window.close()
+                }else{
+                    errorMessage.innerHTML = `
+                        <h3 style="color: red;"> Please select a book </h3>
+                    `
+                }
+            })
+        }
+    </script>
+</html>

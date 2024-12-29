@@ -11,10 +11,13 @@ const backToCollection = document.getElementById("backToCollection");
 const loanDetailForm = document.getElementById("loanDetailForm");
 const viewBookCover = document.getElementById("viewBookCover")
 const viewMemberPhoto = document.getElementById('viewMemberPhoto')
-const borrowButton = document.getElementById("borrowButton")
+const borrowButton = document.getElementById("borrowBook")
 const deleteLoanBtn = document.getElementById("deleteLoanBtn")
 const extendLoanBtn = document.getElementById("extendLoanBtn")
 const returnLoanBtn = document.getElementById("returnLoanBtn")
+const searchMember = document.getElementById("searchMember")
+const searchBook = document.getElementById("searchBook")
+const currentFile = window.imagePaths.shareCurrentFile();
 let index = 1;
 
 if(backToCollection){
@@ -26,7 +29,44 @@ if(backToCollection){
 
 if(borrowButton){
     borrowButton.addEventListener("click", () => {
-        window.navigationApi.toAnotherPage("")
+        window.navigationApi.toAnotherPage("borrowBook.html")
+    })
+}
+
+if(searchMember){
+    searchMember.addEventListener("click", () => {
+        let windowFeatures = {
+            "width":794,
+            "height":400
+    
+        }
+        let data = {
+            "fileName": currentFile+"/searchMembers.html",
+            "name": "Print Window",
+            "windowFeatures": windowFeatures
+        }
+        window.navigationApi.openWindow(data);
+        // let previewWindow = window.open(currentFile+"/printpreview.html", "Print Window", windowFeatures);
+        document.close()
+    })
+}
+
+if(searchBook){
+    searchBook.addEventListener("click", () => {
+        let windowFeatures = {
+            "width":794,
+            "height":400
+    
+        }
+        let data = {
+            "fileName": currentFile+"/searchBooks.html",
+            "name": "Print Window",
+            "windowFeatures": windowFeatures, 
+            enableDevTools: true
+        }
+        window.navigationApi.openWindow(data);
+        // let previewWindow = window.open(currentFile+"/printpreview.html", "Print Window", windowFeatures);
+        document.close()
     })
 }
 
