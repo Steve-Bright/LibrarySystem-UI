@@ -1,4 +1,4 @@
-import { deleteLoanFunction, extendLoanFunction, getAllLoansFunction, getDetailedLoanFunction, returnLoanFunction} from "../controllers/loan.controller.js";
+import { addLoanFunction, deleteLoanFunction, extendLoanFunction, getAllLoansFunction, getDetailedLoanFunction, returnLoanFunction} from "../controllers/loan.controller.js";
 import Book from "../utils/book.model.mjs";
 import { buildMemberNavigation } from "../utils/extra.js";
 import Loan from "../utils/loan.model.mjs";
@@ -17,8 +17,128 @@ const extendLoanBtn = document.getElementById("extendLoanBtn")
 const returnLoanBtn = document.getElementById("returnLoanBtn")
 const searchMember = document.getElementById("searchMember")
 const searchBook = document.getElementById("searchBook")
+const clearLoan = document.getElementById("clearLoan")
+const addMemberArea = document.getElementById('addMemberArea')
+const addBookArea = document.getElementById("addBookArea")
+const initateBookBtn = document.getElementById("initateBookBtn")
 const currentFile = window.imagePaths.shareCurrentFile();
 let index = 1;
+
+if(addMemberArea){
+    let borrowMember = localStorage.getItem("borrowMember")
+    borrowMember = JSON.parse(borrowMember)
+    if(borrowMember){
+        addMemberArea.classList.add("borrowBookDesign")
+        addMemberArea.innerHTML = `
+            <h2>Member Info </h2>
+            <span id="goToMemberDetails">Details</span>
+            <br>
+            
+            <div id="memberContents">
+                <div id="memberCover">
+                    <img src=${filePath + borrowMember.photo} id="memberPhotoSize">
+                </div>
+
+                <div id="memberDetailInfo">
+                    
+                    <label for="memberId">Member Id</label>
+                    <input type="text" value="${borrowMember.memberId}" readonly>
+                    <br>
+
+                    <label for="memberName">Name</label>
+                    <input type="text" value="${borrowMember.name}" readonly>
+                    <br>
+                    <label for="memberType">Member Type </label>
+                    <input type="text" value="${borrowMember.memberType}" readonly>
+                    <br>
+                    <label for="memberPhone">Phone</label>
+                    <input type="text" value="${borrowMember.phone}" readonly>
+                </div>
+            </div>
+        `
+    }
+
+    const goToMemberDetailsBtn = document.getElementById("goToMemberDetails")
+    if(goToMemberDetailsBtn){
+        goToMemberDetailsBtn.addEventListener("click", () => {
+            localStorage.setItem("detailedMemberData", JSON.stringify(borrowMember))
+            window.navigationApi.toAnotherPage("memberDetail.html")
+        })
+    }
+    
+
+}
+
+if(addBookArea){
+    let borrowBook = localStorage.getItem("borrowBook")
+    borrowBook = JSON.parse(borrowBook)
+    if(borrowBook){
+        addBookArea.classList.add("borrowBookDesign")
+        addBookArea.innerHTML = `
+            <h2>Book Info</h2>
+            <span id="goToBookDetails">Details</span>
+            <br>
+            
+            <div id="bookContents">
+                <div id="bookCover">
+                    <img src=${filePath + borrowBook.bookCover} id="bookCoverSize">
+                </div>
+
+                <div id="bookDetailInfo">
+                    
+                    <label for="bookCategory">Category</label>
+                    <input type="text" value="${borrowBook.category}" readonly>
+                    <br>
+
+                    <label for="callNo">Call No </label>
+                    <input type="text" value="${borrowBook.callNo}" readonly>
+                    <br>
+                    <label for="bookTitle">Book Title </label>
+                    <input type="text" value="${borrowBook.bookTitle}" readonly>
+                </div>
+            </div>
+            
+        `
+
+        const goToBookDetailsBtn = document.getElementById("goToBookDetails")
+        if(goToBookDetailsBtn){
+            goToBookDetailsBtn.addEventListener("click", () => {
+                localStorage.setItem("detailedBookData", JSON.stringify(borrowBook))
+                window.navigationApi.toAnotherPage("viewBook.html")
+            })
+        }
+        
+    }
+}
+
+if(initateBookBtn){
+    initateBookBtn.addEventListener("click", async()=> {
+        let loanBookDetail = localStorage.getItem("borrowBook")
+        let loanMemberDetail = localStorage.getItem("borrowMember")
+
+        if(loanBookDetail && loanMemberDetail){
+            // console.log("inside  the loaning function " + loanBookDetail + loanMemberDetail)
+            let loanBook = JSON.parse(loanBookDetail)
+            let loanMember = JSON.parse(loanMemberDetail)
+
+            // let loanDetail = 
+            let loan = new Loan({
+                // category: loanBook.category,
+                bookId: loanBook._id,
+                memberId: loanMember._id
+            })
+            loan.category = loanBook.category;
+            let loanResult = await addLoanFunction(loan);
+            window.showMessageApi.alertMsg(loanResult.msg)
+            if(loanResult.con === true){
+                localStorage.removeItem("borrowBook")
+                localStorage.removeItem("borrowMember")
+                window.location.reload()
+            }
+        }
+
+    })
+}
 
 if(backToCollection){
     // console.log("doesnt this catch this function as well?")
@@ -33,6 +153,14 @@ if(borrowButton){
     })
 }
 
+if(clearLoan){
+    clearLoan.addEventListener("click", () => {
+        localStorage.removeItem("borrowBook")
+        window.showMessageApi.alertMsg("Cleared!")
+        window.location.reload()
+    })
+}
+
 if(searchMember){
     searchMember.addEventListener("click", () => {
         let windowFeatures = {
@@ -42,7 +170,7 @@ if(searchMember){
         }
         let data = {
             "fileName": currentFile+"/searchMembers.html",
-            "name": "Print Window",
+            "name": "Search Member",
             "windowFeatures": windowFeatures
         }
         window.navigationApi.openWindow(data);
@@ -60,13 +188,13 @@ if(searchBook){
         }
         let data = {
             "fileName": currentFile+"/searchBooks.html",
-            "name": "Print Window",
-            "windowFeatures": windowFeatures, 
-            enableDevTools: true
+            "name": "Search Book",
+            "windowFeatures": windowFeatures,
         }
+        
         window.navigationApi.openWindow(data);
         // let previewWindow = window.open(currentFile+"/printpreview.html", "Print Window", windowFeatures);
-        document.close()
+        // document.close()
     })
 }
 

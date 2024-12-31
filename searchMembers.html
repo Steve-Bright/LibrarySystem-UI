@@ -1,30 +1,160 @@
 <!DCOTYPE html>
     <head>
+        <style>
+             .tableFormat{
+                width: 100%;
+                border: 3px;
+            }
 
+            .tableFormat table{
+                width: 100%;
+                font-size: 0.8em;
+                text-align: center;
+            }
+
+            .displayMemberPhoto{
+                width: 95%;
+            }
+
+            .tableFormat table th{
+                font-size: 1.2em;
+            }
+
+            .tableFormat table, th, td{
+                border: 1px solid black;
+            }
+
+            #scanMember{
+                border: none;
+                opacity: 0
+            }
+
+            .tableFormat th:nth-child(3) {
+                width: 10em;
+            }
+
+            .tableFormat td {
+                min-height: 20em;
+                box-sizing: border-box;
+            }
+        </style>
     </head>
     <body>
+        <button id="scanMemberBtn">Scan Member</button>
+        <div id="errorMessage"></div>
+        <div>
+            <!-- Scan the book  -->
+            
+            <div id="scanMessage"></div>
+            <input id="scanMember"> 
+
+        </div>
         <div>
             <form id="searchMemberForm">
-                <label for="memberId">Member Id</label>
-                <input type="text" name="memberId">
+                <label for="memberId">Enter member id </label>
+                <input type="text" name="memberId" id="memberId">
+
+
                 <button id="submit">Search</button>
             </form>
         </div>
         
-        <div id="searchResults">
-            <table>
-                <thead>
+        <div class="tableFormat">
+            <table id="memberResults">
+                <thead id="memberHeadings">
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                        <th>Member Id</th>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Role</th>
+                        <th>Phone</th>
+                        <th>Expire Date</th>
+                        <th></th>
+                    </tr>   
                 </thead>
-
-                <tbody>
-
+    
+                <tbody id="memberData">
+    
                 </tbody>
             </table>
         </div>
+        
+        <button id="selectMemberBtn">Select Member</button>
     </body>
+
+    <script type="module" defer>
+        import {getDetailedMemberFromMemberId} from "./controllers/member.controller.js"
+        const memberDataEl = document.getElementById("memberData")
+        const scanMemberBtn = document.getElementById("scanMemberBtn")
+        const inputField = document.getElementById("scanMember");
+        const scanMessage = document.getElementById("scanMessage")
+        const filePath = window.imagePaths.shareFilePath();
+        const selectMemberBtn = document.getElementById('selectMemberBtn')
+        const searchMemberForm = document.getElementById("searchMemberForm")
+
+        scanMemberBtn.addEventListener("click", () => {
+            inputField.focus()
+        })
+
+        inputField.addEventListener("focus", () => {
+            scanMessage.innerHTML = "Scanning ...."
+        })
+
+        searchMemberForm.addEventListener("submit", async(e) => {
+            e.preventDefault()
+            let memberId = e.target.memberId.value;
+            let detailedMember = await getDetailedMemberFromMemberId(memberId)
+
+            // console.log("this is detailed member" + detailedMember)
+            if(detailedMember && detailedMember.result){
+                showResults(detailedMember.result)
+            }else{
+                memberDataEl.innerHTML = "No Data Found"
+            }
+
+            inputField.addEventListener("change", async() => {
+                
+            })
+        })
+            function showResults(memberData){
+                console.log("member data" + JSON.stringify(memberData))
+            
+            let imagePath = filePath+ memberData.photo
+                // console.log("this is english category")
+               
+                memberDataEl.innerHTML = `
+                    <tr>
+                        <td>
+                            <input type="checkbox" value=true id="selectBookCheckBox">
+                        </td>
+                        <td>${memberData.memberId}</td>
+                        <td><img src="${imagePath}" class="displayMemberPhoto"</td>
+                        <td>${memberData.name}</td>
+                        <td>${memberData.gender}</td>
+                        <td>${memberData.role}</td>
+                        <td>${memberData.phone }</td>
+                        <td>${memberData.expiryDate}</td>
+                    </tr>
+                `
+            
+
+            const selectBookCheckBox = document.getElementById("selectBookCheckBox")
+            selectBookCheckBox.focus()
+            const errorMessage = document.getElementById('errorMessage')
+            selectMemberBtn.addEventListener("click", () => {
+                if(selectBookCheckBox.checked === true){
+                    localStorage.setItem("borrowMember", JSON.stringify(memberData))
+                    window.navigationApi.loadWindow("borrowBook.html")
+                    // window.showMessageApi.alertMsg("added!")
+                    // window.opener.location.reload();
+                    window.close()
+                }else{
+                    errorMessage.innerHTML = `
+                        <h3 style="color: red;"> Please select a member </h3>
+                    `
+                }
+            })
+        }
+    </script>
 </html>

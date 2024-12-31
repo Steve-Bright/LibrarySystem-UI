@@ -96,6 +96,7 @@
         // const manualSearch = document.getElementById("manualSearch")
         // const searchField = document.getElementById("searchField")
         const searchBookForm = document.getElementById("searchBookForm")
+        
         scanBookBtn.addEventListener("click",() => {
             inputField.focus();
         })
@@ -192,6 +193,20 @@
                         <th>Publisher</th>
                     </tr>
                 `
+
+                bookDataEl.innerHTML = `
+                    <tr>
+                        <td>
+                            <input type="checkbox" value=true id="selectBookCheckBox">
+                        </td>
+                        <td>${bookData.accNo}</td>
+                        <td><img src="${imagePath}" class="displayBookCover"</td>
+                        <td>${bookData.bookTitle}</td>
+                        <td>${bookData.sor}</td>
+                        <td>${bookData.classNo}</td>
+                        <td>${bookData.publisher || "-" }</td>
+                    </tr>
+                `
             }
 
             const selectBookCheckBox = document.getElementById("selectBookCheckBox")
@@ -200,6 +215,9 @@
             selectBookBtn.addEventListener("click", () => {
                 if(selectBookCheckBox.checked === true){
                     localStorage.setItem("borrowBook", JSON.stringify(bookData))
+                    window.navigationApi.loadWindow("borrowBook.html")
+                    // window.showMessageApi.alertMsg("added!")
+                    // window.opener.location.reload();
                     window.close()
                 }else{
                     errorMessage.innerHTML = `

@@ -1,4 +1,4 @@
-import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint } from "../utils/links.js";
+import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint} from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -28,6 +28,18 @@ export async function getLatestMemberId(memberType){
 
 export async function getDetailedMember(memberDatabaseId){
     const res = await fetch(getMemberDetailEndpoint(memberDatabaseId), {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`,
+        }
+    })
+
+    return (await res.json())
+}
+
+export async function getDetailedMemberFromMemberId(memberId){
+    const res = await fetch(getMemberFromMemberIdEndpoint(memberId), {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

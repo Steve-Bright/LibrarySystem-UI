@@ -2,7 +2,8 @@ import{ contextBridge, ipcRenderer } from "electron";
 
 const navigationFunction = {
     toAnotherPage: (page) => ipcRenderer.send("navigate-to-page", page),
-    openWindow: (options)=> ipcRenderer.send("open-window", options)
+    openWindow: (options)=> ipcRenderer.send("open-window", options),
+    loadWindow: (fileName) => ipcRenderer.send("reload-parent-window", fileName)
 }
 
 const alertBoxFunction = {
