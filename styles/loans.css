@@ -1,0 +1,179 @@
+.mainTitle{
+    width: 100%;
+    display: flex;
+}
+
+.mainTitle h1{
+    width: 25%;
+    box-sizing: border-box;
+}
+
+.mainTitle div:nth-child(2){
+    width:  60%;
+    margin: auto;
+}
+
+.mainTitle div:nth-child(3){
+    width: 15%;
+    margin: auto;
+}
+
+.mainTitle select{
+    height: 2em;
+    width: 8em;
+}
+
+.subTitle{
+    display: flex;
+    width: 100%;
+}
+
+.subTitle h2{
+    width: 20%;
+}
+
+.subTitle div{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.subTitle button{
+    margin: 0 0.3em;
+    height: 2.1em;
+    width: 8em;
+}
+
+.tableTitle h2{
+    display: inline-block
+}
+
+.tableFormat th:nth-child(2) {
+    width: 10em;
+}
+
+.tableFormat td {
+    min-height: 20em;
+    box-sizing: border-box;
+}
+
+#searchLoanDiv{
+    min-height: 10em;
+    width: 85%;
+    /* margin: 0.4 2em; */
+    margin: auto auto 2em auto;
+    box-sizing: border-box;
+    padding: 0.7em;
+    background-color: #D9D9D9;  
+}
+
+#searchLoanDiv form > div:nth-child(n){
+    display: flex;
+    margin-top: 1em;
+}
+
+#searchLoanDiv form > div:nth-child(n) > div > label{
+    /* background-color: red; */
+    font-weight: lighter;
+    text-align: center;
+    display: inline-block;
+    width: 13em;
+}
+
+#searchLoanDiv form > div:nth-child(n) > div > input{
+    width: 17em;
+    height: 1.7em;
+}
+
+#searchLoanButtonsDiv{
+    min-height: 1.9em;
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+#searchLoanButtonsDiv input{
+    width: 7em;
+    margin: 0 1em;
+    background-color: #1E3FAD;
+    color: white;
+    border: none;
+    /* height: 100 */
+}
+
+#searchLoanButtonsDiv input:hover{
+    background-color: #153399;
+    cursor: pointer;
+}
+
+#loanTitle {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#loanTitle > div {
+    flex: 1;
+    /* text-align: center; */
+}
+
+#filterDiv {
+    display: flex;
+    /* justify-content: center; */
+    gap: 10px;
+}
+
+#filterDiv > div {
+    cursor: pointer;
+}
+
+#loanNavigationArea{
+    margin-left: auto;
+}
+
+#loanDetailForm input, #loanDetailForm textarea{
+    border: none;
+    pointer-events: none;
+}
+
+#viewBookCover, #viewMemberPhoto{
+    width: 100px;
+}
+
+.borrowBookDesign{
+    /* background-color: red; */
+    width: 60%;
+    min-height: 280px;
+    /* height: 100px; */
+}
+
+#bookCoverSize, #memberPhotoSize{
+    width: 100%;
+    /* width: 30%; */
+    /* height: 70%; */
+}
+
+ #memberContents, #bookContents{
+    width: 100%;
+    /* height: 100%; */
+    display: flex;
+}
+
+
+#bookCover, #memberCover{
+    box-sizing: border-box;
+    width: 30%;
+}
+
+#bookDetailInfo, #memberDetailInfo{
+    padding: 20px;
+    width: 70%;
+    /* background-color:green; */
+    box-sizing: border-box;
+}
+
+#bookDetailInfo input, #memberDetailInfo input{
+    background-color: #D9D9D9;
+    border: none;
+}

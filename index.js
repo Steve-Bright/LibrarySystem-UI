@@ -33,4 +33,30 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
 
+
+  ipcMain.on("open-window", (event, arg) => {
+    let fileName = arg.fileName;
+    let windowFeatures = arg.windowFeatures
+    let windowName = arg.name;
+    const newWindow = new BrowserWindow({
+      ...windowFeatures,
+      webPreferences: {
+        nodeIntegration: true, // If needed
+        contextIsolation: true, // If using nodeIntegration
+        preload: path.join(__dirname, "preload.mjs")
+      },
+    })
+    newWindow.loadFile(fileName)
+    // window.open(fileName, windowName, windowFeatures)
+  })
+
+  ipcMain.on("reload-parent-window", (event, htmlFile) => {
+      const currentWindow = win;
+      console.log("this should work " + path.join(__dirname, htmlFile))
+      console.log("focused window " + currentWindow)
+      currentWindow.loadFile(path.join(__dirname, htmlFile))
+    })
+
 ipcHandlers(win)
+
+export default win;

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="styles/universal.css">
+        <link rel="stylesheet" href="styles/loans.css">
+    </head>
+
+    <body>
+        <div id="navigationPanel"  class="loansSelector"></div>
+        <main>
+            <div id="backToCollection">
+                <img src="./assets/arrow.png" class="backButton">
+            </div>
+            <h2>Loans/ Loan Detail</h2>
+
+            <form id="loanDetailForm">
+                <div>
+                    <div>
+                        <h3>Member Info</h3>
+                        <span>Details</span>
+                    </div>
+
+                    <div id="memberInfo">
+                        <div id="photoArea">
+                            <img id="viewMemberPhoto">
+                        </div>
+
+                        <label for="memberId">Member Id</label>
+                        <input type="text" id="memberId" name="memberId">
+                        <br>
+
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name">
+                        <br>
+
+                        <label for="memberType">Member Type</label>
+                        <input type="text" id="memberType" name="memberType">
+                        <br>
+
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" name="phone">
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <h3>Book Info</h3>
+                        <span>Details</span>
+                    </div>
+
+                    <div id="bookInfo">
+                        <div id="imagePreviewArea">
+                            <img id="viewBookCover">
+                        </div>
+
+                        <label for="category">Book Category</label>
+                        <input type="text" id="category" name="category">
+                        <br>
+
+                        <label for="callNo">Call No.</label>
+                        <input type="text" id="callNo" name="callNo">
+                        <br>
+
+                        <label for="bookTitle">Book Title</label>
+                        <input type="text" id="bookTitle" name="bookTitle">
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <h3>Loan Info</h3>
+                        <span>Details</span>
+                    </div>
+
+                    <div id="loanInfo">
+
+                        <label for="borrowDate">Borrow Date</label>
+                        <input type="text" id="borrowDate" name="borrowDate">
+                        <br>
+
+                        <label for="dueDate">Due Date</label>
+                        <input type="text" id="dueDate" name="dueDate">
+                        <br>
+
+                        <label for="duration">Duration</label>
+                        <input type="text" id="duration" name="duration">
+                        <br>
+
+                        <label for="status">Loan Status</label>
+                        <input type="text" id="status" name="status">
+                        <br>
+                    </div>
+                </div>
+
+                <div id="buttonsArea">
+                    <button id="deleteLoanBtn">Delete Loan</button>
+                    <button id="extendLoanBtn">Extend</button>
+                    <button id="returnLoanBtn">Return Complete</button>
+                </div>
+            </form>
+        </main>
+    </body>
+
+    <script src="./utils/JsBarcode.all.min.js" type="module"></script>
+        <script src="./js/universal.js" defer type="module"></script>
+        <script src="./js/loanpage.js" defer type="module"></script>
+</html>
