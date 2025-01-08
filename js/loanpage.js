@@ -156,6 +156,7 @@ if(borrowButton){
 if(clearLoan){
     clearLoan.addEventListener("click", () => {
         localStorage.removeItem("borrowBook")
+        localStorage.removeItem("borrowMember")
         window.showMessageApi.alertMsg("Cleared!")
         window.location.reload()
     })
