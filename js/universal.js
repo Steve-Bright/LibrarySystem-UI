@@ -3,7 +3,7 @@
 const navigationPanel = document.getElementById('navigationPanel')
 
 navigationPanel.innerHTML = `
-    <div id="logoTitle">KayinGyi <br> Library</div>
+    <div id="logoTitle">SH Library</div>
     <div id="navigationPages">
         <div id="scannerPage" class="navigationTitle">
             <div class="imageDiv"> <img src="./assets/barcode-scan.png"></div> 

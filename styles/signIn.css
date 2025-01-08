@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+
+html,body{
+    height: 100%;
+}
+#signInBackground{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+#leftSide{
+    width: 70%;
+
+    /* background-color: red; */
+}
+
+#rightSide{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    animation-name: example;
+    animation-duration: 1.6s;
+    animation-timing-function: ease-out;
+    /* background-color: blue; */
+}
+
+@keyframes example{
+    0% {
+        transform: translateX(100%); /* Start off-screen to the right */
+    }
+    100% {
+        transform: translateX(0); /* End at its original position */
+    }
+}
+
+#logo{
+    width: 15em;
+    height: 15em;
+    margin-top: auto;
+}
+
+
+#imagePlacer{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+#loginPlacer{
+    height: 50%;
+    width: 100%;
+}
+
+#loginPlacer h1{
+    font-family: 'Inria_Sans';
+    text-align: center;
+    margin: auto;
+    /* display: inline-block; */
+}
+
+#loginForm{
+    text-align: center;
+}
+
+input{
+    height: 2.4em;
+    width: 80%;
+    font-size: 0.9em;
+    margin: 1em 0;
+    border-radius: 15px;
+    padding-left: 0.7em;
+    box-shadow: 3px 2px 5px grey;
+}
+
+#loginForm input:focus{
+    border: 2px solid #1E3FAD;;
+    outline: none;  
+}
+
+button{
+    width: 7em;
+    height: 2.4em;
+    border-radius: 30px;
+    box-shadow: 3px 2px 5px grey;
+    /* background-color: */
+}
+
+#backgroundImage{
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    /* height: 100vh; */
+}
+
+@media (max-width: 930px) {
+    #logo{
+        width: 13.5em;
+        height: 13.5em;
+    }
+
+    input{
+        width: 80%;
+    }
+    
+    button{
+        width: 6em;
+    }
+
+    #rightSide{
+        width: 40%;
+    }
+  }
