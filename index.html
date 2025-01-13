@@ -11,16 +11,56 @@
         </div>
 
         <main>
-            <div >
-
+            <div class="mainTitle">
+                    <h1>Dashboard</h1>
+                <div>
+                    <select name="timespan" id="dashboard-time">
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
             </div>
-            <h1>Dashboard</h1>
-            <select name="timespan" id="dashboard-time">
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-                <option value="all">All</option>
-              </select>
             
+            <div id="dashboardBg">
+                <div id="loanBooksDivs">
+                    <div id="bookLoans" class="showDataFormat">
+                        <h3>Book Loans</h3>
+                        <div id="bookLoansData" class="data">
+                            <div class="">
+                                <img src="./assets/totalBorrows.png" class="dataIcon" style="height: 3.6em; width: 3.6em;">
+                                Total Borrows
+                            </div>
+                            <div>
+                                <img src="./assets/return.png" class="dataIcon">
+                                Total Borrows
+                            </div>
+                            <div>
+                                <img src="./assets/overdue.png" class="dataIcon">
+                                Total Borrows
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recentBooks" class="showDataFormat">
+                        <h3>Recent Books </h3>
+                        <div id="recentBooksData" class="data">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="membersDiv">
+                    <h3>Members</h3>
+                    <div id="membersDivData">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+<!--             
             <h3>Book Loans</h3>
             <p id="borrows">Total Borrows: 100 To Return: 90 Overdue: 10</p>
     
@@ -28,7 +68,7 @@
             <p>Total Books: 100 Burmese: 90 English 10</p>
     
             <h3>Members </h3>
-            <p>Recently Joined: 100, Teachers: 10, Students: 90, Operation: 10</p>
+            <p>Recently Joined: 100, Teachers: 10, Students: 90, Operation: 10</p> -->
         </main>
 
     </body>
