@@ -16,10 +16,6 @@
     box-sizing: border-box;
 }
 
-#bookLoansData{
-    display: flex;
-}
-
 .showDataFormat{
     width: 100%;
     height: 50%;
@@ -35,12 +31,36 @@
     margin-right: auto;
 }
 
-.data{
+.leftSideData{
     width: 100%;
     height: 55%;
+    padding-left: 4%;
+    display: flex;
     border-radius: 15px;
     background-color: #E0E0E0;
     /* background-color: red; */
+}
+
+.eachLoanData{
+    width: 33%;
+    display: flex;
+    /* border: 2px solid red; */
+    margin: auto;
+}
+
+.data{
+    width: 45%;
+    text-align: center;
+    font-weight: bold;
+    /* background-color: red; */
+}
+
+.data h5{
+    font-size: 0.9em;
+}
+
+.amountData{
+    font-size: 1.4em;
 }
 
 #recentBooks{
@@ -65,9 +85,27 @@
     width: 50%;
     height: 100%;
     border-radius: 15px;
-    padding: 10px;
-    background-color: #E0E0E0
+    padding: 15px;
+    background-color: #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
+
+.eachMemberData{
+    width: 100%;
+    display: flex;
+    text-align: center;
+}
+
+.memberData{
+    width: 70%;
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-evenly;
+    font-weight: bold;
+}
+
 
 .dataIcon{
     width: 4em;
