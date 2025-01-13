@@ -11,6 +11,7 @@
 #loanBooksDivs{
     width: 55%;
     height: 100%;
+    margin-left: 1%;
     /* background-color: blue; */
     flex-direction: column;
     box-sizing: border-box;
@@ -46,6 +47,10 @@
     display: flex;
     /* border: 2px solid red; */
     margin: auto;
+}
+
+.logoPlace{
+    width: 40%;
 }
 
 .data{
@@ -112,9 +117,51 @@
     height: 4em;
 }
 
+#totalLoanSize{
+    height: 3.6em; 
+    width: 3.6em;
+}
+
 @media (max-width: 1090px) {
     #membersDivData{
         width: 75%;
     }
     
+    .dataIcon{
+        width: 3em;
+        height: 3em;
+    }
+
+    #totalLoanSize{
+        height: 2.7em; 
+        width: 2.7em;
+    }
+
+    #loanBooksDivs{
+        width: 65%;
+    }
+
+    #membersDiv{
+        width: 35%;
+        padding-left: 30px;
+    }
+
+    #membersDivData{
+        width: 100%;
+    }
+
+    .data h5{
+        font-size: 0.75em;
+    }
   }
+
+@media (max-width: 1170px){
+
+    .data h5{
+        font-size: 0.83em;
+    }
+
+    main{
+        padding: 1.5em 0 0 14em
+    }
+}
