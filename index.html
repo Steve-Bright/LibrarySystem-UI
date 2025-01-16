@@ -11,16 +11,124 @@
         </div>
 
         <main>
-            <div >
-
+            <div class="mainTitle">
+                    <h1>Dashboard</h1>
+                <div>
+                    <select name="timespan" id="dashboard-time">
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
             </div>
-            <h1>Dashboard</h1>
-            <select name="timespan" id="dashboard-time">
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-                <option value="all">All</option>
-              </select>
             
+            <div id="dashboardBg">
+                <div id="loanBooksDivs">
+                    <div id="bookLoans" class="showDataFormat">
+                        <h3>Book Loans</h3>
+                        <div id="bookLoansData" class="leftSideData">
+                            <div class="eachLoanData">
+                                <div class="logoPlace">
+                                    <img src="./assets/totalBorrows.png" class="dataIcon" id="totalLoanSize">
+                                </div>
+                                <div  class="data">
+                                    <h5>Total Loan </h5>
+                                    <div class="amountData" id="totalLoanData">20</div>
+                                </div>
+                            </div>
+
+                            <div class="eachLoanData">
+                                <div class="logoPlace">
+                                    <img src="./assets/return.png" class="dataIcon">
+                                </div>
+                                <div class="data"> 
+                                    <h5>To Return </h5>
+                                    <div class="amountData">20</div>
+                                </div>
+                            </div>
+
+                            <div class="eachLoanData">
+                                <div class="logoPlace">
+                                    <img src="./assets/overdue.png" class="dataIcon">
+                                </div>
+                                <div class="data">
+                                    <h5>Overdue</h5>
+                                    <div class="amountData">20</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recentBooks" class="showDataFormat">
+                        <h3>Recent Books </h3>
+                        <div id="recentBooksData" class="leftSideData">
+                            <div class="eachLoanData">
+                                <div class="logoPlace">
+                                    <img src="./assets/totalBooks.png" class="dataIcon" id="totalBooksSize">
+                                </div>
+                                <div class="data">
+                                    <h5>Total Book</h5>
+                                    <div class="amountData">20</div>
+                                </div>
+                            </div>
+
+                            <div class="eachLoanData">
+                                <div class="logoPlace">
+                                    <img src="./assets/english.png" class="dataIcon">
+                                </div>
+                                <div class="data">
+                                    <h5>English</h5>
+                                    <div class="amountData">20</div>
+                                </div>
+                            </div>
+
+                            <div class="eachLoanData">
+                                <div class="logoPlace">
+                                    <img src="./assets/myanmar.png" class="dataIcon">
+                                </div>
+                                <div class="data">
+                                    <h5>Myanmar</h5>
+                                    <div class="amountData">20</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="membersDiv">
+                    <h3>Members</h3>
+                    <div id="membersDivData">
+                        <div class="eachMemberData">
+                            <div>
+                                <img src="./assets/total.png" class="dataIcon">
+                            </div>
+                            <div class="memberData">
+                                <h5>Total Members</h5>
+                                <div class="amountData">20</div>
+                            </div>
+                        </div>
+
+                        <div class="eachMemberData">
+                            <div>
+                                <img src="./assets/public.png" class="dataIcon">
+                            </div>
+                            <div class="memberData">
+                                <h5>Public Members</h5>
+                                <div class="amountData">20</div>
+                            </div>
+                        </div>
+
+                        <div class="eachMemberData">
+                            <div>
+                                <img src="./assets/student.png" class="dataIcon">
+                            </div>
+                            <div class="memberData">
+                                <h5>Students</h5>
+                                <div class="amountData">20</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--             
             <h3>Book Loans</h3>
             <p id="borrows">Total Borrows: 100 To Return: 90 Overdue: 10</p>
     
@@ -28,7 +136,7 @@
             <p>Total Books: 100 Burmese: 90 English 10</p>
     
             <h3>Members </h3>
-            <p>Recently Joined: 100, Teachers: 10, Students: 90, Operation: 10</p>
+            <p>Recently Joined: 100, Teachers: 10, Students: 90, Operation: 10</p> -->
         </main>
 
     </body>

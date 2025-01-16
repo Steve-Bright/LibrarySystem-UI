@@ -73,3 +73,5 @@ export async function addLoanFunction(loanData){
     })
     return (await res.json())
 }
+
+// export async function 
