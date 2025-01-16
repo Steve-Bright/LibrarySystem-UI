@@ -89,13 +89,14 @@ main{
 
 .tableFormat{
     width: 100%;
-    border: 3px;
+    /* border: 3px; */
 }
 
 .tableFormat table{
     width: 100%;
     font-size: 0.8em;
     text-align: center;
+    border-collapse: collapse;
 }
 
 .tableFormat table th{
@@ -144,7 +145,7 @@ button:hover{
 }
 
 .mainTitle h1{
-    width: 18%;
+    min-width: 20%;
 }
 
 .mainTitle div{
@@ -155,6 +156,12 @@ button:hover{
 .mainTitle select{
     height: 2em;
     width: 8em;
+}
+
+input:focus{
+    border: 3px solid #3a68ff;
+    outline: none;  
+    padding-left: 4px;
 }
 
 @media (max-width: 1090px) {
@@ -169,6 +176,6 @@ button:hover{
     }
 
     main{
-        padding: 1.5em 0 0 12.5em
+        padding: 1.5em 0 0 14em
     }
   }
