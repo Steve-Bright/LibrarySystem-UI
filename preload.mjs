@@ -18,7 +18,8 @@ const alertBoxFunction = {
 
 const sharingDataFunction = {
     receiveData: ()=> ipcRenderer.sendSync("passingData"),
-    sendData: (data)=> ipcRenderer.send("sendingData", data)
+    sendData: (data)=> ipcRenderer.send("sendingData", data), 
+    currentDirectory: ()=> ipcRenderer.sendSync("currentDirectory")
 }
 
 const fileSharingFunction = {
