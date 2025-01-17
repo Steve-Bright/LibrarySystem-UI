@@ -11,7 +11,7 @@ loginForm.addEventListener("submit", async(e) => {
     if(statusCode === 200){
         window.cookieApi.setCookie(response.result.token)
         window.sharingDataApi.sendData(response.result.userData)
-        window.navigationApi.toAnotherPage("index.html")
+        window.navigationApi.toAnotherPage("./dashboard/index.html")
     }
  
 })

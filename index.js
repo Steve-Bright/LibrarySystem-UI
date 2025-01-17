@@ -23,7 +23,7 @@ const createWindow = () => {
     })
     // win.webContents.enableDeviceEmulation()
     win.maximize()
-    win.loadFile('index.html')
+    win.loadFile('./dashboard/index.html')
     // win.removeMenu();
     win.webContents.openDevTools();
 }

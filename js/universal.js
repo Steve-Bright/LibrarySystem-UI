@@ -1,46 +1,52 @@
-
-
+let currentDirectory = window.sharingDataApi.currentDirectory();
+const barcodeScanPath = currentDirectory + '/assets/barcode-scan.png';
+const dashboardPath = currentDirectory + "/assets/dashboard.png";
+const bookPilePath = currentDirectory + "/assets/book-pile-white.png"
+const readerPath = currentDirectory + "/assets/reader-white.png"
+const clipboardPath = currentDirectory + "/assets/clipboard-white.png"
+const settingsPath = currentDirectory + "/assets/settings-white.png"
+const signOutPath = currentDirectory + "/assets/sign-out-white.png"
 const navigationPanel = document.getElementById('navigationPanel')
 
 navigationPanel.innerHTML = `
     <div id="logoTitle">SH Library</div>
     <div id="navigationPages">
         <div id="scannerPage" class="navigationTitle">
-            <div class="imageDiv"> <img src="./assets/barcode-scan.png"></div> 
+            <div class="imageDiv"> <img src=${barcodeScanPath}></div> 
             Scanner
         </div>
 
         <div id="dashboardPage" class="navigationTitle">
-            <div class="imageDiv"><img src="./assets/dashboard.png"></div>
+            <div class="imageDiv"><img src=${dashboardPath}></div>
             <div>Dashboard</div>
             
         </div>
         
         <div id="collectionPage" class="navigationTitle">
-            <div class="imageDiv"><img src="./assets/book-pile-white.png"></div>
+            <div class="imageDiv"><img src=${bookPilePath}></div>
             Collection
         </div>
 
         <div id="membersPage" class="navigationTitle">
-            <div class="imageDiv"><img src="./assets/reader-white.png"></div>
+            <div class="imageDiv"><img src=${readerPath}></div>
             
             Members
         </div>
 
         <div id="loanPage" class="navigationTitle">
-            <div class="imageDiv"><img src="./assets/clipboard-white.png"></div>
+            <div class="imageDiv"><img src=${clipboardPath}></div>
             
             Loan
         </div>
 
         <div id="settingsPage" class="navigationTitle">
-            <div class="imageDiv"><img src="./assets/settings-white.png"></div>
+            <div class="imageDiv"><img src=${settingsPath}></div>
             
             Settings
         </div>
 
         <div id="signOutPage" class="navigationTitle">
-            <div class="imageDiv"><img src="./assets/sign-out-white.png"></div>
+            <div class="imageDiv"><img src=${signOutPath}></div>
             SignOut
         </div>
     </div>
@@ -59,8 +65,8 @@ const pageIds = [
 ];
 const pageHtmls = [
     "scannerpage.html",
-    "index.html",
-    "collectionpage.html",
+    "./dashboard/index.html",
+    "./books/collectionpage.html",
     "memberspage.html",
     "loanpage.html",
     "settingspage.html"

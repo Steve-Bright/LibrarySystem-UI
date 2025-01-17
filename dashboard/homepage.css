@@ -1,0 +1,167 @@
+#dashboardBg{
+    width: 100%;
+    height: 100%;
+    /* box-sizing: border-box; */
+    /* overflow: hidden; */
+    /* position: fixed; */
+    display: flex;
+    /* background-color: red; */
+}
+
+#loanBooksDivs{
+    width: 55%;
+    height: 100%;
+    margin-left: 1%;
+    /* background-color: blue; */
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.showDataFormat{
+    width: 100%;
+    height: 50%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+#bookLoans h3, #recentBooks h3{
+    margin-right: auto;
+}
+
+.leftSideData{
+    width: 100%;
+    height: 55%;
+    padding-left: 4%;
+    display: flex;
+    border-radius: 15px;
+    background-color: #E0E0E0;
+    /* background-color: red; */
+}
+
+.eachLoanData{
+    width: 33%;
+    display: flex;
+    /* border: 2px solid red; */
+    margin: auto;
+}
+
+.logoPlace{
+    width: 40%;
+}
+
+.data{
+    width: 45%;
+    text-align: center;
+    font-weight: bold;
+    /* background-color: red; */
+}
+
+.data h5{
+    font-size: 0.9em;
+}
+
+.amountData{
+    font-size: 1.4em;
+}
+
+#recentBooks{
+    width: 100%;
+    height: 50%;
+    flex: 1;
+    /* background-color: green; */
+}
+
+#membersDiv{
+    width: 45%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    /* background-color: yellow; */
+    padding: 0px 30px;
+}
+
+#membersDivData{
+    width: 50%;
+    height: 100%;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.eachMemberData{
+    width: 100%;
+    display: flex;
+    text-align: center;
+}
+
+.memberData{
+    width: 70%;
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-evenly;
+    font-weight: bold;
+}
+
+
+.dataIcon{
+    width: 4em;
+    height: 4em;
+}
+
+#totalLoanSize, #totalBooksSize{
+    height: 3.6em; 
+    width: 3.6em;
+}
+
+@media (max-width: 1090px) {
+    #membersDivData{
+        width: 75%;
+    }
+    
+    .dataIcon{
+        width: 3em;
+        height: 3em;
+    }
+
+    #totalLoanSize, #totalBooksSize{
+        height: 2.7em; 
+        width: 2.7em;
+    }
+
+    #loanBooksDivs{
+        width: 65%;
+    }
+
+    #membersDiv{
+        width: 35%;
+        padding-left: 30px;
+    }
+
+    #membersDivData{
+        width: 100%;
+    }
+
+    .data h5{
+        font-size: 0.75em;
+    }
+  }
+
+@media (max-width: 1170px){
+
+    .data h5{
+        font-size: 0.80em;
+    }
+
+    main{
+        padding: 1.5em 0 0 14em
+    }
+}
