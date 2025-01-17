@@ -23,6 +23,10 @@ export default function setupIpcHandlers(win) {
     sharedData = data;
   });
 
+  ipcMain.on("currentDirectory", (event, data) => {
+    event.returnValue = __dirname;
+  })
+
   ipcMain.on("sharingPath", (event, data) => {
     event.returnValue = os.homedir();
   })

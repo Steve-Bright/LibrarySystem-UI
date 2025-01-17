@@ -28,7 +28,7 @@ if(collectionCategory){
 
 if(backToCollection){
     backToCollection.addEventListener("click", () => {
-        window.navigationApi.toAnotherPage("collectionpage.html")
+        window.navigationApi.toAnotherPage("./books/collectionpage.html")
     })
 }
 
@@ -46,7 +46,7 @@ printPreview.addEventListener("click", () => {
 
     }
     let data = {
-        "fileName": currentFile+"/printpreview.html",
+        "fileName": currentFile+"./books/printpreview.html",
         "name": "Print Window",
         "windowFeatures": windowFeatures
     }

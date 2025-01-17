@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A4 Print Layout</title>
-  <link rel="stylesheet" href="styles/universal.css">
-  <link rel="stylesheet" href="styles/print-preview.css">
+  <link rel="stylesheet" href="../styles/universal.css">
+  <link rel="stylesheet" href="./print-preview.css">
   <style>
    
   </style>
@@ -21,8 +21,8 @@
 </body>
 
 <script type="module">
-  import {buildBarcodeCollectionView} from "./utils/extra.js"
-  import { getDetailedBookFromAccNo} from "./controllers/book.controller.js"
+  import {buildBarcodeCollectionView} from "../utils/extra.js"
+  import { getDetailedBookFromAccNo} from "../controllers/book.controller.js"
 
   const selectedBarcodeData = document.getElementById("barcodeData")
   console.log("does it contain? " + localStorage.getItem("toPrintBarcode"))

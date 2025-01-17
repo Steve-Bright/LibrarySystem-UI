@@ -31,7 +31,7 @@ let index = 1;
 
 if(callNoBtn){
     callNoBtn.addEventListener("click", () => {
-        window.navigationApi.toAnotherPage("bookCallNo.html")
+        window.navigationApi.toAnotherPage("./books/bookCallNo.html")
     })
 }
 
@@ -49,7 +49,7 @@ if(collectionCategory){
 if(backToCollection){
     // console.log("doesnt this catch this function as well?")
     backToCollection.addEventListener("click", () => {
-        window.navigationApi.toAnotherPage("collectionpage.html")
+        window.navigationApi.toAnotherPage("./books/collectionpage.html")
     })
 }
 
@@ -108,7 +108,7 @@ if(categorySelect){
 
 if(addBookBtn){
     addBookBtn.addEventListener("click", ()=> {
-        window.navigationApi.toAnotherPage("addBook.html")
+        window.navigationApi.toAnotherPage("./books/addBook.html")
     })
 }
 
@@ -273,7 +273,7 @@ function viewDetailedBookFunction(category, bookIds){
         eachButton.addEventListener("click", async () => {
             let detailedBookData =  await getDetailedBook(category, bookIds[i])
             localStorage.setItem("detailedBookData", JSON.stringify(detailedBookData.result)) 
-            window.navigationApi.toAnotherPage("viewBook.html")
+            window.navigationApi.toAnotherPage("./books/viewBook.html")
         })
     })
 }
