@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         // window.showMessageApi.alertMsg("you have a token")
     }else{
         // window.showMessageApi.alertMsg("you don't have a token")
-        window.navigationApi.toAnotherPage("signIn.html")
+        window.navigationApi.toAnotherPage("./auth/signIn.html")
     }
 })
 
