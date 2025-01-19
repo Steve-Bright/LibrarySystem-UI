@@ -1,9 +1,11 @@
 import Book from "../utils/book.model.mjs"
 import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook, getLatestAccNo, generateBarCode} from "../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../utils/extra.js"
+import { convertMMToEng } from "../utils/burmese.mapper.js"
 
 const addBookBtn = document.getElementById("addBookBtn")
 const backToCollection = document.getElementById("backToCollection")
+const addBookImageArea = document.getElementById("addBookImageArea")
 const addBookFormEl = document.getElementById("addBookForm")
 const bookDataEl = document.getElementById("bookData")
 const collectionCategory = document.getElementById("collectionCategory")
@@ -20,10 +22,14 @@ const editButtonsArea = document.getElementById("editButtonsArea")
 const totalData = document.getElementById("totalData")
 const deleteBookButton = document.getElementById("deleteBookButton")
 // const bookBarCode = document.getElementById("bookBarCode")
-const imagePlaceholder = document.getElementById("imagePlaceholder")
 const accNoInput = document.getElementById("accNo")
 const categoryInput = document.getElementById("category")
 const callNoBtn = document.getElementById('callNoBtn')
+const callNoInput = document.getElementById("callNo")
+const classInput = document.getElementById("classNo")
+const addBookCover = document.getElementById("bookCover")
+const initialInput = document.getElementById("initial")
+
 
 let category = true
 let addBookCategory = true;
@@ -113,13 +119,30 @@ if(addBookBtn){
 }
 
 
-if(addBookFormEl){    
+if(addBookFormEl){ 
+    addBookCover.addEventListener("change", (event) => {
+
+        let bookCoverAdded = addBookCover.files[0]
+        if(bookCoverAdded){
+            let image = window.URL.createObjectURL(bookCoverAdded)
+                addBookImageArea.innerHTML = `
+                <img src=${image} alt="Book Cover">
+            `
+        }
+    })
+
+    autogenerateCallNo(accNoInput, initialInput, classInput, callNoInput)
+    
     addBookFormEl.addEventListener("submit", async(e)=> {
         e.preventDefault();
         let bookCategory = e.target.category.value;
         let bookAccNo = e.target.accNo.value;
+        bookAccNo = convertMMToEng(bookAccNo, true)
+        let bookClassNo = e.target.classNo.value;
         let barcodeImage = await generateBarCode(bookCategory, bookAccNo)
 
+        console.log("this is acc number " + convertMMToEng(bookAccNo))
+        
         const myBook = new Book({
             bookCover: document.getElementById("bookCover").files[0],
             // bookCover: barcodeImage,
@@ -129,7 +152,7 @@ if(addBookFormEl){
             subTitle: e.target.subTitle.value,
             parallelTitle: e.target.parallelTitle.value,
             initial: e.target.initial.value,
-            classNo: e.target.classNo.value,
+            classNo: convertMMToEng(bookClassNo),
             callNo: e.target.callNo.value,
             sor: e.target.statementOfResponsibility.value,
             authorOne: e.target.author1.value,
@@ -159,8 +182,12 @@ if(addBookFormEl){
             barcode: barcodeImage
             // isbn: e.target.isbn.value,
         })
-        console.log("this is just pagination " + e.target.pagination.value)
-        console.log("this is book " + JSON.stringify(myBook))
+
+        for (const [key, value] of Object.entries(myBook)) {
+            if(value == "" || !value){
+                delete myBook[key]
+            }
+        }
         if(e.target.isbn){
             myBook.isbn = e.target.isbn.value;
         }
@@ -175,9 +202,7 @@ if(addBookFormEl){
             }
         }
         const result = await addBookFunction(formData)
-        console.log("this is result " + JSON.stringify(result))
         window.showMessageApi.alertMsg(result.msg)
-        imagePlaceholder.src = barcodeImage;
         // window.location.reload();
     })
 }
@@ -383,4 +408,31 @@ function updateEditBookUi(){
         let result = await editBook(formData)
         window.showMessageApi.alertMsg(result.msg)
     })
+}
+
+function autogenerateCallNo(accNoInput, initialInput, classInput, callNoInput){
+
+    let accNoValue = accNoInput.value
+    let initialValue = initialInput.value;
+    let classNoValue = classInput.value;
+
+    accNoInput.addEventListener("input", () => {
+        accNoValue = accNoInput.value;
+        triggerCallNumber()
+    })
+
+    initialInput.addEventListener("input", () => {
+        initialValue = initialInput.value
+        triggerCallNumber()
+    })
+
+    classInput.addEventListener("input", () => {
+        classNoValue = classInput.value;
+        triggerCallNumber()
+    })
+
+    function triggerCallNumber(){
+        callNoInput.value = accNoValue + " " + initialValue + " " + classNoValue
+    }
+    
 }

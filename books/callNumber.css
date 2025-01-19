@@ -33,6 +33,7 @@
     min-height: 10em;
     width: 85%;
     /* margin: 0.4 2em; */
+    border-radius: 10px;
     margin: auto auto 2em auto;
     box-sizing: border-box;
     padding: 0.7em;
@@ -44,17 +45,24 @@
     margin-top: 1em;
 }
 
+#searchBookDiv form > div:nth-child(n) > div{
+    width: 50%;
+}
+
 #searchBookDiv form > div:nth-child(n) > div > label{
     /* background-color: red; */
     font-weight: lighter;
     text-align: center;
     display: inline-block;
-    width: 13em;
+    width: 35%;
 }
 
 #searchBookDiv form > div:nth-child(n) > div > input{
-    width: 17em;
-    height: 1.7em;
+    height: 70%;
+    margin: 1% 0;
+    width: 65%;
+    float: right;
+    border-radius: 5px;
 }
 
 #searchButtonsDiv{
