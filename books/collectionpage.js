@@ -25,7 +25,11 @@ const imagePlaceholder = document.getElementById("imagePlaceholder")
 const accNoInput = document.getElementById("accNo")
 const categoryInput = document.getElementById("category")
 const callNoBtn = document.getElementById('callNoBtn')
+const callNoInput = document.getElementById("callNo")
+const classInput = document.getElementById("classNo")
 const addBookCover = document.getElementById("bookCover")
+const initialInput = document.getElementById("initial")
+
 
 let category = true
 let addBookCategory = true;
@@ -118,16 +122,16 @@ if(addBookBtn){
 if(addBookFormEl){ 
     addBookCover.addEventListener("change", (event) => {
 
-        // showImage(addBookCover, addBookImageArea)
         let bookCoverAdded = addBookCover.files[0]
         if(bookCoverAdded){
             let image = window.URL.createObjectURL(bookCoverAdded)
                 addBookImageArea.innerHTML = `
                 <img src=${image} alt="Book Cover">
             `
-            
         }
     })
+
+    autogenerateCallNo(accNoInput, initialInput, classInput, callNoInput)
     
     addBookFormEl.addEventListener("submit", async(e)=> {
         e.preventDefault();
@@ -407,4 +411,31 @@ function updateEditBookUi(){
         let result = await editBook(formData)
         window.showMessageApi.alertMsg(result.msg)
     })
+}
+
+function autogenerateCallNo(accNoInput, initialInput, classInput, callNoInput){
+
+    let accNoValue = accNoInput.value
+    let initialValue = initialInput.value;
+    let classNoValue = classInput.value;
+
+    accNoInput.addEventListener("input", () => {
+        accNoValue = accNoInput.value;
+        triggerCallNumber()
+    })
+
+    initialInput.addEventListener("input", () => {
+        initialValue = initialInput.value
+        triggerCallNumber()
+    })
+
+    classInput.addEventListener("input", () => {
+        classNoValue = classInput.value;
+        triggerCallNumber()
+    })
+
+    function triggerCallNumber(){
+        callNoInput.value = accNoValue + " " + initialValue + " " + classNoValue
+    }
+    
 }
