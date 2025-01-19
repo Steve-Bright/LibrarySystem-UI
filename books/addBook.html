@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     <head>
         <link rel="stylesheet" href="../styles/universal.css">
+        <link rel="stylesheet" href="./bookDetail.css">
     </head>
     <body>
         <div id="navigationPanel" class="collectionSelector"></div>
@@ -10,150 +11,184 @@
             </div>
             
             <h2>Collection / Add Book</h2>
-
+            
             <form id="addBookForm">
-                <label for="bookCover">Book Cover</label>
-                <input type="file" id="bookCover" required>
+                <div>
+                    <label for="bookCover">Book Cover</label>
+                    <input type="file" id="bookCover" required>
+                </div>
 
-                <label for="category">Category</label>
-                <select id="category" name="category">
-                    <option value="english">English</option>
-                    <option value="myanmar">Myanmar</option>
-                </select>
-                <br>
-            
-                <label for="accNo">Acc No.</label>
-                <input type="text" id="accNo" name="accNo" required>
-                <br>
-            
-                <label for="bookTitle">Book Title</label>
-                <input type="text" id="bookTitle" name="bookTitle" required>
-                <br>
-            
-                <label for="subTitle">Sub Title</label>
-                <input type="text" id="subTitle" name="subTitle">
-                <br>
-            
-                <label for="parallelTitle">Parallel Title</label>
-                <input type="text" id="parallelTitle" name="parallelTitle">
-                <br>
-            
-                <label for="initial">Initial</label>
-                <input type="text" id="initial" name="initial" required>
-                <br>
-            
-                <label for="classNo">Class No.</label>
-                <input type="text" id="classNo" name="classNo" required>
-                <br>
-            
-                <label for="callNo">Call No.</label>
-                <input type="text" id="callNo" name="callNo" required>
-                <br>
-
-            
-                <label for="statementOfResponsibility">Statement of Responsibility</label>
-                <input type="text" id="statementOfResponsibility" name="statementOfResponsibility" required>
-                <br>
-
-                <div id="isbnArea">
-                    
+                <div>
+                    <label for="category">Category</label>
+                    <select id="category" name="category">
+                        <option value="english">English</option>
+                        <option value="myanmar">Myanmar</option>
+                    </select>
                 </div>
             
+                <div>
+                    <label for="accNo">Acc No.</label>
+                    <input type="text" id="accNo" name="accNo" required>
+                </div>
+
+            <div>
+                <label for="bookTitle">Book Title</label>
+                <input type="text" id="bookTitle" name="bookTitle" required>
+            </div>
+
+            <div>
+                <label for="subTitle">Sub Title</label>
+                <input type="text" id="subTitle" name="subTitle">
+            </div>
+
+            <div>
+                <label for="parallelTitle">Parallel Title</label>
+                <input type="text" id="parallelTitle" name="parallelTitle">
+            </div>
+
+            <div>
+                <label for="initial">Initial</label>
+                <input type="text" id="initial" name="initial" required>
+            </div>
+
+            <div>
+                <label for="classNo">Class No.</label>
+                <input type="text" id="classNo" name="classNo" required>
+            </div>
+
+            <div>
+                <label for="callNo">Call No.</label>
+                <input type="text" id="callNo" name="callNo" required>
+            </div>
+
+            <div>
+                <label for="statementOfResponsibility">Statement of Responsibility</label>
+                <input type="text" id="statementOfResponsibility" name="statementOfResponsibility" required>
+            </div>
+
+            <div id="isbnArea">
+                    
+            </div>
+
+            <div>
                 <label for="author1">Author 1</label>
                 <input type="text" id="author1" name="author1">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="author2">Author 2</label>
                 <input type="text" id="author2" name="author2">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="author3">Author 3</label>
                 <input type="text" id="author3" name="author3">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="other">Other</label>
                 <input type="text" id="other" name="other">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="translator">Translator</label>
                 <input type="text" id="translator" name="translator">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="pagination">Pagination</label>
                 <input type="text" id="pagination" name="pagination">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="size">Size</label>
                 <input type="text" id="size" name="size">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="illustrationType">Illustration Type</label>
                 <input type="text" id="illustrationType" name="illustrationType">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="seriesTitle">Series Title</label>
                 <input type="text" id="seriesTitle" name="seriesTitle">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="seriesNo">Series No.</label>
                 <input type="text" id="seriesNo" name="seriesNo">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="cdDvd">Included CD/DVD</label>
                 <input type="text" id="cdDvd" name="cdDvd">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="subjectHeadings">Subject Headings</label>
                 <input type="text" id="subjectHeadings" name="subjectHeadings">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="edition">Edition</label>
                 <input type="text" id="edition" name="edition">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="editor">Editor</label>
                 <input type="text" id="editor" name="editor">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="place">Place</label>
                 <input type="text" id="place" name="place">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="publisher">Publisher</label>
                 <input type="text" id="publisher" name="publisher">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="year">Year</label>
                 <input type="text" id="year" name="year">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="keywords">Keywords</label>
                 <input type="text" id="keywords" name="keywords">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="summary">Summary</label>
                 <textarea id="summary" name="summary"></textarea>
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="notes">Notes</label>
                 <textarea id="notes" name="notes"></textarea>
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="source">Source</label>
                 <input type="text" id="source" name="source">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="price">Price</label>
                 <input type="text" id="price" name="price">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="donor">Donor of this book</label>
                 <input type="text" id="donor" name="donor">
-                <br>
-            
+            </div>
+
+            <div>
                 <label for="catalogOwner">Catalog Owner</label>
                 <input type="text" id="catalogOwner" name="catalogOwner">
-                <br>
+            </div>
             
                 <button type="submit">Add Book</button>
                 <button type="button">Cancel</button>

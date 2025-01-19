@@ -159,6 +159,15 @@ if(addBookFormEl){
             barcode: barcodeImage
             // isbn: e.target.isbn.value,
         })
+
+        for (const [key, value] of Object.entries(myBook)) {
+            console.log("value for the key : " + key + " is " + value)
+            if(value == "" || !value){
+                console.log("there is no value inside " + key)
+                delete myBook[key]
+            }
+        }
+
         console.log("this is just pagination " + e.target.pagination.value)
         console.log("this is book " + JSON.stringify(myBook))
         if(e.target.isbn){

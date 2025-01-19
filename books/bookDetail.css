@@ -1,0 +1,33 @@
+br{
+  display: block;
+  margin: 10px 0px;
+}
+
+#addBookForm{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+#addBookForm div{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+#addBookForm div label{
+  width: 40%;
+}
+
+#addBookForm div input{
+  width: 50%;
+  height: 1.7em;
+  margin: 1% 0;
+  border-radius: 5px;
+}
+
+#addBookForm div input, #addBookForm div select, #addBookForm div textarea{
+  width: 50%;
+  height: 1.7em;
+  margin: 1% 0;
+  border-radius: 5px;
+}
