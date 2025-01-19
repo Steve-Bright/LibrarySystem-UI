@@ -4,6 +4,7 @@ import {buildCollectionNavigation} from "../utils/extra.js"
 
 const addBookBtn = document.getElementById("addBookBtn")
 const backToCollection = document.getElementById("backToCollection")
+const addBookImageArea = document.getElementById("addBookImageArea")
 const addBookFormEl = document.getElementById("addBookForm")
 const bookDataEl = document.getElementById("bookData")
 const collectionCategory = document.getElementById("collectionCategory")
@@ -24,6 +25,7 @@ const imagePlaceholder = document.getElementById("imagePlaceholder")
 const accNoInput = document.getElementById("accNo")
 const categoryInput = document.getElementById("category")
 const callNoBtn = document.getElementById('callNoBtn')
+const addBookCover = document.getElementById("bookCover")
 
 let category = true
 let addBookCategory = true;
@@ -113,7 +115,20 @@ if(addBookBtn){
 }
 
 
-if(addBookFormEl){    
+if(addBookFormEl){ 
+    addBookCover.addEventListener("change", (event) => {
+
+        // showImage(addBookCover, addBookImageArea)
+        let bookCoverAdded = addBookCover.files[0]
+        if(bookCoverAdded){
+            let image = window.URL.createObjectURL(bookCoverAdded)
+                addBookImageArea.innerHTML = `
+                <img src=${image} alt="Book Cover">
+            `
+            
+        }
+    })
+    
     addBookFormEl.addEventListener("submit", async(e)=> {
         e.preventDefault();
         let bookCategory = e.target.category.value;
