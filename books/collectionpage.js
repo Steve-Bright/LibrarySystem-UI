@@ -1,6 +1,7 @@
 import Book from "../utils/book.model.mjs"
 import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook, getLatestAccNo, generateBarCode} from "../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../utils/extra.js"
+import { convertMMToEng } from "../utils/burmese.mapper.js"
 
 const addBookBtn = document.getElementById("addBookBtn")
 const backToCollection = document.getElementById("backToCollection")
@@ -21,7 +22,6 @@ const editButtonsArea = document.getElementById("editButtonsArea")
 const totalData = document.getElementById("totalData")
 const deleteBookButton = document.getElementById("deleteBookButton")
 // const bookBarCode = document.getElementById("bookBarCode")
-const imagePlaceholder = document.getElementById("imagePlaceholder")
 const accNoInput = document.getElementById("accNo")
 const categoryInput = document.getElementById("category")
 const callNoBtn = document.getElementById('callNoBtn')
@@ -137,8 +137,12 @@ if(addBookFormEl){
         e.preventDefault();
         let bookCategory = e.target.category.value;
         let bookAccNo = e.target.accNo.value;
+        bookAccNo = convertMMToEng(bookAccNo, true)
+        let bookClassNo = e.target.classNo.value;
         let barcodeImage = await generateBarCode(bookCategory, bookAccNo)
 
+        console.log("this is acc number " + convertMMToEng(bookAccNo))
+        
         const myBook = new Book({
             bookCover: document.getElementById("bookCover").files[0],
             // bookCover: barcodeImage,
@@ -148,7 +152,7 @@ if(addBookFormEl){
             subTitle: e.target.subTitle.value,
             parallelTitle: e.target.parallelTitle.value,
             initial: e.target.initial.value,
-            classNo: e.target.classNo.value,
+            classNo: convertMMToEng(bookClassNo),
             callNo: e.target.callNo.value,
             sor: e.target.statementOfResponsibility.value,
             authorOne: e.target.author1.value,
@@ -180,15 +184,10 @@ if(addBookFormEl){
         })
 
         for (const [key, value] of Object.entries(myBook)) {
-            console.log("value for the key : " + key + " is " + value)
             if(value == "" || !value){
-                console.log("there is no value inside " + key)
                 delete myBook[key]
             }
         }
-
-        console.log("this is just pagination " + e.target.pagination.value)
-        console.log("this is book " + JSON.stringify(myBook))
         if(e.target.isbn){
             myBook.isbn = e.target.isbn.value;
         }
@@ -203,9 +202,7 @@ if(addBookFormEl){
             }
         }
         const result = await addBookFunction(formData)
-        console.log("this is result " + JSON.stringify(result))
         window.showMessageApi.alertMsg(result.msg)
-        imagePlaceholder.src = barcodeImage;
         // window.location.reload();
     })
 }

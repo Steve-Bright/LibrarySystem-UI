@@ -35,7 +35,7 @@ export function convertEngToMM(word){
     return mmWord
 }
 
-export function convertMMToEng(word){
+export function convertMMToEng(word, capital= false){
     let words = word.split("")
     let engWord = ""
     for(let eachWord of words){
@@ -45,7 +45,10 @@ export function convertMMToEng(word){
             if(getKeyByValue(alphabetMapping, eachWord) == undefined){
                 engWord += eachWord
             }else{
-                            engWord += getKeyByValue(alphabetMapping, eachWord)
+              engWord += getKeyByValue(alphabetMapping, eachWord)
+              if(capital){
+                engWord = engWord.toUpperCase()
+              }
             }
         }else{
             engWord += eachWord
