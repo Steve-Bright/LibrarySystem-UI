@@ -125,7 +125,7 @@ if(categorySelect){
 
 if(addBookBtn){
     addBookBtn.addEventListener("click", ()=> {
-        window.navigationApi.toAnotherPage("./books/addBook.html")
+        window.navigationApi.toAnotherPage("./books/addBook/addBook.html")
     })
 }
 
