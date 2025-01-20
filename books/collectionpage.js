@@ -1,7 +1,7 @@
 import Book from "../utils/book.model.mjs"
 import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook, getLatestAccNo, generateBarCode} from "../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../utils/extra.js"
-import { convertMMToEng } from "../utils/burmese.mapper.js"
+import { convertMMToEng, convertEngToMM } from "../utils/burmese.mapper.js"
 
 const addBookBtn = document.getElementById("addBookBtn")
 const backToCollection = document.getElementById("backToCollection")
@@ -29,11 +29,14 @@ const callNoInput = document.getElementById("callNo")
 const classInput = document.getElementById("classNo")
 const addBookCover = document.getElementById("bookCover")
 const initialInput = document.getElementById("initial")
+const clearDataButton = document.getElementById("clearDataButton")
 
 
 let category = true
 let addBookCategory = true;
 let index = 1;
+let addBookData ;
+let bookCache;
 
 if(callNoBtn){
     callNoBtn.addEventListener("click", () => {
@@ -55,6 +58,11 @@ if(collectionCategory){
 if(backToCollection){
     // console.log("doesnt this catch this function as well?")
     backToCollection.addEventListener("click", () => {
+        if(bookCache){
+            localforage.setItem("addbookCache", bookCache).then(function(value){
+                window.navigationApi.toAnotherPage("./books/collectionpage.html")
+            })
+        }
         window.navigationApi.toAnotherPage("./books/collectionpage.html")
     })
 }
@@ -93,6 +101,9 @@ if(categorySelect){
     categorySelect.addEventListener("change", async() => {
         addBookCategory = !addBookCategory
         accNoInput.value = await getLatestAccNo(categoryInput.value)
+        if(categorySelect.value == "myanmar"){
+            accNoInput.value = convertEngToMM(accNoInput.value, true)
+        }
         toggleISBN(addBookCategory)
     })
 
@@ -114,12 +125,42 @@ if(categorySelect){
 
 if(addBookBtn){
     addBookBtn.addEventListener("click", ()=> {
-        window.navigationApi.toAnotherPage("./books/addBook.html")
+        window.navigationApi.toAnotherPage("./books/addBook/addBook.html")
     })
 }
 
 
 if(addBookFormEl){ 
+    const bookValue = await localforage.getItem('addbookCache');
+    let bookValueKeys = Object.keys(bookValue)
+    addBookData = addBookFormEl.querySelectorAll("input, select, textarea")
+    for(let i = 2; i <  addBookData.length; i++){
+        if(addBookData[i].id == bookValueKeys[i]){
+            console.log(addBookData[i].id + " is same with " + bookValueKeys[i])
+        }else{
+            console.log(addBookData[i].id + " is not same with " + bookValueKeys[i])
+        }
+    }
+    bookCache = new Book({
+        category: addBookData[1].value,
+        accNo: addBookData[2].value
+    })
+    delete bookCache.bookCover;
+    let bookKeys = Object.keys(bookCache)
+    addBookData.forEach((eachInput, i) => {
+
+        if(eachInput.type === "file"){
+            console.log('this is the file input type')
+        }else{
+            eachInput.addEventListener("input", () => {
+                bookCache[bookKeys[i]] = eachInput.value;
+            })
+
+            console.log("this is the book cache " + JSON.stringify(bookCache))
+        }
+
+    })
+
     addBookCover.addEventListener("change", (event) => {
 
         let bookCoverAdded = addBookCover.files[0]
@@ -132,6 +173,10 @@ if(addBookFormEl){
     })
 
     autogenerateCallNo(accNoInput, initialInput, classInput, callNoInput)
+
+    clearDataButton.addEventListener("click", () => {
+        localforage.removeItem("addbookCache")
+    })
     
     addBookFormEl.addEventListener("submit", async(e)=> {
         e.preventDefault();
@@ -203,6 +248,9 @@ if(addBookFormEl){
         }
         const result = await addBookFunction(formData)
         window.showMessageApi.alertMsg(result.msg)
+        if(result.con){
+            window.location.reload()
+        }
         // window.location.reload();
     })
 }

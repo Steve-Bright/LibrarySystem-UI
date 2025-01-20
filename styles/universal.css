@@ -164,7 +164,8 @@ input:focus{
     padding-left: 4px;
 }
 
-@media (max-width: 1090px) {
+@media (max-width: 920px) {
+
     #navigationPanel{
         width: 20%;
         left: 0;
@@ -179,3 +180,20 @@ input:focus{
         padding: 1.5em 0 0 12em
     }
   }
+
+@media (min-width: 920px) and (max-width: 1090px) {
+    #navigationPanel{
+        width: 20%;
+        left: 0;
+        font-size: 0.9em;
+        grid-template-rows: 0.7fr 3fr 0.7fr;
+    }
+    .mainTitle h1{
+        width: 30%;
+    }
+
+    main{
+        padding: 1.5em 0 0 14em
+    }
+  }
+
