@@ -74,3 +74,33 @@ br{
   aspect-ratio: 9/12;
   border: 1px solid black;
 }
+
+@media (max-width: 1090px) {
+  #addBookForm{
+    width: 60%;
+  }
+
+  #addBookImageArea{
+    width: 40%;
+  }
+
+  
+  #addBookImageArea img{
+    width: 70%;
+  }
+}
+
+@media (min-width: 1090px) and (max-width: 1280px){
+  #addBookForm{
+    width: 55%;
+  }
+
+  #addBookImageArea{
+    width: 45%;
+  }
+
+  
+  #addBookImageArea img{
+    width: 50%;
+  }
+}

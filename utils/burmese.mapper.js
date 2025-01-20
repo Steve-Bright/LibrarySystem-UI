@@ -20,10 +20,13 @@ export function getKeyByValue(object, value) {
   return Object.keys(object).find(key => object[key] === value);
 }
 
-export function convertEngToMM(word){
+export function convertEngToMM(word, capital = false){
     let words = word.split("")
     let mmWord = "";
     for(let eachWord of words){
+        if(capital){
+            eachWord = eachWord.toLowerCase();
+        }
         if(englishNumbers.includes(eachWord)){
             mmWord += numberMapping[eachWord]
         }else if(englishAlphabets.includes(eachWord)){

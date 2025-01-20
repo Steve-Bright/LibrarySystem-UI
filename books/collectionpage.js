@@ -1,7 +1,7 @@
 import Book from "../utils/book.model.mjs"
 import {addBookFunction, getAllBooksFunction, getDetailedBook, editBook, deleteBook, getLatestAccNo, generateBarCode} from "../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../utils/extra.js"
-import { convertMMToEng } from "../utils/burmese.mapper.js"
+import { convertMMToEng, convertEngToMM } from "../utils/burmese.mapper.js"
 
 const addBookBtn = document.getElementById("addBookBtn")
 const backToCollection = document.getElementById("backToCollection")
@@ -93,6 +93,9 @@ if(categorySelect){
     categorySelect.addEventListener("change", async() => {
         addBookCategory = !addBookCategory
         accNoInput.value = await getLatestAccNo(categoryInput.value)
+        if(categorySelect.value == "myanmar"){
+            accNoInput.value = convertEngToMM(accNoInput.value, true)
+        }
         toggleISBN(addBookCategory)
     })
 
@@ -203,6 +206,9 @@ if(addBookFormEl){
         }
         const result = await addBookFunction(formData)
         window.showMessageApi.alertMsg(result.msg)
+        if(result.con){
+            window.location.reload()
+        }
         // window.location.reload();
     })
 }
