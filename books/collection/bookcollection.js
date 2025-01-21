@@ -1,6 +1,6 @@
-import {getAllBooksFunction} from "../controllers/book.controller.js"
-import {buildCollectionNavigation} from "../utils/extra.js"
-import { convertMMToEng, convertEngToMM } from "../utils/burmese.mapper.js"
+import {getAllBooksFunction} from "../../controllers/book.controller.js"
+import {buildCollectionNavigation} from "../../utils/extra.js"
+import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
 const collectionCategory = document.getElementById("collectionCategory")
 const callNoBtn = document.getElementById('callNoBtn')
 const addBookBtn = document.getElementById("addBookBtn")
@@ -8,8 +8,10 @@ const totalData = document.getElementById("totalData")
 const collectionNavigationArea = document.getElementById("collectionNavigationArea")
 const bookDataHeadings = document.getElementById("bookDataHeadings")
 const bookDataEl = document.getElementById("bookData")
+const filePath = window.imagePaths.shareFilePath();
 
 let index = 1;
+let category = true
 updateBookData(category)
 
 collectionCategory.addEventListener("change", () => {
