@@ -1,10 +1,13 @@
+let currentDirectory = window.sharingDataApi.currentDirectory();
+let forwardButtonIcon = currentDirectory + "/assets/arrow_right.png"
+let backwardButtonIcon = currentDirectory + "/assets/arrow.png"
 const filePath = window.imagePaths.shareFilePath();
 export async function buildCollectionNavigation(area, backward, forward, index, category, updateFunction, onIndexChange){
     area.innerHTML = ``
 
     if(backward == true){
         const backwardButton = document.createElement("img")
-        backwardButton.src = "./assets/arrow.png"
+        backwardButton.src = backwardButtonIcon
         backwardButton.classList.add("backButton")
         backwardButton.id = "collectionBackward"
         area.appendChild(backwardButton)
@@ -12,7 +15,7 @@ export async function buildCollectionNavigation(area, backward, forward, index, 
 
     if(forward == true){
         const forwardButton = document.createElement("img")
-        forwardButton.src = "./assets/arrow_right.png"
+        forwardButton.src = forwardButtonIcon
         forwardButton.classList.add("backButton")
         forwardButton.id = "collectionForward"
         area.appendChild(forwardButton)

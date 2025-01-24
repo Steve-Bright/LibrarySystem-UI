@@ -66,7 +66,7 @@ const pageIds = [
 const pageHtmls = [
     "scannerpage.html",
     "./dashboard/index.html",
-    "./books/collectionpage.html",
+    "./books/collection/collectionpage.html",
     "memberspage.html",
     "loanpage.html",
     "settingspage.html"

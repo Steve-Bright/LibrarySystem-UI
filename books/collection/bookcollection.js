@@ -51,7 +51,7 @@ async function updateBookData(booleanValue, page = 1){
                 <th>Book Title</th>
                 <th>Author</th>
                 <th>Class No</th>
-                <th>Publisher</th>
+                <th colspan="2">Publisher</th>
                 <th></th>
             </tr>
         `
@@ -75,13 +75,20 @@ async function updateBookData(booleanValue, page = 1){
     }
 
     
-    let bookIds = [];
     let totalBookData = result.result.items;
    
     if (totalBookData.length > 0 ){   
         bookDataEl.innerHTML= ``
         totalBookData.forEach((eachBook) => {
-            bookIds.push(eachBook._id)
+            console.log("each book publisher " + eachBook.publisher)
+            let conditionalCell = eachBook.isbn 
+                ? `
+                <td>${eachBook.isbn}</td>
+                <td>${eachBook.publisher || "-"}</td>
+                `
+                : `
+                <td colspan="2">${eachBook.publisher || "-"}</td>` 
+            
             const newRow = document.createElement("tr")
             let imagePath = filePath + eachBook.bookCover
             newRow.innerHTML = 
@@ -91,15 +98,13 @@ async function updateBookData(booleanValue, page = 1){
                     <td>${eachBook.bookTitle}
                     <td>${eachBook.sor}</td>
                     <td>${eachBook.classNo}</td>
-                    <td>${eachBook.isbn}</td>
-                    <td>${eachBook.publisher || "-"}</td>
-                    <td><button class="detailedBook">View Details</button></td>
+                    ${conditionalCell}
+                    <td><button class="detailedBook" id="${eachBook._id}">View Details</button></td>
                 `
             bookDataEl.appendChild(newRow)
             
         });
-        // console.log("These are book Ids " + bookIds)
-        viewDetailedBookFunction(categoryData, bookIds)
+        viewDetailedBookFunction(categoryData)
     }else{
         bookDataEl.innerHTML = `
             <tr> <td colspan="7"> There are no books at the moment </td> </tr>
@@ -110,4 +115,14 @@ async function updateBookData(booleanValue, page = 1){
 
 function updateNewIndex(newIndex){
   index = newIndex;
+}
+
+function viewDetailedBookFunction(category){
+    const detailedButtons = document.querySelectorAll(".detailedBook")
+    detailedButtons.forEach((eachButton) => {
+        eachButton.addEventListener("click", async () => {
+            sessionStorage.setItem("bookId", eachButton.id)
+            window.navigationApi.toAnotherPage("./books/viewBook/viewBook.html")
+        })
+    })
 }
