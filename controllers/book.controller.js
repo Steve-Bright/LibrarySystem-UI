@@ -1,4 +1,4 @@
-import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint} from "../utils/links.js"
+import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint, searchBookEndpoint} from "../utils/links.js"
 
 const token = await window.cookieApi.getCookie()
 
@@ -109,4 +109,19 @@ export async function generateBarCode(category, accNo){
             }
         });
     });
+}
+
+export async function searchBook(searchData){
+    const res = await fetch(searchBookEndpoint, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        },
+        body: JSON.stringify(searchData)
+    })
+
+
+    const response = await res.json()
+    return response.result;
 }

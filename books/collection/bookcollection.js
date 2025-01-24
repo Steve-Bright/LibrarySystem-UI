@@ -1,7 +1,8 @@
-import {getAllBooksFunction} from "../../controllers/book.controller.js"
+import {getAllBooksFunction, searchBook} from "../../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../../utils/extra.js"
 import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
 const collectionCategory = document.getElementById("collectionCategory")
+const searchBookForm = document.getElementById("searchBookForm")
 const callNoBtn = document.getElementById('callNoBtn')
 const addBookBtn = document.getElementById("addBookBtn")
 const totalData = document.getElementById("totalData")
@@ -10,12 +11,33 @@ const bookDataHeadings = document.getElementById("bookDataHeadings")
 const bookDataEl = document.getElementById("bookData")
 const filePath = window.imagePaths.shareFilePath();
 
+let searchedHistory = sessionStorage.getItem("searchResult")
 let index = 1;
-let category = true
-updateBookData(category)
+let category = cacheCategory();
+
+switch(category){
+    case "true": collectionCategory.value = "english";
+    break;
+    case "false": collectionCategory.value = "myanmar";
+    break;
+}
+
+if(!searchedHistory){
+    updateBookData(category)
+}else{
+    showSearchResults()
+}
+
 
 collectionCategory.addEventListener("change", () => {
-  category = !category;
+  switch (collectionCategory.value){
+    case "english":
+      category = true;
+      break;
+    case "myanmar":
+      category = false;
+      break;
+  }
   updateBookData(category)
 })
 
@@ -27,9 +49,14 @@ addBookBtn.addEventListener("click", ()=> {
   window.navigationApi.toAnotherPage("./books/addBook/addBook.html")
 })
 
+
+
 async function updateBookData(booleanValue, page = 1){
-    let categoryData = booleanValue ? "english" : "myanmar"; 
+    let returnBooleanValue =  (cacheCategory(booleanValue) === 'true')
+    let categoryData = returnBooleanValue ? "english" : "myanmar";
+    console.log("this is the category data" + categoryData)
     let result = await getAllBooksFunction(categoryData, page)
+    await searchBookFunction(categoryData)
     if(categoryData == "english"){
         bookDataHeadings.innerHTML = `
             <tr>
@@ -80,7 +107,7 @@ async function updateBookData(booleanValue, page = 1){
     if (totalBookData.length > 0 ){   
         bookDataEl.innerHTML= ``
         totalBookData.forEach((eachBook) => {
-            console.log("each book publisher " + eachBook.publisher)
+            // console.log("each book publisher " + eachBook.publisher)
             let conditionalCell = eachBook.isbn 
                 ? `
                 <td>${eachBook.isbn}</td>
@@ -113,8 +140,47 @@ async function updateBookData(booleanValue, page = 1){
     
 }
 
+function showSearchResults(){
+    
+}
+
+searchBookForm.addEventListener("reset", () => {
+    sessionStorage.removeItem("searchResult")
+    window.location.reload()
+})
+
+async function searchBookFunction(categoryData){
+    searchBookForm.addEventListener("submit", async(e) => {
+        e.preventDefault();
+        let searchData = {
+            category: categoryData,
+            bookTitle: e.target.bookTitleInput.value,
+            accNo: e.target.accNoInput.value,
+            sor: e.target.authorInput.value,
+            publisher: e.target.authorInput.value,
+            classNo: e.target.classNoInput.value,
+            isbn: e.target.isbnInput.value
+        }
+        const result = await searchBook(searchData)
+        sessionStorage.setItem("searchResult", JSON.stringify(result))
+        window.location.reload()
+    })
+}
+
 function updateNewIndex(newIndex){
   index = newIndex;
+}
+
+function cacheCategory(booleanValue = null){
+    if(booleanValue !== null){
+        sessionStorage.setItem("category", booleanValue)
+    }
+    
+    let cachedCategoryValue = sessionStorage.getItem("category")
+    if(cachedCategoryValue === null){
+        return true;
+    }
+    return cachedCategoryValue; 
 }
 
 function viewDetailedBookFunction(category){
