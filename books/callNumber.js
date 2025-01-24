@@ -28,7 +28,7 @@ if(collectionCategory){
 
 if(backToCollection){
     backToCollection.addEventListener("click", () => {
-        window.navigationApi.toAnotherPage("./books/collectionpage.html")
+        window.navigationApi.toAnotherPage("./books/collection/collectionpage.html")
     })
 }
 

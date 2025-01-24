@@ -23,7 +23,7 @@ backToCollection.addEventListener("click", () => {
   if(bookCache){
     cacheBookData(bookCache)
   }
-  window.navigationApi.toAnotherPage("./books/collectionpage.html")
+  window.navigationApi.toAnotherPage("./books/collection/collectionpage.html")
 })
 
 categorySelect.addEventListener("change", async() => {

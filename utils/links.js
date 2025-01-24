@@ -12,6 +12,7 @@ export const getBookFromAccNoEndpoint = (category, accNo) => `${apiEndpoint}book
 export const getBookEndpoint = (category, page) =>  `${apiEndpoint}book/getAllBooks?category=${category}&page=${page}`
 export const deleteBookEndpoint = (category, bookId) => `${apiEndpoint}book/deleteBook/?category=${category}&bookId=${bookId}`
 export const getLatestAccNoEndpoint = (category) => `${apiEndpoint}book/getLatestAccNo/${category}`
+export const searchBookEndpoint = `${apiEndpoint}book/searchBook`
 
 export const addMemberEndpoint = `${apiEndpoint}member/addMember`
 export const editMemberEndpoint = `${apiEndpoint}member/editMember`
