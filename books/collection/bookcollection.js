@@ -49,6 +49,7 @@ function placeItemsInSearchForm(searchedCache){
 }
 
 async function updateBookData(booleanValue, page = 1){
+    category = booleanValue
     let categoryData = cacheCategory(booleanValue);
     let result = await getAllBooksFunction(categoryData, page)
     updateBookHeading(categoryData)
@@ -76,7 +77,7 @@ async function updateBookData(booleanValue, page = 1){
     if (totalBookData.length > 0 ){   
         bookDataEl.innerHTML= ``
         showEachBook(bookDataEl, totalBookData)
-        viewDetailedBookFunction(categoryData)
+        // viewDetailedBookFunction(categoryData)
     }else{
         bookDataEl.innerHTML = `
             <tr> <td colspan="7"> There are no books at the moment </td> </tr>
@@ -207,7 +208,11 @@ function viewDetailedBookFunction(category){
     const detailedButtons = document.querySelectorAll(".detailedBook")
     detailedButtons.forEach((eachButton) => {
         eachButton.addEventListener("click", async () => {
-            sessionStorage.setItem("bookId", eachButton.id)
+            let detailedBook = {
+                id: eachButton.id,
+                category: category
+            }
+            sessionStorage.setItem("bookId", JSON.stringify(detailedBook))
             window.navigationApi.toAnotherPage("./books/viewBook/viewBook.html")
         })
     })

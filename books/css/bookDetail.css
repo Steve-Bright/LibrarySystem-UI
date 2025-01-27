@@ -32,8 +32,7 @@ br{
   border-radius: 5px;
 }
 
-#addBookForm div input, #addBookForm div select, #addBookForm div textarea,
-#viewBookForm div input, #viewBookForm div select, #viewBookForm div textarea{
+#addBookForm div input, #addBookForm div select, #addBookForm div textarea{
   width: 50%;
   height: 1.7em;
   margin: 1% 0;
@@ -42,27 +41,44 @@ br{
   background-color: #D9D9D9
 }
 
-#buttonsArea{
-  width: 100%;
-  height: 5em;
-  display: flex;
-
+#viewBookForm div input, #viewBookForm div select, #viewBookForm div textarea{
+  width: 70%;
+  border-width: 1px;
+  padding-left: 10px;
+  background-color: rgb(240, 240, 240);
 }
 
-#buttonsArea button:nth-child(1){
+.uneditable{
+  pointer-events: none;  
+}
+
+#buttonsArea, #editButtonsArea{
+  border-radius: 10px;
+  background-color: #D9D9D9;
+  width: 38%;
+  height: 5em;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+#buttonsArea button:nth-child(1), #editButtonsArea #cancelEditButton{
   background-color: transparent;
   color: black;
   border: 1.5px solid black;
 }
 
-#buttonsArea button{
+#buttonsArea button, #editButtonsArea button{
   width: 20%;
   height: 40%;
+  margin-top: auto;
+  margin-bottom: auto;
   margin-right: 1em;
   border-radius: 10px;
 }
 
-#addBookImageArea{
+#addBookImageArea, #imagePreviewArea{
   width: 50%;
   height: 20em;
   /* background-color: red; */
@@ -70,38 +86,47 @@ br{
   align-items: center;
 }
 
-#addBookImageArea img{
+#addBookImageArea img, #imagePreviewArea img{
   width: 42%;
   aspect-ratio: 9/12;
   border: 1px solid black;
 }
 
+
 @media (max-width: 1090px) {
-  #addBookForm{
+  #addBookForm, #viewBookForm{
     width: 60%;
   }
 
-  #addBookImageArea{
+  #addBookImageArea, #imagePreviewArea{
     width: 40%;
   }
 
   
-  #addBookImageArea img{
+  #addBookImageArea img, #imagePreviewArea img{
     width: 70%;
+  }
+
+  #imagePreviewArea img {
+    margin-left: 2em;
   }
 }
 
 @media (min-width: 1090px) and (max-width: 1280px){
-  #addBookForm{
+  #addBookForm, #viewBookForm{
     width: 55%;
   }
 
-  #addBookImageArea{
+  #addBookImageArea, #imagePreviewArea{
     width: 45%;
   }
 
   
-  #addBookImageArea img{
+  #addBookImageArea img, #imagePreviewArea img{
     width: 50%;
+  }
+
+  #imagePreviewArea img {
+    margin-left: 5em;
   }
 }

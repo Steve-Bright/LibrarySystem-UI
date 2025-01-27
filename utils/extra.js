@@ -125,3 +125,7 @@ export async function buildMemberNavigation(area, backward, forward, index, upda
     }
     
 }
+
+export function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
