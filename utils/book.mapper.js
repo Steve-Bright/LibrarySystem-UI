@@ -3,6 +3,7 @@ export function bookUIMapping(bookModel) {
     _id, 
     barcode,
     createdAt,
+    loanStatus,
     ...uiBookData // Include everything else
   } = bookModel;
 

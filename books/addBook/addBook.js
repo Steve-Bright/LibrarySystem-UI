@@ -58,8 +58,9 @@ addBookFormEl.addEventListener("submit", async(e)=> {
     bookAccNo = convertMMToEng(bookAccNo, true)
     let bookClassNo = e.target.classNo.value;
     let barcodeImage = await generateBarCode(bookCategory, bookAccNo)
+    console.log("barcode image " + barcodeImage)
 
-    console.log("this is acc number " + convertMMToEng(bookAccNo))
+    // console.log("this is acc number " + convertMMToEng(bookAccNo))
         
     const myBook = new Book({
         bookCover: document.getElementById("bookCover").files[0],
@@ -72,10 +73,10 @@ addBookFormEl.addEventListener("submit", async(e)=> {
         initial: e.target.initial.value,
         classNo: convertMMToEng(bookClassNo),
         callNo: e.target.callNo.value,
-        sor: e.target.statementOfResponsibility.value,
-        authorOne: e.target.author1.value,
-        authorTwo: e.target.author2.value,
-        authorThree: e.target.author3.value,
+        sor: e.target.sor.value,
+        authorOne: e.target.authorOne.value,
+        authorTwo: e.target.authorTwo.value,
+        authorThree: e.target.authorThree.value,
         other: e.target.other.value,
         translator: e.target.translator.value,
         pagination: e.target.pagination.value,
@@ -83,7 +84,7 @@ addBookFormEl.addEventListener("submit", async(e)=> {
         illustrationType: e.target.illustrationType.value,
         seriesTitle: e.target.seriesTitle.value,
         seriesNo: e.target.seriesNo.value,
-        includeCD: e.target.cdDvd.value,
+        includeCD: e.target.includeCD.value,
         subjectHeadings: e.target.subjectHeadings.value,
         edition: e.target.edition.value,
         editor: e.target.editor.value,
@@ -97,7 +98,7 @@ addBookFormEl.addEventListener("submit", async(e)=> {
         price: e.target.price.value,
         donor: e.target.donor.value,
         catalogOwner: e.target.catalogOwner.value,
-        arcode: barcodeImage
+        barcode: barcodeImage
             // isbn: e.target.isbn.value,
     })
 
@@ -134,7 +135,7 @@ function toggleISBN(addCategory){
     }else if(addingBook == "english"){
         isbnArea.innerHTML = `
         <label for="isbn">ISBN</label>
-                <input type="text" id="isbn" name="isbn" required>
+                <input type="text" id="isbn" name="isbn" class="addBookFormat" required>
                 <br>`
     }
 }

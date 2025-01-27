@@ -26,13 +26,13 @@ br{
 }
 
 #addBookForm div input, #viewBookForm div input{
-  width: 50%;
+  /* width: 50%; */
   height: 1.7em;
   margin: 1% 0;
   border-radius: 5px;
 }
 
-#addBookForm div input, #addBookForm div select, #addBookForm div textarea{
+.addBookFormat{
   width: 50%;
   height: 1.7em;
   margin: 1% 0;
@@ -41,14 +41,11 @@ br{
   background-color: #D9D9D9
 }
 
-#viewBookForm div input, #viewBookForm div select, #viewBookForm div textarea{
+.viewBookFormat{
   width: 70%;
   border-width: 1px;
   padding-left: 10px;
   background-color: rgb(240, 240, 240);
-}
-
-.uneditable{
   pointer-events: none;  
 }
 
