@@ -78,11 +78,11 @@ function updateBookUi(){
             editedBook[eachInput.id] = eachInput.value
         })
     })
-    // editedBook.bookCover = document.getElementById("bookCover").files[0]
 
     viewBookForm.addEventListener("submit", async(e) => {  
         e.preventDefault()     
         if(document.getElementById("bookCover")){
+            editedBook.editedPhoto = true;
             editedBook.bookCover = bookCover.files[0]
         }
 
@@ -98,8 +98,7 @@ function updateBookUi(){
 
         const result = await editBook(formData)
         window.showMessageApi.alertMsg(result.msg)
-        // alert("edited " + JSON.stringify(editedBook))
-        // console.log("edited book " + JSON.stringify(editedBook))
+        window.location.reload()
     })
 }
 
