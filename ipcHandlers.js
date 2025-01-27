@@ -10,6 +10,7 @@ import { mainWebsite } from "./utils/links.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 let sharedData;
+let confirmedAns;
 
 console.log("current file name " + __filename + " and dir name " + __dirname)
 
@@ -88,6 +89,32 @@ export default function setupIpcHandlers(win) {
       // console.log("error in openDialog ipcMain: " + error)
     }
   })})
+
+  
+  ipcMain.on("openCustomDialog", (event, dialogOptions) => {
+    try{
+      const currentWindow = win || BrowserWindow.getFocusedWindow();
+      let message = dialogOptions.message
+      let dialogResponse = dialogOptions.responseChannel
+      dialog.showMessageBox(currentWindow, 
+        {message: message,
+          buttons: ["yes", "no"]
+        }).then((result) => {
+          try{
+            confirmedAns = result.response;
+            event.sender.send(dialogResponse, result.response)
+          }catch(error){
+            console.log("error in opening custom dialog " + error)
+          }
+        })
+    }catch(error){
+      console.log("error in open custom dialog " + error)
+    }
+  })
+
+  ipcMain.on("customDialogResponse", (event, message) => {
+    event.returnValue = confirmedAns;
+  })
 
   // ipcMain.on("openDialog", (event, dialogOptions) => {
   //   try {
