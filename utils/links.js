@@ -24,6 +24,7 @@ export const deleteMemberEndpoint = (memberDatabaseId) => `${apiEndpoint}member/
 export const getLatestMemberIdEndpoint = (memberType) => `${apiEndpoint}member/getLatestMemberId/${memberType}`
 export const banMemberEndpoint = (memberDatabaseId, block) => `${apiEndpoint}member/banMember?memberDatabaseId=${memberDatabaseId}&block=${block}`
 export const extendMembershipEndpoint = (memberDatabaseId) => `${apiEndpoint}member/extendMembership/${memberDatabaseId}`
+export const searchMemberEndpoint = `${apiEndpoint}member/searchMember`
 
 //loan related functions
 export const addLoanEndpoint = `${apiEndpoint}loan/addLoan`
