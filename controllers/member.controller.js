@@ -120,7 +120,7 @@ export async function searchMemberFunction(memberData){
             "Content-Type": "application/json",
             authorization: `Bearer ${token[0].value}`
         },
-        body: memberData
+        body: JSON.stringify(memberData)
     })
     return (await res.json())
 }

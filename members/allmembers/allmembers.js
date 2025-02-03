@@ -1,11 +1,15 @@
 import { getAllMembersFunction, searchMemberFunction } from "../../controllers/member.controller.js";
 import {buildMemberNavigation} from "../../utils/extra.js"
+
 const filePath = window.imagePaths.shareFilePath();
 const memberNavigationArea = document.getElementById("memberNavigationArea");
 const memberDataEl = document.getElementById("memberData");
+const searchMemberForm = document.getElementById("searchMemberForm")
 let index = 1;
 let searchedHistory = sessionStorage.getItem("searchMemberResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberData")
+
+await searchMemberFormFunction()
 
 if(!searchedHistory){
   updateMemberData()
@@ -48,6 +52,14 @@ async function updateMemberData(page = 1){
   }
 }
 
+function placeItemsInSearchForm(searchedCache){
+  searchedCache = JSON.parse(searchedCache)
+  searchMemberForm.memberType.value = searchedCache.memberType
+  searchMemberForm.memberId.value = searchedCache.memberId
+  searchMemberForm.name.value = searchedCache.name
+  searchMemberForm.personalId.value = searchedCache.personalId
+}
+
 function showEachMember(placeDiv, memberData){
   for(let eachMember of memberData){
     const newRow = document.createElement("tr")
@@ -74,10 +86,22 @@ function showEachMember(placeDiv, memberData){
   }
 }
 
+function showSearchResults(searchedHistory){
+  searchedHistory = JSON.parse(searchedHistory)
+  totalData.innerHTML = `Members Found (${searchedHistory.length})`
+  if(searchedHistory.length != 0){
+    memberDataEl.innerHTML = ""
+    showEachMember(memberDataEl, searchedHistory)
+  }else{
+    memberDataEl.innerHTML = `
+            <tr> <td colspan="8"> No members found </td> </tr>
+        `
+  }
+}
+
 function viewDetailedMemberFunction(){
   const detailedButtons = document.querySelectorAll(".detailedMember")
   detailedButtons.forEach((eachButton) => {
-    console.log
     eachButton.addEventListener("click", async() => {
       let detailedMember = {
         id: eachButton.id
@@ -90,4 +114,30 @@ function viewDetailedMemberFunction(){
 
 function updateNewIndex(newIndex){
   index = newIndex;
+}
+
+searchMemberForm.addEventListener("reset", () => {
+  sessionStorage.removeItem("searchMemberResult")
+  window.location.reload()
+})
+
+async function searchMemberFormFunction(){
+  searchMemberForm.addEventListener("submit", async(e) => {
+    e.preventDefault()
+    let searchData = {
+      memberType: e.target.memberType.value,
+      name: e.target.name.value,
+      memberId: e.target.memberId.value,
+      personalId: e.target.personalId.value
+    }
+    sessionStorage.setItem("searchMemberData", JSON.stringify(searchData))
+    const result = await searchMemberFunction(searchData)
+    if(!result.result){
+      sessionStorage.setItem("searchMemberResult", "[]")
+      
+    }else{
+        sessionStorage.setItem("searchMemberResult", JSON.stringify(result.result))
+    }
+    window.location.reload()
+  })
 }
