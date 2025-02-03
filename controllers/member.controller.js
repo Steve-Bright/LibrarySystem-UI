@@ -23,7 +23,8 @@ export async function getLatestMemberId(memberType){
         }
     })
 
-    return (await res.json())
+    let result = await res.json()
+    return (result.result)
 }
 
 export async function getDetailedMember(memberDatabaseId){

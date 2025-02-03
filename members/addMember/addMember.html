@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="../../styles/universal.css">
+        <link rel="stylesheet" href="../css/memberDetail.css">
+    </head>
+    <body>
+        <div id="navigationPanel" class="membersSelector"></div>
+        <main>
+            <div id="backToCollection">
+                <img src="../../assets/arrow.png" class="backButton">
+            </div>
+            <h2>Add Member</h2>
+
+            <div id="addMemberArea">
+                <form id="addMemberForm">
+                    <div>
+                        <label for="photo">Photo</label>
+                        <input type="file" id="memberPhoto" name="photo" class="addMemberFormat" required>
+                    </div>
+
+                    <div>
+                        <label for="memberType">Member Type</label>
+                        <select id="memberType" name="memberType" class="addMemberFormat">
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="staff">Staff</option>
+                        </select>
+                    </div>
+    
+                    <div id="gradeArea">
+                        <label for="Grade">Grade</label>
+                        <input type="text" name="grade" id="grade" class="addMemberFormat" required>
+                    </div>
+    
+                    <div>
+                        <label for="personalId">Personal Id</label>
+                        <input type="text" id="personalId" name="personalId" class="addMemberFormat" required>
+                    </div>
+
+                    <div>
+                        <label for="memberId">Member Id</label>
+                        <input type="text" id="memberId" name="memberId" class="addMemberFormat" required>
+                    </div>
+
+    
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="addMemberFormat" required>
+                    </div>
+
+    
+                    <div>
+                        <label for="nrc">Nrc</label>
+                        <input type="text" id="nrc" name="nrc" class="addMemberFormat">
+                    </div>
+
+    
+                    <div>
+                        <label for="genderLabel">Gender: </label>
+                    
+                        <input type="radio" id="maleRadio" name="gender" value="male" class="addMemberFormat" required>
+                        <label for="maleRadio">Male</label>
+            
+                        <input type="radio" id="femaleRadio" name="gender" value="female" class="addMemberFormat" required>
+                        <label for="femaleRadio">Female</label>
+                    </div>
+
+    
+                    <div>
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" name="phone" class="addMemberFormat" required>
+                    </div>
+
+
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" class="addMemberFormat" required>
+                    </div>
+
+    
+                    <div>
+                        <label for="permanentAddress">Permanent Address</label>
+                        <textarea id="permanentAddress" name="permanentAddress" class="addMemberFormat" required></textarea>
+                    </div>
+
+    
+                    <div>
+                        <label for="currentAddress">Current Address</label>
+                        <textarea id="currentAddress" name="currentAddress" class="addMemberFormat" required></textarea>
+                    </div>
+
+    
+                    <div>
+                        <label for="note">Note</label>
+                        <textarea id="note" name="note" class="addMemberFormat"></textarea>
+                    </div>
+    
+                    <div id="buttonsArea">
+                        <button type="reset">Clear All</button>
+                        <button type="submit">Add Member</button>
+                    </div>
+
+                </form>
+
+                <div id="addMemberImageArea">
+
+                </div>
+            </div>
+
+        </main>
+    </body>
+    <script src="../../utils/JsBarcode.all.min.js" type="module"></script>
+    <script src="../../js/universal.js" defer type="module"></script>
+    <script src="./addMember.js" defer type="module"></script>
+    <!-- <script src="../../js/memberspage.js" defer type="module"></script> -->
+</html>

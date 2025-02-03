@@ -1,33 +1,32 @@
-#addbookArea, #viewBookArea{
+#addMemberArea{
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
-#addBookForm, #viewBookForm{
+#addMemberForm{
   display: flex;
   flex-direction: column;
   width: 40%;
 }
 
-#addBookForm div, #viewBookForm div{
+#addMemberForm div{
   display: flex;
   margin-bottom: 10px;
 }
 
-#addBookForm div label, #viewBookForm div label{
+#addMemberForm div label{
   width: 40%;
 }
 
-#addBookForm div input, #viewBookForm div input{
-  /* width: 50%; */
+#addMemberForm div input{
   height: 1.7em;
   margin: 1% 0;
   border-radius: 5px;
 }
 
-.addBookFormat{
+.addMemberFormat{
   width: 50%;
   height: 1.7em;
   margin: 1% 0;
@@ -36,7 +35,7 @@
   background-color: #D9D9D9
 }
 
-.viewBookFormat{
+.viewMemberFormat{
   width: 70%;
   border-width: 1px;
   padding-left: 10px;
@@ -44,7 +43,7 @@
   pointer-events: none;  
 }
 
-#buttonsArea, #editButtonsArea{
+#buttonsArea{
   border-radius: 10px;
   background-color: #D9D9D9;
   width: 38%;
@@ -55,13 +54,13 @@
   right: 0;
 }
 
-#buttonsArea button:nth-child(1), #editButtonsArea #cancelEditButton{
+#buttonsArea button:nth-child(1){
   background-color: transparent;
   color: black;
   border: 1.5px solid black;
 }
 
-#buttonsArea button, #editButtonsArea button{
+#buttonsArea button{
   width: 20%;
   height: 40%;
   margin-top: auto;
@@ -70,7 +69,7 @@
   border-radius: 10px;
 }
 
-#addBookImageArea, #imagePreviewArea{
+#addMemberImageArea{
   width: 50%;
   height: 20em;
   /* background-color: red; */
@@ -78,47 +77,38 @@
   align-items: center;
 }
 
-#addBookImageArea img, #imagePreviewArea img{
+#addMemberImageArea img{
   width: 42%;
-  aspect-ratio: 9/12;
+  aspect-ratio: 1/1;
   border: 1px solid black;
 }
 
-
 @media (max-width: 1090px) {
-  #addBookForm, #viewBookForm{
+  #addMemberForm{
     width: 60%;
   }
 
-  #addBookImageArea, #imagePreviewArea{
+  #addMemberImageArea{
     width: 40%;
   }
 
   
-  #addBookImageArea img, #imagePreviewArea img{
+  #addMemberImageArea img{
     width: 70%;
-  }
-
-  #imagePreviewArea img {
-    margin-left: 2em;
   }
 }
 
 @media (min-width: 1090px) and (max-width: 1280px){
-  #addBookForm, #viewBookForm{
+  #addMemberForm{
     width: 55%;
   }
 
-  #addBookImageArea, #imagePreviewArea{
+  #addMemberImageArea{
     width: 45%;
   }
 
   
-  #addBookImageArea img, #imagePreviewArea img{
+  #addMemberImageArea img{
     width: 50%;
-  }
-
-  #imagePreviewArea img {
-    margin-left: 5em;
   }
 }

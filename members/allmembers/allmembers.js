@@ -5,6 +5,7 @@ const filePath = window.imagePaths.shareFilePath();
 const memberNavigationArea = document.getElementById("memberNavigationArea");
 const memberDataEl = document.getElementById("memberData");
 const searchMemberForm = document.getElementById("searchMemberForm")
+const addMemberBtn = document.getElementById("addMemberBtn");
 let index = 1;
 let searchedHistory = sessionStorage.getItem("searchMemberResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberData")
@@ -51,6 +52,10 @@ async function updateMemberData(page = 1){
     `
   }
 }
+
+addMemberBtn.addEventListener("click", () => {
+  window.navigationApi.toAnotherPage("./members/addMember/addMember.html")
+})
 
 function placeItemsInSearchForm(searchedCache){
   searchedCache = JSON.parse(searchedCache)
