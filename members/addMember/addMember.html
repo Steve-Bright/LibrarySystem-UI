@@ -28,7 +28,7 @@
                     </div>
     
                     <div id="gradeArea">
-                        <label for="Grade">Grade</label>
+                        <label for="grade">Grade</label>
                         <input type="text" name="grade" id="grade" class="addMemberFormat" required>
                     </div>
     
@@ -51,16 +51,24 @@
     
                     <div>
                         <label for="nrc">Nrc</label>
-                        <select id="regionNumber">
+                        <select id="regionNumber" class="addMemberFormat">
                         </select>
-                        <select id="nrcPlace"></select>
-                        <input type="text" id="mainNum">
-                        <input type="text" id="nrc" name="nrc" class="addMemberFormat">
+                        <input list="nrcPlace" class="addMemberFormat">
+                        <dataList id="nrcPlace" class="addMemberFormat"></dataList>
+                        <select id="nrcType" class="addMemberFormat">
+                            <option value="N">N</option>
+                            <option value="AC">AC</option>
+                            <option value="NC">NC</option>
+                            <option value="V">V</option>
+                            <option value="M">M</option>
+                            <option value="AC">AC</option>
+                        </select>
+                        <input id="mainNum" class="addMemberFormat" type="number">
                     </div>
 
     
                     <div>
-                        <label for="genderLabel">Gender: </label>
+                        <label for="gender">Gender: </label>
                     
                         <input type="radio" id="maleRadio" name="gender" value="male" class="addMemberFormat" required>
                         <label for="maleRadio">Male</label>
@@ -72,7 +80,7 @@
     
                     <div>
                         <label for="phone">Phone</label>
-                        <input type="text" id="phone" name="phone" class="addMemberFormat" required>
+                        <input type="number" id="phone" name="phone" class="addMemberFormat" required>
                     </div>
 
 
