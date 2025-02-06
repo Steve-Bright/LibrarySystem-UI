@@ -31,7 +31,7 @@ collectionCategory.addEventListener("change", () => {
 })
 
 callNoBtn.addEventListener("click", () => {
-  window.navigationApi.toAnotherPage("./books/bookCallNo.html")
+  window.navigationApi.toAnotherPage("./books/callNumber/bookCallNo.html")
 })
 
 addBookBtn.addEventListener("click", ()=> {

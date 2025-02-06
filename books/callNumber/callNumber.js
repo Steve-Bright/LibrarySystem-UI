@@ -1,5 +1,5 @@
-import { getAllBooksFunction } from "../controllers/book.controller.js"
-import {buildCollectionNavigation, buildBarcodeCollectionView} from "../utils/extra.js"
+import { getAllBooksFunction } from "../../controllers/book.controller.js"
+import {buildCollectionNavigation, buildBarcodeCollectionView} from "../../utils/extra.js"
 const backToCollection = document.getElementById("backToCollection")
 const totalData = document.getElementById("totalData")
 const collectionCategory = document.getElementById("collectionCategory")
@@ -46,7 +46,7 @@ printPreview.addEventListener("click", () => {
 
     }
     let data = {
-        "fileName": currentFile+"./books/printpreview.html",
+        "fileName": currentFile+"./books/callNumber/printpreview.html",
         "name": "Print Window",
         "windowFeatures": windowFeatures
     }
