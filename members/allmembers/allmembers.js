@@ -112,7 +112,7 @@ function viewDetailedMemberFunction(){
         id: eachButton.id
       }
       sessionStorage.setItem("memberId", JSON.stringify(detailedMember))
-      window.navigationApi.toAnotherPage("./memberDetail.html")
+      window.navigationApi.toAnotherPage("./members/viewMember/viewMember.html")
     })
   })
 }
