@@ -1,7 +1,9 @@
 import {app, BrowserWindow, ipcMain, dialog, session} from "electron"
+import NRCData from "./assets/nrc.json" with {type: "json"}
 import path from "path"
 import { fileURLToPath } from 'url';
 import ipcHandlers from "./ipcHandlers.js";
+import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

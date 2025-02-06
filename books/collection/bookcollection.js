@@ -11,8 +11,8 @@ const bookDataHeadings = document.getElementById("bookDataHeadings")
 const bookDataEl = document.getElementById("bookData")
 const filePath = window.imagePaths.shareFilePath();
 
-let searchedHistory = sessionStorage.getItem("searchResult")
-let searchedKeyword = sessionStorage.getItem("searchData")
+let searchedHistory = sessionStorage.getItem("searchBookResult")
+let searchedKeyword = sessionStorage.getItem("searchBookData")
 let index = 1;
 let category = cacheCategory();
 collectionCategory.value = category;
@@ -130,7 +130,7 @@ function showEachBook(placerDiv, bookData){
 }
 
 searchBookForm.addEventListener("reset", () => {
-    sessionStorage.removeItem("searchResult")
+    sessionStorage.removeItem("searchBookResult")
     window.location.reload()
 })
 
@@ -146,13 +146,13 @@ async function searchBookFunction(categoryData){
             classNo: e.target.classNoInput.value,
             isbn: e.target.isbnInput.value
         }
-        sessionStorage.setItem("searchData", JSON.stringify(searchData))
+        sessionStorage.setItem("searchBookData", JSON.stringify(searchData))
         const result = await searchBook(searchData)
         if(!result){
-            sessionStorage.setItem("searchResult", "[]")
+            sessionStorage.setItem("searchBookResult", "[]")
             
         }else{
-            sessionStorage.setItem("searchResult", JSON.stringify(result))
+            sessionStorage.setItem("searchBookResult", JSON.stringify(result))
         }
         
         window.location.reload()

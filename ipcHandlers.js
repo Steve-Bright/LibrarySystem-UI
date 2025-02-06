@@ -1,9 +1,9 @@
 // ipcHandlers.js
 import { ipcMain, dialog, session, BrowserWindow } from "electron";
-import parentWindow from "./index.js"
+import NRCData from "./assets/nrc.json" with {type: "json"}
 import path from "path";
 import os from "os"
-import JsBarCode from "jsbarcode"
+import fs from "fs";
 import { fileURLToPath } from 'url';
 import { mainWebsite } from "./utils/links.js";
 
@@ -199,5 +199,9 @@ export default function setupIpcHandlers(win) {
         if (!success) console.error(errorType);
       });
       
+  }),
+
+  ipcMain.on("searchNRC", (event, data) => {
+    event.returnValue = `${JSON.stringify(NRCData.data[data])}`
   })
 }

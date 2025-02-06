@@ -1,4 +1,4 @@
-import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint} from "../utils/links.js";
+import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint, searchMemberEndpoint} from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -23,7 +23,8 @@ export async function getLatestMemberId(memberType){
         }
     })
 
-    return (await res.json())
+    let result = await res.json()
+    return (result.result)
 }
 
 export async function getDetailedMember(memberDatabaseId){
@@ -110,5 +111,17 @@ export async function editMember(memberFormatData){
         body: memberFormatData
     })
 
+    return (await res.json())
+}
+
+export async function searchMemberFunction(memberData){
+    const res = await fetch(searchMemberEndpoint, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        },
+        body: JSON.stringify(memberData)
+    })
     return (await res.json())
 }
