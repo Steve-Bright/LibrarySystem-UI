@@ -1,7 +1,8 @@
 <!DOCTYPE html> 
     <head>
-        <link rel="stylesheet" href="styles/universal.css">
-        <link rel="stylesheet" href="styles/members.css">
+        <link rel="stylesheet" href="../../styles/universal.css">
+        <!-- <link rel="stylesheet" href="../../styles/members.css"> -->
+        <link rel="stylesheet" href="../css/members.css">
     </head>
 
     <body>
@@ -18,16 +19,16 @@
             </div>
 
             <div id="searchMemberDiv">
-                <form>
+                <form id="searchMemberForm">
                     <div>
                         <div>
-                            <label for="memberName">Name</label>
-                            <input type="text" name="memberNameInput">
+                            <label for="name">Name</label>
+                            <input type="text" name="name">
                         </div>
                         
                         <div>
                             <label for="memberType">Member Type</label>
-                            <select name="memberTypeSelect">
+                            <select name="memberType">
                                 <option value="student">Student</option>
                                 <option value="teacher">Teacher</option>
                                 <option value="operation">Operation</option>
@@ -39,7 +40,7 @@
                     <div>
                         <div>
                             <label for="memberId">Member Id</label>
-                            <input type="text" name="memberIdInput">
+                            <input type="text" name="memberId">
                         </div>
                         
                         <div>
@@ -100,7 +101,8 @@
 
     </body>
 
-    <script src="./js/universal.js" defer type="module"></script>
-    <script src="./js/memberspage.js" defer type="module"></script>
+    <script src="../../js/universal.js" defer type="module"></script>
+    <script src="./allmembers.js" defer type="module"></script>
+    <!-- <script src="../../js/memberspage.js" defer type="module"></script> -->
     
 </html>

@@ -1,0 +1,1732 @@
+{
+   "data": {
+     "1": [
+       {
+         "name_en": "AhGaYa",
+         "name_mm": "(အဂယ) အင်ဂျန်းယန်"
+       },
+       {
+         "name_en": "BaMaNa",
+         "name_mm": "(ဗမန) ဗန်းမော်"
+       },
+       {
+         "name_en": "KhaPhaNa",
+         "name_mm": "(ခဖန) ချီဖွေ"
+       },
+       {
+         "name_en": "DaPhaYa",
+         "name_mm": "(ဒဖယ) ဒေါ့ဖုန်းယန်"
+       },
+       {
+         "name_en": "HaPaNa",
+         "name_mm": "(ဟပန) ဟိုပင်"
+       },
+       {
+         "name_en": "KaMaNa",
+         "name_mm": "(ကမန) ကာမီ"
+       },
+       {
+         "name_en": "KhaLaPha",
+         "name_mm": "(ခလဖ) ခေါင်လန်ဖူး"
+       },
+       {
+         "name_en": "LaGaNa",
+         "name_mm": "(လဂန) လွယ်ဂျယ်"
+       },
+       {
+         "name_en": "MaKhaBa",
+         "name_mm": "(မခဘ) မချမ်းဘော"
+       },
+       {
+         "name_en": "MaSaNa",
+         "name_mm": "(မစန) မံစီ"
+       },
+       {
+         "name_en": "MaNyaNa",
+         "name_mm": "(မညန) မိုးညင်း"
+       },
+       {
+         "name_en": "MaKaTa",
+         "name_mm": "(မကတ) မိုးကောင်း"
+       },
+       {
+         "name_en": "MaMaNa",
+         "name_mm": "(မမန) မိုးမောက်"
+       },
+       {
+         "name_en": "MaKaNa",
+         "name_mm": "(မကန) မြစ်ကြီးနား"
+       },
+       {
+         "name_en": "NaMaNa",
+         "name_mm": "(နမန) နောင်မွန်း"
+       },
+       {
+         "name_en": "PhaKaNa",
+         "name_mm": "(ဖကန) ဖားကန့်"
+       },
+       {
+         "name_en": "PaTaAh",
+         "name_mm": "(ပတအ) ပူတာအို"
+       },
+       {
+         "name_en": "YaKaNa",
+         "name_mm": "(ရကန) ရွှေကူ"
+       },
+       {
+         "name_en": "SaBaNa",
+         "name_mm": "(ဆဘန) ဆင်ဘို"
+       },
+       {
+         "name_en": "SaLaNa",
+         "name_mm": "(ဆလန) ဆော့လော"
+       },
+       {
+         "name_en": "SaPaBa",
+         "name_mm": "(ဆပဘ) ဆွမ်ပရာဘွမ်"
+       },
+       {
+         "name_en": "TaNaNa",
+         "name_mm": "(တနန) တနိုင်း"
+       },
+       {
+         "name_en": "WaMaNa",
+         "name_mm": "(ဝမန) ဝင်းမော်"
+       },
+       {
+         "name_en": "KaMaTa",
+         "name_mm": "(ကမတ) ကာမိုင်း"
+       },
+       {
+         "name_en": "KaPaTa",
+         "name_mm": "(ကပတ) ကန်ပိုက်တီ"
+       },
+       {
+         "name_en": "MaLaNa",
+         "name_mm": "(မလန) မြို့လှ"
+       },
+       {
+         "name_en": "PaNaDa",
+         "name_mm": "(ပနဒ) ပန်နန်းဒင်"
+       },
+       {
+         "name_en": "PaWaNa",
+         "name_mm": "(ပဝန) ပန်ဝါ"
+       },
+       {
+         "name_en": "SaDaNa",
+         "name_mm": "(ဆဒန) ဆဒုံး"
+       },
+       {
+         "name_en": "YaBaYa",
+         "name_mm": "(ရဘယ) ရှင်ဘွေယန်"
+       }
+     ],
+     "2": [
+       {
+         "name_en": "BaLaKha",
+         "name_mm": "(ဘလခ) ဘော်လခဲ"
+       },
+       {
+         "name_en": "DaMaSa",
+         "name_mm": "(ဒမဆ) ဒီမောဆိုး"
+       },
+       {
+         "name_en": "LaKaNa",
+         "name_mm": "(လကန) လွိုင်ကော်"
+       },
+       {
+         "name_en": "MaSaNa",
+         "name_mm": "(မဆန) မယ်ဆည်နန်"
+       },
+       {
+         "name_en": "PhaSaNa",
+         "name_mm": "(ဖဆန) ဖားဆောင်း"
+       },
+       {
+         "name_en": "PhaYaSa",
+         "name_mm": "(ဖရဆ) ဖရူးဆိုး"
+       },
+       {
+         "name_en": "YaTaNa",
+         "name_mm": "(ရတန) ရှားတော်"
+       },
+       {
+         "name_en": "MaSaNa",
+         "name_mm": "(မစန) မယ်စဲ့"
+       },
+       {
+         "name_en": "YaThaNa",
+         "name_mm": "(ရသန) ရွာသစ်"
+       }
+     ],
+     "3": [
+       {
+         "name_en": "LaBaNa",
+         "name_mm": "(လဘန) လှိုင်းဘွဲ့"
+       },
+       {
+         "name_en": "KaKaYa",
+         "name_mm": "(ကကရ) ကော့ကရိတ်"
+       },
+       {
+         "name_en": "KaSaKa",
+         "name_mm": "(ကဆက) ကြာအင်းဆိပ်ကြီး"
+       },
+       {
+         "name_en": "KaDaNa",
+         "name_mm": "(ကဒန) ကျုံဒိုး"
+       },
+       {
+         "name_en": "MaWaTa",
+         "name_mm": "(မဝတ) မြဝတီ"
+       },
+       {
+         "name_en": "PhaAhNa",
+         "name_mm": "(ဖအန) ဖားအံ"
+       },
+       {
+         "name_en": "BaAhNa",
+         "name_mm": "(ဘအန) ဘားအံ"
+       },
+       {
+         "name_en": "PhaPaNa",
+         "name_mm": "(ဖပန) ဖျာပွန်"
+       },
+       {
+         "name_en": "ThaTaNa",
+         "name_mm": "(သတန) သံတောင်"
+       },
+       {
+         "name_en": "BaGaLa",
+         "name_mm": "(ဘဂလ) ဘောဂလိ"
+       },
+       {
+         "name_en": "BaThaSa",
+         "name_mm": "(ဘသဆ) ဘုရားသုံးဆူ"
+       },
+       {
+         "name_en": "KaMaMa",
+         "name_mm": "(ကမမ) ကမမောင်း"
+       },
+       {
+         "name_en": "LaThaNa",
+         "name_mm": "(လသန) လိပ်သို"
+       },
+       {
+         "name_en": "SaKaLa",
+         "name_mm": "(စကလ) စုကလိ"
+       },
+       {
+         "name_en": "ThaTaKa",
+         "name_mm": "(သတက) သံတောင်ကြီး"
+       },
+       {
+         "name_en": "WaLaMa",
+         "name_mm": "(ဝလမ) ဝေါလေမြိုင်"
+       },
+       {
+         "name_en": "YaYaTha",
+         "name_mm": "(ရရသ) ရှမ်းရွာသစ်"
+       }
+     ],
+     "4": [
+       {
+         "name_en": "HaKhaNa",
+         "name_mm": "(ဟခန) ဟားခါး"
+       },
+       {
+         "name_en": "HtaTaLa",
+         "name_mm": "(ထတလ) ထန်တလန်"
+       },
+       {
+         "name_en": "KaPaLa",
+         "name_mm": "(ကပလ) ကန်ပက်လက်"
+       },
+       {
+         "name_en": "MaTaPa",
+         "name_mm": "(မတပ) မတူပီ"
+       },
+       {
+         "name_en": "MaTaNa",
+         "name_mm": "(မတန) မင်းတပ်"
+       },
+       {
+         "name_en": "PhaLaNa",
+         "name_mm": "(ဖလန) ဖလမ်း"
+       },
+       {
+         "name_en": "PaLaWa",
+         "name_mm": "(ပလဝ) ပလက်ဝ"
+       },
+       {
+         "name_en": "TaTaNa",
+         "name_mm": "(တတန) တီးတိန်"
+       },
+       {
+         "name_en": "TaZaNa",
+         "name_mm": "(တဇန) တွန်းဇံ"
+       },
+       {
+         "name_en": "KaKhaNa",
+         "name_mm": "(ကခန) ကျီခါး"
+       },
+       {
+         "name_en": "SaMaNa",
+         "name_mm": "(ဆမန) ဆမီး"
+       },
+       {
+         "name_en": "YaKhaDa",
+         "name_mm": "(ရခဒ) ရိဒ်ခေါဒါရ်"
+       },
+       {
+         "name_en": "YaZaNa",
+         "name_mm": "(ရဇန) ရေဇွာ"
+       }
+     ],
+     "5": [
+       {
+         "name_en": "AhYaTa",
+         "name_mm": "(အရတ) အရာတော်"
+       },
+       {
+         "name_en": "BaMaNa",
+         "name_mm": "(ဗမန) ဗန်းမောက်"
+       },
+       {
+         "name_en": "BaTaLa",
+         "name_mm": "(ဘတလ) ဘုတလင်"
+       },
+       {
+         "name_en": "KhaOuNa",
+         "name_mm": "(ခဥန) ချောင်းဦး"
+       },
+       {
+         "name_en": "DaPaYa",
+         "name_mm": "(ဒပယ) ဒီပဲယင်း"
+       },
+       {
+         "name_en": "HaMaLa",
+         "name_mm": "(ဟမလ) ဟုမ္မလင်း"
+       },
+       {
+         "name_en": "HtaKhaNa",
+         "name_mm": "(ထခန) ထီးချိုင့်"
+       },
+       {
+         "name_en": "AhTaNa",
+         "name_mm": "(အတန) အင်းတော်"
+       },
+       {
+         "name_en": "KaNaNa",
+         "name_mm": "(ကနန) ကနီ"
+       },
+       {
+         "name_en": "KaThaNa",
+         "name_mm": "(ကသန) ကသာ"
+       },
+       {
+         "name_en": "KaLaHta",
+         "name_mm": "(ကလထ) ကလေး"
+       },
+       {
+         "name_en": "KaLaWa",
+         "name_mm": "(ကလဝ) ကလေးဝ"
+       },
+       {
+         "name_en": "KaBaLa",
+         "name_mm": "(ကဘန) ကန့်ဘလူ"
+       },
+       {
+         "name_en": "KaLaTa",
+         "name_mm": "(ကလတ) ကောလင်း"
+       },
+       {
+         "name_en": "KhaTaNa",
+         "name_mm": "(ခတန) ခန္တီး"
+       },
+       {
+         "name_en": "KhaOuTa",
+         "name_mm": "(ခဥတ) ခင်ဦး"
+       },
+       {
+         "name_en": "KaLaNa",
+         "name_mm": "(ကလန) ကျွန်းလှ"
+       },
+       {
+         "name_en": "MaLaNa",
+         "name_mm": "(မလန) မော်လိုက်"
+       },
+       {
+         "name_en": "MaKaNa",
+         "name_mm": "(မကန) မင်းကင်း"
+       },
+       {
+         "name_en": "MaYaNa",
+         "name_mm": "(မရန) မုံရွာ"
+       },
+       {
+         "name_en": "MaMaNa",
+         "name_mm": "(မမန) မြောင်"
+       },
+       {
+         "name_en": "NaYaNa",
+         "name_mm": "(နယန) နန်းယွန်း"
+       },
+       {
+         "name_en": "NgaZaNa",
+         "name_mm": "(ငဇန) ငါးန်ဇွန်"
+       },
+       {
+         "name_en": "PaLaNa",
+         "name_mm": "(ပလန) ပုလဲ"
+       },
+       {
+         "name_en": "PhaPaNa",
+         "name_mm": "(ဖပန) ဖောင်ပျင်း"
+       },
+       {
+         "name_en": "PaLanBa",
+         "name_mm": "(ပလဘ) ပင်လယ်ဘူး"
+       },
+       {
+         "name_en": "SaKaNa",
+         "name_mm": "(စကန) စစ်ကိုင်း"
+       },
+       {
+         "name_en": "SaLaKa",
+         "name_mm": "(ဆလက) ဆားလင်းကြီး"
+       },
+       {
+         "name_en": "YaBaNa",
+         "name_mm": "(ရဘန) ရွှေဘို"
+       },
+       {
+         "name_en": "TaMaNa",
+         "name_mm": "(တမန) တမူး"
+       },
+       {
+         "name_en": "TaSaNa",
+         "name_mm": "(တဆန) တန့်ဆည်"
+       },
+       {
+         "name_en": "WaLaNa",
+         "name_mm": "(ဝလန) ဝက်လက်"
+       },
+       {
+         "name_en": "WaThaNa",
+         "name_mm": "(ဝသန) ဝမ်းသို"
+       },
+       {
+         "name_en": "YaOuNa",
+         "name_mm": "(ရဥန) ရေဦး"
+       },
+       {
+         "name_en": "YaMaPa",
+         "name_mm": "(ယမပ) ယင်းမာပင်"
+       },
+       {
+         "name_en": "YaThaKa",
+         "name_mm": "(ရသက) ရွာသစ်ကြီး"
+       },
+       {
+         "name_en": "DaHaNa",
+         "name_mm": "(ဒဟန) ဒုံဟီး"
+       },
+       {
+         "name_en": "SaMaYa",
+         "name_mm": "(ဆမရ) ဆွမ္မရာ"
+       },
+       {
+         "name_en": "HtaPaKha",
+         "name_mm": "(ထပခ) ထန်ပါခွေ"
+       },
+       {
+         "name_en": "KaMaNa",
+         "name_mm": "(ကမန) ကျောက်မြောင်း"
+       },
+       {
+         "name_en": "KhaPaNa",
+         "name_mm": "(ခပန) ခမ်းပတ်"
+       },
+       {
+         "name_en": "LaHaNa",
+         "name_mm": "(လဟန) လဟယ်"
+       },
+       {
+         "name_en": "LaYaNa",
+         "name_mm": "(လရန) လေရှီး"
+       },
+       {
+         "name_en": "MaMaNa",
+         "name_mm": "(မမတ) မြင်းမူ"
+       },
+       {
+         "name_en": "MaPaLa",
+         "name_mm": "(မပလ) မိုပိုင်းလွတ်"
+       },
+       {
+         "name_en": "MaThaNa",
+         "name_mm": "(မသန) မြို့သစ်"
+       },
+       {
+         "name_en": "PaSaNa",
+         "name_mm": "(ပဆန) ပန်ဆောင်"
+       }
+     ],
+     "6": [
+       {
+         "name_en": "BaPaNa",
+         "name_mm": "(ဘပန) ဘုတ်ပြင်း"
+       },
+       {
+         "name_en": "HtaWaNa",
+         "name_mm": "(ထဝန) ထားဝယ်"
+       },
+       {
+         "name_en": "KaThaNa",
+         "name_mm": "(ကသန) ကော့သောင်း"
+       },
+       {
+         "name_en": "KaSaNa",
+         "name_mm": "(ကစန) ကျွန်းစု"
+       },
+       {
+         "name_en": "LaLaNa",
+         "name_mm": "(လလန) လောင်းလုံ"
+       },
+       {
+         "name_en": "MaMaNa",
+         "name_mm": "(မမန) မြိတ်"
+       },
+       {
+         "name_en": "MaAhYa",
+         "name_mm": "(မအရ) မြိတ်အရှေ့"
+       },
+       {
+         "name_en": "NgaYaKa",
+         "name_mm": "(ငရက) ငရုတ်ကောင်း"
+       },
+       {
+         "name_en": "PaLaNa",
+         "name_mm": "(ပလန) ပုလော"
+       },
+       {
+         "name_en": "TaNaTha",
+         "name_mm": "(တနသ) တနသာၤရီ"
+       },
+       {
+         "name_en": "TaThaYa",
+         "name_mm": "(တသရ) တနသာၤရီ"
+       },
+       {
+         "name_en": "ThaYaKha",
+         "name_mm": "(သရခ) သရက်ချောင်း"
+       },
+       {
+         "name_en": "YaPhaNa",
+         "name_mm": "(ရဖန) ရေဖြူ"
+       },
+       {
+         "name_en": "KhaMaKa",
+         "name_mm": "ခမက (ခမောက်ကြီး )"
+       },
+       {
+         "name_en": "KaLaAh",
+         "name_mm": "(ကလအ) ကလိန်အောင်"
+       },
+       {
+         "name_en": "KaYaYa",
+         "name_mm": "(ကရရ) ကရသူရိ"
+       },
+       {
+         "name_en": "MaAhNa",
+         "name_mm": "(မအန) မြိတ်အနောက်"
+       },
+       {
+         "name_en": "PaKaMa",
+         "name_mm": "(ပကမ) ပြည်ကြီးမဏ္ဍိုင်"
+       },
+       {
+         "name_en": "PaLaTa",
+         "name_mm": "(ပလတ) ပလောက်"
+       }
+     ],
+     "7": [
+       {
+         "name_en": "AhPhaNa",
+         "name_mm": "(အဖန) အုတ်ဖို"
+       },
+       {
+         "name_en": "AhPhaNa",
+         "name_mm": "(အဖန) အုတ်ဖြတ်"
+       },
+       {
+         "name_en": "AhTaNa",
+         "name_mm": "(အတန) အုတ်တွင်း"
+       },
+       {
+         "name_en": "DaOuNa",
+         "name_mm": "(ဒဥန) ဒိုက်ဦး"
+       },
+       {
+         "name_en": "HtaTaPa",
+         "name_mm": "(ထတပ) ထန်းတပင်"
+       },
+       {
+         "name_en": "KaTaTa",
+         "name_mm": "(ကတတ) ကေတုမတီ"
+       },
+       {
+         "name_en": "KaPaKa",
+         "name_mm": "(ကပက) ကြို့ပင်ကောက်"
+       },
+       {
+         "name_en": "KaKaNa",
+         "name_mm": "(ကကန) ကျောက်ကြီး"
+       },
+       {
+         "name_en": "KaTaKha",
+         "name_mm": "(ကတခ) ကျောက်တံခါး"
+       },
+       {
+         "name_en": "KaKaNa",
+         "name_mm": "(ကကန) ကျောက်ကုန်း"
+       },
+       {
+         "name_en": "MaDaNa",
+         "name_mm": "(မဒန) မဒေါက်"
+       },
+       {
+         "name_en": "MaLaNa",
+         "name_mm": "(မလန) မင်းလှ"
+       },
+       {
+         "name_en": "MaNyaNa",
+         "name_mm": "(မညန) မိုးညို"
+       },
+       {
+         "name_en": "NaTaLa",
+         "name_mm": "(နတလ) နတ်တလင်း"
+       },
+       {
+         "name_en": "NyaLaPa",
+         "name_mm": "(ညလပ) ညောင်လေးပင်"
+       },
+       {
+         "name_en": "PaNaKa",
+         "name_mm": "(ပနက) ပဲနွယ်ကုန်း"
+       },
+       {
+         "name_en": "PaKhaNa",
+         "name_mm": "(ပခန) ပဲခူး"
+       },
+       {
+         "name_en": "PaTaNa",
+         "name_mm": "(ပတန) ပန်တောင်း"
+       },
+       {
+         "name_en": "PaKhaTa",
+         "name_mm": "(ပခန) ပေါက်ခေါင်း"
+       },
+       {
+         "name_en": "PaTaTa",
+         "name_mm": "(ပတတ) ပေါင်းတည်"
+       },
+       {
+         "name_en": "PhaMaNa",
+         "name_mm": "(ဖမန) ဖြူး"
+       },
+       {
+         "name_en": "PaMaNa",
+         "name_mm": "(ပမန) ပြည်"
+       },
+       {
+         "name_en": "PaTaSa",
+         "name_mm": "(ပတစ) ပြွန်တဆာ"
+       },
+       {
+         "name_en": "YaKaNa",
+         "name_mm": "(ရကန) ရွှေကျင်"
+       },
+       {
+         "name_en": "YaTaNa",
+         "name_mm": "(ရတန) ရွှေတောင်"
+       },
+       {
+         "name_en": "TaNgaNa",
+         "name_mm": "(တငန) တောင်ငူ"
+       },
+       {
+         "name_en": "ThaNaPa",
+         "name_mm": "(သနပ) သနပ်ပင်"
+       },
+       {
+         "name_en": "ThaKaNa",
+         "name_mm": "(သကန) သဲကုန်း"
+       },
+       {
+         "name_en": "ThaWaTa",
+         "name_mm": "(သဝတ) သာယာဝတီ"
+       },
+       {
+         "name_en": "ThaSaNa",
+         "name_mm": "(သဆန) သုံးဆယ်"
+       },
+       {
+         "name_en": "WaMaNa",
+         "name_mm": "(ဝမန) ဝေါ"
+       },
+       {
+         "name_en": "YaTaYa",
+         "name_mm": "(ရတရ) ရေတာရှည်"
+       },
+       {
+         "name_en": "ZaKaNa",
+         "name_mm": "(ဇကန) ဇီးကုန်း"
+       },
+       {
+         "name_en": "KaWaNa",
+         "name_mm": "(ကဝန) ကဝ"
+       },
+       {
+         "name_en": "LaPATa",
+         "name_mm": "(လပတ) လက်ပံတန်း"
+       },
+       {
+         "name_en": "PaTaLa",
+         "name_mm": "(ပတလ) ပေါင်းတလည်"
+       }
+     ],
+     "8": [
+       {
+         "name_en": "AhLaNa",
+         "name_mm": "(အလန) အောင်လံ"
+       },
+       {
+         "name_en": "KhaMaNa",
+         "name_mm": "(ခမန) ချောက်"
+       },
+       {
+         "name_en": "GaGaNa",
+         "name_mm": "(ဂဂန) ဂန့်ဂေါ"
+       },
+       {
+         "name_en": "SaPhaNa",
+         "name_mm": "(ဆဖန) ဆိပ်ဖြူ"
+       },
+       {
+         "name_en": "SaPaWa",
+         "name_mm": "(ဆပဝ) ဆင်ပေါင်ဝဲ"
+       },
+       {
+         "name_en": "HtaLaNa",
+         "name_mm": "(ထလန) ထီးလင်း"
+       },
+       {
+         "name_en": "KaMaNa",
+         "name_mm": "(ကမန) ကံမ"
+       },
+       {
+         "name_en": "MaKaNa",
+         "name_mm": "(မကန) မကွေး"
+       },
+       {
+         "name_en": "MaBaNa",
+         "name_mm": "(မဘန) မင်းဘူး"
+       },
+       {
+         "name_en": "MaLaNa",
+         "name_mm": "(မလန) မင်းလှ"
+       },
+       {
+         "name_en": "MaTaNa",
+         "name_mm": "(မတန) မင်းတုန်း"
+       },
+       {
+         "name_en": "MaMaNa",
+         "name_mm": "(မမန) မြိုင်"
+       },
+       {
+         "name_en": "MaHtaNa",
+         "name_mm": "(မထန) မြေထဲ"
+       },
+       {
+         "name_en": "MaThaNa",
+         "name_mm": "(မသန) မြို့သစ်"
+       },
+       {
+         "name_en": "NaMaNa",
+         "name_mm": "(နမန) နတ်မောက်"
+       },
+       {
+         "name_en": "NgaPhaNa",
+         "name_mm": "(ငဖန) ငါးဖယ်"
+       },
+       {
+         "name_en": "PaKhaKa",
+         "name_mm": "(ပခက) ပခုက္ကူ"
+       },
+       {
+         "name_en": "PaMaNa",
+         "name_mm": "(ပမန) ပေါက်"
+       },
+       {
+         "name_en": "PaPhaNa",
+         "name_mm": "(ပဖန) ပွင့်ဖြူ"
+       },
+       {
+         "name_en": "SaLaNa",
+         "name_mm": "(စလန) စလင်း"
+       },
+       {
+         "name_en": "SaTaYa",
+         "name_mm": "(စတရ) စေတုတ္တရာ"
+       },
+       {
+         "name_en": "SaKaNa",
+         "name_mm": "(စကန) စကု"
+       },
+       {
+         "name_en": "TaTaKa",
+         "name_mm": "(တတက) တောင်တွင်းကြီး"
+       },
+       {
+         "name_en": "ThaYaNa",
+         "name_mm": "(သရန) သရက်"
+       },
+       {
+         "name_en": "SaMaNa",
+         "name_mm": "(ဆမန) ဆော"
+       },
+       {
+         "name_en": "YaNaKha",
+         "name_mm": "(ရနခ) ရေနံချောင်း"
+       },
+       {
+         "name_en": "YaSaKa",
+         "name_mm": "(ရစက) ရေစကြို"
+       },
+       {
+         "name_en": "KaHtaNa",
+         "name_mm": "(ကထန) ကျောက်ထု"
+       }
+     ],
+     "9": [
+       {
+         "name_en": "DaKhaTha",
+         "name_mm": "(ဒခသ) ဒက္ခိဏသီရိ"
+       },
+       {
+         "name_en": "LaWaNa",
+         "name_mm": "(လဝန) လယ်ဝေး"
+       },
+       {
+         "name_en": "OuTaTha",
+         "name_mm": "(ဥတသ) ဥတ္တရသီရိ"
+       },
+       {
+         "name_en": "PaBaTha",
+         "name_mm": "(ပဗသ) ပုဗ္ဗသီရိ"
+       },
+       {
+         "name_en": "PaMaNa",
+         "name_mm": "(ပမန) ပျဉ်းမနား"
+       },
+       {
+         "name_en": "TaKaNa",
+         "name_mm": "(တကန) တပ်ကုန်း"
+       },
+       {
+         "name_en": "ZaBaTha",
+         "name_mm": "(ဇဗသ) ဇမ္ဗူသီရိ"
+       },
+       {
+         "name_en": "ZaYaTha",
+         "name_mm": "(ဇယသ) ဇေယျာသီရိ"
+       },
+       {
+         "name_en": "AhMaYa",
+         "name_mm": "(အမရ) အမရပူရ"
+       },
+       {
+         "name_en": "AhMaZa",
+         "name_mm": "(အမဇ) အောင်မြေသာဇံ"
+       },
+       {
+         "name_en": "KhaAhZa",
+         "name_mm": "(ခအစ) ချမ်းအေးသာစည်"
+       },
+       {
+         "name_en": "KhaMaSa",
+         "name_mm": "(ခမစ) ချမ်းမြသာစည်"
+       },
+       {
+         "name_en": "KaPaTa",
+         "name_mm": "(ကပတ) ကျောက်ပန်းတောင်း"
+       },
+       {
+         "name_en": "KaSaNa",
+         "name_mm": "(ကဆန) ကျောက်ဆည်"
+       },
+       {
+         "name_en": "MaLaNa",
+         "name_mm": "(မလန) မလိူင်"
+       },
+       {
+         "name_en": "MaHaMa",
+         "name_mm": "(မဟမ) မဟာအောင်မြေ"
+       },
+       {
+         "name_en": "MaNaMa",
+         "name_mm": "(မနမ) မန်းနောက်မြောက်"
+       },
+       {
+         "name_en": "MaNaTa",
+         "name_mm": "(မနတ) မန်းနောက်တောင်"
+       },
+       {
+         "name_en": "MaYaMa",
+         "name_mm": "(မရမ) မန်းရှေ့မြောက်"
+       },
+       {
+         "name_en": "MaYaTa",
+         "name_mm": "(မရတ) မန်းရှေ့တောင်"
+       },
+       {
+         "name_en": "MaTaYa",
+         "name_mm": "(မတရ) မတ္တရာ"
+       },
+       {
+         "name_en": "MaMaNa",
+         "name_mm": "(မမန) မေမြို့"
+       },
+       {
+         "name_en": "MaHtaLa",
+         "name_mm": "(မထလ) မိတ္ထီလာ"
+       },
+       {
+         "name_en": "MaKaNa",
+         "name_mm": "(မကန) မိုးကုတ်"
+       },
+       {
+         "name_en": "MaKhaNa",
+         "name_mm": "(မခန) မြင်းခြံ"
+       },
+       {
+         "name_en": "MaThaNa",
+         "name_mm": "(မသန) မြစ်သား"
+       },
+       {
+         "name_en": "NaHtaKa",
+         "name_mm": "(နထက) နွားထိုးကြီး"
+       },
+       {
+         "name_en": "NgaTaYa",
+         "name_mm": "(ငသရ) င့ါသရောက်"
+       },
+       {
+         "name_en": "NyaOuNa",
+         "name_mm": "(ညဥန) ညောင်ဦး"
+       },
+       {
+         "name_en": "PaLaNa",
+         "name_mm": "(ပလန) ပုလိပ်"
+       },
+       {
+         "name_en": "PaThaKa",
+         "name_mm": "(ပသက) ပုသိမ်ကြီး"
+       },
+       {
+         "name_en": "PaBaNa",
+         "name_mm": "(ပဖန) ပျော်ဖွယ်"
+       },
+       {
+         "name_en": "PaKaKha",
+         "name_mm": "(ပကခ) ပြည်ကြီးတံခွန်"
+       },
+       {
+         "name_en": "PaOuLa",
+         "name_mm": "(ပဥလ) ပြင်ဦးလွင်"
+       },
+       {
+         "name_en": "PaMaNa",
+         "name_mm": "(ပမန) ပျဉ်းမနား"
+       },
+       {
+         "name_en": "SaKaTa",
+         "name_mm": "(စကတ) စဉ့်ကိုင်"
+       },
+       {
+         "name_en": "SaKaNa",
+         "name_mm": "(ဆကန) စဉ့်ကူး"
+       },
+       {
+         "name_en": "TaKaNa",
+         "name_mm": "(တကန) တကောင်း"
+       },
+       {
+         "name_en": "TaTaOu",
+         "name_mm": "(တတဥ) တံတားဦး"
+       },
+       {
+         "name_en": "TaThaNa",
+         "name_mm": "(တသန) တောင်သာ"
+       },
+       {
+         "name_en": "ThaPaKa",
+         "name_mm": "(သပက) သပိတ်ကျင်း"
+       },
+       {
+         "name_en": "ThaSaNa",
+         "name_mm": "(သစန) သာစည်"
+       },
+       {
+         "name_en": "WaTaNa",
+         "name_mm": "(ဝတန) ဝမ်းတွင်း"
+       },
+       {
+         "name_en": "YaMaTha",
+         "name_mm": "(ရမသ) ရမည်းသင်း"
+       },
+       {
+         "name_en": "NgaZaNa",
+         "name_mm": "(ငဇန) ငါန်းဇွန်"
+       },
+       {
+         "name_en": "PaBaNa",
+         "name_mm": "(ပဘန) ပျော်ဘွယ်"
+       },
+       {
+         "name_en": "OoTaYa",
+         "name_mm": "(ဥတသ) ဥတ္တရသီရိ"
+       },
+       {
+         "name_en": "KhAaHsa",
+         "name_mm": "(ခအဇ) ချမ်းအေးသာစံ"
+       }
+     ],
+     "10": [
+       {
+         "name_en": "BaLaNa",
+         "name_mm": "(ဘလန) ဘီးလင်း"
+       },
+       {
+         "name_en": "KhaSaNa",
+         "name_mm": "(ခဆန) ချောင်းဆုံ"
+       },
+       {
+         "name_en": "KaMaYa",
+         "name_mm": "(ကမရ) ကျိုက်မရော"
+       },
+       {
+         "name_en": "KaHtaNa",
+         "name_mm": "(ကထန) ကျိုက်ထို"
+       },
+       {
+         "name_en": "MaLaMa",
+         "name_mm": "(မလမ) မော်လမြိုင်"
+       },
+       {
+         "name_en": "MaDaNa",
+         "name_mm": "(မဒန) မုဒုံ"
+       },
+       {
+         "name_en": "PaMaNa",
+         "name_mm": "(ပမန) ပေါင်"
+       },
+       {
+         "name_en": "ThaPhaYa",
+         "name_mm": "(သဖရ) သံဖြူဇရပ်"
+       },
+       {
+         "name_en": "ThaHtaNa",
+         "name_mm": "(သထန) သထုံ"
+       },
+       {
+         "name_en": "KhaZaNa",
+         "name_mm": "(ခဇန) ခေါဇာ"
+       },
+       {
+         "name_en": "LaMaNa",
+         "name_mm": "(လမန) လမိုင်း"
+       },
+       {
+         "name_en": "YaMaNa",
+         "name_mm": "(ရမန) ရေး"
+       },
+       {
+         "name_en": "KaKhaMa",
+         "name_mm": "(ကခမ) ကျိုက္ခမီ"
+       }
+     ],
+     "11": [
+       {
+         "name_en": "AaMaNa",
+         "name_mm": "(အမန) အမ်း"
+       },
+       {
+         "name_en": "BaThaTa",
+         "name_mm": "(ဘသတ) ဘူးသီးတောင်"
+       },
+       {
+         "name_en": "GaMaNa",
+         "name_mm": "(ဂမန) ဂွ"
+       },
+       {
+         "name_en": "KaPhaNa",
+         "name_mm": "(ကဖန) ကျောက်ဖြူ"
+       },
+       {
+         "name_en": "KaTaNa",
+         "name_mm": "(ကတန) ကျောက်တော်"
+       },
+       {
+         "name_en": "MaAhNa",
+         "name_mm": "(မအန) မာန်အောင်"
+       },
+       {
+         "name_en": "MaTaNa",
+         "name_mm": "(မတန) မောင်းတော"
+       },
+       {
+         "name_en": "MaPaNa",
+         "name_mm": "(မပန) မင်းပြား"
+       },
+       {
+         "name_en": "MaOuNa",
+         "name_mm": "(မဥန) မြောက်ဦး"
+       },
+       {
+         "name_en": "MaPaTa",
+         "name_mm": "(မပတ) မြေပုံ"
+       },
+       {
+         "name_en": "PaTaNa",
+         "name_mm": "(ပတန) ပေါက်တော"
+       },
+       {
+         "name_en": "PaNaKa",
+         "name_mm": "(ပဏက) ပုဏ္ဏကျွန်း"
+       },
+       {
+         "name_en": "SaTaNa",
+         "name_mm": "(စတန) စစ်တွေ"
+       },
+       {
+         "name_en": "TaKaNa",
+         "name_mm": "(တကန) တောင်ကုတ်"
+       },
+       {
+         "name_en": "ThaTaNa",
+         "name_mm": "(သတန) သံတွဲ"
+       },
+       {
+         "name_en": "YaBaNa",
+         "name_mm": "(ရဗန) ရမ်းဗြဲ"
+       },
+       {
+         "name_en": "YaThaTa",
+         "name_mm": "(ရသတ) ရသေ့တောင်"
+       },
+       {
+         "name_en": "KaTaLa",
+         "name_mm": "(ကတလ) ကျိန္တလီ"
+       },
+       {
+         "name_en": "MaAhTa",
+         "name_mm": "(မအတ) မအီ"
+       },
+       {
+         "name_en": "TaPaWa",
+         "name_mm": "(တပဝ) တောင်ပြိုလက်ဝဲ"
+       }
+     ],
+     "12": [
+       {
+         "name_en": "AaLaNa",
+         "name_mm": "(အလန) အလုံ"
+       },
+       {
+         "name_en": "BaHaNa",
+         "name_mm": "(ဗဟန) ဗဟန်း"
+       },
+       {
+         "name_en": "BaTaHta",
+         "name_mm": "(ဗတထ) ဗိုလ်တထောင်"
+       },
+       {
+         "name_en": "KaKaKa",
+         "name_mm": "(ကကက) ကိုကိုးကျွန်း"
+       },
+       {
+         "name_en": "DaGaNa",
+         "name_mm": "(ဒဂန) ဒဂုံ"
+       },
+       {
+         "name_en": "DaGaYa",
+         "name_mm": "(ဒဂရ) ဒဂုံမြို့သစ်(အရှေ့ပိုင်း)"
+       },
+       {
+         "name_en": "DaGaMa",
+         "name_mm": "(ဒဂမ) ဒဂုံမြို့သစ်(မြောက်ပိုင်း)"
+       },
+       {
+         "name_en": "DaSaKa",
+         "name_mm": "(ဒဆက) ဒဂုံမြို့သစ်ဆိပ်ကမ်း"
+       },
+       {
+         "name_en": "DaGaTa",
+         "name_mm": "(ဒဂတ) ဒဂုံမြို့သစ်(တောင်ပိုင်း)"
+       },
+       {
+         "name_en": "DaLaNa",
+         "name_mm": "(ဒလန) ဒလ"
+       },
+       {
+         "name_en": "DaPaNa",
+         "name_mm": "(ဒပန) ဒေါပုံ"
+       },
+       {
+         "name_en": "LaMaNa",
+         "name_mm": "(လမန) လှိုင်"
+       },
+       {
+         "name_en": "LaThaYa",
+         "name_mm": "(လသယ) လှိုင်သာယာ"
+       },
+       {
+         "name_en": "LaKaNa",
+         "name_mm": "(လကန) လှည်းကူး"
+       },
+       {
+         "name_en": "MaBaNa",
+         "name_mm": "(မဘန) မှော်ဘီ"
+       },
+       {
+         "name_en": "HtaTaPa",
+         "name_mm": "(ထတပ) ထန်းတပင်"
+       },
+       {
+         "name_en": "AhSaNa",
+         "name_mm": "(အစန) အင်းစိန်"
+       },
+       {
+         "name_en": "KaMaYa",
+         "name_mm": "(ကမရ) ကမာရွတ်"
+       },
+       {
+         "name_en": "KaMaNa",
+         "name_mm": "(ကမန) ကော့မှုုး"
+       },
+       {
+         "name_en": "KhaYaNa",
+         "name_mm": "(ခရန) ခရမ်း"
+       },
+       {
+         "name_en": "KaKhaKa",
+         "name_mm": "(ကခက) ကွမ်းခြံကုန်း"
+       },
+       {
+         "name_en": "KaTaTa",
+         "name_mm": "(ကတတ) ကျောက်တံတား"
+       },
+       {
+         "name_en": "KaTaNa",
+         "name_mm": "(ကတန) ကျောက်တန်း"
+       },
+       {
+         "name_en": "KaMaTa",
+         "name_mm": "(ကမတ) ကြည့်မြင်တိုင်"
+       },
+       {
+         "name_en": "LaMata",
+         "name_mm": "(လမတ) လမ်းမတော်"
+       },
+       {
+         "name_en": "LaThaNa",
+         "name_mm": "(လသန) လသာ"
+       },
+       {
+         "name_en": "MaYaKa",
+         "name_mm": "(မရက) မရမ်းကုန်း"
+       },
+       {
+         "name_en": "MaGaTa",
+         "name_mm": "(မဂတ) မင်္ဂလာတောင်ညွှန့်"
+       },
+       {
+         "name_en": "MaGaDa",
+         "name_mm": "(မဂဒ) မင်္ဂလာဒုံ"
+       },
+       {
+         "name_en": "OuKaMa",
+         "name_mm": "(ဥကမ) မြောက်ဥက္ကလာပ"
+       },
+       {
+         "name_en": "PaBaTa",
+         "name_mm": "(ပဘတ) ပန်းဘဲတန်း"
+       },
+       {
+         "name_en": "PaZaDa",
+         "name_mm": "(ပဇတ) ပုဇွန်တောင်"
+       },
+       {
+         "name_en": "SaKhaNa",
+         "name_mm": "(စခန) စမ်းချောင်း"
+       },
+       {
+         "name_en": "SaKakha",
+         "name_mm": "(ဆကခ) ဆိပ်ကြီးခနောင်တို"
+       },
+       {
+         "name_en": "SaKaNa",
+         "name_mm": "(ဆကန) ဆိပ်ကမ်း"
+       },
+       {
+         "name_en": "YaPaKa",
+         "name_mm": "(ရပက) ရွှေပေါက်ကံ"
+       },
+       {
+         "name_en": "YaPaTha",
+         "name_mm": "(ရပသ) ရွှေပြည်သာ"
+       },
+       {
+         "name_en": "OuKaTa",
+         "name_mm": "(ဥကတ) တောင်ဥက္ကလာပ"
+       },
+       {
+         "name_en": "TaKaNa",
+         "name_mm": "(တကန) တိုက်ကြီး"
+       },
+       {
+         "name_en": "TaMaNa",
+         "name_mm": "(တမန) တာမွေ"
+       },
+       {
+         "name_en": "ThaKaTa",
+         "name_mm": "(သကတ) သာကေတ"
+       },
+       {
+         "name_en": "ThaLaNa",
+         "name_mm": "(သလန) သန်လျင်"
+       },
+       {
+         "name_en": "ThaGaKa",
+         "name_mm": "(သဃက) သင်္ဃန်းကျွန်း"
+       },
+       {
+         "name_en": "ThaKhaNa",
+         "name_mm": "(သခန) သုံးခွ"
+       },
+       {
+         "name_en": "TaTaNa",
+         "name_mm": "(တတန) တွံတေး"
+       },
+       {
+         "name_en": "YaKaNa",
+         "name_mm": "(ရကန) ရန်ကင်း"
+       },
+       {
+         "name_en": "TaTaHta",
+         "name_mm": "တတထ (တံတား)"
+       }
+     ],
+     "13": [
+       {
+         "name_en": "KhaYaHa",
+         "name_mm": "(ခရဟ) ချင်းရွှေဟော် မြို့နယ်ခွဲ"
+       },
+       {
+         "name_en": "HaPaTa",
+         "name_mm": "(ဟပတ) ဟိုပန်"
+       },
+       {
+         "name_en": "HaPaNa",
+         "name_mm": "(ဟပန) ဟိုပုံး"
+       },
+       {
+         "name_en": "KaLaNa",
+         "name_mm": "(ကလန) ကလော"
+       },
+       {
+         "name_en": "KaLaTa",
+         "name_mm": "(ကလတ) ကွမ်းလုံ"
+       },
+       {
+         "name_en": "KaHaNa",
+         "name_mm": "(ကဟန) ကွန်ဟိန်း"
+       },
+       {
+         "name_en": "KaThaNa",
+         "name_mm": "(ကသန) ကျေးသီး"
+       },
+       {
+         "name_en": "KaTaTa",
+         "name_mm": "(ကတတ) ကျိုင်းတောင်း"
+       },
+       {
+         "name_en": "KaTaNa",
+         "name_mm": "(ကတန) ကျိုင်းတုံ"
+       },
+       {
+         "name_en": "KaMaNa",
+         "name_mm": "(ကမန) ကျောက်မဲ"
+       },
+       {
+         "name_en": "KaKhaNa",
+         "name_mm": "(ကခန) ကွတ်ခိုင်"
+       },
+       {
+         "name_en": "LaYaNa",
+         "name_mm": "(လရန) လားရှိုး"
+       },
+       {
+         "name_en": "LaKaNa",
+         "name_mm": "(လကန) လောက်ကိုင်"
+       },
+       {
+         "name_en": "LaKhaTa",
+         "name_mm": "(လခတ) လဲချား"
+       },
+       {
+         "name_en": "LaKhaNa",
+         "name_mm": "(လခန) လင်းခေး"
+       },
+       {
+         "name_en": "LaLaNa",
+         "name_mm": "(လလန) လွိုင်လင်"
+       },
+       {
+         "name_en": "MaBaNa",
+         "name_mm": "(မဘန) မဘိမ်း"
+       },
+       {
+         "name_en": "MaKaNa",
+         "name_mm": "(မကန) မိုင်းကိုင်"
+       },
+       {
+         "name_en": "MaKhaNa",
+         "name_mm": "(မခန) မိုင်းခတ်"
+       },
+       {
+         "name_en": "MaPHaNa",
+         "name_mm": "(မဖန) မိုင်းဖြတ်"
+       },
+       {
+         "name_en": "MaPaTa",
+         "name_mm": "(မပတ) မိုင်းပြင်း"
+       },
+       {
+         "name_en": "MaSaNa",
+         "name_mm": "(မဆန) မိုင်းဆတ်"
+       },
+       {
+         "name_en": "MaYaNa",
+         "name_mm": "(မရန) မိုင်းရှုး"
+       },
+       {
+         "name_en": "MaYaTa",
+         "name_mm": "(မရတ) မိုင်းရယ်"
+       },
+       {
+         "name_en": "MaTaTa",
+         "name_mm": "(မတတ) မန်တုန်"
+       },
+       {
+         "name_en": "MaMaTa",
+         "name_mm": "(မမတ) မိုးမိတ်"
+       },
+       {
+         "name_en": "MaNaNa",
+         "name_mm": "(မနန) မိုးနဲ"
+       },
+       {
+         "name_en": "MaKaNa",
+         "name_mm": "(မကန) မုန်းကိုး"
+       },
+       {
+         "name_en": "MaSaTa",
+         "name_mm": "(မဆတ) မူဆယ်"
+       },
+       {
+         "name_en": "NaMaTa",
+         "name_mm": "(နမတ) နမ့်မတူ"
+       },
+       {
+         "name_en": "NaKhaNa",
+         "name_mm": "(နခန) နမ့်ခမ်း"
+       },
+       {
+         "name_en": "NaSaNa",
+         "name_mm": "(နဆန) နမ့်ဆန်"
+       },
+       {
+         "name_en": "NaPaNa",
+         "name_mm": "(နဖန) နမ့်ဖိုင်"
+       },
+       {
+         "name_en": "NaKhaTa",
+         "name_mm": "(နခတ) နောင်ချို"
+       },
+       {
+         "name_en": "NyaYaNa",
+         "name_mm": "(ညရန) ညောင်ရွှေ"
+       },
+       {
+         "name_en": "PhaKhaNa",
+         "name_mm": "(ဖခန) ဖယ်ခုံ"
+       },
+       {
+         "name_en": "PaLaNa",
+         "name_mm": "(ပလန) ပင်လုံ"
+       },
+       {
+         "name_en": "PaTaYa",
+         "name_mm": "(ပတရ) ပင်းတယ"
+       },
+       {
+         "name_en": "SaSaNa",
+         "name_mm": "(ဆဆန) ဆီဆိုင်"
+       },
+       {
+         "name_en": "YaNyaNa",
+         "name_mm": "(ရညန) ရွှေညောင်"
+       },
+       {
+         "name_en": "TaYaNa",
+         "name_mm": "(တယန) တန့်ယန်း"
+       },
+       {
+         "name_en": "TaMaNya",
+         "name_mm": "(တမည) တာမိုးညဲ"
+       },
+       {
+         "name_en": "TaKhaLa",
+         "name_mm": "(တခလ) တာချီလိတ်"
+       },
+       {
+         "name_en": "TaLaNa",
+         "name_mm": "(တလန) တာလေ"
+       },
+       {
+         "name_en": "TaKaNa",
+         "name_mm": "(တကန) တောင်ကြီး"
+       },
+       {
+         "name_en": "ThaNaNa",
+         "name_mm": "(သနန) သိန္နီ"
+       },
+       {
+         "name_en": "ThaPaNa",
+         "name_mm": "(သပန) သီပေါ"
+       },
+       {
+         "name_en": "YaNgaNa",
+         "name_mm": "(ရငန) ရွာငံ"
+       },
+       {
+         "name_en": "YaSaNa",
+         "name_mm": "(ရစန) ရပ်စောက်"
+       },
+       {
+         "name_en": "AhPaNa",
+         "name_mm": "(အပန) အောင်ပန်း"
+       },
+       {
+         "name_en": "AhTaNa",
+         "name_mm": "(အတန) အင်တော"
+       },
+       {
+         "name_en": "AhTaYa",
+         "name_mm": "(အသယ) အေးသာယာ"
+       },
+       {
+         "name_en": "HaHaNa",
+         "name_mm": "(ဟဟန) ဟဲဟိုး"
+       },
+       {
+         "name_en": "HaMaNa",
+         "name_mm": "(ဟမန) ဟိုမိန်း"
+       },
+       {
+         "name_en": "KaLaHta",
+         "name_mm": "(ကလထ) ကျိူင်းလပ်"
+       },
+       {
+         "name_en": "KaLaNa",
+         "name_mm": "(ခလန) ခိုလမ်"
+       },
+       {
+         "name_en": "MaHtaNa",
+         "name_mm": "(မထန) မော်ထိုက်"
+       },
+       {
+         "name_en": "MaKhaTa",
+         "name_mm": "(မခတ) မိုင်းခုတ်"
+       },
+       {
+         "name_en": "MaNgaNa",
+         "name_mm": "(မငန) မိုင်းငေါ့"
+       },
+       {
+         "name_en": "MaPhaHta",
+         "name_mm": "(မဖထ) မိုင်းဖျန်"
+       },
+       {
+         "name_en": "NaTaYa",
+         "name_mm": "(နတရ) နောင်တရား"
+       },
+       {
+         "name_en": "PaPaKa",
+         "name_mm": "(ပပက) ပုံပါကျင်"
+       },
+       {
+         "name_en": "PaWaNa",
+         "name_mm": "(ပဝန) ပန်ဝိုင်"
+       },
+       {
+         "name_en": "TaTaNa",
+         "name_mm": "(တတန) တုံတာ"
+       }
+     ],
+     "14": [
+       {
+         "name_en": "BaKaLa",
+         "name_mm": "(ဘကလ) ဘိုကလေး"
+       },
+       {
+         "name_en": "DaNaPha",
+         "name_mm": "(ဓနဖ) ဓနုဖြူ"
+       },
+       {
+         "name_en": "DaDaYa",
+         "name_mm": "(ဒဒရ) ဒေးဒရဲ"
+       },
+       {
+         "name_en": "PaThaYa",
+         "name_mm": "(ပသရ) ပုသိမ်(အရှေ့)"
+       },
+       {
+         "name_en": "AhMaNa",
+         "name_mm": "(အမန) အိမ်မဲ"
+       },
+       {
+         "name_en": "HaKaKa",
+         "name_mm": "(ဟကက) ဟိုင်းကြီးကျွန်း"
+       },
+       {
+         "name_en": "HaThaTa",
+         "name_mm": "(ဟသတ) ဟင်္သာတ"
+       },
+       {
+         "name_en": "AhGaPa",
+         "name_mm": "(အဂပ) အင်္ဂပူ"
+       },
+       {
+         "name_en": "KaNaNa",
+         "name_mm": "(ခနန) ခနောင်"
+       },
+       {
+         "name_en": "KaLaNa",
+         "name_mm": "(ကလန) ကျိုက်လတ်"
+       },
+       {
+         "name_en": "KaKhaNa",
+         "name_mm": "(ကခန) ကြံခင်း"
+       },
+       {
+         "name_en": "KaKaNa",
+         "name_mm": "(ကကန) ကျောင်းကုန်း"
+       },
+       {
+         "name_en": "KaPaNa",
+         "name_mm": "(ကပန) ကျုံပျော်"
+       },
+       {
+         "name_en": "LaPaTa",
+         "name_mm": "(လပတ) လပွတ္တာ"
+       },
+       {
+         "name_en": "LaMaNa",
+         "name_mm": "(လမန) လေးမျက်နှာ"
+       },
+       {
+         "name_en": "MaAhPa",
+         "name_mm": "(မအပ) မအူပင်"
+       },
+       {
+         "name_en": "MaMaKa",
+         "name_mm": "(မမက) မော်လမြိုင်ကျွန်း"
+       },
+       {
+         "name_en": "MaAhaNa",
+         "name_mm": "(မအန) မြန်အောင်"
+       },
+       {
+         "name_en": "MaMaNa",
+         "name_mm": "(မမန) မြောင်းမြ"
+       },
+       {
+         "name_en": "NgaPaTa",
+         "name_mm": "(ငပတ) ငပုတော"
+       },
+       {
+         "name_en": "NgaThaKha",
+         "name_mm": "(ငသခ) ငါးသိုင်းချောင်း"
+       },
+       {
+         "name_en": "NyaTaNa",
+         "name_mm": "(ညတန) ညောင်တုန်း"
+       },
+       {
+         "name_en": "PaTaNa",
+         "name_mm": "(ပတန) ပန်းတနော်"
+       },
+       {
+         "name_en": "PhaPaNa",
+         "name_mm": "(ဖပန) ဖျာပုံ"
+       },
+       {
+         "name_en": "ThaPaNa",
+         "name_mm": "(သပန) သာပေါင်း"
+       },
+       {
+         "name_en": "WaKhaMa",
+         "name_mm": "(ဝခမ) ဝါးခယ်မ"
+       },
+       {
+         "name_en": "PaThaNa",
+         "name_mm": "(ပသန) ပုသိမ်(အနောက်)"
+       },
+       {
+         "name_en": "YaKaNa",
+         "name_mm": "(ရကန) ရေကြည်"
+       },
+       {
+         "name_en": "ZaLaNa",
+         "name_mm": "(ဇလန) ဇလွန်"
+       },
+       {
+         "name_en": "KaKaHta",
+         "name_mm": "(ကကထ) ကန်ကြီးထောင့်"
+       },
+       {
+         "name_en": "AhMaTa",
+         "name_mm": "(အမတ) အမာ"
+       },
+       {
+         "name_en": "NgaYaKa",
+         "name_mm": "(ငရက) ငရုတ်ကောင်း"
+       },
+       {
+         "name_en": "PaSaLa",
+         "name_mm": "(ပစလ) ပြင်စလူ"
+       },
+       {
+         "name_en": "YaThaYa",
+         "name_mm": "(ရသယ) ရွှေသောင်ယံ"
+       }
+     ]
+   }
+ }
