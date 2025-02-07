@@ -1,0 +1,127 @@
+<!DOCTYPE html> 
+    <head>
+        <link rel="stylesheet" href="../../styles/universal.css">
+        <link rel="stylesheet" href="../css/memberCards.css">
+    </head>
+
+    <body>
+        <div id="navigationPanel" class="membersSelector"></div>
+        <main>
+            <div id="backToCollection">
+                <img src="../../assets/arrow.png" class="backButton">
+            </div>
+
+            <div class="mainTitle">
+                <h1>Member Cards</h1>
+                <div>
+                    <!-- <select name="collection-type" id="collectionCategory" size="1">
+                        <option value="english">English</option>
+                        <option value="myanmar">Myanmar</option>
+                    </select> -->
+                </div>
+
+                <div>
+                    <button id="printPreview">Print preview</button>
+                </div>
+            </div>
+
+            <div id="searchMemberDiv">
+                <form>
+                    <div>
+                        <div>
+                            <label for="name">Name</label>
+                            <input type="text" name="name">
+                        </div>
+                        
+                        <div>
+                            <label for="memberId">Member Id</label>
+                            <input type="text" name="memberId">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div>
+                        
+                        <div>
+                            <label for="memberType">Member Type</label>
+                            <select name="memberType" id="memberType" size="1">
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="staff">Staff</option>
+                                <option value="public">Public</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="personalId">Personal Id</label>
+                            <input type="text" name="personalId">
+                        </div>
+                    </div>
+
+                    <br>
+                    
+                    <div  id="searchMemButtonsDiv">
+                        <input type="reset" value="Clear All">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+            </div>
+
+            <div class="tableFormat">
+                <div class="tableTitle">
+                    <h2 id="totalData">Members</h2>
+                    <div id="barcodeNavigationArea">
+                    </div>
+                </div>
+
+                <table>
+                    <tbody id="memberCardData">
+                        <tr>
+                            <td>
+                                <div class="cardFormat">
+                                    <div class="cardHeading">
+                                        <div class="logoArea">
+                                            <img src="../../assets/card_logo.png"> 
+                                        </div>
+                                        <div class="logoTitle">
+                                            <h1>Yangon Reading Club</h1>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="cardBody">
+                                        <div class="photoArea">
+                                            <img src="../../assets/profile-sample-2.png" class="photoId">
+                                        </div>
+                                        <div class="individualData">
+                                        </div>  
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <!-- <div class="cardFormat">
+                                    <div class="cardHeading">
+                                        <h1>Yangon Reading Club</h1>
+                                    </div>
+
+                                    <div class="cardBody">
+                                        <div class="photoArea">
+                                            <!-- <img src="../../assets/profile-sample.jpg" class="photoId"> -->
+                                        </div>
+                                        <div class="individualData">
+                                        </div>  
+                                    </div>
+                                </div> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+    </body>
+
+    <script src="../../js/universal.js" defer type="module"></script>
+    <!-- <script src="../../js/memberspage.js" defer type="module"></script> -->
+    
+</html>

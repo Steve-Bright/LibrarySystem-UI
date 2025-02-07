@@ -9,6 +9,7 @@ const addMemberBtn = document.getElementById("addMemberBtn");
 let index = 1;
 let searchedHistory = sessionStorage.getItem("searchMemberResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberData")
+const memberCards = document.getElementById("memberCards")
 
 await searchMemberFormFunction()
 
@@ -55,6 +56,10 @@ async function updateMemberData(page = 1){
 
 addMemberBtn.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./members/addMember/addMember.html")
+})
+
+memberCards.addEventListener("click", () => {  
+  window.navigationApi.toAnotherPage("./members/memberCards/memberCards.html")
 })
 
 function placeItemsInSearchForm(searchedCache){
