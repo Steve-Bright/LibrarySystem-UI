@@ -199,19 +199,36 @@ button {
   margin: 1em 0em;
 }
 
+.photoArea{
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
 .thirdRow{
   font-size: 1em;
 }
 
-.footLine{
-  width: 100%;
+.barcode{
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+
+.footLine{
+  width: 80%;
+  display: flex;
+  position: absolute;
   justify-content: space-between;
   font-weight: bold;
-  letter-spacing: 5px;
+  letter-spacing: 4px;
+  color: red;
+  right: 40px;
+  bottom: 0px;
 }
 
 .barcodeId{
   height: 4em;
-  width: 100%;
+  width: 80%;
+  margin: 0;
 }
