@@ -101,8 +101,10 @@ function barcodeSelection(category){
                 "accNo": eachCallNum.id
             })
             if(selectedCallNums.includes(objectData)){
+                let selectedIndex = selectedCallNums.indexOf(objectData)
+                console.log("selected index " + selectedIndex)
                 eachCallNum.classList.remove("selectedCallNo")
-                selectedCallNums.pop(objectData)
+                selectedCallNums.splice(selectedIndex, 1)
             }else{
                 eachCallNum.classList.add("selectedCallNo")
                 selectedCallNums.push(objectData)
