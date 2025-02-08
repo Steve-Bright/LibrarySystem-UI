@@ -91,7 +91,7 @@ export async function buildMemberNavigation(area, backward, forward, index, upda
 
     if(backward == true){
         const backwardButton = document.createElement("img")
-        backwardButton.src = "./assets/arrow.png"
+        backwardButton.src = backwardButtonIcon
         backwardButton.classList.add("backButton")
         backwardButton.id = "collectionBackward"
         area.appendChild(backwardButton)
@@ -99,7 +99,7 @@ export async function buildMemberNavigation(area, backward, forward, index, upda
 
     if(forward == true){
         const forwardButton = document.createElement("img")
-        forwardButton.src = "./assets/arrow_right.png"
+        forwardButton.src = forwardButtonIcon
         forwardButton.classList.add("backButton")
         forwardButton.id = "collectionForward"
         area.appendChild(forwardButton)
@@ -214,8 +214,14 @@ export function attachMemberCardToDiv(table, cardData){
         tableRows[finalIndex].appendChild(td)
     }) 
 
-    tableRows.forEach((eachRow) => {
-        console.log("each row " + eachRow)
+    let finalIndexOfRow = tableRows.length -1
+    tableRows.forEach((eachRow, i) => {
+
+        if(tableRows.length %2 != 0 && i == finalIndexOfRow){
+            let td = document.createElement("td")
+            tableRows[finalIndexOfRow].appendChild(td)
+        }
+
         table.appendChild(eachRow)
     })
 }

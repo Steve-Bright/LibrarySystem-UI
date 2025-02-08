@@ -1,11 +1,23 @@
-import { getAllMembersFunction } from "../../controllers/member.controller.js"
-import { buildCardDesign, attachMemberCardToDiv } from "../../utils/extra.js"
+import { getAllMembersFunction, searchMemberFunction } from "../../controllers/member.controller.js"
+import { buildCardDesign, attachMemberCardToDiv, buildMemberNavigation } from "../../utils/extra.js"
 
 const printPreview = document.getElementById("printPreview")
 const totalData = document.getElementById("totalData")
 const memberCardData = document.getElementById("memberCardData")
+const memberNavigationArea = document.getElementById("memberNavigationArea")
+const searchMemberForm = document.getElementById("searchMemberForm")
+let index = 1;
+let searchedHistory = sessionStorage.getItem("searchMemberCardResult")
+let searchedKeyword = sessionStorage.getItem("searchMemberCardData")
 
-await updateMemberCardData(1)
+await searchMemberFormFunction()
+
+if(!searchedHistory){
+  await updateMemberCardData()
+}else{
+  placeItemsInSearchForm(searchedKeyword)
+  showSearchResults(searchedHistory)
+}
 
 async function updateMemberCardData(page = 1){
   let memberData  = await getAllMembersFunction(page)
@@ -16,13 +28,76 @@ async function updateMemberCardData(page = 1){
 
 
   memberCardData.innerHTML = ``
-  let tr;
-  let td;
-  let trArrays = [];
 
   let cardDesigns = buildCardDesign(totalMembers)
   attachMemberCardToDiv(memberCardData, cardDesigns)
-  // let rowData = buildMemberCardCollectionView()
+
+  if(totalMembersLength > 1){
+    if(page == 1){
+      buildMemberNavigation(memberNavigationArea, false, true, index, updateMemberCardData, updateNewIndex)
+    }else if(page == totalPages){
+      buildMemberNavigation(memberNavigationArea, true, false, index, updateMemberCardData, updateNewIndex)
+    }else{
+      buildMemberNavigation(memberNavigationArea, true, true, index, updateMemberCardData, updateNewIndex)
+    }
+  }else{
+    buildMemberNavigation(memberNavigationArea, false, false, index,  updateMemberCardData, updateNewIndex)
+  }
+}
+
+function updateNewIndex(newIndex){
+  index = newIndex;
+}
+
+function placeItemsInSearchForm(searchedCache){
+  searchedCache = JSON.parse(searchedCache)
+  searchMemberForm.memberType.value = searchedCache.memberType
+  searchMemberForm.memberId.value = searchedCache.memberId
+  searchMemberForm.name.value = searchedCache.name
+  searchMemberForm.personalId.value = searchedCache.personalId
+}
+
+function showSearchResults(searchedHistory){
+  searchedHistory = JSON.parse(searchedHistory)
+  totalData.innerHTML = `Members Found (${searchedHistory.length})`
+  if(searchedHistory.length != 0){
+    memberCardData.innerHTML = ``
+    let cardDesigns = buildCardDesign(searchedHistory)
+    attachMemberCardToDiv(memberCardData, cardDesigns)
+    // showEachMember(memberDataEl, searchedHistory)
+  }else{
+    memberCardData.innerHTML = `
+            <tr> <td colspan="2"> No member cards found </td> </tr>
+        `
+  }
+}
+
+searchMemberForm.addEventListener("reset", () => {
+  sessionStorage.removeItem("searchMemberCardResult")
+  sessionStorage.removeItem("searchMemberCardData")
+  window.location.reload()
+})
+
+async function searchMemberFormFunction(){
+  searchMemberForm.addEventListener("submit", async(e) => {
+    e.preventDefault();
+    let searchData = {
+      name: e.target.name.value,
+      memberType: e.target.memberType.value,
+      memberId: e.target.memberId.value,
+      personalId: e.target.personalId.value
+    }
+
+    sessionStorage.setItem("searchMemberCardData", JSON.stringify(searchData))
+    const result = await searchMemberFunction(searchData)
+    if(!result.result){
+      sessionStorage.setItem("searchMemberCardResult", "[]")
+      
+    }else{
+        sessionStorage.setItem("searchMemberCardResult", JSON.stringify(result.result))
+    }
+    window.location.reload();
+  })
 }
 
 printPreview.addEventListener("click", () => {
