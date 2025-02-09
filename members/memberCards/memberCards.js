@@ -9,9 +9,17 @@ const searchMemberForm = document.getElementById("searchMemberForm")
 let index = 1;
 let searchedHistory = sessionStorage.getItem("searchMemberCardResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberCardData")
+let printMaterials = sessionStorage.getItem("toPrintMemberCards")
+const currentFile = window.imagePaths.shareCurrentFile();
 
 let cardIds = []
 await searchMemberFormFunction()
+
+if(printMaterials){
+  cardIds = printMaterials.split(",")
+  // console.log("there is print materials " + printMaterials)
+  // cardIds = JSON.parse(printMaterials
+}
 
 if(!searchedHistory){
   await updateMemberCardData()
@@ -19,6 +27,30 @@ if(!searchedHistory){
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
 }
+
+printPreview.addEventListener("click",() => {
+  if(cardIds!=[]){
+    sessionStorage.setItem("toPrintMemberCards", cardIds)
+  }else{
+    sessionStorage.removeItem("toPrintBarcode")
+  }
+
+  let windowFeatures = {
+    "width":794,
+    "height":1123,
+    "alwaysOnTop": true
+
+  }
+
+  let data = {
+    "fileName": currentFile+"./members/memberCards/printPreview.html",
+    "name": "Member cards print Window",
+    "windowFeatures": windowFeatures
+  }
+
+  window.navigationApi.openWindow(data);
+  document.close()
+})
 
 async function updateMemberCardData(page = 1){
   let memberData  = await getAllMembersFunction(page)
@@ -72,6 +104,7 @@ function showSearchResults(searchedHistory){
             <tr> <td colspan="2"> No member cards found </td> </tr>
         `
   }
+  memberCardSelection()
 }
 
 searchMemberForm.addEventListener("reset", () => {
@@ -83,6 +116,7 @@ searchMemberForm.addEventListener("reset", () => {
 async function searchMemberFormFunction(){
   searchMemberForm.addEventListener("submit", async(e) => {
     e.preventDefault();
+    sessionStorage.setItem("toPrintMemberCards", cardIds)
     let searchData = {
       name: e.target.name.value,
       memberType: e.target.memberType.value,
