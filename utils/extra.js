@@ -148,7 +148,7 @@ export function buildCardDesign(memberData){
         }
         let expireDate = (new Date(eachMember.expiryDate)).toDateString().split(" ")
         let card = `
-            <div class="cardFormat">
+            <div class="cardFormat" id="${eachMember._id}">
                 <div class="cardHeading">
                     <div class="logoArea">
                         <img src="../../assets/club_logo_transparent.png"> 
@@ -205,8 +205,6 @@ export function attachMemberCardToDiv(table, cardData){
             let tr = document.createElement("tr")
             tableRows.push(tr)
         }
-        console.log("each row "  + i
-        )
 
         let finalIndex = tableRows.length - 1
         let td = document.createElement("td")

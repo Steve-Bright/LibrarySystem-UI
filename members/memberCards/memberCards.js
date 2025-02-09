@@ -10,6 +10,7 @@ let index = 1;
 let searchedHistory = sessionStorage.getItem("searchMemberCardResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberCardData")
 
+let cardIds = []
 await searchMemberFormFunction()
 
 if(!searchedHistory){
@@ -43,6 +44,7 @@ async function updateMemberCardData(page = 1){
   }else{
     buildMemberNavigation(memberNavigationArea, false, false, index,  updateMemberCardData, updateNewIndex)
   }
+  memberCardSelection()
 }
 
 function updateNewIndex(newIndex){
@@ -94,9 +96,31 @@ async function searchMemberFormFunction(){
       sessionStorage.setItem("searchMemberCardResult", "[]")
       
     }else{
-        sessionStorage.setItem("searchMemberCardResult", JSON.stringify(result.result))
+      sessionStorage.setItem("searchMemberCardResult", JSON.stringify(result.result))
     }
     window.location.reload();
+  })
+}
+
+function memberCardSelection(){
+  let allCards = document.querySelectorAll(".cardFormat")
+
+  allCards.forEach((eachCard) => {
+    if(cardIds.includes(eachCard.id) && !eachCard.classList.contains("selectedMemberCard")){
+      eachCard.classList.add("selectedMemberCard")
+    }
+
+    eachCard.addEventListener("pointerdown", () => {
+      let eachCardId = eachCard.id
+      if(cardIds.includes(eachCardId)){
+        let selectedIndex = cardIds.indexOf(eachCardId)
+        eachCard.classList.remove("selectedMemberCard")
+        cardIds.splice(selectedIndex, 1)
+      }else{
+        eachCard.classList.add("selectedMemberCard")
+        cardIds.push(eachCardId)
+      }
+    })
   })
 }
 
