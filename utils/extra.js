@@ -151,10 +151,10 @@ export function buildCardDesign(memberData){
             <div class="cardFormat" id="${eachMember._id}">
                 <div class="cardHeading">
                     <div class="logoArea">
-                        <img src="../../assets/club_logo_transparent.png"> 
+                        <img src="../../assets/YGW.png"> 
                     </div>
                     <div class="logoTitle">
-                        <h1>Yangon Reading Club</h1>
+                        <h1>Yellow Generation Wave</h1>
                     </div>
 
                 </div>

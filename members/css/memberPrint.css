@@ -1,0 +1,179 @@
+@font-face {
+  font-family: 'Lucida-HandWriting';
+  src: url('../../fonts/Lucida/LucidaHandwritingStdRg.woff'); /*URL to font*/
+}
+
+@font-face {
+  font-family: "Kadwa";
+  src: url("../../fonts/Kadwa/Kadwa-Regular.ttf")
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Kadwa";
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+}
+
+button{
+  margin-bottom: 3px;
+  width: 7em;
+  height: 3em;
+}
+
+.tableFormat table {
+  border-collapse: collapse;
+  border: none;
+}
+
+.tableFormat table td{
+  min-height: 20em;
+  box-sizing: border-box;
+}
+
+#memberCardData tr{
+  width: 100%;
+}
+
+#memberCardData tr td{
+  width: 50%;
+}
+
+#memberCardData td{
+  margin: 4px;
+}
+
+.cardFormat{
+  background-image: url("../../assets/cardBackground.png");
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeading{
+  height: 35%;
+  width: 100%;
+  display: flex;
+}
+
+.cardBody{
+  width: 100%;
+  flex: 1;
+  display: flex;
+
+}
+
+.photoArea{
+  width: 30%;
+  /* background-color: red; */
+}
+
+.individualData{
+  width: 79%;
+}
+
+.logoArea{
+  width: 25%;
+  text-align: right;
+}
+
+.logoArea img{
+  /* width: 100%; */
+  height: 7.3em;
+  /* height: 7em;  */
+}
+
+.logoTitle{
+  height: 100%;
+  width: 70%;
+}
+
+.logoTitle h1{
+  margin-top: 23px;
+  font-size: 2.3em;
+  font-family: "Lucida-HandWriting";
+}
+
+.photoId{
+  width: 85%;
+  border-radius: 45% 45% 45% 45%;
+}
+
+.individualData{
+  width: 79%;
+  box-sizing: border-box
+  /* background-color: red; */
+}
+
+.firstRow, .secondRow, .thirdRow{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 3em;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 1em 0em;
+}
+
+.photoArea{
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.thirdRow{
+  font-size: 1em;
+}
+
+.barcode{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+
+.footLine{
+  width: 80%;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: red;
+  right: 40px;
+  bottom: 0px;
+}
+
+.barcodeId{
+  height: 4em;
+  width: 80%;
+  margin: 0;
+}
+
+  /* Set A4 dimensions for print media */
+  @page {
+    size: A4;
+    margin: 0.75in -0.25in 0.75in -0.25in;
+}
+
+@media print {
+  body {
+    size: A4;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    background: #fff;
+    margin: 0;
+  }
+  
+
+  button{
+      display: none;
+  }
+}

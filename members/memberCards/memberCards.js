@@ -9,7 +9,7 @@ const searchMemberForm = document.getElementById("searchMemberForm")
 let index = 1;
 let searchedHistory = sessionStorage.getItem("searchMemberCardResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberCardData")
-let printMaterials = sessionStorage.getItem("toPrintMemberCards")
+let printMaterials = localStorage.getItem("toPrintMemberCards")
 const currentFile = window.imagePaths.shareCurrentFile();
 
 let cardIds = []
@@ -30,9 +30,9 @@ if(!searchedHistory){
 
 printPreview.addEventListener("click",() => {
   if(cardIds!=[]){
-    sessionStorage.setItem("toPrintMemberCards", cardIds)
+    localStorage.setItem("toPrintMemberCards", cardIds)
   }else{
-    sessionStorage.removeItem("toPrintBarcode")
+    localStorage.removeItem("toPrintBarcode")
   }
 
   let windowFeatures = {
@@ -116,7 +116,7 @@ searchMemberForm.addEventListener("reset", () => {
 async function searchMemberFormFunction(){
   searchMemberForm.addEventListener("submit", async(e) => {
     e.preventDefault();
-    sessionStorage.setItem("toPrintMemberCards", cardIds)
+    localStorage.setItem("toPrintMemberCards", cardIds)
     let searchData = {
       name: e.target.name.value,
       memberType: e.target.memberType.value,
