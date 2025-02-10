@@ -1,0 +1,245 @@
+@font-face {
+  /* font-stretch: 20%; */
+  font-family: 'Lucida-HandWriting'; /*a name to be used later*/
+  src: url('../../fonts/Lucida/LucidaHandwritingStdRg.woff'); /*URL to font*/
+}
+
+.mainTitle h1{
+  width: 25%;
+  box-sizing: border-box;
+}
+
+.mainTitle{
+  width: 100%;
+  display: flex;
+}
+
+.mainTitle h1{
+  width: 25%;
+  box-sizing: border-box;
+}
+
+.mainTitle div:nth-child(2){
+  width:  60%;
+  margin: auto;
+}
+
+.mainTitle div:nth-child(3){
+  width: 15%;
+  margin: auto;
+}
+
+.tableTitle h2{
+  display: inline-block
+}
+
+.tableFormat th:nth-child(2) {
+  width: 10em;
+}
+
+.tableFormat td {
+  min-height: 20em;
+  box-sizing: border-box;
+}
+
+#searchMemberDiv{
+    min-height: 10em;
+    width: 85%;
+    /* margin: 0.4 2em; */
+    margin: auto auto 2em auto;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 0.7em;
+    background-color: #D9D9D9;  
+}
+
+#searchMemberDiv form > div:nth-child(n){
+    display: flex;
+    margin-top: 1em;
+}
+
+#searchMemberDiv form > div:nth-child(n) > div{
+    width: 50%;
+}
+
+#searchMemberDiv form > div:nth-child(n) > div > label{
+    /* background-color: red; */
+    font-weight: lighter;
+    text-align: center;
+    display: inline-block;
+    width: 35%
+}
+
+#searchMemberDiv form > div:nth-child(n) > div > input{
+    height: 70%;
+    margin: 1% 0;
+    width: 65%;
+    float: right;
+    border-radius: 5px;
+}
+
+#searchMemberDiv form > div:nth-child(n) > div > select{
+  height: 70%;
+  margin: 1% 0;
+  width: 65%;
+  float: right;
+  border-radius: 5px;
+}
+
+
+#searchMemButtonsDiv{
+  min-height: 1.9em;
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+#searchMemButtonsDiv input{
+  width: 7em;
+  margin: 0 1em;
+  background-color: #1E3FAD;
+  color: white;
+  border: none;
+  /* height: 100 */
+}
+
+#searchMemButtonsDiv input:hover{
+  background-color: #153399;
+  cursor: pointer;
+}
+
+button {
+  width: 7em;
+  height: 1.9em;
+  margin: 0 1em;
+}
+#memberCardData tr{
+  width: 100%;
+}
+
+#memberCardData tr td{
+  width: 50%;
+}
+
+#memberCardData td{
+  margin: 4px;
+}
+
+.cardFormat{
+  background-image: url("../../assets/cardBackground2.png");
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeading{
+  height: 35%;
+  width: 100%;
+  display: flex;
+}
+
+.cardBody{
+  width: 100%;
+  flex: 1;
+  display: flex;
+
+}
+
+.photoArea{
+  width: 30%;
+  /* background-color: red; */
+}
+
+.individualData{
+  width: 79%;
+}
+
+.logoArea{
+  width: 25%;
+  text-align: right;
+}
+
+.logoArea img{
+  /* width: 100%; */
+  /* height: 7.3em; */
+  height: 6.5em;
+}
+
+.logoTitle{
+  height: 100%;
+  width: 70%;
+}
+
+.logoTitle h1{
+  margin-top: 23px;
+  font-size: 2.6em;
+  font-family: serif /*YGW*/;
+  text-shadow: 0.5px 2px 3px black;
+  -webkit-text-stroke: 0.5px #f5e2c9;
+  color: red;
+  /* font-family: "Lucida-HandWriting"; YRC*/
+}
+
+.photoId{
+  width: 85%;
+  border-radius: 45% 45% 45% 45%;
+}
+
+.individualData{
+  width: 79%;
+  box-sizing: border-box
+  /* background-color: red; */
+}
+
+.firstRow, .secondRow, .thirdRow{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 3em;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 1em 0em;
+}
+
+.photoArea{
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.thirdRow{
+  font-size: 1em;
+}
+
+.barcode{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+
+.footLine{
+  width: 80%;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: red;
+  right: 40px;
+  bottom: 0px;
+}
+
+.barcodeId{
+  height: 4em;
+  width: 80%;
+  margin: 0;
+}
+
+.selectedMemberCard {
+  border: 2px solid #007BFF; 
+}

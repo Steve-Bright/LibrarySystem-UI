@@ -9,8 +9,8 @@ const editMemberButton = document.getElementById("editMemberButton")
 const editButtonsArea = document.getElementById("editButtonsArea")
 const viewMemberPhoto = document.getElementById("viewMemberPhoto")
 const imagePreviewArea = document.getElementById("imagePreviewArea")
-const gradeArea = document.getElementById("gradeArea")
 const viewMemberForm = document.getElementById("viewMemberForm")
+const memberCards = document.getElementById("memberCards")
 const filePath = window.imagePaths.shareFilePath();
 
 let detailedMember = JSON.parse(sessionStorage.getItem("memberId"))
@@ -32,14 +32,6 @@ deleteMemberButton.addEventListener("click", () => {
         window.navigationApi.toAnotherPage("./books/allmembers/memberspage.html")
     }
 })
-
-gradeArea.innerHTML = ``
-if(cleanedMemberData["memberType"] == "student"){
-  gradeArea.innerHTML = `
-    <label for="grade">Grade</label>
-    <input type="text" name="grade" id="grade" class="viewMemberFormat">
-  `
-}
 
 const viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea")
 let index = 0; 
@@ -65,7 +57,8 @@ editMemberButton.addEventListener("click", () => {
 
 function updateMemberUi(){
   let editedMember = new Member({
-    memberDatabaseId: detailedMember.id
+    memberDatabaseId: detailedMember.id,
+    memberType: cleanedMemberData.memberType
   })
   delete editedMember.loanBooks;
   delete editedMember.barcode;
@@ -88,7 +81,6 @@ function updateMemberUi(){
       editedMember.photo = document.getElementById("photo").files[0]
     }
 
-    console.log(JSON.stringify(editedMember))
     const formData = new FormData()
 
     for(let key in editedMember){

@@ -51,7 +51,6 @@ printPreview.addEventListener("click", () => {
         "windowFeatures": windowFeatures
     }
     window.navigationApi.openWindow(data);
-    // let previewWindow = window.open(currentFile+"/printpreview.html", "Print Window", windowFeatures);
     document.close()
 })
 
@@ -95,20 +94,25 @@ function barcodeSelection(category){
     let allCallNums = document.querySelectorAll(".eachBookCallNo")
 
     allCallNums.forEach((eachCallNum) => {
+        let objectData = JSON.stringify({
+            category,
+            "accNo": eachCallNum.id
+        })
+        if(selectedCallNums.includes(objectData) && !eachCallNum.classList.contains("selectedCallNo")){
+            eachCallNum.classList.add("selectedCallNo")
+        }
+
         eachCallNum.addEventListener('pointerdown', ()=> {
-            let objectData = JSON.stringify({
-                category,
-                "accNo": eachCallNum.id
-            })
             if(selectedCallNums.includes(objectData)){
+                let selectedIndex = selectedCallNums.indexOf(objectData)
                 eachCallNum.classList.remove("selectedCallNo")
-                selectedCallNums.pop(objectData)
+                selectedCallNums.splice(selectedIndex, 1)
             }else{
                 eachCallNum.classList.add("selectedCallNo")
                 selectedCallNums.push(objectData)
             }
             
-            console.log("this is all the call numbers " + selectedCallNums)
+            // console.log("this is all the call numbers " + selectedCallNums)
         })
     })
 }

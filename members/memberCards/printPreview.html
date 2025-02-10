@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A4 Print Layout</title>
+    <link rel="stylesheet" href="../../styles/universal.css">
+    <!-- <link rel="stylesheet" href="../css/memberCards.css"> -->
+    <link rel="stylesheet" href="../css/memberPrint.css">
+  </head>
+
+  <body>
+    <div class="tableFormat">
+      <button onclick="window.print()">Print</button>
+      <table>
+        <tbody id="memberCardData">
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+  <script type="module">
+    import {buildCardDesign, attachMemberCardToDiv} from "../../utils/extra.js"
+    import {getDetailedMember} from "../../controllers/member.controller.js"
+
+    const selectedMemberCardsData = document.getElementById("memberCardData")
+    if(localStorage.getItem("toPrintMemberCards")){
+      let memberDetail = localStorage.getItem("toPrintMemberCards")
+      memberDetail = memberDetail.split(",")
+
+      let detailedMemberData = []
+      for(let i = 0; i < memberDetail.length; i++){
+        let memberData = await getDetailedMember(memberDetail[i])
+        detailedMemberData.push(memberData.result)
+      }
+
+      selectedMemberCardsData.innerHTML = ""
+      let cardDesigns = buildCardDesign(detailedMemberData)
+      attachMemberCardToDiv(selectedMemberCardsData, cardDesigns)
+
+    }else{
+      selectedMemberCardsData.innerHTML = "Please select at least one membercard to print";
+    }
+  </script>
+</html>
