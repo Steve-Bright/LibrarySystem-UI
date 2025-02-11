@@ -64,7 +64,7 @@ const pageIds = [
     "settingsPage",
 ];
 const pageHtmls = [
-    "scannerpage.html",
+    "./scanner/scannerpage.html",
     "./dashboard/index.html",
     "./books/collection/collectionpage.html",
     "./members/allmembers/memberspage.html",

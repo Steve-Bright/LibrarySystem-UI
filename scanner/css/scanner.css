@@ -1,0 +1,35 @@
+#testInput{
+    /* width: 30%;
+    height: 30%; */
+    border: none;
+    opacity: 0;
+}
+
+#mainScanner{
+    display: flex;
+    margin: 5em auto;
+    width: 65%;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgb(129, 129, 129);
+    border-radius: 20px;
+    padding: 30px;
+    gap: 1em;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        animation-name: example;
+        animation-duration: 2s;
+        animation-timing-function: ease-out;
+}
+
+#mainScanner img{
+    width: 35%;
+}
+
+@keyframes example{
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
