@@ -9,7 +9,7 @@ const signOutPath = currentDirectory + "/assets/sign-out-white.png"
 const navigationPanel = document.getElementById('navigationPanel')
 
 navigationPanel.innerHTML = `
-    <div id="logoTitle">SH Library</div>
+    <div id="logoTitle">READORA CS</div>
     <div id="navigationPages">
         <div id="scannerPage" class="navigationTitle">
             <div class="imageDiv"> <img src=${barcodeScanPath}></div> 
