@@ -33,7 +33,7 @@ button{
 }
 
 .tableFormat table {
-  border-spacing: 0.1in 0.53in ;
+  border-spacing: 0in 0.3in ;
   border-collapse: separate;
   border: none;
 }
@@ -46,6 +46,7 @@ button{
 
 #memberCardData tr{
   width: 100%;
+  page-break-inside: avoid;
 }
 
 #memberCardData tr td{
@@ -61,7 +62,7 @@ button{
   position: relative;
   /* min-height: 310px; */
   aspect-ratio: 3.45/ 2.15;
-  /* width: 3.45in; */
+  width: 3.45in;
   /* width: 98%; */
   display: flex;
   border: 1px solid black;
@@ -194,13 +195,13 @@ button{
     /* margin-left: 0.13in; THIS WORKS*/
     /* margin: 0.25in; */
     /* margin: 0.39in; */
-    margin: 0.53in;
+    margin: 0.43in;
     /* margin-right: 0.53in; */
     /*  0.68in */
 }
 
 @media print {
-  body {
+  tbody {
     size: A4;
     font-family: Arial, sans-serif;
     background: #fff;
