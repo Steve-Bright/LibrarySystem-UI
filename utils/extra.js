@@ -231,7 +231,9 @@ export function attachMemberCardToDiv(table, cardData){
     let finalIndexOfRow = tableRows.length -1
     tableRows.forEach((eachRow, i) => {
 
-        if(tableRows.length %2 != 0 && i == finalIndexOfRow){
+        // if(tableRows.length %2 != 0 && i == finalIndexOfRow){\
+        if(eachRow.children.length %2 != 0 && i == finalIndexOfRow){
+            console.log("extra td here")
             let td = document.createElement("td")
             tableRows[finalIndexOfRow].appendChild(td)
         }
