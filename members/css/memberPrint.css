@@ -33,7 +33,7 @@ button{
 }
 
 .tableFormat table {
-  border-spacing: 0.12in 0.3in ;
+  border-spacing: 0.12in 0in;
   /* width: 100%; */
   /* table-layout: 100%; */
   /* margin: 0 auto; */
@@ -50,12 +50,12 @@ button{
 }
 
 .tableFormat table td{
+  padding-bottom: 0.3in;
   /* padding-left: 0.12in;
   padding-right: 0.12in; */
   min-height: 20em;
   /* background-color: red; */
   width: 3.45in;
-  box-sizing: border-box;
   border: none;
 }
 
@@ -75,6 +75,7 @@ button{
 
 .cardFormat{
   position: relative;
+  border-radius: 15px;
   /* min-height: 310px; */
   aspect-ratio: 3.45/ 2.15;
   width: 100%;
@@ -93,6 +94,8 @@ button{
 
 .cardHeading img{
   width: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .cardBody{
@@ -146,7 +149,7 @@ button{
   /* font-size: 1.1em; */
 }
 .thirdRow{
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .firstRow > div, .secondRow > div, .thirdRow > div{
@@ -186,18 +189,19 @@ button{
   width: 80%;
   display: flex;
   position: absolute;
+  font-size: 8px;
   justify-content: space-between;
   font-weight: bold;
   letter-spacing: 4px;
   color: red;
-  right: 50px;
-  bottom: 10px;
+  right: 0.38in;
+  bottom: 0.055in;
   line-height: 1.2;
 }
 
 .barcodeId{
   height: 2em;
-  width: 80%;
+  width: 70%;
   margin: 0;
 }
 
@@ -225,6 +229,7 @@ button{
   
 
   button{
+    position: fixed;
       display: none;
   }
 }
