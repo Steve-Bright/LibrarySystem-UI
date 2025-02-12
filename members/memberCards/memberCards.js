@@ -29,6 +29,12 @@ if(!searchedHistory){
 }
 
 printPreview.addEventListener("click",() => {
+  let dpi = window.devicePixelRatio * 96;
+  let a4WidthInInches = 8.27; // A4 width in inches
+  let a4HeightInInches = 11.69; // A4 height in inches
+
+  let a4WidthPixels = Math.round(a4WidthInInches * dpi);
+  let a4HeightPixels = Math.round(a4HeightInInches * dpi);
   if(cardIds!=[]){
     localStorage.setItem("toPrintMemberCards", cardIds)
   }else{
@@ -36,9 +42,8 @@ printPreview.addEventListener("click",() => {
   }
 
   let windowFeatures = {
-    "width":794,
-    "height":1123,
-    "alwaysOnTop": true
+    "width":a4WidthPixels,
+    "height":a4HeightPixels
 
   }
 

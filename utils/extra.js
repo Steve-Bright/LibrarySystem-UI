@@ -129,10 +129,6 @@ export async function buildMemberNavigation(area, backward, forward, index, upda
 export function buildCardDesign(memberData){
     // console.log("this is member data " + memberData.expiryDate)
     let cards = [];
-
-
-
-
     memberData.forEach((eachMember) => {
         // console.log("this is expirty date " + eachMember.expiryDate)
         let secondRowData1;
@@ -150,33 +146,53 @@ export function buildCardDesign(memberData){
         let card = `
             <div class="cardFormat" id="${eachMember._id}">
                 <div class="cardHeading">
-                    <div class="logoArea">
-                        <img src="../../assets/YGW.png"> 
-                    </div>
-                    <div class="logoTitle">
-                        <h1>Yellow Generation Wave</h1>
-                    </div>
-
+                    <img src="../../assets/YRC-Student-Heading.jpg">
                 </div>
 
                 <div class="cardBody">
                     <div class="photoArea">
-                        <img src="${filePath}${eachMember.photo}" class="photoId">
-                            ${eachMember.memberId}
+                        <div>
+                            <img src="${filePath}${eachMember.photo}" class="photoId">
+                        </div>
+                        <div> ${eachMember.memberId}</div>
                     </div>
                     <div class="individualData">
                         <div class="firstRow">
-                            <div>${eachMember.name}</div>
-                            <div>${eachMember.phone}</div>
+                            <div id="memberName">
+                                <div>Name</div>
+                                <div>${eachMember.name}</div>
+                            </div>
+
+                            <div id="memberPhone">
+                                <div>Phone Number</div>
+                                <div>${eachMember.phone}</div>
+                            </div>
                         </div>
                         <div class="secondRow">
-                            <div>${secondRowData1}</div>
-                            <div>${secondRowData2}</div>
+                            <div id="studentId">
+                                <div>Student Id</div>
+                                <div>${secondRowData1}</div>
+                            </div>
+
+                            <div id="type">
+                                <div>Type</div>
+                                <div>${eachMember.memberType}</div>                        
+                            </div>
+
+
                         </div>
 
                         <div class="thirdRow">
-                            <div>${eachMember.currentAddress}</div>
-                            <div></div>
+                            <div id="memberAddress">
+                                <div>Address</div>
+                                <div>${eachMember.currentAddress}</div>                        
+                            </div>
+
+                            <div>
+                                <div></div>                        
+                            </div>
+
+
                         </div>
                         <div class="barcode">
                             <img src="${filePath}${eachMember.barcode}" class="barcodeId">
@@ -215,7 +231,9 @@ export function attachMemberCardToDiv(table, cardData){
     let finalIndexOfRow = tableRows.length -1
     tableRows.forEach((eachRow, i) => {
 
-        if(tableRows.length %2 != 0 && i == finalIndexOfRow){
+        // if(tableRows.length %2 != 0 && i == finalIndexOfRow){\
+        if(eachRow.children.length %2 != 0 && i == finalIndexOfRow){
+            console.log("extra td here")
             let td = document.createElement("td")
             tableRows[finalIndexOfRow].appendChild(td)
         }
