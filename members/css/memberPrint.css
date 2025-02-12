@@ -33,7 +33,7 @@ button{
 }
 
 .tableFormat table {
-  border-spacing: 0in 0.3in ;
+  border-spacing: 0.125in 0.3in ;
   border-collapse: separate;
   border: none;
 }
@@ -62,7 +62,7 @@ button{
   position: relative;
   /* min-height: 310px; */
   aspect-ratio: 3.45/ 2.15;
-  width: 3.45in;
+  /* width: 3.45in; */
   /* width: 98%; */
   display: flex;
   border: 1px solid black;
