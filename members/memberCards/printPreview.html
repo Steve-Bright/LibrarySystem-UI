@@ -12,18 +12,44 @@
   <body>
     <div class="tableFormat">
       <button onclick="window.print()">Print</button>
-      <table>
-        <tbody id="memberCardData">
-        </tbody>
-      </table>
+      <button id="frontSide">Front Sides</button>
+      <button id="backSide">Back Sides</button>
+      <div id="languageDiv" hidden>
+        <label>Language: </label> 
+        <label>MM:</label>
+        <input type="radio" name="language" value="Myanmar">
+        <label>Eng:</label>
+        <input type="radio" name="language" value="English">
+      </div>
+      <div id="frontCards">
+        <table>
+          <tbody id="memberCardData">
+          </tbody>
+        </table>
+      </div>
+
+      <div id="backCards" style="display: none;">
+        <table>
+          <tbody id="memberCardBackData"></tbody>
+        </table>
+      </div>
     </div>
   </body>
 
   <script type="module">
-    import {buildCardDesign, attachMemberCardToDiv} from "../../utils/extra.js"
+    import {buildCardDesign, attachMemberCardToDiv, generateBackCardDesigns} from "../../utils/extra.js"
     import {getDetailedMember} from "../../controllers/member.controller.js"
 
     const selectedMemberCardsData = document.getElementById("memberCardData")
+    const frontSideButton = document.getElementById("frontSide")
+    const backSideButton = document.getElementById("backSide")
+    const memberCardBackData = document.getElementById("memberCardBackData")
+    const languageChoose = document.getElementById("languageDiv")
+    let languageRadios = document.getElementsByName('language');
+
+    const backCards = document.getElementById("backCards")
+    const frontCards = document.getElementById("frontCards")
+
     if(localStorage.getItem("toPrintMemberCards")){
       let memberDetail = localStorage.getItem("toPrintMemberCards")
       memberDetail = memberDetail.split(",")
@@ -38,8 +64,58 @@
       let cardDesigns = buildCardDesign(detailedMemberData)
       attachMemberCardToDiv(selectedMemberCardsData, cardDesigns)
 
+      backSideButton.addEventListener("click", () => {
+        toggleSideCards(false)
+        let cardBackDesigns = generateBackCardDesigns(detailedMemberData.length)
+
+        backSideCards(detailedMemberData.length, cardBackDesigns)
+        toggleLanguage(detailedMemberData.length)
+      })
+      frontSideButton.addEventListener("click", () => {
+        toggleSideCards(true)
+      })
+
     }else{
       selectedMemberCardsData.innerHTML = "Please select at least one membercard to print";
+    }
+
+
+    function toggleSideCards(faceCard = true){
+      if(faceCard == false){
+        backCards.style.display = "block"
+        frontCards.style.display = "none"
+        languageChoose.style.display = "inline"
+      }else{
+        backCards.style.display = "none"
+        frontCards.style.display = "block"
+        languageChoose.style.display = "none"
+      }
+    }
+
+    function backSideCards(numOfCards, cardDesigns){
+      memberCardBackData.innerHTML = ""
+      if(numOfCards != 0){
+        attachMemberCardToDiv(memberCardBackData, cardDesigns)
+      }else{
+        backSideCards.innerHTML = "Please select at least one membercard to print backsides";
+      }
+      
+    }
+
+    function toggleLanguage(numOfCards){
+      for(let i = 0; i < languageRadios.length; i++){
+        console.log("hey " + languageRadios[i].checked)
+        languageRadios[i].addEventListener("change", () => {
+          let cardBackDesigns = generateBackCardDesigns(numOfCards, languageRadios[i].value)
+          
+          backSideCards(numOfCards, cardBackDesigns)
+        })
+        // if(languageRadios[i].checked){
+        //   console.log("hello?")
+
+        //   break;
+        // }
+      }
     }
   </script>
 </html>

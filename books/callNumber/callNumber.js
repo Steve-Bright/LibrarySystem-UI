@@ -41,9 +41,7 @@ printPreview.addEventListener("click", () => {
      
     let windowFeatures = {
         "width":794,
-        "height":1123,
-        "alwaysOnTop": true
-
+        "height":1123
     }
     let data = {
         "fileName": currentFile+"./books/callNumber/printpreview.html",

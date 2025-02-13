@@ -127,10 +127,8 @@ export async function buildMemberNavigation(area, backward, forward, index, upda
 }
 
 export function buildCardDesign(memberData){
-    // console.log("this is member data " + memberData.expiryDate)
     let cards = [];
     memberData.forEach((eachMember) => {
-        // console.log("this is expirty date " + eachMember.expiryDate)
         let secondRowData1;
         let secondRowData2 = "";
         switch(eachMember.memberType){
@@ -187,12 +185,6 @@ export function buildCardDesign(memberData){
                                 <div>Address</div>
                                 <div>${eachMember.currentAddress}</div>                        
                             </div>
-
-                            <div>
-                                <div></div>                        
-                            </div>
-
-
                         </div>
                         <div class="barcode">
                             <img src="${filePath}${eachMember.barcode}" class="barcodeId">
@@ -209,6 +201,31 @@ export function buildCardDesign(memberData){
         cards.push(card)
     })
     return cards;
+}
+
+export function generateBackCardDesigns(noOfCards, language = "Myanmar"){
+    let cardFormat;
+    if(language=="Myanmar"){
+        cardFormat = `
+            <div class="cardFormat">
+                <img src="../../assets/rulesYRC-mm.jpg" style="width: 100%; border-radius: 15px;">
+            </div>
+        `
+    }else{
+        cardFormat = `
+            <div class="cardFormat">
+                <img src="../../assets/rulesYRC-eng.jpg" style="width: 100%; border-radius: 15px;">
+            </div>
+        `
+    }
+
+    let allBackCards = [];
+    for(let i = 0; i < noOfCards; i++){
+        allBackCards.push(cardFormat)
+    }
+
+    return allBackCards;
+
 }
 
 export function attachMemberCardToDiv(table, cardData){
@@ -242,6 +259,21 @@ export function attachMemberCardToDiv(table, cardData){
     })
 }
 
+// export function attachBackSideToDiv(table, cardData){
+//     let tableRows = []
+//     cardData.forEach((eachCard, i) => {
+//         if(i % 2 === 0){
+//             // let tr = 
+//             let tr = document.createElement("tr")
+//             tableRows.push(tr)
+//         }
+
+//         let finalIndex = tableRows.length - 1
+//         let td = document.createElement("td")
+//         td.innerHTML = eachCard
+//         tableRows[finalIndex].appendChild(td)
+//     }) 
+// }
 // export async function buildMemberCardCollectionView(views, totalData, tr, td, trArrays){
 
 // }
