@@ -15,7 +15,7 @@ let index = 1;
 let selectedCallNums = [];
 
 
-    localStorage.removeItem("toPrintBarcode");
+localStorage.removeItem("toPrintBarcode");
 
 updateBookData(category)
 
@@ -40,7 +40,7 @@ printPreview.addEventListener("click", () => {
     }
      
     let windowFeatures = {
-        "width":794,
+        "width":725,
         "height":1123
     }
     let data = {
