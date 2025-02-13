@@ -59,7 +59,7 @@ button{
   border: none;
 }
 
-#memberCardData tr{
+#memberCardData tr, #memberCardBackData tr{
   width: 100%;
   page-break-inside: avoid;
 }
@@ -160,6 +160,10 @@ button{
   width: 50%;
 }
 
+#memberAddress{
+  width: 100%;
+}
+
 .firstRow > div > div:nth-child(1), .secondRow > div > div:nth-child(1), .thirdRow > div > div:nth-child(1){
   font-family: "Source-Serif";
   font-weight: lighter;
@@ -226,7 +230,10 @@ button{
     background: #fff;
     margin: 0;
   }
-  
+  #languageDiv, #languageDiv > * {
+    position: fixed;
+    display: none;
+  }
 
   button{
     position: fixed;

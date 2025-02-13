@@ -193,6 +193,9 @@ button {
   line-height: 1.3;
   width: 50%;
 }
+.thirdRow > div{
+  width: 100%;
+}
 
 .firstRow > div > div:nth-child(2), .secondRow > div > div:nth-child(2), .thirdRow > div > div:nth-child(2){
   font-weight: bold;

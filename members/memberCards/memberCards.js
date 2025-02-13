@@ -42,10 +42,9 @@ printPreview.addEventListener("click",() => {
   }
 
   let windowFeatures = {
-    "width":a4WidthPixels,
-    "height":a4HeightPixels
-
-  }
+    "width":725,
+    "height":1123
+}
 
   let data = {
     "fileName": currentFile+"./members/memberCards/printPreview.html",
