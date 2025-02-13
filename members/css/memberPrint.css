@@ -213,11 +213,6 @@ button{
   /* Set A4 dimensions for print media */
   @page {
     size: A4;
-    /* margin-left: 0.06in;  */
-    /* margin: 0.12in; */
-    /* margin-left: 0.13in; THIS WORKS*/
-    /* margin: 0.25in; */
-    /* margin: 0.39in; */
     margin: 0.505in;
     /* margin-right: 0.53in; */
     /*  0.68in */

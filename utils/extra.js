@@ -55,9 +55,9 @@ export function buildBarcodeCollectionView(views, totalData, tr, td, trArrays){
         let barcode = `
             <div class="eachBookCallNo" id=${totalData[i].accNo}>
                 <div class="callNo">
-                    Acc No ${totalData[i].accNo} <br>
+                    Acc No: ${totalData[i].accNo} <br>
                     ${totalData[i].initial}<br>
-                    Class No ${totalData[i].classNo}
+                    Class No: ${totalData[i].classNo}
                 </div>
                 <div class="barcode">
                     <img src="${filePath}${totalData[i].barcode}">
