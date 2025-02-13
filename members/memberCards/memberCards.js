@@ -17,8 +17,6 @@ await searchMemberFormFunction()
 
 if(printMaterials){
   cardIds = printMaterials.split(",")
-  // console.log("there is print materials " + printMaterials)
-  // cardIds = JSON.parse(printMaterials
 }
 
 if(!searchedHistory){
