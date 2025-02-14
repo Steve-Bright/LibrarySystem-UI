@@ -1,12 +1,16 @@
+.mainTitle select{
+  height: 2em;
+  width: 8em;
+}
+
 .subTitle{
   display: flex;
   width: 100%;
-  box-sizing: border-box;
 }
 
 
 .subTitle div{
-  width: 75%;
+  width: 80%;
   display: flex;
   justify-content: flex-end;
 }
@@ -26,12 +30,11 @@
 }
 
 .tableFormat td {
-  height: 1.5in;
+  height: 1in;
   box-sizing: border-box;
 }
 
-
-#searchMemberDiv{
+#searchLoanDiv{
   min-height: 10em;
   width: 85%;
   /* margin: 0.4 2em; */
@@ -42,16 +45,16 @@
   background-color: #D9D9D9;  
 }
 
-#searchMemberDiv form > div:nth-child(n){
+#searchLoanDiv form > div:nth-child(n){
   display: flex;
   margin-top: 1em;
 }
 
-#searchMemberDiv form > div:nth-child(n) > div{
-  width: 50%;
+#searchLoanDiv form > div:nth-child(n) > div{
+  width: 50%
 }
 
-#searchMemberDiv form > div:nth-child(n) > div > label{
+#searchLoanDiv form > div:nth-child(n) > div > label{
   /* background-color: red; */
   font-weight: lighter;
   text-align: center;
@@ -59,7 +62,7 @@
   width: 35%
 }
 
-#searchMemberDiv form > div:nth-child(n) > div > input, select{
+#searchLoanDiv form > div:nth-child(n) > div > input{
   height: 70%;
   margin: 1% 0;
   width: 65%;
@@ -67,14 +70,14 @@
   border-radius: 5px;
 }
 
-#searchMemButtonsDiv{
+#searchLoanButtonsDiv{
   min-height: 1.9em;
   display: flex;
   justify-content: center;
   margin-top: 1em;
 }
 
-#searchMemButtonsDiv input{
+#searchLoanButtonsDiv input{
   width: 7em;
   margin: 0 1em;
   background-color: #1E3FAD;
@@ -83,19 +86,19 @@
   /* height: 100 */
 }
 
-#searchMemButtonsDiv input:hover{
+#searchLoanButtonsDiv input:hover{
   background-color: #153399;
   cursor: pointer;
 }
 
-#memberTitle {
+#loanTitle {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
 
-#memberTitle > div {
+#loanTitle > div {
   flex: 1;
   /* text-align: center; */
 }
@@ -110,15 +113,11 @@
   cursor: pointer;
 }
 
-#memberNavigationArea{
+#loanNavigationArea{
   margin-left: auto;
 }
 
-.detailedMember{
+.detailedLoan{
   width: 7em;
   height: 2.2em;
-}
-
-.member-photo{
-  width: 95%;
 }

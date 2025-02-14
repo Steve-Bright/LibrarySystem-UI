@@ -117,7 +117,7 @@ function showEachBook(placerDiv, bookData){
             `
                 <td>${eachBook.accNo}</td>
                 <td><img src="${imagePath}" class="displayBookCover"></td> 
-                <td>${eachBook.bookTitle}
+                <td>${eachBook.bookTitle}</td>
                 <td>${eachBook.sor}</td>
                 <td>${eachBook.classNo}</td>
                 ${conditionalCell}
