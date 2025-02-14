@@ -23,7 +23,7 @@ if(!searchedHistory){
   showSearchResults(searchedHistory)
 }
 
-loanType.addEventListener("change",() => {
+loanType.addEventListener("change", () => {
   updateLoanData(loanType.value)
 } )
 

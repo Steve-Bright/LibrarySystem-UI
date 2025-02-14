@@ -2,8 +2,8 @@ import { addLoanEndpoint, deleteLoanEndpoint, extendLoanEndpoint, getAllLoansEnd
 
 const token = await window.cookieApi.getCookie()
 
-export async function getAllLoansFunction(){
-    const res = await fetch(getAllLoansEndpoint, {
+export async function getAllLoansFunction(loanType, page){
+    const res = await fetch(getAllLoansEndpoint(loanType, page), {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -33,5 +33,5 @@ export const returnLoanEndpoint = (loanId) => `${apiEndpoint}loan/returnLoan/${l
 export const deleteLoanEndpoint = (loanId) => `${apiEndpoint}loan/deleteLoan/${loanId}`
 export const searchLoanEndpoint = `${apiEndpoint}loan/searchLoan`
 export const extendLoanEndpoint = (loanId) => `${apiEndpoint}loan/extendLoan/${loanId}`
-export const getAllLoansEndpoint = `${apiEndpoint}loan/getAllLoans`
+export const getAllLoansEndpoint = (loanType, page) =>   `${apiEndpoint}loan/getAllLoans?loanType=${loanType}&page=${page}`
 export const getLoanDetailEndpoint = (loanId) => `${apiEndpoint}loan/getLoan/${loanId}`
