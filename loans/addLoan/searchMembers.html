@@ -84,7 +84,7 @@
     </body>
 
     <script type="module" defer>
-        import {getDetailedMemberFromMemberId} from "./controllers/member.controller.js"
+        import {getDetailedMemberFromMemberId} from "../../controllers/member.controller.js"
         const memberDataEl = document.getElementById("memberData")
         const scanMemberBtn = document.getElementById("scanMemberBtn")
         const inputField = document.getElementById("scanMember");
@@ -118,7 +118,6 @@
             })
         })
             function showResults(memberData){
-                console.log("member data" + JSON.stringify(memberData))
             
             let imagePath = filePath+ memberData.photo
                 // console.log("this is english category")
@@ -146,8 +145,6 @@
                 if(selectBookCheckBox.checked === true){
                     localStorage.setItem("borrowMember", JSON.stringify(memberData))
                     window.navigationApi.loadWindow("borrowBook.html")
-                    // window.showMessageApi.alertMsg("added!")
-                    // window.opener.location.reload();
                     window.close()
                 }else{
                     errorMessage.innerHTML = `
