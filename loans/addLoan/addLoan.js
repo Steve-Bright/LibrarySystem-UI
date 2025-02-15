@@ -90,7 +90,7 @@ if(borrowBook){
               <label for="callNo">Call No </label>
               <input type="text" value="${borrowBook.callNo}" readonly>
             </div>
-            
+
             <div>
               <label for="bookTitle">Book Title </label>
               <input type="text" value="${borrowBook.bookTitle}" readonly>
@@ -149,4 +149,30 @@ clearLoan.addEventListener("click", () => {
   localStorage.removeItem("borrowMember")
   window.showMessageApi.alertMsg("Cleared!")
   window.location.reload()
+})
+
+borrowBtn.addEventListener("click", async()=> {
+  let loanBookDetail = localStorage.getItem("borrowBook")
+  let loanMemberDetail = localStorage.getItem("borrowMember")
+
+  if(loanBookDetail && loanMemberDetail){
+      let loanBook = JSON.parse(loanBookDetail)
+      let loanMember = JSON.parse(loanMemberDetail)
+
+      // let loanDetail = 
+      let loan = new Loan({
+          // category: loanBook.category,
+          bookId: loanBook._id,
+          memberId: loanMember._id
+      })
+      loan.category = loanBook.category;
+      let loanResult = await addLoanFunction(loan);
+      window.showMessageApi.alertMsg(loanResult.msg)
+      if(loanResult.con === true){
+          localStorage.removeItem("borrowBook")
+          localStorage.removeItem("borrowMember")
+          window.location.reload()
+      }
+  }
+
 })
