@@ -283,7 +283,6 @@ async function updateLoanData(page = 1){
     let totalLoanData = result.result.items;
 
     if(totalLoanData.length > 0){
-        totalDataEl.innerHTML = ``
         totalLoanData.forEach((eachLoan) => {
             // console.log("each loan " + JSON.stringify(eachLoan))
             loanIds.push(eachLoan._id)
@@ -301,11 +300,11 @@ async function updateLoanData(page = 1){
             });
             const newRow = document.createElement("tr")
             newRow.innerHTML = `
+                <td>${eachLoan.memberId.name}</td>            
                 <td>${eachLoan.memberId.memberId}</td>
-                <td>${eachLoan.memberId.name}</td>
-                <td>${eachLoan.bookId.category}</td>
                 <td>${eachLoan.bookId.bookTitle}</td>
                 <td>${eachLoan.bookId.callNo}</td>
+                <td>${eachLoan.bookId.category}</td>
                 <td>${formattedLoanDate}</td>
                 <td>${formattedDueDate}</td>
                 <td><button class="detailedLoan">View Details </button></td>

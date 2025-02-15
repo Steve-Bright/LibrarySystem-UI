@@ -1,27 +1,77 @@
 <!DCOTYPE html>
     <head>
         <style>
+            *{
+                background-color: #D9D9D9;
+            }
+
+            button{
+                background-color: #1E3FAD;
+                color: white;
+                border: none;
+                border-radius: 10px;
+            }
+
+            button:hover{
+                cursor: pointer;
+                background-color: #153399 
+            }
+
+            #scanMemberBtn, #selectMemberBtn{
+                width: 10em;
+                height: 2em;
+            }
+
+            #searchMemberForm{
+                text-align: center;
+            }
+
+            #searchMember{
+                width: 7em;
+                height: 2em;
+            }
+
+            #memberId{
+                background-color: white;
+                border: none;
+                width: 12em;
+                height: 1.7em;
+                border-radius: 6px;
+                margin: 0px 5px;
+            }
+
+            #memberId:focus{
+                outline: none;
+                border: 2.5px solid #1E3FAD;
+            }
+
              .tableFormat{
                 width: 100%;
                 border: 3px;
             }
 
             .tableFormat table{
+                border-collapse: collapse;
                 width: 100%;
                 font-size: 0.8em;
                 text-align: center;
             }
 
+            .tableFormat table th:nth-child(1), .tableFormat table td:nth-child(1){
+                border:none;
+            }
+
             .displayMemberPhoto{
-                width: 95%;
+                width: 100%;
             }
 
             .tableFormat table th{
                 font-size: 1.2em;
             }
 
-            .tableFormat table, th, td{
+            .tableFormat th, td{
                 border: 1px solid black;
+                background-color: white;
             }
 
             #scanMember{
@@ -30,12 +80,18 @@
             }
 
             .tableFormat th:nth-child(3) {
-                width: 10em;
+                width: 0.5in
             }
 
             .tableFormat td {
                 min-height: 20em;
                 box-sizing: border-box;
+            }
+
+            #selectArea{
+                display: flex;
+                margin-top: 5px;
+                justify-content: flex-end;
             }
         </style>
     </head>
@@ -55,7 +111,7 @@
                 <input type="text" name="memberId" id="memberId">
 
 
-                <button id="submit">Search</button>
+                <button type="submit" id="searchMember">Search</button>
             </form>
         </div>
         
@@ -63,6 +119,7 @@
             <table id="memberResults">
                 <thead id="memberHeadings">
                     <tr>
+                        <th>Select</th>
                         <th>Member Id</th>
                         <th>Photo</th>
                         <th>Name</th>
@@ -70,7 +127,7 @@
                         <th>Role</th>
                         <th>Phone</th>
                         <th>Expire Date</th>
-                        <th></th>
+
                     </tr>   
                 </thead>
     
@@ -80,11 +137,13 @@
             </table>
         </div>
         
-        <button id="selectMemberBtn">Select Member</button>
+        <div id="selectArea">
+            <button id="selectMemberBtn">Select Member</button>
+        </div>
     </body>
 
     <script type="module" defer>
-        import {getDetailedMemberFromMemberId} from "./controllers/member.controller.js"
+        import {getDetailedMemberFromMemberId} from "../../controllers/member.controller.js"
         const memberDataEl = document.getElementById("memberData")
         const scanMemberBtn = document.getElementById("scanMemberBtn")
         const inputField = document.getElementById("scanMember");
@@ -112,13 +171,22 @@
             }else{
                 memberDataEl.innerHTML = "No Data Found"
             }
-
-            inputField.addEventListener("change", async() => {
-                
-            })
         })
-            function showResults(memberData){
-                console.log("member data" + JSON.stringify(memberData))
+
+        inputField.addEventListener("change", async() => {
+                let memberId = inputField.value;
+                console.log("member id " + memberId)
+                let detailedMember = await getDetailedMemberFromMemberId(memberId)
+
+                // console.log("this is detailed member" + detailedMember)
+                if(detailedMember && detailedMember.result){
+                    showResults(detailedMember.result)
+                }else{
+                    memberDataEl.innerHTML = "No Data Found"
+                }
+        })
+
+        function showResults(memberData){
             
             let imagePath = filePath+ memberData.photo
                 // console.log("this is english category")
@@ -132,7 +200,7 @@
                         <td><img src="${imagePath}" class="displayMemberPhoto"</td>
                         <td>${memberData.name}</td>
                         <td>${memberData.gender}</td>
-                        <td>${memberData.role}</td>
+                        <td>${memberData.memberType}</td>
                         <td>${memberData.phone }</td>
                         <td>${memberData.expiryDate}</td>
                     </tr>
@@ -145,9 +213,7 @@
             selectMemberBtn.addEventListener("click", () => {
                 if(selectBookCheckBox.checked === true){
                     localStorage.setItem("borrowMember", JSON.stringify(memberData))
-                    window.navigationApi.loadWindow("borrowBook.html")
-                    // window.showMessageApi.alertMsg("added!")
-                    // window.opener.location.reload();
+                    window.navigationApi.loadWindow("./loans/addLoan/addLoan.html")
                     window.close()
                 }else{
                     errorMessage.innerHTML = `

@@ -68,7 +68,7 @@ const pageHtmls = [
     "./dashboard/index.html",
     "./books/collection/collectionpage.html",
     "./members/allmembers/memberspage.html",
-    "loanpage.html",
+    "./loans/allLoans/loanpage.html",
     "settingspage.html"
 ]
 const pageSelectors = [

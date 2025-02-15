@@ -31,7 +31,7 @@ export const addLoanEndpoint = `${apiEndpoint}loan/addLoan`
 export const checkLoanEndpoint = `${apiEndpoint}loan/checkLoan`
 export const returnLoanEndpoint = (loanId) => `${apiEndpoint}loan/returnLoan/${loanId}`
 export const deleteLoanEndpoint = (loanId) => `${apiEndpoint}loan/deleteLoan/${loanId}`
-export const searchLoanEndpoint = `${apiEndpoint}loan/searchLoan`
+export const searchLoanEndpoint = (loanType) => `${apiEndpoint}loan/searchLoan?loanType=${loanType}`
 export const extendLoanEndpoint = (loanId) => `${apiEndpoint}loan/extendLoan/${loanId}`
-export const getAllLoansEndpoint = `${apiEndpoint}loan/getAllLoans`
+export const getAllLoansEndpoint = (loanType, page) =>   `${apiEndpoint}loan/getAllLoans?loanType=${loanType}&page=${page}`
 export const getLoanDetailEndpoint = (loanId) => `${apiEndpoint}loan/getLoan/${loanId}`

@@ -1,0 +1,120 @@
+<!DOCTYPE html> 
+    <head>
+        <link rel="stylesheet" href="../../styles/universal.css">
+        <link rel="stylesheet" href="../css/loanpage.css">
+    </head>
+
+    <body>
+        <div id="navigationPanel"  class="loansSelector"></div>
+        <main>
+            <div class="mainTitle">
+                <h1>Book Loan</h1>
+                <div>
+                    <select name="collection-type" id="loanType" size="1">
+                        <!-- <option value="english">English</option>
+                        <option value="myanmar">Myanmar</option> -->
+                        <option value="all">All</option>
+                        <option value="today">Today Deadline</option>
+                        <option value="overdue">Overdue</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="subTitle">
+                <h2>Search Loan</h2>
+                <div>
+                    <button id="printLoan">Print Loans</button>
+                    <button id="borrowBook">Borrow</button>
+                </div>
+                
+            </div>
+
+            <div id="searchLoanDiv">
+                <form id="searchLoanForm">
+                    <div>
+                        <div>
+                            <label for="accNo">Account No.</label>
+                            <input type="text" name="accNoInput">
+                        </div>
+                        
+                        <div>
+                            <label for="memberId">Member Id</label>
+                            <input type="text" name="memberIdInput">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label for="bookName">Book Name</label>
+                            <input type="text" name="bookNameInput">
+                        </div>
+
+                        <div>
+                            <label for="memberName">Member Name</label>
+                            <input type="text" name="memberNameInput">
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div>
+                            <label for="borrowDate">Loan Date</label>
+                            <input type="text" name="loanDateInput">
+                        </div>
+                        
+                        <div>
+                            <label for="dueDate">Due Date</label>
+                            <input type="text" name="dueDateInput">
+                        </div>
+                       
+                    </div>
+
+
+                    <div id="searchLoanButtonsDiv">
+                        <input type="reset" value="Clear All">
+                        <input type="submit" value="Search">
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="tableFormat">
+                <div class="tableTitle">
+                    <div id="loanTitle">
+                        <div>
+                            <h2 id="totalData">Total Loans</h2>
+                        </div>
+                        <div id="loanNavigationArea">
+
+                        </div>
+                    </div>
+
+                </div>
+                <table>
+                    <thead id="loanDataHeadings">
+                        <tr>
+                            <th>Member Name</th>
+                            <th>Member Id</th>
+                            <th>Book Name</th>
+                            <th>Call No</th>
+                            <th>Book Category</th>
+                            <th>Loan Date</th>
+                            <th>Due Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="loanData">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+    </body>
+
+    <script src="../../js/universal.js" defer type="module"></script>
+    <script src="./loanpage.js" defer type="module"></script>\
+    <!-- <script src="../../js/loanpage.js" defer type="module"></script> -->
+    
+</html>
