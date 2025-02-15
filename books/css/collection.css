@@ -1,5 +1,5 @@
 .tableFormat th:nth-child(2) {
-    width: 10em;
+    width: 1in;
 }
 
 .tableFormat td {
@@ -8,7 +8,9 @@
 }
 
 .displayBookCover{
-    width: 95%;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .subTitle{
@@ -88,7 +90,9 @@
 }
 
 #viewBookCover{
-    width: 100px;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 #viewBookForm input, #viewBookForm textarea{

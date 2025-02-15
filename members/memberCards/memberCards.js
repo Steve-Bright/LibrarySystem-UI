@@ -1,6 +1,7 @@
 import { getAllMembersFunction, searchMemberFunction } from "../../controllers/member.controller.js"
 import { buildCardDesign, attachMemberCardToDiv, buildMemberNavigation } from "../../utils/extra.js"
 
+const backToCollection = document.getElementById("backToCollection")
 const printPreview = document.getElementById("printPreview")
 const totalData = document.getElementById("totalData")
 const memberCardData = document.getElementById("memberCardData")
@@ -25,6 +26,10 @@ if(!searchedHistory){
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
 }
+
+backToCollection.addEventListener("click", () => {
+  window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
+})
 
 printPreview.addEventListener("click",() => {
   let dpi = window.devicePixelRatio * 96;

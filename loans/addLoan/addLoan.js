@@ -1,8 +1,7 @@
 import { addLoanFunction } from "../../controllers/loan.controller.js";
-import Book from "../../utils/book.model.mjs";
 import Loan from "../../utils/loan.model.mjs";
-import Member from "../../utils/member.model.js";
 const addMemberArea = document.getElementById('addMemberArea')
+const backToCollection = document.getElementById("backToCollection")
 const addBookArea = document.getElementById("addBookArea")
 const borrowBtn = document.getElementById("borrowBtn")
 const searchMember = document.getElementById("searchMember")
@@ -15,6 +14,10 @@ let borrowMember = localStorage.getItem("borrowMember")
 borrowMember = JSON.parse(borrowMember)
 let borrowBook = localStorage.getItem("borrowBook")
 borrowBook = JSON.parse(borrowBook)
+
+backToCollection.addEventListener("click", () => {
+  window.navigationApi.toAnotherPage("./loans/allLoans/loanpage.html")
+})
 
 if(borrowMember){
     addMemberArea.classList.add("borrowBookDesign")

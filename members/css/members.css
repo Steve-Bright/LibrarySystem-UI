@@ -22,14 +22,18 @@
 }
 
 .tableFormat th:nth-child(2) {
-  width: 10em;
+  width: 0.5in;
+  height: 0.5in;
 }
 
 .tableFormat td {
-  height: 1.5in;
+  height: 0.5in;
   box-sizing: border-box;
 }
 
+.tableFormat tr {
+  height: 0.5in;
+}
 
 #searchMemberDiv{
   min-height: 10em;
@@ -120,5 +124,9 @@
 }
 
 .member-photo{
-  width: 95%;
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover; 
+  display: block;
 }
