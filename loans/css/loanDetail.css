@@ -55,18 +55,24 @@ h4:hover{
 
 #bookCoverSize, #memberPhotoSize{
   width: 100%;
+  margin-top: auto;
+  padding: 1px;
+  border: 1px solid black;
   /* width: 30%; */
   /* height: 70%; */
 }
 
 #bookCover, #memberCover{
   box-sizing: border-box;
-  width: 25%;
+  width: 15%;
 }
 
 #bookDetailInfo, #memberDetailInfo{
   padding: 20px;
   width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   /* background-color:green; */
   box-sizing: border-box;
 }

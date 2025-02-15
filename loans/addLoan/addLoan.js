@@ -25,7 +25,6 @@ if(borrowMember){
           </div>
           <span id="goToMemberDetails">Details</span>
         </div>
-        <br>
         
         <div id="memberContents">
             <div id="memberCover">
@@ -38,19 +37,16 @@ if(borrowMember){
                 <label for="memberId">Member Id</label>
                 <input type="text" value="${borrowMember.memberId}" readonly>
               </div>
-                <br>
 
               <div>
                 <label for="memberName">Name</label>
                 <input type="text" value="${borrowMember.name}" readonly>
               </div>
-                <br>
 
               <div>
                 <label for="memberType">Member Type </label>
                 <input type="text" value="${borrowMember.memberType}" readonly>
               </div>
-                <br>
               
               <div>
                 <label for="memberPhone">Phone</label>
@@ -77,7 +73,6 @@ if(borrowBook){
         </div>
         <span id="goToBookDetails">Details</span>
       </div>
-      <br>
       
       <div id="bookContents">
           <div id="bookCover">
@@ -90,14 +85,12 @@ if(borrowBook){
               <label for="bookCategory">Category</label>
               <input type="text" value="${borrowBook.category}" readonly>
             </div>
-              <br>
 
             <div>
               <label for="callNo">Call No </label>
               <input type="text" value="${borrowBook.callNo}" readonly>
             </div>
-
-              <br>
+            
             <div>
               <label for="bookTitle">Book Title </label>
               <input type="text" value="${borrowBook.bookTitle}" readonly>

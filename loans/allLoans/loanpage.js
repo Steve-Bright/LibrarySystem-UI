@@ -14,7 +14,7 @@ let searchedKeyword = sessionStorage.getItem("searchLoanData")
 let index = 1;
 let loanTypeValue = cacheLoanType();
 loanType.value = loanTypeValue;
-await searchLoanFunction()
+await searchLoanFunction(loanTypeValue)
 
 if(!searchedHistory){
   updateLoanData(loanTypeValue)
@@ -76,7 +76,6 @@ async function updateLoanData(loanValue, page = 1){
 }
 
 function showSearchResults(searchedHistory){
-  console.log("hello? " + searchedHistory)
   searchedHistory = JSON.parse(searchedHistory)
   totalData.innerHTML = `Loans Found (${searchedHistory.length})`
   if(searchedHistory.length != 0){
@@ -123,7 +122,7 @@ function showEachLoan(placerDiv, loanData){
   }
 }
 
-async function searchLoanFunction(){
+async function searchLoanFunction(loanType){
   searchLoanForm.addEventListener("submit", async(e) => {
     e.preventDefault()
     let searchData = {
@@ -135,7 +134,7 @@ async function searchLoanFunction(){
       dueDate: e.target.dueDateInput.value
     }
     sessionStorage.setItem("searchLoanData", JSON.stringify(searchData))
-    const result = await searchLoan(searchData)
+    const result = await searchLoan(loanType, searchData)
     if(!result){
       sessionStorage.setItem("searchLoanResult", "[]")
     }else{
@@ -144,6 +143,12 @@ async function searchLoanFunction(){
     window.location.reload()
   })
 }
+
+searchLoanForm.addEventListener("reset", async(e) => {
+  sessionStorage.removeItem("searchLoanResult")
+  sessionStorage.removeItem("searchLoanData")
+  window.location.reload()
+})
 
 function cacheLoanType(booleanValue = null){
   if(booleanValue !== null){

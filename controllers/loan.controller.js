@@ -61,7 +61,7 @@ export async function deleteLoanFunction(loanId){
 
     return (await res.json())
 }
-
+ 
 export async function addLoanFunction(loanData){
     const res = await fetch(addLoanEndpoint, {
         method: "POST",
@@ -74,8 +74,8 @@ export async function addLoanFunction(loanData){
     return (await res.json())
 }
 
-export async function searchLoan(searchData){
-    const res = await fetch(searchLoanEndpoint, {
+export async function searchLoan(loanType, searchData){
+    const res = await fetch(searchLoanEndpoint(loanType), {
         method: "POST",
         headers: {
              "Content-Type": "application/json",

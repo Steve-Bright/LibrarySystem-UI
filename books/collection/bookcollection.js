@@ -130,6 +130,7 @@ function showEachBook(placerDiv, bookData){
 }
 
 searchBookForm.addEventListener("reset", () => {
+    sessionStorage.removeItem("searchBookData")
     sessionStorage.removeItem("searchBookResult")
     window.location.reload()
 })

@@ -112,12 +112,22 @@
             }else{
                 memberDataEl.innerHTML = "No Data Found"
             }
-
-            inputField.addEventListener("change", async() => {
-                
-            })
         })
-            function showResults(memberData){
+
+        inputField.addEventListener("change", async() => {
+                let memberId = inputField.value;
+                console.log("member id " + memberId)
+                let detailedMember = await getDetailedMemberFromMemberId(memberId)
+
+                // console.log("this is detailed member" + detailedMember)
+                if(detailedMember && detailedMember.result){
+                    showResults(detailedMember.result)
+                }else{
+                    memberDataEl.innerHTML = "No Data Found"
+                }
+        })
+
+        function showResults(memberData){
             
             let imagePath = filePath+ memberData.photo
                 // console.log("this is english category")
@@ -144,7 +154,7 @@
             selectMemberBtn.addEventListener("click", () => {
                 if(selectBookCheckBox.checked === true){
                     localStorage.setItem("borrowMember", JSON.stringify(memberData))
-                    window.navigationApi.loadWindow("borrowBook.html")
+                    window.navigationApi.loadWindow("./loans/addLoan/addLoan.html")
                     window.close()
                 }else{
                     errorMessage.innerHTML = `

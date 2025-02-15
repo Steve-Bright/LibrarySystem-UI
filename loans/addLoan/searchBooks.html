@@ -215,7 +215,7 @@
             selectBookBtn.addEventListener("click", () => {
                 if(selectBookCheckBox.checked === true){
                     localStorage.setItem("borrowBook", JSON.stringify(bookData))
-                    window.navigationApi.loadWindow("borrowBook.html")
+                    window.navigationApi.loadWindow("./loans/addLoan/addLoan.html")
                     // window.showMessageApi.alertMsg("added!")
                     // window.opener.location.reload();
                     window.close()
