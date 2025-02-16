@@ -6,11 +6,11 @@ import { capitalizeFirstLetter } from "../../utils/extra.js"
 const backToCollection = document.getElementById("backToCollection")
 const deleteMemberButton = document.getElementById("deleteMemberButton")
 const editMemberButton = document.getElementById("editMemberButton")
+const borrowMemberButton = document.getElementById("borrowMemberButton")
 const editButtonsArea = document.getElementById("editButtonsArea")
 const viewMemberPhoto = document.getElementById("viewMemberPhoto")
 const imagePreviewArea = document.getElementById("imagePreviewArea")
 const viewMemberForm = document.getElementById("viewMemberForm")
-const memberCards = document.getElementById("memberCards")
 const filePath = window.imagePaths.shareFilePath();
 
 let detailedMember = JSON.parse(sessionStorage.getItem("memberId"))
@@ -23,6 +23,11 @@ backToCollection.addEventListener("click", () => {
 
 deleteMemberButton.addEventListener("click", () => {
   window.showMessageApi.confirmMsg("Do you really want to delete this member? ")
+})
+
+borrowMemberButton.addEventListener('click', () => {
+  localStorage.setItem("borrowMember", JSON.stringify(memberData.result))
+  window.navigationApi.toAnotherPage("./loans/addLoan/addLoan.html")
 })
 
  window.showMessageApi.dialogResponse(async(event, response) =>{

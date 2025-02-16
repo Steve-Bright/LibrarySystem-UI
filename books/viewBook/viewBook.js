@@ -10,6 +10,7 @@ const filePath = window.imagePaths.shareFilePath();
 const backToCollection = document.getElementById("backToCollection")
 const deleteBookButton = document.getElementById("deleteBookButton")
 const editBookButton = document.getElementById("editBookButton")
+const borrowBookButton = document.getElementById("borrowBookButton")
 const imagePreviewArea = document.getElementById("imagePreviewArea")
 const viewBookForm = document.getElementById("viewBookForm")
 
@@ -61,6 +62,13 @@ Object.keys(cleanedBookData).forEach((eachKey) => {
                    
     }
 })
+
+borrowBookButton.addEventListener("click", () => {
+    console.log("book data" + bookData)
+    localStorage.setItem("borrowBook", JSON.stringify(bookData.result))
+    window.navigationApi.toAnotherPage("./loans/addLoan/addLoan.html")
+})
+
 
 function updateBookUi(){
     let editedBook = new Book({
