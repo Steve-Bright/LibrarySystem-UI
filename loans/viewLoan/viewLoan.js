@@ -11,19 +11,56 @@ const memberPhotoPlace = document.getElementById("memberPhotoSize")
 const bookContentsInputs = document.querySelectorAll("#bookDetailInfo input")
 const bookCoverPlace = document.getElementById("bookCoverSize")
 const loanContentsInput = document.querySelectorAll("#loanDetailInfo input")
+const deleteLoanBtn = document.getElementById("deleteLoanBtn")
+const extendLoanBtn = document.getElementById("extendLoanBtn")
+const returnLoanBtn = document.getElementById("returnLoanBtn")
+
 const loanData = await getDetailedLoanFunction(detailedLoan.id)
 let cleanedLoanMemberData = loanMap.loanMemberMapping(loanData.result.memberId)
 let cleanedLoanBookData = loanMap.loanBookMapping(loanData.result.bookId)
 let cleanedLoanDetailData = loanMap.loanDetailMapping(loanData.result)
 
-
-console.log("this is loan book; "+ JSON.stringify(cleanedLoanBookData))
-console.log("this is loandetail; " + JSON.stringify(cleanedLoanDetailData))
 backToCollection.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./loans/allLoans/loanpage.html")
 })
 
+deleteLoanBtn.addEventListener("click", ()=>{
+  window.showMessageApi.confirmMsg("Are you sure you want to delete the loan?")
+})
 
+extendLoanBtn.addEventListener("click", ()=> {
+  window.showMessageApi.confirmMsg2("Are you sure you want to extend the loan?")
+})
+
+returnLoanBtn.addEventListener("click", () => {
+  window.showMessageApi.confirmMsg3("Are you sure you want to return the loan?")
+})
+
+//delete loan response
+window.showMessageApi.dialogResponse(async(event, response) => {
+  if(!response){
+    const result = await deleteLoanFunction(detailedLoan.id)
+    window.showMessageApi.alertMsg(result.msg)
+    window.navigationApi.toAnotherPage("./loans/allLoans/loanpage.html")
+  }
+})
+
+//extend loan response
+window.showMessageApi.dialogResponse2(async(event, response) => {
+  if(!response){
+      const result = await extendLoanFunction(detailedLoan.id)
+      window.showMessageApi.alertMsg(result.msg)
+  }
+
+})
+
+//return loan response
+window.showMessageApi.dialogResponse3(async(event, response) => {
+  if(!response){
+      const result = await returnLoanFunction(detailedLoan.id)
+      window.showMessageApi.alertMsg(result.msg)
+  } 
+})
 
 getMemberData()
 getBookData()
