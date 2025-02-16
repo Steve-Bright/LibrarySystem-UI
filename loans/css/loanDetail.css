@@ -30,27 +30,28 @@ h4:hover{
   border-radius: 10px;
 }
 
-#memberHeading, #bookHeading{
+#memberHeading, #bookHeading, #loanHeading{
   display: flex;
 }
 
-#memberHeading div, #bookHeading div{
+#memberHeading div, #bookHeading div, #loanHeading div{
   min-width: 13%;
 }
 
-#goToMemberDetails, #goToBookDetails{
+#goToMemberDetails, #goToBookDetails, #loanDetailsMiniHeading{
   margin: auto 0;
 }
 
-#goToMemberDetails:hover, #goToBookDetails:hover{
+#goToMemberDetails:hover, #goToBookDetails:hover, #loanDetailsMiniHeading:hover{
   cursor: pointer;
   text-decoration: underline;
 }
 
-#memberContents, #bookContents{
+#memberContents, #bookContents, #loanContents{
   width: 100%;
   /* height: 100%; */
   display: flex;
+  margin-bottom: 20px;
 }
 
 #bookCoverSize, #memberPhotoSize{
@@ -67,7 +68,7 @@ h4:hover{
   width: 15%;
 }
 
-#bookDetailInfo, #memberDetailInfo{
+#bookDetailInfo, #memberDetailInfo, #loanDetailInfo{
   padding: 20px;
   width: 35%;
   display: flex;
@@ -77,17 +78,17 @@ h4:hover{
   box-sizing: border-box;
 }
 
-#bookDetailInfo div, #memberDetailInfo div{
+#bookDetailInfo div, #memberDetailInfo div,  #loanDetailInfo div{
   display: flex;
   justify-content: space-between;
 }
 
 
-#bookDetailInfo label, #memberDetailInfo label{
+#bookDetailInfo label, #memberDetailInfo label,  #loanDetailInfo label{
   font-size: 0.9em;
 }
 
-#bookDetailInfo input, #memberDetailInfo input{
+#bookDetailInfo input, #memberDetailInfo input, #loanDetailInfo input{
   background-color: #D9D9D9;
   height: 2em;
   border-radius: 10px;
