@@ -13,6 +13,7 @@ export const getBookEndpoint = (category, page) =>  `${apiEndpoint}book/getAllBo
 export const deleteBookEndpoint = (category, bookId) => `${apiEndpoint}book/deleteBook/?category=${category}&bookId=${bookId}`
 export const getLatestAccNoEndpoint = (category) => `${apiEndpoint}book/getLatestAccNo/${category}`
 export const searchBookEndpoint = `${apiEndpoint}book/searchBook`
+export const getBookLoanHistoryEndpoint = (bookId, page) => `${apiEndpoint}loan/loanHistory?bookId=${bookId}&page=${page}`
 
 export const addMemberEndpoint = `${apiEndpoint}member/addMember`
 export const editMemberEndpoint = `${apiEndpoint}member/editMember`
@@ -25,6 +26,7 @@ export const getLatestMemberIdEndpoint = (memberType) => `${apiEndpoint}member/g
 export const banMemberEndpoint = (memberDatabaseId, block) => `${apiEndpoint}member/banMember?memberDatabaseId=${memberDatabaseId}&block=${block}`
 export const extendMembershipEndpoint = (memberDatabaseId) => `${apiEndpoint}member/extendMembership/${memberDatabaseId}`
 export const searchMemberEndpoint = `${apiEndpoint}member/searchMember`
+export const getMemberLoanHistoryEndpoint = (memberDatabaseId, page) => `${apiEndpoint}loan/loanHistory?memberId=${memberDatabaseId}&page=${page}`
 
 //loan related functions
 export const addLoanEndpoint = `${apiEndpoint}loan/addLoan`
