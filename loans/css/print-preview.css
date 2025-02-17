@@ -1,0 +1,34 @@
+.tableFormat th:nth-child(2) {
+  width: 10em;
+}
+
+.tableFormat td {
+  height: 0.5in;
+  box-sizing: border-box;
+}
+
+button{
+  margin-bottom: 3px;
+  width: 7em;
+  height: 3em;
+}
+
+@page {
+  size: A4;
+  margin: 0.5in 0.5in 0.5in 0.5in;
+}
+
+@media print {
+  body {
+      size: A4;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    background: #fff;
+    margin: 0;
+  }
+  
+  button{
+      display: none;
+  }
+}
