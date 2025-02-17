@@ -28,7 +28,7 @@ if(printMaterials){
     selectedCallNums=dummy;
     // selectedCallNums = printMaterials.split(",")
 }
-console.log("selected call numbers " + selectedCallNums)
+
 if(!searchedHistory){
     await updateBookData(category)
 }else{

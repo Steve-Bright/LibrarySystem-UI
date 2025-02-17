@@ -10,8 +10,10 @@ const filePath = window.imagePaths.shareFilePath();
 const backToCollection = document.getElementById("backToCollection")
 const deleteBookButton = document.getElementById("deleteBookButton")
 const editBookButton = document.getElementById("editBookButton")
+const borrowBookButton = document.getElementById("borrowBookButton")
 const imagePreviewArea = document.getElementById("imagePreviewArea")
 const viewBookForm = document.getElementById("viewBookForm")
+const loanHistory = document.getElementById("loanHistory")
 
 let detailedBook = JSON.parse(sessionStorage.getItem("bookId"))
 const bookData = await getDetailedBook(detailedBook.category, detailedBook.id)
@@ -26,6 +28,10 @@ deleteBookButton.addEventListener("click", () => {
 
 editBookButton.addEventListener("click", () => {
     updateBookUi();
+})
+
+loanHistory.addEventListener("click", () => {
+    window.navigationApi.toAnotherPage("./books/loanHistory/loanHistory.html")
 })
 
  window.showMessageApi.dialogResponse(async(event, response) =>{
@@ -61,6 +67,13 @@ Object.keys(cleanedBookData).forEach((eachKey) => {
                    
     }
 })
+
+borrowBookButton.addEventListener("click", () => {
+    console.log("book data" + bookData)
+    localStorage.setItem("borrowBook", JSON.stringify(bookData.result))
+    window.navigationApi.toAnotherPage("./loans/addLoan/addLoan.html")
+})
+
 
 function updateBookUi(){
     let editedBook = new Book({

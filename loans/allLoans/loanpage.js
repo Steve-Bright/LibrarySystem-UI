@@ -7,7 +7,6 @@ const borrowButton = document.getElementById("borrowBook")
 const totalData = document.getElementById("totalData")
 const loanNavigationArea = document.getElementById("loanNavigationArea")
 const loanDataEl = document.getElementById("loanData")
-const filePath = window.imagePaths.shareFilePath();
 
 let searchedHistory = sessionStorage.getItem("searchLoanResult")
 let searchedKeyword = sessionStorage.getItem("searchLoanData")
@@ -26,6 +25,10 @@ if(!searchedHistory){
 loanType.addEventListener("change", () => {
   updateLoanData(loanType.value)
 } )
+
+printLoan.addEventListener("click", () => {
+  window.navigationApi.toAnotherPage("./loans/printLoans/printLoans.html")
+})
 
 borrowButton.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./loans/addLoan/addLoan.html")

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="../../styles/universal.css">
+        <link rel="stylesheet" href="../css/loan-print.css">
+    </head>
+
+    <body>
+        <div id="navigationPanel" class="loansSelector"></div>
+        <main>
+            <div id="backToCollection">
+                <img src="../../assets/arrow.png" class="backButton">
+            </div>
+
+            <div class="mainTitle">
+                <h2>Loans</h2>
+                <div>
+                    <select name="collection-type" id="loanType" size="1">
+                      <option value="all">All</option>
+                      <option value="today">Today Deadline</option>
+                      <option value="overdue">Overdue</option>
+                      <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <button id="printPreview">Print preview</button>
+                </div>
+            </div>
+          
+            <div id="searchLoanDiv">
+              <form id="searchLoanForm">
+                  <div>
+                      <div>
+                          <label for="accNo">Account No.</label>
+                          <input type="text" name="accNoInput">
+                      </div>
+                      
+                      <div>
+                          <label for="memberId">Member Id</label>
+                          <input type="text" name="memberIdInput">
+                      </div>
+                  </div>
+
+                  <div>
+                      <div>
+                          <label for="bookName">Book Name</label>
+                          <input type="text" name="bookNameInput">
+                      </div>
+
+                      <div>
+                          <label for="memberName">Member Name</label>
+                          <input type="text" name="memberNameInput">
+                      </div>
+                  </div>
+
+
+                  <div>
+                      <div>
+                          <label for="borrowDate">Loan Date</label>
+                          <input type="text" name="loanDateInput">
+                      </div>
+                      
+                      <div>
+                          <label for="dueDate">Due Date</label>
+                          <input type="text" name="dueDateInput">
+                      </div>
+                     
+                  </div>
+
+
+                  <div id="searchLoanButtonsDiv">
+                      <input type="reset" value="Clear All">
+                      <input type="submit" value="Search">
+
+                  </div>
+              </form>
+            </div>
+
+            <div class="tableFormat">
+                <div class="tableTitle">
+                    <h2 id="totalData">Loans</h2>
+                    <div id="loanNavigationArea">
+
+                    </div>
+                </div>
+                
+                <table>
+                  <thead id="loanDataHeadings">
+                    <th>
+                        <input type="checkbox" id="selectAllLoans">  
+                    </th>
+                      <th>Member Name</th>
+                      <th>Member Id</th>
+                      <th>Book Name</th>
+                      <th>Call No</th>
+                      <th>Loan Date</th>
+                      <th>Due Date</th>
+                    </tr>
+                  </thead>
+
+                    <tbody id="loanData">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </body>
+
+    <script src="../../js/universal.js" defer type="module"></script>
+    <script src="./printLoans.js" defer type="module"></script>
+</html>

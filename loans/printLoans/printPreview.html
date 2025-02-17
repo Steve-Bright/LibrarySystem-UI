@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="../../styles/universal.css">
+        <link rel="stylesheet" href="../css/print-preview.css">
+    </head>
+
+    <body>
+      <div class="tableFormat">
+        <button onclick="window.print()">Print</button>
+        <table>
+          <thead id="loanDataHeadings">
+              <th>Member Name</th>
+              <th>Member Id</th>
+              <th>Book Name</th>
+              <th>Call No</th>
+              <th>Loan Date</th>
+              <th>Due Date</th>
+            </tr>
+          </thead>
+          <tbody id="loanData">
+          </tbody>
+        </table>
+      </div>
+    </body>
+
+    <script type="module">
+      import { buildMemberNavigation } from "../../utils/extra.js";
+      import {getDetailedLoanFunction} from "../../controllers/loan.controller.js";
+      
+      const selectedLoanData = document.getElementById("loanData")
+      if(localStorage.getItem("toPrintLoan")){
+        let loanDetail = localStorage.getItem("toPrintLoan")
+        loanDetail = loanDetail.split(",")
+
+        let detailedLoanData = []
+        for(let i = 0; i < loanDetail.length; i++){
+          let loanData = await getDetailedLoanFunction(loanDetail[i])
+          detailedLoanData.push(loanData.result)
+        }
+
+        selectedLoanData.innerHTML = ``;
+        showEachLoan(selectedLoanData, detailedLoanData)
+      }else{
+        selectedLoanData.innerHTML = "Please select at least one loan"
+      }
+
+      function showEachLoan(placerDiv, loanData){
+        for(let eachLoan of loanData){
+          let loanDate = new Date(eachLoan.loanDate)
+          let dueDate = new Date(eachLoan.dueDate)
+          let formattedLoanDate = loanDate.toLocaleDateString('en-GB', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+          });
+          let formattedDueDate = dueDate.toLocaleDateString('en-GB', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+          });
+          const newRow = document.createElement("tr")
+          newRow.innerHTML = `
+            <td>${eachLoan.memberId.name}</td>            
+            <td>${eachLoan.memberId.memberId}</td>
+            <td>${eachLoan.bookId.bookTitle}</td>
+            <td>${eachLoan.bookId.callNo}</td>
+            <td>${formattedLoanDate}</td>
+            <td>${formattedDueDate}</td>
+          `
+          placerDiv.appendChild(newRow)
+          }
+        }
+    </script>
+</html>
