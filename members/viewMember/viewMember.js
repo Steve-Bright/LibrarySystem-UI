@@ -12,6 +12,7 @@ const viewMemberPhoto = document.getElementById("viewMemberPhoto")
 const imagePreviewArea = document.getElementById("imagePreviewArea")
 const viewMemberForm = document.getElementById("viewMemberForm")
 const filePath = window.imagePaths.shareFilePath();
+const loanHistory = document.getElementById("loanHistory")
 
 let detailedMember = JSON.parse(sessionStorage.getItem("memberId"))
 const memberData = await getDetailedMember(detailedMember.id)
@@ -23,6 +24,10 @@ backToCollection.addEventListener("click", () => {
 
 deleteMemberButton.addEventListener("click", () => {
   window.showMessageApi.confirmMsg("Do you really want to delete this member? ")
+})
+
+loanHistory.addEventListener("click", () => {
+  window.navigationApi.toAnotherPage("./members/loanHistory/loanHistory.html")
 })
 
 borrowMemberButton.addEventListener('click', () => {

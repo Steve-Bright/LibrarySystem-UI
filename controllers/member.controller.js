@@ -127,7 +127,7 @@ export async function searchMemberFunction(memberData){
 }
 
 export async function getMemLoanHis(memberDatabaseId, page) {
-    const res = await fetch(getMemberLoanHistoryEndpoint(memberDatabaseId), {
+    const res = await fetch(getMemberLoanHistoryEndpoint(memberDatabaseId, page), {
         method: "GET", 
         headers: {
             "Content-Type": "application/json",

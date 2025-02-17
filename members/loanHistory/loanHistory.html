@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="../../styles/universal.css">
+        <link rel="stylesheet" href="../../loans/css/loanpage.css">
+    </head>
+
+    <body>
+      <div id="navigationPanel" class="membersSelector"></div>
+      <main>
+        <div id="backToCollection">
+            <img src="../../assets/arrow.png" class="backButton">
+        </div>
+        
+        <h2>Member Loan History</h2>
+
+        <div class="tableFormat">
+          <div class="tableTitle">
+              <div id="loanTitle">
+                  <div>
+                      <h3 id="totalData">Total Loans</h3>
+                  </div>
+                  <div id="loanNavigationArea">
+
+                  </div>
+              </div>
+
+          </div>
+          <table>
+              <thead id="loanDataHeadings">
+                  <tr>
+                      <th>Member Name</th>
+                      <th>Member Id</th>
+                      <th>Book Name</th>
+                      <th>Call No</th>
+                      <th>Book Category</th>
+                      <th>Loan Date</th>
+                      <th>Due Date</th>
+                      <th></th>
+                  </tr>
+              </thead>
+
+              <tbody id="loanData">
+              </tbody>
+          </table>
+        </div>
+      </main>
+    </body>
+
+    <script src="../../js/universal.js" defer type="module"></script>
+    <script src="./loanHistory.js" defer type= "module"></script>
+</html>
