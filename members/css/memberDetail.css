@@ -1,10 +1,14 @@
-#bannedBanner{
+.bannedBanner{
     background-color: #f6e7e6;
     width: 100%; 
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
     margin: 0.5em 0;
+}
+
+.removedArea{
+  display: none;
 }
 
 #bannedTitle{

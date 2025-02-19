@@ -4,7 +4,6 @@ export function memberUIMapping(bookModel) {
     barcode,
     createdAt,
     loanBooks,
-    block,
     ...uiBookData // Include everything else
   } = bookModel;
 

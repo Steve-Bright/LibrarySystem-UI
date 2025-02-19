@@ -1,5 +1,5 @@
 import Member from "../../utils/member.model.js"
-import { getDetailedMember, deleteMember, editMember, toggleBan } from "../../controllers/member.controller.js"
+import { getDetailedMember, deleteMember, editMember, toggleBan, checkBannedUntil } from "../../controllers/member.controller.js"
 import {memberUIMapping} from "../../utils/member.mapper.js"
 import { capitalizeFirstLetter } from "../../utils/extra.js"
 
@@ -64,6 +64,32 @@ Object.keys(cleanedMemberData).forEach((eachKey) => {
     viewMemberPhoto.src = filePath + cleanedMemberData[eachKey]
   }
 })
+
+if(cleanedMemberData.block){
+  const bannedArea = document.getElementById("banArea")
+    bannedArea.classList.remove('removedArea')
+    bannedArea.classList.add("bannedBanner")
+    await unbanFunctionality(detailedMember.id)
+}
+
+async function unbanFunctionality(memberId){
+  const unbanButton = document.getElementById("unbanButton")
+  const banPeriod = document.getElementById("banPeriod")
+  
+  let bannedPeriod = await checkBannedUntil(memberId)
+  banPeriod.innerHTML = new Date(bannedPeriod).toDateString()
+  unbanButton.addEventListener("click", () => {
+    window.showMessageApi.confirmMsg3("Do you want to unban this member?")
+  })
+
+  window.showMessageApi.dialogResponse3(async(event, response) =>{
+    if(!response){
+        const result = await toggleBan(detailedMember.id, false)
+        window.showMessageApi.alertMsg(result.msg)
+        window.location.reload()
+    }
+  })
+}
 
 editMemberButton.addEventListener("click", () => {
   updateMemberUi()
@@ -147,7 +173,8 @@ function updateButtonFunctionality(memberModification){
     if(!response){
         const result = await toggleBan(detailedMember.id, true)
         window.showMessageApi.alertMsg(result.msg)
-        window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
+        window.location.reload()
+        // window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
     }
   })
 
