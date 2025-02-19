@@ -1,3 +1,33 @@
+#bannedBanner{
+    background-color: #f6e7e6;
+    width: 100%; 
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em 0;
+}
+
+#bannedTitle{
+  font-weight: bold;
+}
+
+#bannedDes{
+  font-size: 0.87em
+}
+
+#bannedMember div:nth-child(2){
+  height: 100%;
+}
+
+#unbanButton{
+  background-color: #C80003;
+  color: white;
+  border: none;
+  margin-top: 16px;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
 #topMsg{
   display: flex;
   align-items: center;
@@ -131,6 +161,16 @@ input::-webkit-inner-spin-button {
   border: 1px solid black;
   margin: auto auto auto 0;
 }
+
+#blockButton{
+  background-color: #C80003;
+}
+#cancelEditButton{
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+}
+
 
 @media (max-width: 1090px) {
   #addMemberForm, #viewMemberForm{

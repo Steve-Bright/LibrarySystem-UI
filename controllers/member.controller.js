@@ -1,4 +1,4 @@
-import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint, searchMemberEndpoint, getMemberLoanHistoryEndpoint} from "../utils/links.js";
+import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint, searchMemberEndpoint, getMemberLoanHistoryEndpoint, banMemberEndpoint} from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -129,6 +129,18 @@ export async function searchMemberFunction(memberData){
 export async function getMemLoanHis(memberDatabaseId, page) {
     const res = await fetch(getMemberLoanHistoryEndpoint(memberDatabaseId, page), {
         method: "GET", 
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        }
+    })
+
+    return (await res.json())
+}
+
+export async function toggleBan(memberDatabaseId, block){
+    const res = await fetch(banMemberEndpoint(memberDatabaseId, block), {
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${token[0].value}`

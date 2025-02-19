@@ -1,5 +1,5 @@
 import Member from "../../utils/member.model.js"
-import { getDetailedMember, deleteMember, editMember } from "../../controllers/member.controller.js"
+import { getDetailedMember, deleteMember, editMember, toggleBan } from "../../controllers/member.controller.js"
 import {memberUIMapping} from "../../utils/member.mapper.js"
 import { capitalizeFirstLetter } from "../../utils/extra.js"
 
@@ -107,12 +107,15 @@ function updateMemberUi(){
 
     const result = await editMember(formData)
     window.showMessageApi.alertMsg(result.msg)
-    window.location.reload()
+    if(result.con){
+      window.location.reload()
+    }
   })
 }
 
 function uiTransform(memberModification){
   editButtonsArea.innerHTML = `
+    <button type="button" id="blockButton"> Block </button>
     <button type="button" id="cancelEditButton">Cancel</button>
     <button type="submit">Save</button>
   `
@@ -133,6 +136,19 @@ function updateButtonFunctionality(memberModification){
   const cancelButton = document.getElementById("cancelEditButton")
   cancelButton.addEventListener("click", () => {
     window.location.reload()
+  })
+
+  const blockButton = document.getElementById("blockButton")
+  blockButton.addEventListener("click", () => {
+    window.showMessageApi.confirmMsg2("Do you want to block this member?")
+  })
+
+  window.showMessageApi.dialogResponse2(async(event, response) =>{
+    if(!response){
+        const result = await toggleBan(detailedMember.id, true)
+        window.showMessageApi.alertMsg(result.msg)
+        window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
+    }
   })
 
   const removeImageBtn = document.getElementById("removeImage")
