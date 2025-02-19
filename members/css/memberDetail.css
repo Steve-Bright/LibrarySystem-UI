@@ -22,11 +22,20 @@
   margin-bottom: 10px;
 }
 
-#addMemberForm div label, #viewMemberForm div label{
+#membershipDetail{
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  border: 2px solid black;
+  padding-left: 20px;
+}
+
+#addMemberForm div label, #viewMemberForm div label, #membershipDetail div label{
   width: 40%;
 }
 
-#addMemberForm div input, datalist, #viewMemberForm div input{
+#addMemberForm div input, datalist, #viewMemberForm div input, #membershipDetail div input{
   height: 1.7em;
   margin: 1% 0;
   border-radius: 5px;
@@ -69,12 +78,16 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-.viewMemberFormat{
+.viewMemberFormat, .viewMembership{
   width: 70%;
   border-width: 1px;
   padding-left: 10px;
   background-color: rgb(240, 240, 240);
   pointer-events: none;  
+}
+
+.viewMembership{
+  width: 40%;
 }
 
 #buttonsArea, #editButtonsArea{
@@ -105,16 +118,18 @@ input::-webkit-inner-spin-button {
 
 #addMemberImageArea, #imagePreviewArea{
   width: 50%;
-  height: 20em;
+  height: 27em;
   /* background-color: red; */
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  flex-direction: column
 }
 
 #addMemberImageArea img, #imagePreviewArea img{
   width: 42%;
   aspect-ratio: 1/1;
   border: 1px solid black;
+  margin: auto auto auto 0;
 }
 
 @media (max-width: 1090px) {
@@ -142,7 +157,7 @@ input::-webkit-inner-spin-button {
   }
 
   
-  #addMemberImageArea img{
+  #addMemberImageArea img, #imagePreviewArea img{
     width: 50%;
   }
 }

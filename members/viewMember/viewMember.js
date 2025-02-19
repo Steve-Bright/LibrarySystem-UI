@@ -9,7 +9,8 @@ const editMemberButton = document.getElementById("editMemberButton")
 const borrowMemberButton = document.getElementById("borrowMemberButton")
 const editButtonsArea = document.getElementById("editButtonsArea")
 const viewMemberPhoto = document.getElementById("viewMemberPhoto")
-const imagePreviewArea = document.getElementById("imagePreviewArea")
+const imagePreview = document.querySelector("#imagePreviewArea div")
+// const imagePreviewArea = document.getElementById("imagePreviewArea")
 const viewMemberForm = document.getElementById("viewMemberForm")
 const filePath = window.imagePaths.shareFilePath();
 const loanHistory = document.getElementById("loanHistory")
@@ -18,6 +19,7 @@ let detailedMember = JSON.parse(sessionStorage.getItem("memberId"))
 const memberData = await getDetailedMember(detailedMember.id)
 let cleanedMemberData = memberUIMapping(memberData.result)
 
+let photoChange = false;
 backToCollection.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
 })
@@ -43,13 +45,15 @@ borrowMemberButton.addEventListener('click', () => {
     }
 })
 
-const viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea")
-let index = 0; 
+let viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea, #membershipDetail input")
 
 Object.keys(cleanedMemberData).forEach((eachKey) => {
   for(let eachInput of viewInputs){
     if(eachKey == "memberType" && eachInput.id == "memberType"){
       eachInput.value = capitalizeFirstLetter(cleanedMemberData[eachKey])
+    }else if((eachKey == "issueDate" && eachInput.id == "issueDate")|| (eachKey == "expiryDate" && eachInput.id == "expiryDate")){
+      let date = new Date(cleanedMemberData[eachKey])
+      eachInput.value = date.toDateString();
     }
     else if(eachInput.id == eachKey){
       eachInput.value = cleanedMemberData[eachKey] ? cleanedMemberData[eachKey] : "-"
@@ -86,7 +90,7 @@ function updateMemberUi(){
 
   viewMemberForm.addEventListener("submit", async(e) => {
     e.preventDefault()
-    if(document.getElementById("photo")){
+    if(photoChange){
       editedMember.editedPhoto = true;
       editedMember.photo = document.getElementById("photo").files[0]
     }
@@ -142,8 +146,9 @@ function updateButtonFunctionality(memberModification){
     memberPhoto.addEventListener("change", (e) => {
       let editedMemberPhoto = memberPhoto.files[0]
       if(editedMemberPhoto){
+        photoChange = true;
         let image = window.URL.createObjectURL(editedMemberPhoto)
-        imagePreviewArea.innerHTML = `
+        imagePreview.innerHTML = `
                     <img src=${image} alt="MemberPhoto" id="viewMemberPhoto">
                 `
       }

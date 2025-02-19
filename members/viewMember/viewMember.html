@@ -52,7 +52,7 @@
 
     
                     <div>
-                        <label for="nrc">Nrc</label>
+                        <label for="nrc">NRC</label>
                         <input id="nrc" name="type" class="viewMemberFormat">
                         <!-- <select id="regionNumber" class="viewMemberFormat">
                         </select>
@@ -120,7 +120,22 @@
                 </form>
 
                 <div id="imagePreviewArea">
-                  <img alt="image-preview" id="viewMemberPhoto">
+                  <div>
+                    <img alt="image-preview" id="viewMemberPhoto">
+                  </div>
+
+                  <div id="membershipDetail">
+                    <h3>Membership Status</h3>
+                    <div>
+                        <label>Issue Date:</label>
+                        <input type="text" name="issueDate" id="issueDate" class="viewMembership">
+                    </div>
+
+                    <div>
+                        <label>Expire Date</label>
+                        <input type="text" name="expiryDate" id="expiryDate" class="viewMembership">
+                    </div>
+                  </div>
                 </div>
 
             </div>
