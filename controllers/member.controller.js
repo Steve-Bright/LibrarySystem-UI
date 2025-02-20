@@ -1,4 +1,4 @@
-import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint, searchMemberEndpoint, getMemberLoanHistoryEndpoint, banMemberEndpoint, checkBannedUntilEndpoint} from "../utils/links.js";
+import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint, searchMemberEndpoint, getMemberLoanHistoryEndpoint, banMemberEndpoint, checkBannedUntilEndpoint, extendMembershipEndpoint} from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -161,4 +161,16 @@ export async function checkBannedUntil(memberDatabaseId){
 
     let result = await res.json()
     return result.result.banUntil;
+}
+
+export async function extendMembership(memberDatabaseId){
+    const res = await fetch(extendMembershipEndpoint(memberDatabaseId), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        }
+    })
+
+    return (await res.json())
 }

@@ -1,5 +1,5 @@
 import Member from "../../utils/member.model.js"
-import { getDetailedMember, deleteMember, editMember, toggleBan, checkBannedUntil } from "../../controllers/member.controller.js"
+import { getDetailedMember, deleteMember, editMember, toggleBan, checkBannedUntil, extendMembership } from "../../controllers/member.controller.js"
 import {memberUIMapping} from "../../utils/member.mapper.js"
 import { capitalizeFirstLetter } from "../../utils/extra.js"
 
@@ -25,6 +25,17 @@ backToCollection.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
 })
 
+extendMemberBtn.addEventListener("click", () => {
+  window.showMessageApi.confirmMsg4("Do you want to extend membership?")
+})
+
+window.showMessageApi.dialogResponse4(async(event, response) =>{
+  if(!response){
+      const result = await extendMembership(detailedMember.id)
+      window.showMessageApi.alertMsg(result.msg)
+      window.location.reload()
+  }
+})
 
 deleteMemberButton.addEventListener("click", () => {
   window.showMessageApi.confirmMsg("Do you really want to delete this member? ")
