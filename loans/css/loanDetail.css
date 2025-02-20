@@ -38,6 +38,22 @@ h4:hover{
   min-width: 13%;
 }
 
+.notBanned{
+  display: none;
+}
+
+.bannedArea{
+  background-color: #f6e7e6;
+  text-align: center;
+  margin: auto 0 auto 10px;
+  padding: 5px;
+  width:  15%;
+  border: 2px solid #C80003;
+  border-radius: 15px;
+  color: #C80003;
+  font-weight: bold;
+}
+
 #goToMemberDetails, #goToBookDetails, #loanDetailsMiniHeading{
   margin: auto 0;
 }
