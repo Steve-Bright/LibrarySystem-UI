@@ -13,7 +13,9 @@ const alertBoxFunction = {
     confirmMsg2: (message) => ipcRenderer.send("openDialog2", message),
     dialogResponse2: (message) => ipcRenderer.on("dialogResponse2", message),
     confirmMsg3: (message) => ipcRenderer.send("openDialog3", message),
-    dialogResponse3: (message) => ipcRenderer.on("dialogResponse3", message)
+    dialogResponse3: (message) => ipcRenderer.on("dialogResponse3", message),
+    confirmMsg4: (message) => ipcRenderer.send("openDialog4", message),
+    dialogResponse4: (message) => ipcRenderer.on("dialogResponse4", message)
 }
 
 const sharingDataFunction = {

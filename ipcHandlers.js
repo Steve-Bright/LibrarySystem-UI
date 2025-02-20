@@ -68,10 +68,8 @@ export default function setupIpcHandlers(win) {
       })
   .then((result) => {
     try{
-      // console.log("this is the result: " + JSON.stringify(result))
       event.sender.send("dialogResponse2", result.response);
     }catch(error){
-      // console.log("error in openDialog ipcMain: " + error)
     }
   })})
 
@@ -83,13 +81,23 @@ export default function setupIpcHandlers(win) {
       })
   .then((result) => {
     try{
-      // console.log("this is the result: " + JSON.stringify(result))
       event.sender.send("dialogResponse3", result.response);
     }catch(error){
-      // console.log("error in openDialog ipcMain: " + error)
     }
   })})
 
+  ipcMain.on("openDialog4", (event, message) =>{
+    const currentWindow = win || BrowserWindow.getFocusedWindow();
+    dialog.showMessageBox(currentWindow, 
+      {message: message,
+        buttons: ["yes", "no"]
+      })
+  .then((result) => {
+    try{
+      event.sender.send("dialogResponse4", result.response);
+    }catch(error){
+    }
+  })})
   
   ipcMain.on("openCustomDialog", (event, dialogOptions) => {
     try{

@@ -10,6 +10,7 @@ const borrowMemberButton = document.getElementById("borrowMemberButton")
 const editButtonsArea = document.getElementById("editButtonsArea")
 const viewMemberPhoto = document.getElementById("viewMemberPhoto")
 const imagePreview = document.querySelector("#imagePreviewArea div")
+const extendMemberBtn = document.getElementById('extendMemberButton')
 // const imagePreviewArea = document.getElementById("imagePreviewArea")
 const viewMemberForm = document.getElementById("viewMemberForm")
 const filePath = window.imagePaths.shareFilePath();
@@ -23,6 +24,7 @@ let photoChange = false;
 backToCollection.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
 })
+
 
 deleteMemberButton.addEventListener("click", () => {
   window.showMessageApi.confirmMsg("Do you really want to delete this member? ")

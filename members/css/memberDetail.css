@@ -135,6 +135,11 @@ input::-webkit-inner-spin-button {
   right: 0;
 }
 
+#editButtonsArea{
+  width: 43%;
+  padding-left: 10px;
+}
+
 #buttonsArea button:nth-child(1){
   background-color: transparent;
   color: black;
