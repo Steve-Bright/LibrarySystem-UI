@@ -27,6 +27,7 @@ export const banMemberEndpoint = (memberDatabaseId, block) => `${apiEndpoint}mem
 export const extendMembershipEndpoint = (memberDatabaseId) => `${apiEndpoint}member/extendMembership/${memberDatabaseId}`
 export const searchMemberEndpoint = `${apiEndpoint}member/searchMember`
 export const getMemberLoanHistoryEndpoint = (memberDatabaseId, page) => `${apiEndpoint}loan/loanHistory?memberId=${memberDatabaseId}&page=${page}`
+export const checkBannedUntilEndpoint = (memberDatabaseId) => `${apiEndpoint}member/checkBanUntil/${memberDatabaseId}`
 
 //loan related functions
 export const addLoanEndpoint = `${apiEndpoint}loan/addLoan`

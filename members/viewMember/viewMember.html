@@ -9,6 +9,16 @@
             <div id="backToCollection">
                 <img src="../../assets/arrow.png" class="backButton">
             </div>
+            <div id="banArea" class="removedArea">
+                <div>
+                    <div id="bannedTitle">Member is banned until <span id="banPeriod"></span> </div>
+                    <div id="bannedDes">Sorry, this member cannot borrow any book. You can unban the member. </div>
+                </div>
+                <div>
+                    <button id="unbanButton">Unban</button>
+                </div>
+
+            </div>
             <h2>Member Details</h2>
 
             <div id="viewMemberArea">
@@ -52,32 +62,14 @@
 
     
                     <div>
-                        <label for="nrc">Nrc</label>
+                        <label for="nrc">NRC</label>
                         <input id="nrc" name="type" class="viewMemberFormat">
-                        <!-- <select id="regionNumber" class="viewMemberFormat">
-                        </select>
-                        <input list="nrcPlace" class="viewMemberFormat">
-                        <dataList id="nrcPlace" class="viewMemberFormat"></dataList>
-                        <select id="nrcType" class="viewMemberFormat">
-                            <option value="N">N</option>
-                            <option value="AC">AC</option>
-                            <option value="NC">NC</option>
-                            <option value="V">V</option>
-                            <option value="M">M</option>
-                            <option value="AC">AC</option>
-                        </select>
-                        <input id="mainNum" class="viewMemberFormat" type="number"> -->
                     </div>
 
     
                     <div>
                         <label for="gender">Gender: </label>
                         <input type="text" name="gender" id="gender" class="viewMemberFormat">
-                        <!-- <input type="radio" id="maleRadio" name="gender" value="male" class="viewMemberFormat"  >
-                        <label for="maleRadio">Male</label>
-            
-                        <input type="radio" id="femaleRadio" name="gender" value="female" class="viewMemberFormat"  >
-                        <label for="femaleRadio">Female</label> -->
                     </div>
 
     
@@ -111,6 +103,7 @@
                     </div>
     
                     <div id="editButtonsArea">
+                        <button id="extendMemberButton" type="button">Extend</button>
                         <button id="loanHistory" type="button"> Loan History </button>
                         <button type="button" id="borrowMemberButton"> Borrow </button>
                         <button id="deleteMemberButton">Delete Member</button>
@@ -120,7 +113,22 @@
                 </form>
 
                 <div id="imagePreviewArea">
-                  <img alt="image-preview" id="viewMemberPhoto">
+                  <div>
+                    <img alt="image-preview" id="viewMemberPhoto">
+                  </div>
+
+                  <div id="membershipDetail">
+                    <h3>Membership Status</h3>
+                    <div>
+                        <label>Issue Date:</label>
+                        <input type="text" name="issueDate" id="issueDate" class="viewMembership">
+                    </div>
+
+                    <div>
+                        <label>Expire Date</label>
+                        <input type="text" name="expiryDate" id="expiryDate" class="viewMembership">
+                    </div>
+                  </div>
                 </div>
 
             </div>

@@ -78,6 +78,12 @@ function getMemberData(){
       memberPhotoPlace.src = filePath + cleanedLoanMemberData[eachKey]
     }
   })
+  
+  if(cleanedLoanMemberData.block){
+    const bannedOrNot = document.getElementById("bannedOrNot");
+      bannedOrNot.classList.remove("notBanned");
+      bannedOrNot.classList.add("bannedArea")
+  }
 }
 
 function getBookData(){

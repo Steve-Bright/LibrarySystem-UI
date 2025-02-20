@@ -1,5 +1,5 @@
 import Member from "../../utils/member.model.js"
-import { getDetailedMember, deleteMember, editMember } from "../../controllers/member.controller.js"
+import { getDetailedMember, deleteMember, editMember, toggleBan, checkBannedUntil, extendMembership } from "../../controllers/member.controller.js"
 import {memberUIMapping} from "../../utils/member.mapper.js"
 import { capitalizeFirstLetter } from "../../utils/extra.js"
 
@@ -9,7 +9,9 @@ const editMemberButton = document.getElementById("editMemberButton")
 const borrowMemberButton = document.getElementById("borrowMemberButton")
 const editButtonsArea = document.getElementById("editButtonsArea")
 const viewMemberPhoto = document.getElementById("viewMemberPhoto")
-const imagePreviewArea = document.getElementById("imagePreviewArea")
+const imagePreview = document.querySelector("#imagePreviewArea div")
+const extendMemberBtn = document.getElementById('extendMemberButton')
+// const imagePreviewArea = document.getElementById("imagePreviewArea")
 const viewMemberForm = document.getElementById("viewMemberForm")
 const filePath = window.imagePaths.shareFilePath();
 const loanHistory = document.getElementById("loanHistory")
@@ -18,8 +20,21 @@ let detailedMember = JSON.parse(sessionStorage.getItem("memberId"))
 const memberData = await getDetailedMember(detailedMember.id)
 let cleanedMemberData = memberUIMapping(memberData.result)
 
+let photoChange = false;
 backToCollection.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
+})
+
+extendMemberBtn.addEventListener("click", () => {
+  window.showMessageApi.confirmMsg4("Do you want to extend membership?")
+})
+
+window.showMessageApi.dialogResponse4(async(event, response) =>{
+  if(!response){
+      const result = await extendMembership(detailedMember.id)
+      window.showMessageApi.alertMsg(result.msg)
+      window.location.reload()
+  }
 })
 
 deleteMemberButton.addEventListener("click", () => {
@@ -43,13 +58,15 @@ borrowMemberButton.addEventListener('click', () => {
     }
 })
 
-const viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea")
-let index = 0; 
+let viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea, #membershipDetail input")
 
 Object.keys(cleanedMemberData).forEach((eachKey) => {
   for(let eachInput of viewInputs){
     if(eachKey == "memberType" && eachInput.id == "memberType"){
       eachInput.value = capitalizeFirstLetter(cleanedMemberData[eachKey])
+    }else if((eachKey == "issueDate" && eachInput.id == "issueDate")|| (eachKey == "expiryDate" && eachInput.id == "expiryDate")){
+      let date = new Date(cleanedMemberData[eachKey])
+      eachInput.value = date.toDateString();
     }
     else if(eachInput.id == eachKey){
       eachInput.value = cleanedMemberData[eachKey] ? cleanedMemberData[eachKey] : "-"
@@ -60,6 +77,32 @@ Object.keys(cleanedMemberData).forEach((eachKey) => {
     viewMemberPhoto.src = filePath + cleanedMemberData[eachKey]
   }
 })
+
+if(cleanedMemberData.block){
+  const bannedArea = document.getElementById("banArea")
+    bannedArea.classList.remove('removedArea')
+    bannedArea.classList.add("bannedBanner")
+    await unbanFunctionality(detailedMember.id)
+}
+
+async function unbanFunctionality(memberId){
+  const unbanButton = document.getElementById("unbanButton")
+  const banPeriod = document.getElementById("banPeriod")
+  
+  let bannedPeriod = await checkBannedUntil(memberId)
+  banPeriod.innerHTML = new Date(bannedPeriod).toDateString()
+  unbanButton.addEventListener("click", () => {
+    window.showMessageApi.confirmMsg3("Do you want to unban this member?")
+  })
+
+  window.showMessageApi.dialogResponse3(async(event, response) =>{
+    if(!response){
+        const result = await toggleBan(detailedMember.id, false)
+        window.showMessageApi.alertMsg(result.msg)
+        window.location.reload()
+    }
+  })
+}
 
 editMemberButton.addEventListener("click", () => {
   updateMemberUi()
@@ -86,7 +129,7 @@ function updateMemberUi(){
 
   viewMemberForm.addEventListener("submit", async(e) => {
     e.preventDefault()
-    if(document.getElementById("photo")){
+    if(photoChange){
       editedMember.editedPhoto = true;
       editedMember.photo = document.getElementById("photo").files[0]
     }
@@ -103,12 +146,15 @@ function updateMemberUi(){
 
     const result = await editMember(formData)
     window.showMessageApi.alertMsg(result.msg)
-    window.location.reload()
+    if(result.con){
+      window.location.reload()
+    }
   })
 }
 
 function uiTransform(memberModification){
   editButtonsArea.innerHTML = `
+    <button type="button" id="blockButton"> Block </button>
     <button type="button" id="cancelEditButton">Cancel</button>
     <button type="submit">Save</button>
   `
@@ -131,6 +177,20 @@ function updateButtonFunctionality(memberModification){
     window.location.reload()
   })
 
+  const blockButton = document.getElementById("blockButton")
+  blockButton.addEventListener("click", () => {
+    window.showMessageApi.confirmMsg2("Do you want to block this member?")
+  })
+
+  window.showMessageApi.dialogResponse2(async(event, response) =>{
+    if(!response){
+        const result = await toggleBan(detailedMember.id, true)
+        window.showMessageApi.alertMsg(result.msg)
+        window.location.reload()
+        // window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
+    }
+  })
+
   const removeImageBtn = document.getElementById("removeImage")
   removeImageBtn.addEventListener("click", () => {
     viewMemberPhoto.remove()
@@ -142,8 +202,9 @@ function updateButtonFunctionality(memberModification){
     memberPhoto.addEventListener("change", (e) => {
       let editedMemberPhoto = memberPhoto.files[0]
       if(editedMemberPhoto){
+        photoChange = true;
         let image = window.URL.createObjectURL(editedMemberPhoto)
-        imagePreviewArea.innerHTML = `
+        imagePreview.innerHTML = `
                     <img src=${image} alt="MemberPhoto" id="viewMemberPhoto">
                 `
       }

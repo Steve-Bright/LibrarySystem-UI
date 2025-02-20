@@ -20,6 +20,13 @@ backToCollection.addEventListener("click", () => {
 })
 
 if(borrowMember){
+
+    let bannedArea;
+    if(borrowMember.block){
+      bannedArea = `<div class="bannedArea">Banned Member</div>`
+    }else{
+      bannedArea = ``
+    }
     addMemberArea.classList.add("borrowBookDesign")
     addMemberArea.innerHTML = `
         <div id="memberHeading">
@@ -27,6 +34,7 @@ if(borrowMember){
              <h3>Member Info </h3>
           </div>
           <span id="goToMemberDetails">Details</span>
+          ${bannedArea}
         </div>
         
         <div id="memberContents">
