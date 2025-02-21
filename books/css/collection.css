@@ -3,6 +3,10 @@ tr:hover{
     cursor: pointer;
 }
 
+.tableFormat th td{
+    border: 2px solid #F5F7FB
+}
+
 .tableFormat th:nth-child(2) {
     width: 1in;
 }

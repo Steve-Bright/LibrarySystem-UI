@@ -12,6 +12,8 @@ let win;
 const createWindow = () => {
     win = new BrowserWindow({
       minWidth: 930,
+      icon: __dirname + "/assets/rcs_app_logo.png",
+      title: "RCS Library Management System",
       // width: 800,
       // height: 600,
       // titleBarStyle: 'hidden', // or 'hiddenInset' if you want a slimmer title bar

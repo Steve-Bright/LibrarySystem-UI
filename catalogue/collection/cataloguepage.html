@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="../../styles/universal.css">
+        <!-- <link rel="stylesheet" href="../css/bookDetail.css"> -->
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        <div id="navigationPanel" class="catalogueSelector"></div>
+        <main>
+            <div class="mainTitle">
+                <h1>Collections</h1>
+                <div>
+                    <select name="collection-type" id="collectionCategory" size="1">
+                        <option value="english">English</option>
+                        <option value="myanmar">Myanmar</option>
+                    </select>
+                </div>
+                
+            </div>
+            
+
+            <div class="subTitle">
+                <h2>Search Book</h2>
+                <div>
+                    <button id="callNoBtn">Call No.</button>
+                    <button id="addBookBtn">Add Book</button>
+                </div>
+                
+            </div>
+            
+            <div id="searchBookDiv">
+                <form id="searchBookForm">
+                    <div>
+                        <div>
+                            <label for="bookTitle">Book Title</label>
+                            <input type="text" name="bookTitleInput">
+                        </div>
+                        
+                        <div>
+                            <label for="accNo">Acc No</label>
+                            <input type="text" name="accNoInput">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <label for="author">Author</label>
+                            <input type="text" name="authorInput">
+                        </div>
+
+                        <div>
+                            <label for="isbn">ISBN</label>
+                            <input type="text" name="isbnInput">
+                        </div>
+                    </div>  
+
+                    <div>
+                        <div>
+                            <label for="classNo">Class No</label>
+                            <input type="text" name="classNoInput">
+                        </div>
+
+                        <div>
+                            <label for="publisher">Publisher</label>
+                            <input type="text" name="publisherInput">
+                        </div>
+                    </div>
+
+                    <div id="searchButtonsDiv">
+                        <input type="reset" value="Clear All">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+            </div>
+
+            <div class="tableFormat">
+                <div class="tableTitle">
+                    <h2 id="totalData">Books</h2>
+                    <div id="collectionNavigationArea">
+                        <!-- <img src="./assets/arrow.png" class="backButton" id="collectionBackward">
+                        <img src="./assets/arrow_right.png" class="backButton" id="collectionForward"> -->
+                    </div>
+                </div>
+                
+                <table>
+                    <thead id="bookDataHeadings">
+                    </thead>
+
+                    <tbody id="bookData">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </body>
+    <script src="../../js/universal.js" defer type="module"></script>
+</html>

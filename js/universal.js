@@ -1,4 +1,5 @@
 let currentDirectory = window.sharingDataApi.currentDirectory();
+const logoPath = currentDirectory + "/assets/rcs_blue_bg_transparent.png"
 const barcodeScanPath = currentDirectory + '/assets/barcode-scan.png';
 const dashboardPath = currentDirectory + "/assets/dashboard.png";
 const bookPilePath = currentDirectory + "/assets/book-pile-white.png"
@@ -6,10 +7,13 @@ const readerPath = currentDirectory + "/assets/reader-white.png"
 const clipboardPath = currentDirectory + "/assets/clipboard-white.png"
 const settingsPath = currentDirectory + "/assets/settings-white.png"
 const signOutPath = currentDirectory + "/assets/sign-out-white.png"
+const cataloguePath = currentDirectory + "/assets/catalogue.png"
 const navigationPanel = document.getElementById('navigationPanel')
 
 navigationPanel.innerHTML = `
-    <div id="logoTitle">READORA CS</div>
+    <div id="logoTitle">
+        <img src=${logoPath} alt="logo" id="logoImage">
+    </div>
     <div id="navigationPages">
         <div id="scannerPage" class="navigationTitle">
             <div class="imageDiv"> <img src=${barcodeScanPath}></div> 
@@ -39,6 +43,11 @@ navigationPanel.innerHTML = `
             Loan
         </div>
 
+        <div id="cataloguePage" class="navigationTitle">
+            <div class="imageDiv"><img src=${cataloguePath}></div>
+            Catalogue
+        </div>
+
         <div id="settingsPage" class="navigationTitle">
             <div class="imageDiv"><img src=${settingsPath}></div>
             
@@ -50,9 +59,6 @@ navigationPanel.innerHTML = `
             SignOut
         </div>
     </div>
-    <div id="whiteSpace">
-        Server Status
-    </div>
 `
 
 const pageIds = [
@@ -61,6 +67,7 @@ const pageIds = [
     "collectionPage",
     "membersPage",
     "loanPage",
+    "cataloguePage",
     "settingsPage",
 ];
 const pageHtmls = [
@@ -69,6 +76,7 @@ const pageHtmls = [
     "./books/collection/collectionpage.html",
     "./members/allmembers/memberspage.html",
     "./loans/allLoans/loanpage.html",
+    "./catalogue/collection/cataloguepage.html",
     "settingspage.html"
 ]
 const pageSelectors = [
@@ -77,6 +85,7 @@ const pageSelectors = [
     ".collectionSelector",
     ".membersSelector",
     ".loansSelector",
+    ".catalogueSelector",
     ".settingsSelector",
   ];
 
@@ -92,7 +101,8 @@ pageSelectors.forEach((pageSelector, i) => {
     const selectedPage = document.querySelector(pageSelector)
     if(selectedPage){
         const pageSelector = document.querySelector(`#navigationPages #${pageIds[i]}`)
-        pageSelector.style.textDecoration = "underline"
+        // pageSelector.style.textDecoration = "underline"
+        pageSelector.style.backgroundColor = "#021c6f"
     }
 })
 
