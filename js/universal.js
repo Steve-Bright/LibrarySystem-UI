@@ -1,4 +1,5 @@
 let currentDirectory = window.sharingDataApi.currentDirectory();
+const logoPath = currentDirectory + "/assets/rcs_blue_bg_transparent.png"
 const barcodeScanPath = currentDirectory + '/assets/barcode-scan.png';
 const dashboardPath = currentDirectory + "/assets/dashboard.png";
 const bookPilePath = currentDirectory + "/assets/book-pile-white.png"
@@ -10,7 +11,9 @@ const cataloguePath = currentDirectory + "/assets/catalogue.png"
 const navigationPanel = document.getElementById('navigationPanel')
 
 navigationPanel.innerHTML = `
-    <div id="logoTitle">READORA CS</div>
+    <div id="logoTitle">
+        <img src=${logoPath} alt="logo" id="logoImage">
+    </div>
     <div id="navigationPages">
         <div id="scannerPage" class="navigationTitle">
             <div class="imageDiv"> <img src=${barcodeScanPath}></div> 
