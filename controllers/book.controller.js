@@ -1,4 +1,4 @@
-import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint, searchBookEndpoint, getBookLoanHistoryEndpoint} from "../utils/links.js"
+import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint, searchBookEndpoint, getBookLoanHistoryEndpoint, getBookNumsEndpoint} from "../utils/links.js"
 
 const token = await window.cookieApi.getCookie()
 
@@ -136,4 +136,17 @@ export async function getBookLoanHis(bookId, page){
     })
 
     return (await res.json())
+}
+
+export async function getBookNums(duration){
+    const res = await fetch(getBookNumsEndpoint(duration), {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token[0].value}`
+        }
+    })
+
+    let result = await res.json();
+    return (result.result)
 }

@@ -14,11 +14,6 @@ const createWindow = () => {
       minWidth: 930,
       icon: __dirname + "/assets/rcs_app_logo.png",
       title: "RCS Library Management System",
-      // width: 800,
-      // height: 600,
-      // titleBarStyle: 'hidden', // or 'hiddenInset' if you want a slimmer title bar
-      // frame: false,             // This removes the default frame, making it non-resizable.
-      // resizable: false  ,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: true,
