@@ -1,14 +1,22 @@
-tr:hover{
-    background-color:#e7e9ea;
-    cursor: pointer;
-}
-
-.tableFormat th td{
-    border: 2px solid #F5F7FB
-}
 
 .tableFormat th:nth-child(2) {
     width: 1in;
+}
+
+.tableFormat th{
+    padding: 0.5em 0;
+}
+
+.tableFormat td, .tableFormat th{
+    border: 2px solid #c3d1ff;
+}
+
+.tableFormat tr:nth-child(even){
+    background-color: #f7f9fc
+}
+
+.tableFormat tr:hover{
+    background-color:#e7e9ea;
 }
 
 .tableFormat td {

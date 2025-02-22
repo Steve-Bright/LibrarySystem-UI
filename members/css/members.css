@@ -9,6 +9,17 @@ tr:hover{
   box-sizing: border-box;
 }
 
+.tableFormat th{
+  padding: 0.5em 0;
+}
+
+.tableFormat td, .tableFormat th{
+  border: 2px solid #c3d1ff;
+}
+
+.tableFormat tr:nth-child(even){
+  background-color: #f7f9fc
+}
 
 .subTitle div{
   width: 75%;

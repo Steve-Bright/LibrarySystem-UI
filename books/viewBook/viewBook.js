@@ -1,5 +1,6 @@
 import Book from "../../utils/book.model.mjs"
 import { getDetailedBook, deleteBook, editBook } from "../../controllers/book.controller.js"
+import { convertEngToMM, convertMMToEng } from "../../utils/burmese.mapper.js"
 import { bookUIMapping } from "../../utils/book.mapper.js"
 import { capitalizeFirstLetter } from "../../utils/extra.js"
 
@@ -51,15 +52,35 @@ if(cleanedBookData["category"] == "english"){
 }
 const viewInputs = document.querySelectorAll("#viewBookForm input, #viewBookForm textarea")
     let index = 0; 
-        
+
+let accNo;
+let classNo;
+let callNo;
 Object.keys(cleanedBookData).forEach((eachKey) => {
     for(let eachInput of viewInputs){
         if(eachKey == "category" && eachInput.id == "category"){
             viewInputs[index].value = capitalizeFirstLetter(cleanedBookData[eachKey]);
+            if(cleanedBookData[eachKey] == "myanmar"){ 
+                accNo = convertEngToMM(cleanedBookData["accNo"], true)
+                classNo = convertEngToMM(cleanedBookData["classNo"])
+                callNo = convertEngToMM(cleanedBookData["callNo"], true)
+            }else{
+                accNo = cleanedBookData["accNo"]
+                classNo = cleanedBookData["classNo"]
+                callNo = cleanedBookData["callNo"]
+            }
             index++
         }
         else if(eachInput.id == eachKey){
-            eachInput.value = cleanedBookData[eachKey] ? cleanedBookData[eachKey] : "-"
+            if(eachKey == "accNo" && eachInput.id == "accNo"){
+                eachInput.value = accNo;
+            }else if(eachKey == "classNo" && eachInput.id == "classNo"){
+                eachInput.value = classNo;
+            }else if(eachKey == "callNo" && eachInput.id == "callNo"){
+                eachInput.value = callNo;
+            }else{
+                eachInput.value = cleanedBookData[eachKey] ? cleanedBookData[eachKey] : "-"
+            }
         }
     }
     if(eachKey == "bookCover"){
@@ -100,6 +121,19 @@ function updateBookUi(){
         }
 
         const formData = new FormData()
+
+        if(editedBook.category == "myanmar"){
+            console.log("this condition is burmese " + JSON.stringify(editedBook))
+            if(editedBook.accNo){
+                editedBook.accNo = convertMMToEng(editedBook.accNo, true)
+            }
+            if(editedBook.callNo){
+                editedBook.callNo = convertMMToEng(editedBook.callNo, true)
+            }
+            if(editedBook.classNo){
+                editedBook.classNo = convertMMToEng(editedBook.classNo)
+            }
+        }
     
         for(let key in editedBook){
             if(editedBook.hasOwnProperty(key)){

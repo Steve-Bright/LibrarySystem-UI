@@ -21,7 +21,7 @@ await searchBookFunction(category)
 if(!searchedHistory){
     updateBookData(category)
 }else{
-    placeItemsInSearchForm(searchedKeyword)
+    placeItemsInSearchForm(category, searchedKeyword)
     showSearchResults(category, searchedHistory)
 }
 
@@ -38,13 +38,19 @@ addBookBtn.addEventListener("click", ()=> {
   window.navigationApi.toAnotherPage("./books/addBook/addBook.html")
 })
 
-function placeItemsInSearchForm(searchedCache){
+function placeItemsInSearchForm(categoryData, searchedCache){
     searchedCache = JSON.parse(searchedCache)
+    let searchedAccNo;
+    let searchedClassNo;
+    if(categoryData == "myanmar"){
+        searchedAccNo = convertEngToMM(searchedCache.accNo, true)
+        searchedClassNo = convertEngToMM(searchedCache.classNo)
+    }
     searchBookForm.bookTitleInput.value = searchedCache.bookTitle
-    searchBookForm.accNoInput.value = searchedCache.accNo
+    searchBookForm.accNoInput.value = searchedAccNo
     searchBookForm.authorInput.value = searchedCache.sor
     searchBookForm.publisherInput.value = searchedCache.publisher
-    searchBookForm.classNoInput.value = searchedCache.classNo
+    searchBookForm.classNoInput.value = searchedClassNo
     searchBookForm.isbnInput.value = searchedCache.isbn
 }
 
@@ -104,6 +110,15 @@ function showSearchResults(category, searchedHistory){
 
 function showEachBook(placerDiv, bookData){
     for(let eachBook of bookData){
+        let accNo;
+        let classNo;
+        if(!eachBook.isbn){
+            accNo = convertEngToMM(eachBook.accNo, true)
+            classNo = convertEngToMM(eachBook.classNo, true)
+        }else{
+            accNo = eachBook.accNo
+            classNo = eachBook.classNo
+        }
         let conditionalCell = eachBook.isbn 
                 ? `
                 <td>${eachBook.isbn}</td>
@@ -115,11 +130,11 @@ function showEachBook(placerDiv, bookData){
         let imagePath = filePath + eachBook.bookCover
         newRow.innerHTML = 
             `
-                <td>${eachBook.accNo}</td>
+                <td>${accNo}</td>
                 <td><img src="${imagePath}" class="displayBookCover"></td> 
                 <td>${eachBook.bookTitle}</td>
                 <td>${eachBook.sor}</td>
-                <td>${eachBook.classNo}</td>
+                <td>${classNo}</td>
                 ${conditionalCell}
                 <td><button class="detailedBook" id="${eachBook._id}">View Details</button></td>
             `
@@ -141,10 +156,10 @@ async function searchBookFunction(categoryData){
         let searchData = {
             category: categoryData,
             bookTitle: e.target.bookTitleInput.value,
-            accNo: e.target.accNoInput.value,
+            accNo: convertMMToEng(e.target.accNoInput.value, true),
             sor: e.target.authorInput.value,
             publisher: e.target.authorInput.value,
-            classNo: e.target.classNoInput.value,
+            classNo: convertMMToEng(e.target.classNoInput.value),
             isbn: e.target.isbnInput.value
         }
         sessionStorage.setItem("searchBookData", JSON.stringify(searchData))

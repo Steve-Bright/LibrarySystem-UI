@@ -3,6 +3,19 @@ tr:hover{
   cursor: pointer;
 }
 
+.tableFormat th{
+  padding: 0.5em 0;
+}
+
+.tableFormat td, .tableFormat th{
+  border: 2px solid #c3d1ff;
+}
+
+.tableFormat tr:nth-child(even){
+  background-color: #f7f9fc
+}
+
+
 .mainTitle select{
   height: 2em;
   width: 8em;
