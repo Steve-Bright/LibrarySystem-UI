@@ -15,6 +15,10 @@ const borrowBookButton = document.getElementById("borrowBookButton")
 const imagePreviewArea = document.getElementById("imagePreviewArea")
 const viewBookForm = document.getElementById("viewBookForm")
 const loanHistory = document.getElementById("loanHistory")
+const accNoInput = document.getElementById('accNo')
+const classInput = document.getElementById("classNo")
+const initialInput = document.getElementById("initial")
+const callNoInput = document.getElementById("callNo")
 
 let detailedBook = JSON.parse(sessionStorage.getItem("bookId"))
 const bookData = await getDetailedBook(detailedBook.category, detailedBook.id)
@@ -90,7 +94,6 @@ Object.keys(cleanedBookData).forEach((eachKey) => {
 })
 
 borrowBookButton.addEventListener("click", () => {
-    console.log("book data" + bookData)
     localStorage.setItem("borrowBook", JSON.stringify(bookData.result))
     window.navigationApi.toAnotherPage("./loans/addLoan/addLoan.html")
 })
@@ -111,6 +114,8 @@ function updateBookUi(){
         eachInput.addEventListener("input", () => {
             editedBook[eachInput.id] = eachInput.value
         })
+
+        autogenerateCallNo(accNoInput, initialInput, classInput, callNoInput, editedBook)
     })
 
     viewBookForm.addEventListener("submit", async(e) => {  
@@ -193,4 +198,32 @@ function updateButtonFunctionality(bookModification){
             }
         })
     })
+}
+
+function autogenerateCallNo(accNoInput, initialInput, classInput, callNoInput, book){
+
+    let accNoValue = accNoInput.value
+    let initialValue = initialInput.value;
+    let classNoValue = classInput.value;
+      
+    accNoInput.addEventListener("input", () => {
+        accNoValue = accNoInput.value;
+        triggerCallNumber()
+    })
+      
+    initialInput.addEventListener("input", () => {
+        initialValue = initialInput.value
+        triggerCallNumber()
+    })
+      
+    classInput.addEventListener("input", () => {
+        classNoValue = classInput.value;
+        triggerCallNumber()
+    })
+      
+    function triggerCallNumber(){
+        callNoInput.value = accNoValue + " " + initialValue + " " + classNoValue
+        book["callNo"] = callNoInput.value
+    }
+        
 }
