@@ -190,7 +190,6 @@ delete bookCache.bookCover;
 let bookKeys = Object.keys(bookCache)
 addBookData.forEach((eachInput, i) => {
     if(eachInput.type === "file"){
-        console.log('this is the file input type')
     }else{
         eachInput.addEventListener("input", () => {
             bookCache[bookKeys[i]] = eachInput.value;

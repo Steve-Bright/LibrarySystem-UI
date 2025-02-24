@@ -31,12 +31,13 @@
 
                     <div>
                         <label for="memberType">Member Type</label>
-                        <input type="text" id="memberType" class="viewMemberFormat">
-                        <!-- <select id="memberType" name="memberType" class="viewMemberFormat">
+                        <!-- <input type="text" id="memberType" class="viewMemberFormat"> -->
+                        <select id="memberType" name="memberType" class="viewMemberFormat">
                             <option value="student">Student</option>
                             <option value="teacher">Teacher</option>
                             <option value="staff">Staff</option>
-                        </select> -->
+                            <option value="public">Public</option>
+                        </select>
                     </div>
     
                     <div id="gradeArea">
@@ -51,7 +52,7 @@
 
                     <div>
                         <label for="memberId">Member Id</label>
-                        <input type="text" id="memberId" name="memberId" class="viewMemberFormat"  >
+                        <input type="text" id="memberId" name="memberId" class="viewMemberFormat" disabled >
                     </div>
 
     
@@ -63,13 +64,25 @@
     
                     <div>
                         <label for="nrc">NRC</label>
-                        <input id="nrc" name="type" class="viewMemberFormat">
+                        <select id="regionNumber" class="viewMemberFormat viewNRCFormat">
+                        </select>
+                        <input list="nrcPlace" class="viewMemberFormat viewNRCFormat" id="nrcPlaceView">
+                        <dataList id="nrcPlace" class="viewMemberFormat viewNRCFormat"></dataList>
+                        <select id="nrcType" class="viewMemberFormat viewNRCFormat">
+                            <option value="N">N</option>
+                            <option value="AC">AC</option>
+                            <option value="NC">NC</option>
+                            <option value="V">V</option>
+                            <option value="M">M</option>
+                            <option value="AC">AC</option>
+                        </select>
+                        <input id="mainNum" class="viewMemberFormat viewNRCFormat" type="number">
                     </div>
 
     
                     <div>
                         <label for="gender">Gender: </label>
-                        <input type="text" name="gender" id="gender" class="viewMemberFormat">
+                        <input type="text" name="gender" id="gender" class="viewMemberFormat" disabled>
                     </div>
 
     

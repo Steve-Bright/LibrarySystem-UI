@@ -43,6 +43,20 @@ main{
     padding: 1.5em 0 0 15em
 }
 
+.pageInput::-webkit-outer-spin-button,
+.pageInput::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.pageInput{
+    width: 3em;
+    margin: 0 1em;
+    text-align: center
+}
+
+
 #logoTitle{
     text-align: left;
     font-weight: bold;

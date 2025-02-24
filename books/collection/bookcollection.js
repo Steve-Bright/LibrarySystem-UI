@@ -45,6 +45,9 @@ function placeItemsInSearchForm(categoryData, searchedCache){
     if(categoryData == "myanmar"){
         searchedAccNo = convertEngToMM(searchedCache.accNo, true)
         searchedClassNo = convertEngToMM(searchedCache.classNo)
+    }else{
+        searchedAccNo = searchedCache.accNo
+        searchedClassNo = searchedCache.classNo;
     }
     searchBookForm.bookTitleInput.value = searchedCache.bookTitle
     searchBookForm.accNoInput.value = searchedAccNo

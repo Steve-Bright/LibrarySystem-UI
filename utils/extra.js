@@ -4,7 +4,6 @@ let backwardButtonIcon = currentDirectory + "/assets/arrow.png"
 const filePath = window.imagePaths.shareFilePath();
 export async function buildCollectionNavigation(area, backward, forward, index, category, updateFunction, onIndexChange){
     area.innerHTML = ``
-
     if(backward == true){
         const backwardButton = document.createElement("img")
         backwardButton.src = backwardButtonIcon
@@ -12,6 +11,8 @@ export async function buildCollectionNavigation(area, backward, forward, index, 
         backwardButton.id = "collectionBackward"
         area.appendChild(backwardButton)
     } 
+
+    area.innerHTML += `<input type='number' id='page' class='pageInput' value=${index}>`
 
     if(forward == true){
         const forwardButton = document.createElement("img")
