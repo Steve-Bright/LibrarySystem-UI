@@ -15,6 +15,11 @@ const extendMemberBtn = document.getElementById('extendMemberButton')
 const viewMemberForm = document.getElementById("viewMemberForm")
 const filePath = window.imagePaths.shareFilePath();
 const loanHistory = document.getElementById("loanHistory")
+const regionNumber = document.getElementById("regionNumber")
+const nrcPlace = document.getElementById("nrcPlace")
+const nrcPlaceView = document.getElementById("nrcPlaceView")
+const mainNum = document.getElementById("mainNum")
+const nrcType = document.getElementById("nrcType")
 
 let detailedMember = JSON.parse(sessionStorage.getItem("memberId"))
 const memberData = await getDetailedMember(detailedMember.id)
@@ -58,12 +63,15 @@ borrowMemberButton.addEventListener('click', () => {
     }
 })
 
-let viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea, #membershipDetail input")
+nrcControl()
+
+let viewInputs = document.querySelectorAll("#viewMemberForm input, #viewMemberForm textarea, #membershipDetail input, #viewMemberForm select, #viewMemberForm dataList")
+
 
 Object.keys(cleanedMemberData).forEach((eachKey) => {
   for(let eachInput of viewInputs){
     if(eachKey == "memberType" && eachInput.id == "memberType"){
-      eachInput.value = capitalizeFirstLetter(cleanedMemberData[eachKey])
+      eachInput.value = cleanedMemberData[eachKey]
     }else if((eachKey == "issueDate" && eachInput.id == "issueDate")|| (eachKey == "expiryDate" && eachInput.id == "expiryDate")){
       let date = new Date(cleanedMemberData[eachKey])
       eachInput.value = date.toDateString();
@@ -75,6 +83,20 @@ Object.keys(cleanedMemberData).forEach((eachKey) => {
 
   if(eachKey == "photo"){
     viewMemberPhoto.src = filePath + cleanedMemberData[eachKey]
+  }
+
+  if(eachKey == "nrc" && eachKey != ""){
+    console.log("nrc value " + cleanedMemberData[eachKey])
+    let separateNumbers = cleanedMemberData[eachKey].split("/")
+    regionNumber.value = separateNumbers[0]
+
+    let separateNRCPlace = separateNumbers[1].split("(")
+    nrcPlaceView.value = separateNRCPlace[0];
+
+    let separateNRCType = separateNRCPlace[1].split(")")
+    nrcType.value = separateNRCType[0];
+
+    mainNum.value = separateNRCType[1]
   }
 })
 
@@ -116,11 +138,11 @@ function updateMemberUi(){
   delete editedMember.loanBooks;
   delete editedMember.barcode;
   const memberModification = document.getElementById("memberModification")
-  uiTransform(memberModification)
+  uiTransform(cleanedMemberData.memberType, memberModification)
   updateButtonFunctionality(memberModification)
 
   viewInputs.forEach((eachInput) => {
-    eachInput.addEventListener("input", () => {
+    eachInput.addEventListener("change", () => {
       editedMember[eachInput.id] = eachInput.value
     })
   })
@@ -152,16 +174,23 @@ function updateMemberUi(){
   })
 }
 
-function uiTransform(memberModification){
+function uiTransform(memberType, memberModification){
+
   editButtonsArea.innerHTML = `
     <button type="button" id="blockButton"> Block </button>
     <button type="button" id="cancelEditButton">Cancel</button>
     <button type="submit">Save</button>
   `
 
-  viewInputs.forEach((eachInput) => {
+  viewInputs.forEach((eachInput, i) => {
     eachInput.classList.remove("viewMemberFormat")
     eachInput.classList.add("addMemberFormat")
+
+    if(eachInput.classList.contains("viewNRCFormat")){
+      if(memberType == "student"){
+        eachInput.classList.remove("viewNRCFormat")
+      }
+    }
   })
 
   const removeImageButton = document.createElement("button");
@@ -210,4 +239,33 @@ function updateButtonFunctionality(memberModification){
       }
     })
   })
+}
+
+function nrcControl(){
+  addRegionNumber(),
+  changePlace(nrcPlace, "1")
+  regionNumber.addEventListener("change", () => {
+    changePlace(nrcPlace, regionNumber.value)
+  })
+}
+
+function addRegionNumber(){
+  for(let i = 1; i < 15; i++){
+    let opt = document.createElement("option")
+    opt.value = i
+    opt.innerHTML = i
+    regionNumber.appendChild(opt)
+  }
+}
+
+function changePlace(placeDiv, regionNum){
+  placeDiv.innerHTML = ``
+    let result = window.sharingDataApi.searchNRC(regionNum)
+    result = JSON.parse(result)
+    for(let i = 0; i < result.length; i ++){
+      let placeOpt = document.createElement("option")
+      placeOpt.value = result[i].name_en
+      placeOpt.innerHTML = result[i].name_en
+      placeDiv.appendChild(placeOpt)
+    }
 }

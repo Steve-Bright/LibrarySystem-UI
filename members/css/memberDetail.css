@@ -85,9 +85,17 @@
 }
 
 /* //NRC CSS ADJUST */
+.viewNRCFormat{
+  pointer-events:none;
+}
+
 #regionNumber{
   width: 10%;
   text-align: center; 
+}
+
+#regionNumber.viewMemberFormat{
+  width: 11%;
 }
 
 input[list="nrcPlace"]{
