@@ -21,6 +21,7 @@
 
 body{
     display: flex;
+    background-color: #f0efef
 }
 
 #navigationPanel{
