@@ -44,4 +44,4 @@ export const getLoanNumsEndpoint = (duration) => `${apiEndpoint}loan/totalNum/${
 
 
 //import book
-export const saveCSVFileEndpoint = `${apiEndpoint}book/saveCSVFile`
+export const importBookEndpoint = `${apiEndpoint}book/importData`

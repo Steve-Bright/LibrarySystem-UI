@@ -1,4 +1,3 @@
-// ipcHandlers.js
 import { ipcMain, dialog, session, BrowserWindow } from "electron";
 import NRCData from "./assets/nrc.json" with {type: "json"}
 import path from "path";
@@ -54,10 +53,8 @@ export default function setupIpcHandlers(win) {
       })
   .then((result) => {
     try{
-      // console.log("this is the result: " + JSON.stringify(result))
       event.sender.send("dialogResponse", result.response);
     }catch(error){
-      // console.log("error in openDialog ipcMain: " + error)
     }
   })})
 
@@ -125,32 +122,6 @@ export default function setupIpcHandlers(win) {
     event.returnValue = confirmedAns;
   })
 
-  // ipcMain.on("openDialog", (event, dialogOptions) => {
-  //   try {
-  //     const currentWindow = win || BrowserWindow.getFocusedWindow();
-  
-  //     // Use dialogOptions to dynamically set the dialog properties
-  //     dialog
-  //       .showMessageBox(currentWindow, {
-  //         type: dialogOptions.type || "info", // Default type is 'info'
-  //         title: dialogOptions.title || "Confirm", // Default title
-  //         message: dialogOptions.message || "Are you sure?", // Default message
-  //         buttons: dialogOptions.buttons || ["Yes", "No"], // Default buttons
-  //         defaultId: dialogOptions.defaultId || 0, // Default selected button
-  //         cancelId: dialogOptions.cancelId || 1, // Default cancel button
-  //         detail: dialogOptions.detail || "", // Additional details if any
-  //       })
-  //       .then((result) => {
-  //         event.sender.send(dialogOptions.responseChannel || "dialogResponse", result.response); // Dynamic response channel
-  //       });
-  //   } catch (error) {
-  //     console.error("Error in openDialog ipcMain:", error);
-  //     event.sender.send(dialogOptions.responseChannel || "dialogResponse", { error: error.message });
-  //   }
-  // });
-
-  
-
   ipcMain.on("setCookies", (event, data) => {
     const cookie = { url: mainWebsite, name: "token", value: data, expirationDate: (Date.now() / 1000) + (7 * 24 * 60 * 60), httpOnly: true, secure: false};
     session.defaultSession.cookies
@@ -212,15 +183,5 @@ export default function setupIpcHandlers(win) {
 
   ipcMain.on("searchNRC", (event, data) => {
     event.returnValue = `${JSON.stringify(NRCData.data[data])}`
-  })
-
-  ipcMain.on("analyseCSV", (event, data)=> {
-    let results = []
-    fs.createReadStream(data)
-      .pipe(csvParser())
-      .on('data', (data) => results.push(data))
-      .on('end', () => {
-        console.log(results);
-      });
   })
 }

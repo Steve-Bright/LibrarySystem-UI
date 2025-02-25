@@ -11,6 +11,11 @@
             <div>
                 <h3>Import your data</h3>
                 <form id="importCSVForm">
+                    <input type="radio" id="myanmarBook" name="category" value="myanmar" required>
+                    <label for="myanmarBook">Myanmar</label>
+                    <input type="radio" id="englishBook" name="category" value="english">
+                    <label for="englishBook" >English</label>
+                    <br>
                     <input type="file" name="bookData" id="importCSVData" accept=".csv" required>
                     <br>
                     <button id="importCSV" type="submit">Process Import</button>
