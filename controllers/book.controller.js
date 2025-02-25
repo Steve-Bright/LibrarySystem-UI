@@ -1,4 +1,4 @@
-import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint, searchBookEndpoint, getBookLoanHistoryEndpoint, getBookNumsEndpoint} from "../utils/links.js"
+import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint, searchBookEndpoint, getBookLoanHistoryEndpoint, getBookNumsEndpoint, saveCSVFileEndpoint} from "../utils/links.js"
 
 const token = await window.cookieApi.getCookie()
 
@@ -149,4 +149,16 @@ export async function getBookNums(duration){
 
     let result = await res.json();
     return (result.result)
+}
+
+export async function saveCSVFile(csvFile){
+    const res = await fetch(saveCSVFileEndpoint, {
+        method: "POST",
+        headers: {
+             authorization: `Bearer ${token[0].value}`,
+        },
+        body: csvFile
+    })
+
+    return (await res.json());
 }

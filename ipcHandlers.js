@@ -3,6 +3,7 @@ import { ipcMain, dialog, session, BrowserWindow } from "electron";
 import NRCData from "./assets/nrc.json" with {type: "json"}
 import path from "path";
 import os from "os"
+import csvParser from "csv-parser";
 import fs from "fs";
 import { fileURLToPath } from 'url';
 import { mainWebsite } from "./utils/links.js";
@@ -211,5 +212,15 @@ export default function setupIpcHandlers(win) {
 
   ipcMain.on("searchNRC", (event, data) => {
     event.returnValue = `${JSON.stringify(NRCData.data[data])}`
+  })
+
+  ipcMain.on("analyseCSV", (event, data)=> {
+    let results = []
+    fs.createReadStream(data)
+      .pipe(csvParser())
+      .on('data', (data) => results.push(data))
+      .on('end', () => {
+        console.log(results);
+      });
   })
 }

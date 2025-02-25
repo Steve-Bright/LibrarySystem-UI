@@ -77,7 +77,7 @@ const pageHtmls = [
     "./members/allmembers/memberspage.html",
     "./loans/allLoans/loanpage.html",
     "./catalogue/collection/cataloguepage.html",
-    "settingspage.html"
+    "./settings/settingspage.html"
 ]
 const pageSelectors = [
     ".scannerSelector",

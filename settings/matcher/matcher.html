@@ -1,0 +1,19 @@
+<!DOCTYPE html> 
+    <head>
+    </head>
+
+    <body>
+      <div id="fileExists"></div>
+      <form>
+      </form>
+    </body>
+    
+    <script>
+      const csvFileName = localStorage.getItem("csvFileName")
+      const fileExists = document.getElementById("fileExists")
+
+      if(csvFileName){
+        fileExists.innerHTML = `file exists ${csvFileName} `
+      }
+    </script>
+</html>

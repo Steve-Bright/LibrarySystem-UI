@@ -41,3 +41,7 @@ export const extendLoanEndpoint = (loanId) => `${apiEndpoint}loan/extendLoan/${l
 export const getAllLoansEndpoint = (loanType, page) =>   `${apiEndpoint}loan/getAllLoans?loanType=${loanType}&page=${page}`
 export const getLoanDetailEndpoint = (loanId) => `${apiEndpoint}loan/getLoan/${loanId}`
 export const getLoanNumsEndpoint = (duration) => `${apiEndpoint}loan/totalNum/${duration}`  
+
+
+//import book
+export const saveCSVFileEndpoint = `${apiEndpoint}book/saveCSVFile`

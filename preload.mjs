@@ -22,7 +22,8 @@ const sharingDataFunction = {
     receiveData: ()=> ipcRenderer.sendSync("passingData"),
     sendData: (data)=> ipcRenderer.send("sendingData", data), 
     currentDirectory: ()=> ipcRenderer.sendSync("currentDirectory"),
-    searchNRC: (data) => ipcRenderer.sendSync("searchNRC", data)
+    searchNRC: (data) => ipcRenderer.sendSync("searchNRC", data),
+    analyseCSV: (data) => ipcRenderer.send("analyseCSV", data)
 }
 
 const fileSharingFunction = {
