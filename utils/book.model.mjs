@@ -23,7 +23,9 @@ class Book {
       seriesTitle,
       seriesNo,
       includeCD,
-      subjectHeadings,
+      subjectOne,
+      subjectTwo,
+      subjectThree,
       edition,
       editor,
       place,
@@ -62,7 +64,9 @@ class Book {
       this.seriesTitle = seriesTitle;
       this.seriesNo = seriesNo;
       this.includeCD = includeCD;
-      this.subjectHeadings = subjectHeadings;
+      this.subjectOne = subjectOne;
+      this.subjectTwo = subjectTwo;
+      this.subjectThree = subjectThree;
       this.edition = edition;
       this.editor = editor;
       this.place = place;
