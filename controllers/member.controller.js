@@ -2,8 +2,8 @@ import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, ge
 
 const token = await window.cookieApi.getCookie()
 
-export async function getAllMembersFunction(page){
-    const res = await fetch(getAllMembersEndpoint(page), {
+export async function getAllMembersFunction(memberType, page){
+    const res = await fetch(getAllMembersEndpoint(memberType, page), {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

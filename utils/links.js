@@ -20,7 +20,7 @@ export const addMemberEndpoint = `${apiEndpoint}member/addMember`
 export const editMemberEndpoint = `${apiEndpoint}member/editMember`
 export const getMemberDetailEndpoint = (memberDatabaseId) => `${apiEndpoint}member/getMember?memberDatabaseId=${memberDatabaseId}`
 export const getMemberFromMemberIdEndpoint = (memberId) => `${apiEndpoint}member/getMember?memberId=${memberId}`
-export const getAllMembersEndpoint = (page) => `${apiEndpoint}member/getAllMembers?page=${page}`
+export const getAllMembersEndpoint = (memberType, page) => `${apiEndpoint}member/getAllMembers?memberType=${memberType}&page=${page}`
 export const getSpecificMembersEndpoint = (memberType, page) => `${apiEndpoint}member/getAllMembers?memberType=${memberType}page=${page}`
 export const deleteMemberEndpoint = (memberDatabaseId) => `${apiEndpoint}member/deleteMember/?memberDatabaseId=${memberDatabaseId}`
 export const getLatestMemberIdEndpoint = (memberType) => `${apiEndpoint}member/getLatestMemberId/${memberType}`

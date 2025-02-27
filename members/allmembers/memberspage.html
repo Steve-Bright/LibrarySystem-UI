@@ -7,7 +7,18 @@
     <body>
         <div id="navigationPanel" class="membersSelector"></div>
         <main>
-            <h1>Members</h1>
+            <div class="mainTitle">
+                <h1>Members</h1>
+                <div>
+                    <select name="member-type" id="memberType" size="1">
+                        <option value="all">All</option>
+                        <option value="staff">Staff</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="public">Public</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="subTitle">
                 <h2>Search Members</h2>
@@ -65,12 +76,6 @@
                     <div id="memberTitle">
                         <div>
                             <h2 id="totalData">Total Members</h2>
-                        </div>
-                        <div id="filterDiv">
-                            <span>Filter -</span>
-                            <div>All</div>
-                            <div>Teacher</div>
-                            <div>Operation</div>
                         </div>
                         <div id="memberNavigationArea">
                             
