@@ -22,8 +22,6 @@ async function updateStatistics(dashboardValue){
   updateBookData(bookData)
   updateMemberData(memberData)
   updateLoanData(loanData)
-  console.log("memberData: "+ JSON.stringify(memberData) )
-  console.log("loanData: "+ JSON.stringify(loanData) )
 }
 
 function updateBookData(dataset){
@@ -46,11 +44,15 @@ function updateLoanData(dataset){
 
 function updateMemberData(dataset){
   const totalMembers = document.getElementById("totalMembers")
-  const otherMembers = document.getElementById("otherMembers")
+  const staffMembers = document.getElementById("staffMembers")
+  const teacherMembers = document.getElementById("teacherMembers")
+  const publicMembers = document.getElementById("publicMembers")
   const students = document.getElementById("studentMembers")
 
   totalMembers.innerHTML = dataset.total
-  otherMembers.innerHTML = dataset.teachers + dataset.staffs + dataset.public 
+  staffMembers.innerHTML = dataset.staffs;
+  teacherMembers.innerHTML = dataset.teachers
+  publicMembers.innerHTML = dataset.public
   students.innerHTML = dataset.students
 }
 
