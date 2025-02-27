@@ -43,11 +43,6 @@ navigationPanel.innerHTML = `
             Loan
         </div>
 
-        <div id="cataloguePage" class="navigationTitle">
-            <div class="imageDiv"><img src=${cataloguePath}></div>
-            Catalogue
-        </div>
-
         <div id="settingsPage" class="navigationTitle">
             <div class="imageDiv"><img src=${settingsPath}></div>
             
@@ -67,7 +62,6 @@ const pageIds = [
     "collectionPage",
     "membersPage",
     "loanPage",
-    "cataloguePage",
     "settingsPage",
 ];
 const pageHtmls = [
@@ -76,7 +70,6 @@ const pageHtmls = [
     "./books/collection/collectionpage.html",
     "./members/allmembers/memberspage.html",
     "./loans/allLoans/loanpage.html",
-    "./catalogue/collection/cataloguepage.html",
     "./settings/settingspage.html"
 ]
 const pageSelectors = [
@@ -85,7 +78,6 @@ const pageSelectors = [
     ".collectionSelector",
     ".membersSelector",
     ".loansSelector",
-    ".catalogueSelector",
     ".settingsSelector",
   ];
 

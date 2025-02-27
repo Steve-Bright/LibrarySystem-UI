@@ -12,7 +12,7 @@ let win;
 const createWindow = () => {
     win = new BrowserWindow({
       minWidth: 930,
-      icon: __dirname + "/assets/rcs_app_logo.png",
+      icon: __dirname + "/rcs_app_logo.ico",
       title: "RCS Library Management System",
       webPreferences: {
         nodeIntegration: true,
