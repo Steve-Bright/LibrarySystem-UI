@@ -1,0 +1,32 @@
+<!DOCTYPE html> 
+    <head>
+        <link rel="stylesheet" href="../styles/universal.css">
+        <link rel="stylesheet" href="./css/settings.css">
+    </head>
+
+    <body>
+        <div id="navigationPanel" class="settingsSelector"></div>
+        <main>
+            <h1>Settings</h1>
+            <div>
+                <h3>Import your data</h3>
+                <form id="importCSVForm">
+                    <input type="radio" id="myanmarBook" name="category" value="myanmar" required>
+                    <label for="myanmarBook">Myanmar</label>
+                    <input type="radio" id="englishBook" name="category" value="english">
+                    <label for="englishBook" >English</label>
+                    <br>
+                    <input type="file" name="bookData" id="importCSVData" accept=".csv" required>
+                    <br>
+                    <button id="importCSV" type="submit">Process Import</button>
+                </form>
+
+            </div>
+        </main>
+
+    </body>
+
+    <script src="../js/universal.js" defer type="module"></script>
+    <script src="./settings.js" defer type="module"></script>
+    
+</html>

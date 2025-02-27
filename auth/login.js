@@ -9,6 +9,7 @@ loginForm.addEventListener("submit", async(e) => {
     window.showMessageApi.alertMsg(response.msg)
 
     if(statusCode === 200){
+        localStorage.clear()
         window.cookieApi.setCookie(response.result.token)
         window.sharingDataApi.sendData(response.result.userData)
         window.navigationApi.toAnotherPage("./dashboard/index.html")
