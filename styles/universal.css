@@ -170,7 +170,9 @@ button:hover{
 
 .mainTitle div{
     width: 82%;
-    margin: auto;
+    margin: auto 0;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .mainTitle select{

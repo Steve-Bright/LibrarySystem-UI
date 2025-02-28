@@ -41,19 +41,16 @@ addBookBtn.addEventListener("click", ()=> {
 function placeItemsInSearchForm(categoryData, searchedCache){
     searchedCache = JSON.parse(searchedCache)
     let searchedAccNo;
-    let searchedClassNo;
     if(categoryData == "myanmar"){
         searchedAccNo = convertEngToMM(searchedCache.accNo, true)
-        searchedClassNo = convertEngToMM(searchedCache.classNo)
     }else{
         searchedAccNo = searchedCache.accNo
-        searchedClassNo = searchedCache.classNo;
     }
     searchBookForm.bookTitleInput.value = searchedCache.bookTitle
     searchBookForm.accNoInput.value = searchedAccNo
     searchBookForm.authorInput.value = searchedCache.sor
     searchBookForm.publisherInput.value = searchedCache.publisher
-    searchBookForm.classNoInput.value = searchedClassNo
+    searchBookForm.subjectInput.value = searchedCache.subject
     searchBookForm.isbnInput.value = searchedCache.isbn
 }
 
@@ -162,7 +159,7 @@ async function searchBookFunction(categoryData){
             accNo: convertMMToEng(e.target.accNoInput.value, true),
             sor: e.target.authorInput.value,
             publisher: e.target.authorInput.value,
-            classNo: convertMMToEng(e.target.classNoInput.value),
+            subject: e.target.subjectInput.value,
             isbn: e.target.isbnInput.value
         }
         sessionStorage.setItem("searchBookData", JSON.stringify(searchData))

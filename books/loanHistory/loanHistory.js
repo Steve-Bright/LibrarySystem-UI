@@ -1,5 +1,5 @@
 import { getBookLoanHis } from "../../controllers/book.controller.js"
-import { buildMemberNavigation } from "../../utils/extra.js"
+import { buildLoanHistoryNavigation } from "../../utils/extra.js"
 const backToCollection = document.getElementById("backToCollection")
 const totalData = document.getElementById("totalData")
 const loanNavigationArea = document.getElementById("loanNavigationArea")
@@ -22,14 +22,14 @@ async function updateLoanData(page = 1){
 
     if(totalPages > 1){
         if(page == 1){
-            buildMemberNavigation(loanNavigationArea, false, true, index, updateLoanData, updateNewIndex)
+            buildLoanHistoryNavigation(loanNavigationArea, false, true, index, updateLoanData, updateNewIndex)
         }else if (page === totalPages){
-            buildMemberNavigation(loanNavigationArea, true, false, index, updateLoanData, updateNewIndex)
+            buildLoanHistoryNavigation(loanNavigationArea, true, false, index, updateLoanData, updateNewIndex)
         }else{
-            buildMemberNavigation(loanNavigationArea, true, true, index, updateLoanData, updateNewIndex)
+            buildLoanHistoryNavigation(loanNavigationArea, true, true, index, updateLoanData, updateNewIndex)
         }
     }else{
-        buildMemberNavigation(loanNavigationArea, false, false, index, updateLoanData, updateNewIndex)
+        buildLoanHistoryNavigation(loanNavigationArea, false, false, index, updateLoanData, updateNewIndex)
     }
 
     let totalLoanData = result.result.items;

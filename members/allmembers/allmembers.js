@@ -2,40 +2,50 @@ import { getAllMembersFunction, searchMemberFunction } from "../../controllers/m
 import {buildMemberNavigation} from "../../utils/extra.js"
 
 const filePath = window.imagePaths.shareFilePath();
+const memberType = document.getElementById("memberType")
 const memberNavigationArea = document.getElementById("memberNavigationArea");
 const memberDataEl = document.getElementById("memberData");
 const searchMemberForm = document.getElementById("searchMemberForm")
 const addMemberBtn = document.getElementById("addMemberBtn");
+
 let index = 1;
 let searchedHistory = sessionStorage.getItem("searchMemberResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberData")
 const memberCards = document.getElementById("memberCards")
+let memberTypeValue = cacheMemberType()
+memberType.value = memberTypeValue;
 
 await searchMemberFormFunction()
 
 if(!searchedHistory){
-  updateMemberData()
+  updateMemberData(memberTypeValue)
 }else{
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
 }
 
-async function updateMemberData(page = 1){
-  let result = await getAllMembersFunction(page);
+memberType.addEventListener("change", () => {
+  updateMemberData(memberType.value)
+})
+
+async function updateMemberData(memberValue, page = 1){
+  memberTypeValue = memberValue;
+  let memberTypeData = cacheMemberType(memberValue)
+  let result = await getAllMembersFunction(memberTypeData, page);
   let totalLength = result.result.totalItems;
   let totalPages = result.result.totalPages;
   totalData.innerText = `Total Members: ${totalLength}`
 
   if(totalPages > 1){
     if(page == 1){
-       buildMemberNavigation(memberNavigationArea, false, true, index, updateMemberData, updateNewIndex)
+       buildMemberNavigation(memberNavigationArea, false, true, memberTypeValue, index, updateMemberData, updateNewIndex)
     }else if (page === totalPages){
-      buildMemberNavigation(memberNavigationArea, true, false, index, updateMemberData, updateNewIndex)
+      buildMemberNavigation(memberNavigationArea, true, false, memberTypeValue, index, updateMemberData, updateNewIndex)
     }else{
-      buildMemberNavigation(memberNavigationArea, true, true, index, updateMemberData, updateNewIndex)
+      buildMemberNavigation(memberNavigationArea, true, true, memberTypeValue, index, updateMemberData, updateNewIndex)
     }
   }else{
-     buildMemberNavigation(memberNavigationArea, false, false, index, updateMemberData, updateNewIndex)
+     buildMemberNavigation(memberNavigationArea, false, false, memberTypeValue, index, updateMemberData, updateNewIndex)
   }
 
   let totalMemberData = result.result.items
@@ -130,6 +140,18 @@ searchMemberForm.addEventListener("reset", () => {
   sessionStorage.removeItem("searchMemberResult")
   window.location.reload()
 })
+
+function cacheMemberType(booleanValue = null){
+  if(booleanValue !== null){
+    sessionStorage.setItem("memberType", booleanValue)
+  }
+
+  let cachedMemberTypeValue = sessionStorage.getItem("memberType")
+  if(cachedMemberTypeValue === null){
+    return "all"
+  }
+  return cachedMemberTypeValue;
+}
 
 async function searchMemberFormFunction(){
   searchMemberForm.addEventListener("submit", async(e) => {

@@ -59,7 +59,7 @@ borrowMemberButton.addEventListener('click', () => {
     if(!response){
         const result = await deleteMember(detailedMember.id)
         window.showMessageApi.alertMsg(result.msg)
-        window.navigationApi.toAnotherPage("./books/allmembers/memberspage.html")
+        window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
     }
 })
 

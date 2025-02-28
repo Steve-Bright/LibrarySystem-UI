@@ -63,14 +63,14 @@ async function updateLoanData(loanValue, page = 1){
 
     if(totalPages > 1){
         if(page == 1){
-            buildMemberNavigation(loanNavigationArea, false, true, index, updateLoanData, updateNewIndex)
+            buildMemberNavigation(loanNavigationArea, false, true, index, loanTypeValue,  updateLoanData, updateNewIndex)
         }else if (page === totalPages){
-            buildMemberNavigation(loanNavigationArea, true, false, index, updateLoanData, updateNewIndex)
+            buildMemberNavigation(loanNavigationArea, true, false, index, loanTypeValue,  updateLoanData, updateNewIndex)
         }else{
-            buildMemberNavigation(loanNavigationArea, true, true, index, updateLoanData, updateNewIndex)
+            buildMemberNavigation(loanNavigationArea, true, true, index, loanTypeValue, updateLoanData, updateNewIndex)
         }
     }else{
-        buildMemberNavigation(loanNavigationArea, false, false, index, updateLoanData, updateNewIndex)
+        buildMemberNavigation(loanNavigationArea, false, false, index, loanTypeValue, updateLoanData, updateNewIndex)
     }
 
     let totalLoanData = result.result.items;
