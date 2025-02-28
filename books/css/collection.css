@@ -61,7 +61,7 @@
 
 #searchBookDiv form > div:nth-child(n){
     display: flex;
-    margin-top: 1em;
+    margin-top: 0.4em;
 }
 
 #searchBookDiv form > div:nth-child(n) > div{
@@ -69,15 +69,17 @@
 }
 
 #searchBookDiv form > div:nth-child(n) > div > label{
-    /* background-color: red; */
+    height: 2.5em;
     font-weight: lighter;
     display: inline-block;
     width: 35%;
+    margin-top: 0.5em;
     text-align: center;
 }
 
 #searchBookDiv form > div:nth-child(n) > div > input{
-    height: 70%;
+    /* height: 70%; */
+    height: 2.5em;
     margin: 1% 0;
     width: 65%;
     float: right;
