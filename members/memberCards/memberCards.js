@@ -1,6 +1,7 @@
 import { getAllMembersFunction, searchMemberFunction } from "../../controllers/member.controller.js"
 import { buildCardDesign, attachMemberCardToDiv, buildMemberNavigation } from "../../utils/extra.js"
 
+const memberType = document.getElementById("memberType")
 const backToCollection = document.getElementById("backToCollection")
 const printPreview = document.getElementById("printPreview")
 const totalData = document.getElementById("totalData")
@@ -12,6 +13,8 @@ let searchedHistory = sessionStorage.getItem("searchMemberCardResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberCardData")
 let printMaterials = localStorage.getItem("toPrintMemberCards")
 const currentFile = window.imagePaths.shareCurrentFile();
+let memberTypeValue = cacheMemberType()
+memberType.value = memberTypeValue;
 
 let cardIds = []
 await searchMemberFormFunction()
@@ -21,11 +24,15 @@ if(printMaterials){
 }
 
 if(!searchedHistory){
-  await updateMemberCardData()
+  await updateMemberCardData(memberTypeValue)
 }else{
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
 }
+
+memberType.addEventListener("change", () => {
+  updateMemberCardData(memberType.value)
+})
 
 backToCollection.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
@@ -54,8 +61,10 @@ printPreview.addEventListener("click",() => {
   document.close()
 })
 
-async function updateMemberCardData(page = 1){
-  let memberData  = await getAllMembersFunction(page)
+async function updateMemberCardData(memberValue, page = 1){
+  memberTypeValue = memberValue;
+  let memberTypeData = cacheMemberType(memberValue)
+  let memberData  = await getAllMembersFunction(memberTypeData, page)
   let totalMembersLength = memberData.result.totalItems;
   let totalMembers = memberData.result.items;
   let totalPages = memberData.result.totalPages;
@@ -69,14 +78,14 @@ async function updateMemberCardData(page = 1){
 
   if(totalMembersLength > 1){
     if(page == 1){
-      buildMemberNavigation(memberNavigationArea, false, true, index, updateMemberCardData, updateNewIndex)
+      buildMemberNavigation(memberNavigationArea, false, true, memberTypeValue,  index, updateMemberCardData, updateNewIndex)
     }else if(page == totalPages){
-      buildMemberNavigation(memberNavigationArea, true, false, index, updateMemberCardData, updateNewIndex)
+      buildMemberNavigation(memberNavigationArea, true, false, memberTypeValue, index, updateMemberCardData, updateNewIndex)
     }else{
-      buildMemberNavigation(memberNavigationArea, true, true, index, updateMemberCardData, updateNewIndex)
+      buildMemberNavigation(memberNavigationArea, true, true, memberTypeValue, index, updateMemberCardData, updateNewIndex)
     }
   }else{
-    buildMemberNavigation(memberNavigationArea, false, false, index,  updateMemberCardData, updateNewIndex)
+    buildMemberNavigation(memberNavigationArea, false, false, memberTypeValue, index,  updateMemberCardData, updateNewIndex)
   }
   memberCardSelection()
 }
@@ -114,6 +123,19 @@ searchMemberForm.addEventListener("reset", () => {
   sessionStorage.removeItem("searchMemberCardData")
   window.location.reload()
 })
+
+function cacheMemberType(booleanValue = null){
+  if(booleanValue !== null){
+    sessionStorage.setItem("memberCardMemberType", booleanValue)
+  }
+
+  let cachedMemberTypeValue = sessionStorage.getItem("memberCardMemberType")
+  if(cachedMemberTypeValue === null){
+    return "all"
+  }
+
+  return cachedMemberTypeValue;
+}
 
 async function searchMemberFormFunction(){
   searchMemberForm.addEventListener("submit", async(e) => {

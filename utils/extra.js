@@ -87,7 +87,48 @@ export function buildBarcodeCollectionView(views, totalData, tr, td, trArrays){
     return trArrays;
 }
 
-export async function buildMemberNavigation(area, backward, forward, index, updateFunction, onIndexChange){
+//this is used to navigate both member and loan. 
+export async function buildMemberNavigation(area, backward, forward, memberType, index, updateFunction, onIndexChange){
+    area.innerHTML = ``
+
+    if(backward == true){
+        const backwardButton = document.createElement("img")
+        backwardButton.src = backwardButtonIcon
+        backwardButton.classList.add("backButton")
+        backwardButton.id = "collectionBackward"
+        area.appendChild(backwardButton)
+    } 
+
+    if(forward == true){
+        const forwardButton = document.createElement("img")
+        forwardButton.src = forwardButtonIcon
+        forwardButton.classList.add("backButton")
+        forwardButton.id = "collectionForward"
+        area.appendChild(forwardButton)
+    }
+
+    const collectionBackward = document.getElementById("collectionBackward")
+    const collectionForward = document.getElementById("collectionForward")
+    
+    if(collectionForward){
+        collectionForward.addEventListener("click", () => {
+            index++;
+            updateFunction(memberType, index)
+            onIndexChange(index)
+        })
+    }
+    
+    if(collectionBackward){
+        collectionBackward.addEventListener("click", () => {
+            index --;
+            updateFunction(memberType, index)
+            onIndexChange(index)
+        })
+    }
+    
+}
+
+export async function buildLoanHistoryNavigation(area, backward, forward, index, updateFunction, onIndexChange){
     area.innerHTML = ``
 
     if(backward == true){

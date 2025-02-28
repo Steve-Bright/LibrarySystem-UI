@@ -38,14 +38,14 @@ async function updateMemberData(memberValue, page = 1){
 
   if(totalPages > 1){
     if(page == 1){
-       buildMemberNavigation(memberNavigationArea, false, true, index, updateMemberData, updateNewIndex)
+       buildMemberNavigation(memberNavigationArea, false, true, memberTypeValue, index, updateMemberData, updateNewIndex)
     }else if (page === totalPages){
-      buildMemberNavigation(memberNavigationArea, true, false, index, updateMemberData, updateNewIndex)
+      buildMemberNavigation(memberNavigationArea, true, false, memberTypeValue, index, updateMemberData, updateNewIndex)
     }else{
-      buildMemberNavigation(memberNavigationArea, true, true, index, updateMemberData, updateNewIndex)
+      buildMemberNavigation(memberNavigationArea, true, true, memberTypeValue, index, updateMemberData, updateNewIndex)
     }
   }else{
-     buildMemberNavigation(memberNavigationArea, false, false, index, updateMemberData, updateNewIndex)
+     buildMemberNavigation(memberNavigationArea, false, false, memberTypeValue, index, updateMemberData, updateNewIndex)
   }
 
   let totalMemberData = result.result.items
