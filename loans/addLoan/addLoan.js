@@ -34,6 +34,7 @@ if(borrowMember){
              <h3>Member Info </h3>
           </div>
           <span id="goToMemberDetails">Details</span>
+          <button id="clearMember">Clear</button>
           ${bannedArea}
         </div>
         
@@ -73,6 +74,14 @@ if(borrowMember){
             window.navigationApi.toAnotherPage("./members/viewMember/viewMember.html")
         })
     }
+
+    const clearMemberBtn = document.getElementById("clearMember")
+    if(clearMemberBtn){
+      clearMemberBtn.addEventListener("click", () => {
+        localStorage.removeItem("borrowMember")
+        window.location.reload()
+      })
+    }
 }
 
 if(borrowBook){
@@ -83,6 +92,7 @@ if(borrowBook){
           <h2>Book Info</h2>
         </div>
         <span id="goToBookDetails">Details</span>
+        <button id="clearBook">Clear</button>
       </div>
       
       <div id="bookContents">
@@ -120,6 +130,14 @@ if(borrowBook){
           sessionStorage.setItem("bookId", JSON.stringify(detailedBook))
           window.navigationApi.toAnotherPage("./books/viewBook/viewBook.html")
       })
+  }
+
+  const clearBookBtn = document.getElementById("clearBook")
+  if(clearBookBtn){
+    clearBookBtn.addEventListener("click", () => {
+      localStorage.removeItem("borrowBook")
+      window.location.reload()
+    })
   }
   
 }
