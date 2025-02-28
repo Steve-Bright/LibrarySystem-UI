@@ -170,6 +170,7 @@
         const searchBookForm = document.getElementById("searchBookForm")
         
         scanBookBtn.addEventListener("click",() => {
+            inputField.value = ""
             inputField.focus();
         })
 
@@ -195,27 +196,26 @@
         })
         
         inputField.addEventListener("change", async () => {
-           
+            scanMessage.innerHTML = ``
             let searchData = inputField.value.split(",")
             let category = searchData[0]
             let accNo = searchData[1]
-
-            //PLEASE FIX ERRORRRRRRRRRRRRRR
-            console.log("category " + category  + "accNo " + accNo)
-
                 
             if(category && accNo){
                 let detailedBook = await getDetailedBookFromAccNo(category, accNo)
                 if(detailedBook.result){
-                    showResults(detailedBook.result)
+                    updateBookHeading(category);
+                    showEachBook(bookDataEl, detailedBook.result)
+                }else{
+                    updateBookHeading(category);
+                    bookDataEl.innerHTML = ` <tr> <td colspan="8">No Data Found</td></tr>`
                 }
-                
-                // window.showMessageApi.alertMsg(JSON.stringify(detailedBook))
-                // localStorage.setItem("detailedBookData", JSON.stringify(detailedBook.result)) 
-                // myanmar,CC-00006window.navigationApi.toAnotherPage("viewBook.html")
+
                 inputField.blur()
-                scanMessage.innerHTML = `Scan Complete`
                 inputField.value = "";
+            }else {
+                                bookDataEl.innerHTML = `
+                <tr> <td colspan="8">No Data Found</td></tr>`
             }
                 
         });   

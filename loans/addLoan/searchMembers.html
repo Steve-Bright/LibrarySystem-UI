@@ -160,6 +160,7 @@
         const searchMemberForm = document.getElementById("searchMemberForm")
 
         scanMemberBtn.addEventListener("click", () => {
+            inputField.value = ""
             inputField.focus()
         })
 
@@ -181,6 +182,7 @@
         })
 
         inputField.addEventListener("change", async() => {
+                scanMessage.innerHTML = ""
                 let memberId = inputField.value;
                 let detailedMember = await getDetailedMemberFromMemberId(memberId)
 
@@ -188,7 +190,9 @@
                 if(detailedMember && detailedMember.result){
                     showResults(detailedMember.result)
                 }else{
-                    memberDataEl.innerHTML = "No Data Found"
+                    memberDataEl.innerHTML = `
+                    <tr> <td colspan="8">No Data Found</td></tr>
+                    `
                 }
         })
 
