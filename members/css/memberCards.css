@@ -46,7 +46,7 @@
 
 #searchMemberDiv form > div:nth-child(n){
     display: flex;
-    margin-top: 1em;
+    margin-top: 0.4em;
 }
 
 #searchMemberDiv form > div:nth-child(n) > div{
@@ -55,14 +55,17 @@
 
 #searchMemberDiv form > div:nth-child(n) > div > label{
     /* background-color: red; */
+    height: 2.5em;
     font-weight: lighter;
     text-align: center;
+    margin-top: 0.5em;
     display: inline-block;
     width: 35%
 }
 
 #searchMemberDiv form > div:nth-child(n) > div > input{
-    height: 70%;
+    /* height: 70%; */
+    height: 2.5em;
     margin: 1% 0;
     width: 65%;
     float: right;
@@ -70,7 +73,7 @@
 }
 
 #searchMemberDiv form > div:nth-child(n) > div > select{
-  height: 70%;
+  height: 2.5em;
   margin: 1% 0;
   width: 65%;
   float: right;
