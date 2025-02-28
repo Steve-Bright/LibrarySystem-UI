@@ -1,8 +1,14 @@
 <!DCOTYPE html>
     <head>
         <style>
+            @font-face {
+                font-family: "Kadwa";
+                src: url("../../fonts/Kadwa/Kadwa-Regular.ttf")
+            }
+
             *{
                 background-color: #D9D9D9;
+                font-family: "Kadwa"
             }
 
             button{
@@ -70,6 +76,7 @@
             }
 
             .tableFormat th, td{
+                padding: 0.5em 0;
                 border: 1px solid black;
                 background-color: white;
             }
@@ -165,17 +172,16 @@
             let memberId = e.target.memberId.value;
             let detailedMember = await getDetailedMemberFromMemberId(memberId)
 
-            // console.log("this is detailed member" + detailedMember)
             if(detailedMember && detailedMember.result){
                 showResults(detailedMember.result)
             }else{
-                memberDataEl.innerHTML = "No Data Found"
+                memberDataEl.innerHTML = `
+                <tr> <td colspan="8">No Data Found</td></tr>`
             }
         })
 
         inputField.addEventListener("change", async() => {
                 let memberId = inputField.value;
-                console.log("member id " + memberId)
                 let detailedMember = await getDetailedMemberFromMemberId(memberId)
 
                 // console.log("this is detailed member" + detailedMember)
@@ -189,7 +195,8 @@
         function showResults(memberData){
             
             let imagePath = filePath+ memberData.photo
-                // console.log("this is english category")
+            let memberExpireDate = new Date(memberData.expiryDate)
+
                
                 memberDataEl.innerHTML = `
                     <tr>
@@ -202,7 +209,7 @@
                         <td>${memberData.gender}</td>
                         <td>${memberData.memberType}</td>
                         <td>${memberData.phone }</td>
-                        <td>${memberData.expiryDate}</td>
+                        <td>${memberExpireDate.toDateString()}</td>
                     </tr>
                 `
             
