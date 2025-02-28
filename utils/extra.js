@@ -1,3 +1,4 @@
+import { convertMMToEng, convertEngToMM } from "../utils/burmese.mapper.js"
 let currentDirectory = window.sharingDataApi.currentDirectory();
 let forwardButtonIcon = currentDirectory + "/assets/arrow_right.png"
 let backwardButtonIcon = currentDirectory + "/assets/arrow.png"
@@ -53,12 +54,23 @@ export function buildBarcodeCollectionView(views, totalData, tr, td, trArrays){
         }
 
         td = document.createElement("td")
+        let accessionNumber;
+        let classNumber;
+
+        if(totalData[i].category == "myanmar"){
+            accessionNumber = convertEngToMM(totalData[i].accNo)
+            classNumber = convertEngToMM(totalData[i].classNo)
+        }else{
+            accessionNumber = totalData[i].accNo
+            classNumber = totalData[i].classNo;
+        }
+
         let barcode = `
             <div class="eachBookCallNo" id=${totalData[i].accNo}>
                 <div class="callNo">
-                    Acc No: ${totalData[i].accNo} <br>
+                    ${accessionNumber} <br>
                     ${totalData[i].initial}<br>
-                    Class No: ${totalData[i].classNo}
+                    ${classNumber}
                 </div>
                 <div class="barcode">
                     <img src="${filePath}${totalData[i].barcode}">
