@@ -111,11 +111,11 @@ function showEachLoan(placerDiv, loanData){
     });
     const newRow = document.createElement("tr")
     newRow.innerHTML = `
-      <td>${eachLoan.memberId.name}</td>            
-      <td>${eachLoan.memberId.memberId}</td>
-      <td>${eachLoan.bookId.bookTitle}</td>
-      <td>${eachLoan.bookId.callNo}</td>
-      <td>${eachLoan.bookId.category}</td>
+      <td>${eachLoan.name}</td>            
+      <td>${eachLoan.memberId}</td>
+      <td>${eachLoan.bookTitle}</td>
+      <td>${eachLoan.callNo}</td>
+      <td>${eachLoan.category}</td>
       <td>${formattedLoanDate}</td>
       <td>${formattedDueDate}</td>
       <td><button class="detailedLoan" id=${eachLoan._id}>View Details </button></td>

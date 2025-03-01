@@ -138,19 +138,50 @@ function updateMemberUi(){
   delete editedMember.loanBooks;
   delete editedMember.barcode;
   const memberModification = document.getElementById("memberModification")
-  uiTransform(cleanedMemberData.memberType, memberModification)
+  uiTransform(cleanedMemberData.memberType, cleanedMemberData.nrc, memberModification)
   updateButtonFunctionality(memberModification)
+  let regionNumberValue = "1";
+  let nrcPlaceValue;
+  let nrcTypeValue = "N"; //default value
+  let mainNumValue;
 
   viewInputs.forEach((eachInput) => {
     eachInput.addEventListener("change", () => {
-      editedMember[eachInput.id] = eachInput.value
+      switch(eachInput.id){
+        case("regionNumber"):
+          regionNumberValue = eachInput.value;
+          break;
+        case("nrcPlaceView"):
+          nrcPlaceValue = eachInput.value;
+          break;
+        case("nrcType"):
+          nrcTypeValue = eachInput.value;
+          break;
+        case("mainNum"):
+          mainNumValue = eachInput.value;
+          break;
+        default:
+          editedMember[eachInput.id] = eachInput.value
+      }
     })
   })
 
-  // const memberPhoto = document.getElementById("photo")
+  viewMemberForm.addEventListener("keydown", (e) => {
+    if(e.key === "Enter"){
+      e.preventDefault()
+    }
+  })
 
   viewMemberForm.addEventListener("submit", async(e) => {
     e.preventDefault()
+
+    if(regionNumberValue && nrcPlaceValue && nrcTypeValue && mainNumValue){
+      let nrcData = `${regionNumberValue}/${nrcPlaceValue}(${nrcTypeValue})${mainNumValue}`
+      if(nrcData){
+        editedMember.nrc = nrcData
+      }
+    }
+      
     if(photoChange){
       editedMember.editedPhoto = true;
       editedMember.photo = document.getElementById("photo").files[0]
@@ -174,7 +205,7 @@ function updateMemberUi(){
   })
 }
 
-function uiTransform(memberType, memberModification){
+function uiTransform(memberType, memberNRC, memberModification){
 
   editButtonsArea.innerHTML = `
     <button type="button" id="blockButton"> Block </button>
@@ -187,7 +218,7 @@ function uiTransform(memberType, memberModification){
     eachInput.classList.add("addMemberFormat")
 
     if(eachInput.classList.contains("viewNRCFormat")){
-      if(memberType == "student"){
+      if(memberType == "student" && !memberNRC){
         eachInput.classList.remove("viewNRCFormat")
       }
     }

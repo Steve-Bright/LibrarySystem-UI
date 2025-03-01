@@ -120,4 +120,5 @@ h4:hover{
   padding-left: 1em;
   width: 70%;
   border: none;
+  pointer-events: none;   
 }
