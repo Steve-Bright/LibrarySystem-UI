@@ -65,7 +65,7 @@ tr:hover{
 
 #searchLoanDiv form > div:nth-child(n){
   display: flex;
-  margin-top: 1em;
+  margin-top: 0.4em;
 }
 
 #searchLoanDiv form > div:nth-child(n) > div{
@@ -74,14 +74,16 @@ tr:hover{
 
 #searchLoanDiv form > div:nth-child(n) > div > label{
   /* background-color: red; */
+  height: 2.5em;
   font-weight: lighter;
   text-align: center;
   display: inline-block;
+  margin-top: 0.5em;
   width: 35%
 }
 
 #searchLoanDiv form > div:nth-child(n) > div > input{
-  height: 70%;
+  height: 2.5em;
   margin: 1% 0;
   width: 65%;
   float: right;

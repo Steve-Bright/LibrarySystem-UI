@@ -172,11 +172,9 @@ function barcodeSelection(category){
         })
 
         if(selectedCallNums.includes(objectData) && !eachCallNum.classList.contains("selectedCallNo")){
-            console.log('this conditio must be fulfilled')
             eachCallNum.classList.add("selectedCallNo")
         }
 
-        console.log('this shoudl run ')
         eachCallNum.addEventListener('pointerdown', ()=> {
             if(selectedCallNums.includes(objectData)){
                 let selectedIndex = selectedCallNums.indexOf(objectData)

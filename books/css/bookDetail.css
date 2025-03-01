@@ -18,18 +18,19 @@
 
 #addBookForm div label, #viewBookForm div label{
   width: 40%;
+  margin: auto 0px auto 1em;
 }
 
 #addBookForm div input, #viewBookForm div input{
   /* width: 50%; */
-  height: 1.7em;
+  height: 2.5em;
   margin: 1% 0;
   border-radius: 5px;
 }
 
 .addBookFormat{
-  width: 50%;
-  height: 1.7em;
+  width: 60%;
+  /* height: 2em; */
   margin: 1% 0;
   border-radius: 5px;
   border-width: 2px;

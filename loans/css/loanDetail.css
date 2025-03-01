@@ -1,6 +1,7 @@
 h4{
   color: #1E3FAD;
   font-weight: bold;
+  display: inline;
 }
 
 h4:hover{
@@ -54,11 +55,18 @@ h4:hover{
   font-weight: bold;
 }
 
-#goToMemberDetails, #goToBookDetails, #loanDetailsMiniHeading{
+#goToMemberDetails, #goToBookDetails, #loanDetailsMiniHeading, #clearMember, #clearBook{
   margin: auto 0;
 }
 
-#goToMemberDetails:hover, #goToBookDetails:hover, #loanDetailsMiniHeading:hover{
+#clearMember, #clearBook{
+  width: 6.5em;
+  height: 2em;
+  margin-left: 15em;
+  background-color: #C80003;
+}
+
+#goToMemberDetails:hover, #goToBookDetails:hover, #loanDetailsMiniHeading:hover, #clearMember:hover, #clearBook:hover{
   cursor: pointer;
   text-decoration: underline;
 }
@@ -80,6 +88,7 @@ h4:hover{
 }
 
 #bookCover, #memberCover{
+  margin: auto 0;
   box-sizing: border-box;
   width: 15%;
 }

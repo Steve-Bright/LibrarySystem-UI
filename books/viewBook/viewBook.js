@@ -54,7 +54,7 @@ if(cleanedBookData["category"] == "english"){
               <input type="text" id="isbn" name="isbn" class="viewBookFormat">
               `
 }
-const viewInputs = document.querySelectorAll("#viewBookForm input, #viewBookForm textarea")
+const viewInputs = document.querySelectorAll("#viewBookForm input, #viewBookForm textarea, #includeCD")
     let index = 0; 
 
 let accNo;
@@ -83,7 +83,7 @@ Object.keys(cleanedBookData).forEach((eachKey) => {
             }else if(eachKey == "callNo" && eachInput.id == "callNo"){
                 eachInput.value = callNo;
             }else{
-                eachInput.value = cleanedBookData[eachKey] ? cleanedBookData[eachKey] : "-"
+                eachInput.value = cleanedBookData[eachKey]
             }
         }
     }

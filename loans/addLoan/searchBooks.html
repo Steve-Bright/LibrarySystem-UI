@@ -1,8 +1,15 @@
 <!DCOTYPE html>
     <head>
         <style>
+
+            @font-face {
+                font-family: "Kadwa";
+                src: url("../../fonts/Kadwa/Kadwa-Regular.ttf")
+            }
+
             *{
                 background-color: #D9D9D9;
+                font-family: "Kadwa"
             }
 
             button{
@@ -29,6 +36,7 @@
             #searchBookForm select{
                 width: 7em;
                 height: 2em;
+                background-color: white;
             }
 
             #searchBook{
@@ -75,7 +83,9 @@
             }
 
             .tableFormat th, td{
+                padding: 0.5em 0;
                 border: 1px solid black;
+                background-color: white;
             }
 
             #scanBook{
@@ -148,6 +158,7 @@
 
     <script type="module" defer>
         import {getDetailedBookFromAccNo} from "../../controllers/book.controller.js"
+        import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
         const bookDataEl = document.getElementById("bookData")
         const scanBookBtn = document.getElementById("scanBookBtn")
         const inputField = document.getElementById("scanBook");
@@ -159,6 +170,7 @@
         const searchBookForm = document.getElementById("searchBookForm")
         
         scanBookBtn.addEventListener("click",() => {
+            inputField.value = ""
             inputField.focus();
         })
 
@@ -169,47 +181,128 @@
 
         searchBookForm.addEventListener("submit", async(e)=> {
             e.preventDefault();
-            let bookAccNo = e.target.bookAccNo.value;
+            let bookAccNo = convertMMToEng(e.target.bookAccNo.value);
             let category = e.target.collection.value;
             let detailedBook = await getDetailedBookFromAccNo(category, bookAccNo)
             if(detailedBook.result){
-                showResults(detailedBook.result)
+                updateBookHeading(category);
+                showEachBook(bookDataEl, detailedBook.result)
+                // showResults(detailedBook.result)
             }else{
-                bookDataEl.innerHTML = "No Data Found"
+                updateBookHeading(category)
+                bookDataEl.innerHTML = `
+                <tr> <td colspan="8">No Data Found</td></tr>`
             }
         })
         
         inputField.addEventListener("change", async () => {
-           
+            scanMessage.innerHTML = ``
             let searchData = inputField.value.split(",")
             let category = searchData[0]
             let accNo = searchData[1]
-
-            //PLEASE FIX ERRORRRRRRRRRRRRRR
-            console.log("category " + category  + "accNo " + accNo)
-
                 
             if(category && accNo){
                 let detailedBook = await getDetailedBookFromAccNo(category, accNo)
                 if(detailedBook.result){
-                    showResults(detailedBook.result)
+                    updateBookHeading(category);
+                    showEachBook(bookDataEl, detailedBook.result)
+                }else{
+                    updateBookHeading(category);
+                    bookDataEl.innerHTML = ` <tr> <td colspan="8">No Data Found</td></tr>`
                 }
-                
-                // window.showMessageApi.alertMsg(JSON.stringify(detailedBook))
-                // localStorage.setItem("detailedBookData", JSON.stringify(detailedBook.result)) 
-                // myanmar,CC-00006window.navigationApi.toAnotherPage("viewBook.html")
+
                 inputField.blur()
-                scanMessage.innerHTML = `Scan Complete`
                 inputField.value = "";
+            }else {
+                                bookDataEl.innerHTML = `
+                <tr> <td colspan="8">No Data Found</td></tr>`
             }
                 
-        });      
+        });   
+        
+        function updateBookHeading(categoryData){
+            const bookHeadings = document.getElementById("bookHeadings")
+            if(categoryData == "english"){
+                bookHeadings.innerHTML = `
+                    <tr>
+                        <th>Select</th>
+                        <th>Acc No.</th>
+                        <th>Book Cover</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Class No</th>
+                        <th>ISBN</th>
+                        <th>Publisher</th>
+                    </tr>
+                `
+            }else if(categoryData == "myanmar"){
+                bookHeadings.innerHTML = `
+                    <tr>
+                        <th>Select</th>
+                        <th>Acc No.</th>
+                        <th>Book Cover</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Class No</th>
+                        <th colspan="2">Publisher</th>
+                    </tr>
+                `
+            }
+        }
 
+        function showEachBook(placerDiv, bookData){
+                placerDiv.innerHTML = ""
+                let accNo;
+                let classNo;
+                if(!bookData.isbn){
+                    accNo = convertEngToMM(bookData.accNo, true)
+                    classNo = convertEngToMM(bookData.classNo, true)
+                }else{
+                    accNo = bookData.accNo
+                    classNo = bookData.classNo
+                }
+                let conditionalCell = bookData.isbn 
+                        ? `
+                        <td>${bookData.isbn}</td>
+                        <td>${bookData.publisher || "-"}</td>
+                        `
+                        : `
+                        <td colspan="2">${bookData.publisher || "-"}</td>` 
+                const newRow = document.createElement("tr")
+                let imagePath = filePath + bookData.bookCover
+                newRow.innerHTML = 
+                    `
+                        <td>
+                            <input type="checkbox" value=true id="selectBookCheckBox">
+                        </td>
+                        <td>${accNo}</td>
+                        <td><img src="${imagePath}" class="displayBookCover"></td> 
+                        <td>${bookData.bookTitle}</td>
+                        <td>${bookData.sor}</td>
+                        <td>${classNo}</td>
+                        ${conditionalCell}
+                    `
+                    placerDiv.appendChild(newRow) 
+                    
+            const selectBookCheckBox = document.getElementById("selectBookCheckBox")
+            selectBookCheckBox.focus()
+            const errorMessage = document.getElementById('errorMessage')
+            selectBookBtn.addEventListener("click", () => {
+                if(selectBookCheckBox.checked === true){
+                    localStorage.setItem("borrowBook", JSON.stringify(bookData))
+                    window.navigationApi.loadWindow("./loans/addLoan/addLoan.html")
+                    // window.showMessageApi.alertMsg("added!")
+                    // window.opener.location.reload();
+                    window.close()
+                }else{
+                    errorMessage.innerHTML = `
+                        <h3 style="color: red;"> Please select a book </h3>
+                    `
+                }
+            })            
+        }
         function showResults(bookData){
             const bookHeadings = document.getElementById("bookHeadings")
-            
-            console.log("show results appeared " +JSON.stringify(bookData))
-            console.log(bookData.category)
             
             let imagePath = filePath+ bookData.bookCover
             if(bookData.category == "english"){

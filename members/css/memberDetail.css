@@ -67,17 +67,17 @@
 
 #addMemberForm div label, #viewMemberForm div label, #membershipDetail div label{
   width: 40%;
+  margin: auto 0px auto 1em;
 }
 
 #addMemberForm div input, datalist, #viewMemberForm div input, #membershipDetail div input{
-  height: 1.7em;
+  height: 2.5em;
   margin: 1% 0;
   border-radius: 5px;
 }
 
 .addMemberFormat{
-  width: 50%;
-  height: 1.7em;
+  width: 60%;
   margin: 1% 0;
   border-radius: 5px;
   border-width: 2px;
