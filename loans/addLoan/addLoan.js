@@ -1,4 +1,5 @@
 import { addLoanFunction } from "../../controllers/loan.controller.js";
+import { convertEngToMM } from "../../utils/burmese.mapper.js";
 import Loan from "../../utils/loan.model.mjs";
 const addMemberArea = document.getElementById('addMemberArea')
 const backToCollection = document.getElementById("backToCollection")
@@ -86,6 +87,12 @@ if(borrowMember){
 
 if(borrowBook){
   addBookArea.classList.add("borrowBookDesign")
+  let callNumberValue;
+  if(borrowBook.category == "myanmar"){
+    callNumberValue = convertEngToMM(borrowBook.callNo);
+  }else{
+    callNumberValue = borrowBook.callNo;
+  }
   addBookArea.innerHTML = `
       <div id="bookHeading">
         <div>
@@ -109,7 +116,7 @@ if(borrowBook){
 
             <div>
               <label for="callNo">Call No </label>
-              <input type="text" value="${borrowBook.callNo}" readonly>
+              <input type="text" value="${callNumberValue}" readonly>
             </div>
 
             <div>
@@ -191,8 +198,8 @@ borrowBtn.addEventListener("click", async()=> {
       // let loanDetail = 
       let loan = new Loan({
           // category: loanBook.category,
-          bookId: loanBook._id,
-          memberId: loanMember._id
+          bookDatabaseId: loanBook._id,
+          memberDatabaseId: loanMember._id
       })
       loan.category = loanBook.category;
       let loanResult = await addLoanFunction(loan);

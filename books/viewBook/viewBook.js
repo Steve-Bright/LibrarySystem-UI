@@ -118,6 +118,12 @@ function updateBookUi(){
         autogenerateCallNo(accNoInput, initialInput, classInput, callNoInput, editedBook)
     })
 
+    viewBookForm.addEventListener("keydown", (e) => {
+        if(e.key == "Enter"){
+            e.preventDefault()
+        }
+    })
+
     viewBookForm.addEventListener("submit", async(e) => {  
         e.preventDefault()     
         if(document.getElementById("bookCover")){

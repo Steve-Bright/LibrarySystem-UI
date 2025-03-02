@@ -1,3 +1,5 @@
+import { checkLoanFunction } from "../controllers/loan.controller.js";
+import { checkBannedMembers } from "../controllers/member.controller.js";
 import { loginEndpoint } from "../utils/links.js";
 
 const loginForm = document.getElementById("loginForm")
@@ -12,6 +14,8 @@ loginForm.addEventListener("submit", async(e) => {
         localStorage.clear()
         window.cookieApi.setCookie(response.result.token)
         window.sharingDataApi.sendData(response.result.userData)
+        await checkBannedMembers();
+        await checkLoanFunction()
         window.navigationApi.toAnotherPage("./dashboard/index.html")
     }
  

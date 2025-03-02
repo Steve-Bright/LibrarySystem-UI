@@ -13,7 +13,7 @@ export const getBookEndpoint = (category, page) =>  `${apiEndpoint}book/getAllBo
 export const deleteBookEndpoint = (category, bookId) => `${apiEndpoint}book/deleteBook/?category=${category}&bookId=${bookId}`
 export const getLatestAccNoEndpoint = (category) => `${apiEndpoint}book/getLatestAccNo/${category}`
 export const searchBookEndpoint = `${apiEndpoint}book/searchBook`
-export const getBookLoanHistoryEndpoint = (bookId, page) => `${apiEndpoint}loan/loanHistory?bookId=${bookId}&page=${page}`
+export const getBookLoanHistoryEndpoint = (bookId, page) => `${apiEndpoint}loan/loanHistory?bookDatabaseId=${bookId}&page=${page}`
 export const getBookNumsEndpoint = (duration) => `${apiEndpoint}book/totalNum/${duration}`
 
 export const addMemberEndpoint = `${apiEndpoint}member/addMember`
@@ -27,8 +27,9 @@ export const getLatestMemberIdEndpoint = (memberType) => `${apiEndpoint}member/g
 export const banMemberEndpoint = (memberDatabaseId, block) => `${apiEndpoint}member/banMember?memberDatabaseId=${memberDatabaseId}&block=${block}`
 export const extendMembershipEndpoint = (memberDatabaseId) => `${apiEndpoint}member/extendMembership/${memberDatabaseId}`
 export const searchMemberEndpoint = `${apiEndpoint}member/searchMember`
-export const getMemberLoanHistoryEndpoint = (memberDatabaseId, page) => `${apiEndpoint}loan/loanHistory?memberId=${memberDatabaseId}&page=${page}`
+export const getMemberLoanHistoryEndpoint = (memberDatabaseId, page) => `${apiEndpoint}loan/loanHistory?memberDatabaseId=${memberDatabaseId}&page=${page}`
 export const checkBannedUntilEndpoint = (memberDatabaseId) => `${apiEndpoint}member/checkBanUntil/${memberDatabaseId}`
+export const checkBannedMembersEndpoint = `${apiEndpoint}member/checkBannedMembers`
 export const getMemberNumsEndpoint = (duration) => `${apiEndpoint}member/totalNum/${duration}`
 
 //loan related functions

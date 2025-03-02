@@ -1,4 +1,4 @@
-import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint, searchMemberEndpoint, getMemberLoanHistoryEndpoint, banMemberEndpoint, checkBannedUntilEndpoint, extendMembershipEndpoint, getMemberNumsEndpoint} from "../utils/links.js";
+import { getAllMembersEndpoint, getLatestMemberIdEndpoint, addMemberEndpoint, getMemberDetailEndpoint, deleteMemberEndpoint, editMemberEndpoint, getMemberFromMemberIdEndpoint, searchMemberEndpoint, getMemberLoanHistoryEndpoint, banMemberEndpoint, checkBannedUntilEndpoint, extendMembershipEndpoint, getMemberNumsEndpoint, checkBannedMembersEndpoint} from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -186,4 +186,16 @@ export async function getMemberNums(duration){
 
     let result = await res.json()
     return (result.result)
+}
+
+export async function checkBannedMembers(){
+    const res = await fetch(checkBannedMembersEndpoint, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    let result = await res.json()
+    return result;
 }

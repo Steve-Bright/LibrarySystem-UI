@@ -1,4 +1,4 @@
-import { addLoanEndpoint, deleteLoanEndpoint, extendLoanEndpoint, getAllLoansEndpoint, getLoanDetailEndpoint, returnLoanEndpoint, searchLoanEndpoint, getLoanNumsEndpoint } from "../utils/links.js";
+import { addLoanEndpoint, deleteLoanEndpoint, extendLoanEndpoint, getAllLoansEndpoint, getLoanDetailEndpoint, returnLoanEndpoint, searchLoanEndpoint, getLoanNumsEndpoint, checkLoanEndpoint } from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 
@@ -98,4 +98,16 @@ export async function getLoanNums(duration){
 
     let result = await res.json()
     return (result.result)
+}
+
+export async function checkLoanFunction(){
+    const res = await fetch(checkLoanEndpoint, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    let result = await res.json();
+    return result;
 }
