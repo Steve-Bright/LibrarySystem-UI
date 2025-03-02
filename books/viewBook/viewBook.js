@@ -1,9 +1,11 @@
 import Book from "../../utils/book.model.mjs"
-import { getDetailedBook, deleteBook, editBook } from "../../controllers/book.controller.js"
+import { getDetailedBook, deleteBook, editBook, getLatestLoanFunction } from "../../controllers/book.controller.js"
 import { convertEngToMM, convertMMToEng } from "../../utils/burmese.mapper.js"
 import { bookUIMapping } from "../../utils/book.mapper.js"
+import {loanMappingInBook} from "../../utils/loan.mapper.js"
 import { capitalizeFirstLetter } from "../../utils/extra.js"
 
+const loanArea = document.getElementById("loanArea")
 const isbnViewArea = document.getElementById("viewIsbnArea")
 const viewBookCover = document.getElementById("viewBookCover")
 const editButtonsArea = document.getElementById("editButtonsArea")
@@ -19,9 +21,15 @@ const accNoInput = document.getElementById('accNo')
 const classInput = document.getElementById("classNo")
 const initialInput = document.getElementById("initial")
 const callNoInput = document.getElementById("callNo")
+const loanedPeriod = document.getElementById("loanPeriod")
+const loanedMember = document.getElementById("memberName")
+const loanedMemberNum = document.getElementById("phoneNumber")
+const viewLoanDetail = document.getElementById("viewLoanButton")
 
 let detailedBook = JSON.parse(sessionStorage.getItem("bookId"))
 const bookData = await getDetailedBook(detailedBook.category, detailedBook.id)
+const loanedData = await getLatestLoanFunction(detailedBook.category, detailedBook.id)
+let cleanedLoanData = loanMappingInBook(loanedData.result)
 let cleanedBookData = bookUIMapping(bookData.result)
 backToCollection.addEventListener("click", () => {
     window.navigationApi.toAnotherPage("./books/collection/collectionpage.html")
@@ -92,6 +100,30 @@ Object.keys(cleanedBookData).forEach((eachKey) => {
                    
     }
 })
+
+console.log('due date  ' + cleanedLoanData.dueDate)
+
+if(loanedData.con){
+    loanedPeriod.textContent = (new Date(cleanedLoanData.dueDate)).toDateString()
+    loanedMember.textContent = cleanedLoanData.name
+    loanedMemberNum.textContent = cleanedLoanData.phone
+    loanArea.classList.remove("removedArea")
+    loanArea.classList.add("loanedBanner")
+    
+    if(cleanedLoanData.overdue){
+        loanArea.classList.add("overduedLoan")
+    }else{
+        loanArea.classList.add("defaultLoan")
+    }
+
+    viewLoanDetail.addEventListener("click", () => {
+        let detailedLoan = {
+            id: cleanedLoanData._id
+          }
+          sessionStorage.setItem("loanId", JSON.stringify(detailedLoan))
+          window.navigationApi.toAnotherPage("./loans/viewLoan/viewLoan.html")    
+    })
+}
 
 borrowBookButton.addEventListener("click", () => {
     localStorage.setItem("borrowBook", JSON.stringify(bookData.result))

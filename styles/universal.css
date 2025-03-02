@@ -107,6 +107,12 @@ main{
     cursor: pointer;
 }
 
+.dotSize{
+    width: 3em;
+    margin-top: auto;
+    display: inline;
+}
+
 .tableFormat{
     width: 100%;
     /* border: 3px; */

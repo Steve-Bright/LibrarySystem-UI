@@ -1,4 +1,4 @@
-import { addLoanEndpoint, deleteLoanEndpoint, extendLoanEndpoint, getAllLoansEndpoint, getLoanDetailEndpoint, returnLoanEndpoint, searchLoanEndpoint, getLoanNumsEndpoint, checkLoanEndpoint } from "../utils/links.js";
+import { addLoanEndpoint, deleteLoanEndpoint, extendLoanEndpoint, getAllLoansEndpoint, getLoanDetailEndpoint, returnLoanEndpoint, searchLoanEndpoint, getLoanNumsEndpoint, checkLoanEndpoint} from "../utils/links.js";
 
 const token = await window.cookieApi.getCookie()
 

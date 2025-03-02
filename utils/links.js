@@ -1,3 +1,4 @@
+let currentDirectory = window.sharingDataApi.currentDirectory();
 const apiEndpoint = "http://127.0.0.1:3000/"
 export const mainWebsite = "http://localhost"
 
@@ -15,6 +16,7 @@ export const getLatestAccNoEndpoint = (category) => `${apiEndpoint}book/getLates
 export const searchBookEndpoint = `${apiEndpoint}book/searchBook`
 export const getBookLoanHistoryEndpoint = (bookId, page) => `${apiEndpoint}loan/loanHistory?bookDatabaseId=${bookId}&page=${page}`
 export const getBookNumsEndpoint = (duration) => `${apiEndpoint}book/totalNum/${duration}`
+export const getBookLatestLoanEndpoint = (category, bookId) => `${apiEndpoint}book/latestLoan?bookId=${bookId}&category=${category}`
 
 export const addMemberEndpoint = `${apiEndpoint}member/addMember`
 export const editMemberEndpoint = `${apiEndpoint}member/editMember`
@@ -46,3 +48,10 @@ export const getLoanNumsEndpoint = (duration) => `${apiEndpoint}loan/totalNum/${
 
 //import book
 export const importBookEndpoint = `${apiEndpoint}book/importData`
+
+export let dotImages = {
+  red_dot: currentDirectory +  "/assets/red-dot.svg",
+  black_dot : currentDirectory + "/assets/black-dot.svg",
+  orange_dot : currentDirectory + "/assets/orange-dot.svg",
+  green_dot : currentDirectory + "/assets/green-dot.svg"
+}

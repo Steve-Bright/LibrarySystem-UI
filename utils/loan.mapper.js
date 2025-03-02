@@ -6,3 +6,9 @@ export function loanUIMapping(loanModel){
   
   return {...restOfModel}
 }
+
+export function loanMappingInBook(loanModel){
+  const {...allData} = loanModel
+
+  return {...allData}
+}

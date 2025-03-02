@@ -1,6 +1,7 @@
 import {getAllBooksFunction, searchBook} from "../../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../../utils/extra.js"
 import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
+import { dotImages } from "../../utils/links.js"
 const collectionCategory = document.getElementById("collectionCategory")
 const searchBookForm = document.getElementById("searchBookForm")
 const callNoBtn = document.getElementById('callNoBtn')
@@ -10,12 +11,6 @@ const collectionNavigationArea = document.getElementById("collectionNavigationAr
 const bookDataHeadings = document.getElementById("bookDataHeadings")
 const bookDataEl = document.getElementById("bookData")
 const filePath = window.imagePaths.shareFilePath();
-let currentDirectory = window.sharingDataApi.currentDirectory();
-
-const red_dot = currentDirectory + "/assets/red-dot.svg"
-const black_dot = currentDirectory + "/assets/black-dot.svg"
-const orange_dot = currentDirectory + "/assets/orange-dot.svg"
-const green_dot = currentDirectory + "/assets/green-dot.svg"
 
 let searchedHistory = sessionStorage.getItem("searchBookResult")
 let searchedKeyword = sessionStorage.getItem("searchBookData")
@@ -119,9 +114,9 @@ function showEachBook(placerDiv, bookData){
     for(let eachBook of bookData){
         let imageCondition;
         if(eachBook.loanStatus == true){
-            imageCondition = `<img src=${red_dot} id="dotSize"></img>`
+            imageCondition = `<img src=${dotImages.orange_dot} class="dotSize"></img>`
         }else{
-            imageCondition = `<img src=${green_dot} id="dotSize"></img>`
+            imageCondition = `<img src=${dotImages.green_dot} class="dotSize"></img>`
         }
         let accNo;
         let classNo;

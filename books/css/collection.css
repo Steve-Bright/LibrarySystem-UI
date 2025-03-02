@@ -57,11 +57,6 @@
     box-sizing: border-box;
 }
 
-#dotSize{
-    width: 3em;
-    margin: auto;
-    display: inline;
-}
 
 .subTitle div{
     width: 80%;
