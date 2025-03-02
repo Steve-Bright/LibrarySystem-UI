@@ -9,6 +9,38 @@ h4:hover{
   text-decoration: underline;
 }
 
+#loanTitle{
+  display: flex;
+}
+
+.returnedStatus{
+  display: none;
+}
+
+.loanStatus{
+  font-size: 0.8em;
+  color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 3em;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.nearDueStatus{
+  border: 2px solid orange;
+  background-color: orange;
+}
+
+.overdueStatus{
+  border: 2px solid #C80003;
+  background-color: #C80003;
+}
+
+.defaultLoanStatus{
+  border: 2px solid green;
+  background-color: green;
+}
 
 #buttonsArea, #editButtonsArea{
   display: flex;

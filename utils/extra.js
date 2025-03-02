@@ -335,3 +335,14 @@ export function attachMemberCardToDiv(table, cardData){
 export function capitalizeFirstLetter(val) {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
+
+export const todayDate = (nextDay = 0) => {
+    let today = new Date();
+    today.setDate(today.getDate() + nextDay)
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    today =  yyyy + "-" + mm + "-" + dd;
+    return Date.parse(today);
+}
