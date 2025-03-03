@@ -29,7 +29,10 @@ const viewLoanDetail = document.getElementById("viewLoanButton")
 let detailedBook = JSON.parse(sessionStorage.getItem("bookId"))
 const bookData = await getDetailedBook(detailedBook.category, detailedBook.id)
 const loanedData = await getLatestLoanFunction(detailedBook.category, detailedBook.id)
-let cleanedLoanData = loanMappingInBook(loanedData.result)
+let cleanedLoanData
+if(loanedData.result){
+    cleanedLoanData = loanMappingInBook(loanedData.result)
+}
 let cleanedBookData = bookUIMapping(bookData.result)
 backToCollection.addEventListener("click", () => {
     window.navigationApi.toAnotherPage("./books/collection/collectionpage.html")
@@ -100,8 +103,6 @@ Object.keys(cleanedBookData).forEach((eachKey) => {
                    
     }
 })
-
-console.log('due date  ' + cleanedLoanData.dueDate)
 
 if(loanedData.con){
     loanedPeriod.textContent = (new Date(cleanedLoanData.dueDate)).toDateString()

@@ -3,9 +3,6 @@ import { getDetailedBook } from "../../controllers/book.controller.js";
 import { getDetailedMember } from "../../controllers/member.controller.js";
 import {loanUIMapping} from "../../utils/loan.mapper.js";
 import { todayDate } from "../../utils/extra.js";
-import Book from "../../utils/book.model.mjs";
-import Loan from "../../utils/loan.model.mjs";
-import Member from "../../utils/member.model.js";
 const backToCollection = document.getElementById("backToCollection");
 const filePath = window.imagePaths.shareFilePath();
 let detailedLoan = JSON.parse(sessionStorage.getItem("loanId"))

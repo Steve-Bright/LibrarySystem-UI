@@ -346,3 +346,10 @@ export const todayDate = (nextDay = 0) => {
     today =  yyyy + "-" + mm + "-" + dd;
     return Date.parse(today);
 }
+
+export let dotImages = {
+    red_dot: currentDirectory +  "/assets/red-dot.svg",
+    black_dot : currentDirectory + "/assets/black-dot.svg",
+    orange_dot : currentDirectory + "/assets/orange-dot.svg",
+    green_dot : currentDirectory + "/assets/green-dot.svg"
+  }

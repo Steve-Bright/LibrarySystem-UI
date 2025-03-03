@@ -1,7 +1,8 @@
 import {getAllBooksFunction, searchBook} from "../../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../../utils/extra.js"
 import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
-import { dotImages } from "../../utils/links.js"
+import { dotImages } from "../../utils/extra.js"
+import { todayDate } from "../../utils/extra.js"
 const collectionCategory = document.getElementById("collectionCategory")
 const searchBookForm = document.getElementById("searchBookForm")
 const callNoBtn = document.getElementById('callNoBtn')
@@ -112,11 +113,18 @@ function showSearchResults(category, searchedHistory){
 function showEachBook(placerDiv, bookData){
 
     for(let eachBook of bookData){
-        let imageCondition;
+        let imageCondition = ``;
         if(eachBook.loanStatus == true){
-            imageCondition = `<img src=${dotImages.orange_dot} class="dotSize"></img>`
-        }else{
-            imageCondition = `<img src=${dotImages.green_dot} class="dotSize"></img>`
+            if(eachBook.latestLoanId.overdue){
+                imageCondition = `<img src=${dotImages.red_dot} class="dotSize"></img>`
+            }else{
+                let bookDueDate = new Date(eachBook.latestLoanId.dueDate)
+                if(bookDueDate.toDateString() === new Date(todayDate()).toDateString() || bookDueDate.toDateString() === new Date(todayDate(1)).toDateString()){
+                    imageCondition = `<img src=${dotImages.orange_dot} class="dotSize"></img>`
+                }else{
+                    imageCondition = `<img src=${dotImages.green_dot} class="dotSize"></img>`
+                }
+            }
         }
         let accNo;
         let classNo;

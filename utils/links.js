@@ -1,4 +1,4 @@
-let currentDirectory = window.sharingDataApi.currentDirectory();
+
 const apiEndpoint = "http://127.0.0.1:3000/"
 export const mainWebsite = "http://localhost"
 
@@ -48,10 +48,3 @@ export const getLoanNumsEndpoint = (duration) => `${apiEndpoint}loan/totalNum/${
 
 //import book
 export const importBookEndpoint = `${apiEndpoint}book/importData`
-
-export let dotImages = {
-  red_dot: currentDirectory +  "/assets/red-dot.svg",
-  black_dot : currentDirectory + "/assets/black-dot.svg",
-  orange_dot : currentDirectory + "/assets/orange-dot.svg",
-  green_dot : currentDirectory + "/assets/green-dot.svg"
-}
