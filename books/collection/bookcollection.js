@@ -1,6 +1,8 @@
 import {getAllBooksFunction, searchBook} from "../../controllers/book.controller.js"
 import {buildCollectionNavigation} from "../../utils/extra.js"
 import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
+import { dotImages } from "../../utils/extra.js"
+import { todayDate } from "../../utils/extra.js"
 const collectionCategory = document.getElementById("collectionCategory")
 const searchBookForm = document.getElementById("searchBookForm")
 const callNoBtn = document.getElementById('callNoBtn')
@@ -86,7 +88,7 @@ async function updateBookData(booleanValue, page = 1){
         // viewDetailedBookFunction(categoryData)
     }else{
         bookDataEl.innerHTML = `
-            <tr> <td colspan="7"> There are no books at the moment </td> </tr>
+            <tr> <td colspan="8"> There are no books at the moment </td> </tr>
         `
     }
     
@@ -101,7 +103,7 @@ function showSearchResults(category, searchedHistory){
         showEachBook(bookDataEl, searchedHistory)
     }else{
         bookDataEl.innerHTML = `
-            <tr> <td colspan="7">Book is not found </td> </tr>
+            <tr> <td colspan="8">Book is not found </td> </tr>
         `
     }
     
@@ -109,15 +111,33 @@ function showSearchResults(category, searchedHistory){
 }
 
 function showEachBook(placerDiv, bookData){
+
     for(let eachBook of bookData){
+        let imageCondition = ``;
+        if(eachBook.loanStatus == true){
+            if(eachBook.latestLoanId.overdue){
+                imageCondition = `<img src=${dotImages.red_dot} class="dotSize"></img>`
+            }else{
+                let bookDueDate = new Date(eachBook.latestLoanId.dueDate)
+                if(bookDueDate.toDateString() === new Date(todayDate()).toDateString() || bookDueDate.toDateString() === new Date(todayDate(1)).toDateString()){
+                    imageCondition = `<img src=${dotImages.orange_dot} class="dotSize"></img>`
+                }else{
+                    imageCondition = `<img src=${dotImages.green_dot} class="dotSize"></img>`
+                }
+            }
+        }
         let accNo;
         let classNo;
         if(!eachBook.isbn){
             accNo = convertEngToMM(eachBook.accNo, true)
             classNo = convertEngToMM(eachBook.classNo, true)
+            placerDiv.classList.remove("englishSize")
+            placerDiv.classList.add("burmeseSize")
         }else{
             accNo = eachBook.accNo
             classNo = eachBook.classNo
+            placerDiv.classList.remove("burmeseSize")
+            placerDiv.classList.add("englishSize")
         }
         let conditionalCell = eachBook.isbn 
                 ? `
@@ -130,6 +150,7 @@ function showEachBook(placerDiv, bookData){
         let imagePath = filePath + eachBook.bookCover
         newRow.innerHTML = 
             `
+                <td>${imageCondition}</td>
                 <td>${accNo}</td>
                 <td><img src="${imagePath}" class="displayBookCover"></td> 
                 <td>${eachBook.bookTitle}</td>
@@ -195,8 +216,9 @@ function updateBookHeading(categoryData){
     if(categoryData == "english"){
         bookDataHeadings.innerHTML = `
             <tr>
+                <th class="dotFormat"></th>
                 <th>Acc No.</th>
-                <th>Book Cover</th>
+                <th class="headingCoverFormat">Book Cover</th>
                 <th>Book Title</th>
                 <th>Author</th>
                 <th>Class No</th>
@@ -208,8 +230,9 @@ function updateBookHeading(categoryData){
     }else if(categoryData == "myanmar"){
         bookDataHeadings.innerHTML = `
             <tr>
+                <th class="dotFormat"></th>
                 <th>Acc No.</th>
-                <th>Book Cover</th>
+                <th class="headingCoverFormat">Book Cover</th>
                 <th>Book Title</th>
                 <th>Author</th>
                 <th>Class No</th>

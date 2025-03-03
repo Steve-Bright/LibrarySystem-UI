@@ -1,5 +1,7 @@
 import { getAllLoansFunction, searchLoan } from "../../controllers/loan.controller.js";
 import { buildMemberNavigation } from "../../utils/extra.js";
+import { dotImages } from "../../utils/extra.js";
+import { todayDate } from "../../utils/extra.js";
 const loanType = document.getElementById("loanType")
 const searchLoanForm = document.getElementById("searchLoanForm")
 const printLoan = document.getElementById('printLoan')
@@ -97,6 +99,19 @@ function updateNewIndex(newIndex){
 
 function showEachLoan(placerDiv, loanData){
   for(let eachLoan of loanData){
+    let imageCondition = ``;
+    if(eachLoan.loanStatus == true){
+        let dueDate = new Date(eachLoan.dueDate)
+        if(eachLoan.overdue){
+          imageCondition =  `<img src=${dotImages.red_dot} class="dotSize"></img>`
+        }else if(dueDate.toDateString() === new Date(todayDate()).toDateString() || dueDate.toDateString() === new Date(todayDate(1)).toDateString()){
+          imageCondition = `<img src=${dotImages.orange_dot} class="dotSize"></img>`
+        }
+        else{
+          imageCondition = `<img src=${dotImages.green_dot} class="dotSize"></img>`
+        }
+    }
+
     let loanDate = new Date(eachLoan.loanDate)
     let dueDate = new Date(eachLoan.dueDate)
     let formattedLoanDate = loanDate.toLocaleDateString('en-GB', {
@@ -111,6 +126,7 @@ function showEachLoan(placerDiv, loanData){
     });
     const newRow = document.createElement("tr")
     newRow.innerHTML = `
+      <td>${imageCondition}</td>
       <td>${eachLoan.name}</td>            
       <td>${eachLoan.memberId}</td>
       <td>${eachLoan.bookTitle}</td>
