@@ -46,11 +46,17 @@ export async function buildCollectionNavigation(area, backward, forward, index, 
     
 }
 
-export async function buildNavArea({resultPages, collectionNavigation, pageValues, skipArea}){
+export async function buildNavArea({resultPages, collectionNavigation, pageValues, category, skipArea}){
     let {totalPages, index, navigationButtons} = resultPages
     let {collectionBackward, collectionForward} = collectionNavigation
     let {pageIndex, totalPagesUI} = pageValues;
 
+    let sessionData;
+    if(category === "myanmar"){
+        sessionData = "mmPageIndex"
+    }else{
+        sessionData = "engEngIndex"
+    }
 
     navigationButtons.innerHTML = ""
     pageIndex.value =index;
@@ -73,17 +79,17 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
 
     }
 
-    buildNumberButtons(totalPages, index, navigationButtons, skipArea)
-    buttonFunctionality()
+    buildNumberButtons(sessionData, totalPages, index, navigationButtons, skipArea)
+    buttonFunctionality(sessionData)
 
-    function buttonFunctionality(){
+    function buttonFunctionality(sessionData){
          const collectionForwardButton = document.querySelectorAll(`.collectionForward img`)
 
          if(collectionForwardButton){
             for(let eachForwardButton of collectionForwardButton){
                 eachForwardButton.addEventListener("click", ()=> {
                     let updatedIndex = index+1;
-                    sessionStorage.setItem("pageIndex", updatedIndex)
+                    sessionStorage.setItem(sessionData, updatedIndex)
                     window.location.reload()
                  })
             }
@@ -94,14 +100,14 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
             for(let eachBackwardButton of collectionBackwardButton){
                 eachBackwardButton.addEventListener("click", ()=> {
                     let updatedIndex = index-1;
-                    sessionStorage.setItem("pageIndex", updatedIndex)
+                    sessionStorage.setItem(sessionData, updatedIndex)
                     window.location.reload()
                  })
             }
          }
     }
 }
-function buildNumberButtons(pages, currentPageNum, buttonsArea, skipArea){
+function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, skipArea){
     let {leftSkip, rightSkip} = skipArea
     leftSkip.innerHTML =  `<img src=${leftSkipIcon} class="backButton">`
     rightSkip.innerHTML =  `<img src=${rightSkipIcon} class="backButton">`
@@ -138,7 +144,7 @@ function buildNumberButtons(pages, currentPageNum, buttonsArea, skipArea){
             buttonsArea.innerHTML = ""
             firstNumber = firstNumber + 10;
             assignNumber(displayButtons, firstNumber, currentPageNum)
-            pageNumberFunctionality()
+            pageNumberFunctionality(sessionData)
         }
     })
 
@@ -147,10 +153,10 @@ function buildNumberButtons(pages, currentPageNum, buttonsArea, skipArea){
             buttonsArea.innerHTML = ""
             firstNumber = firstNumber - 10;
             assignNumber(displayButtons, firstNumber, currentPageNum)
-            pageNumberFunctionality()
+            pageNumberFunctionality(sessionData)
         }
     })
-    pageNumberFunctionality()
+    pageNumberFunctionality(sessionData)
 
     function assignNumber(displayButtons, firstNumber, currentNum){
         displayButtonsArray = Array.from({ length: displayButtons }, (_, i) => firstNumber + i);
@@ -166,12 +172,12 @@ function buildNumberButtons(pages, currentPageNum, buttonsArea, skipArea){
         }
     }
 
-    function pageNumberFunctionality(){
+    function pageNumberFunctionality(sessionData){
         let buttonsAreaId = buttonsArea.id;
         let buttonClicks = document.querySelectorAll(`#${buttonsAreaId} button`)
         for(let eachButton of buttonClicks){
            eachButton.addEventListener("click", () => {
-               sessionStorage.setItem("pageIndex", eachButton.id)
+               sessionStorage.setItem(sessionData, eachButton.id)
                window.location.reload()
            })
         }

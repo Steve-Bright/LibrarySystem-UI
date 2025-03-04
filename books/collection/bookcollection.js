@@ -23,8 +23,8 @@ const filePath = window.imagePaths.shareFilePath();
 
 let searchedHistory = sessionStorage.getItem("searchBookResult")
 let searchedKeyword = sessionStorage.getItem("searchBookData")
-let index = Number(cachePageIndex())
 let category = cacheCategory();
+let index = Number(cachePageIndex(category))
 collectionCategory.value = category;
 await searchBookFunction(category)
 
@@ -38,6 +38,7 @@ if(!searchedHistory){
 
 collectionCategory.addEventListener("change", () => {
   updateBookData(collectionCategory.value)
+  window.location.reload()
 })
 
 callNoBtn.addEventListener("click", () => {
@@ -78,10 +79,20 @@ async function updateBookData(booleanValue, page = 1){
         resultPages: {totalPages, index, navigationButtons},
         collectionNavigation: {collectionBackward, collectionForward},
         pageValues: {pageIndex, totalPagesUI},
+        category: categoryData,
         skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
     }
     buildNavArea(navigationComponents)
 
+
+    pageIndex.addEventListener("change", () => {
+        if(pageIndex.value <= totalPages){
+            cachePageIndex(categoryData, pageIndex.value)
+            window.location.reload()
+        }else{
+            window.showMessageApi.alertMsg("Invalid page")
+        }
+    })
     
     let totalBookData = result.result.items;
    
@@ -215,11 +226,17 @@ function cacheCategory(booleanValue = null){
     return cachedCategoryValue; 
 }
 
-function cachePageIndex(indexValue = null){
-    if(indexValue !== null){
-        sessionStorage.setItem("pageIndex", indexValue)
+function cachePageIndex(category, indexValue = null){
+    let sessionData;
+    if(category === "myanmar"){
+        sessionData = "mmPageIndex"
+    }else{
+        sessionData = "engEngIndex"
     }
-    let cachedPageIndexValue = sessionStorage.getItem("pageIndex")
+    if(indexValue !== null){
+        sessionStorage.setItem(sessionData, indexValue)
+    }
+    let cachedPageIndexValue = sessionStorage.getItem(sessionData)
     if(cachedPageIndexValue === null){
         return 1;
     }
