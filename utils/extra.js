@@ -2,6 +2,8 @@ import { convertMMToEng, convertEngToMM } from "../utils/burmese.mapper.js"
 let currentDirectory = window.sharingDataApi.currentDirectory();
 let forwardButtonIcon = currentDirectory + "/assets/arrow_right.png"
 let backwardButtonIcon = currentDirectory + "/assets/arrow.png"
+let leftSkipIcon = currentDirectory + "/assets/jump_left.png"
+let rightSkipIcon = currentDirectory + "/assets/jump_right.png"
 const filePath = window.imagePaths.shareFilePath();
 export async function buildCollectionNavigation(area, backward, forward, index, category, updateFunction, onIndexChange){
     area.innerHTML = ``
@@ -44,7 +46,7 @@ export async function buildCollectionNavigation(area, backward, forward, index, 
     
 }
 
-export async function buildNavArea({resultPages, collectionNavigation, pageValues, category, updateFunction}){
+export async function buildNavArea({resultPages, collectionNavigation, pageValues, skipArea}){
     let {totalPages, index, navigationButtons} = resultPages
     let {collectionBackward, collectionForward} = collectionNavigation
     let {pageIndex, totalPagesUI} = pageValues;
@@ -71,7 +73,7 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
 
     }
 
-    buildNumberButtons(totalPages, index, navigationButtons)
+    buildNumberButtons(totalPages, index, navigationButtons, skipArea)
     buttonFunctionality()
 
     function buttonFunctionality(){
@@ -97,18 +99,12 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
                  })
             }
          }
-
-         const buttonsAreaId = navigationButtons.id;
-         const buttonClicks = document.querySelectorAll(`#${buttonsAreaId} button`)
-         for(let eachButton of buttonClicks){
-            eachButton.addEventListener("click", () => {
-                sessionStorage.setItem("pageIndex", eachButton.id)
-                window.location.reload()
-            })
-         }
     }
 }
 function buildNumberButtons(pages, currentPageNum, buttonsArea, skipArea){
+    let {leftSkip, rightSkip} = skipArea
+    leftSkip.innerHTML =  `<img src=${leftSkipIcon} class="backButton">`
+    rightSkip.innerHTML =  `<img src=${rightSkipIcon} class="backButton">`
     let displayButtons;
     let numberString = JSON.stringify(currentPageNum)
     let lastDigit = numberString[numberString.length-1]
@@ -134,16 +130,51 @@ function buildNumberButtons(pages, currentPageNum, buttonsArea, skipArea){
         }
     
 
-    let displayButtonsArray = Array.from({ length: displayButtons }, (_, i) => firstNumber + i);
+    let displayButtonsArray 
+    assignNumber(displayButtons, firstNumber, currentPageNum)
 
-    for (let num of displayButtonsArray) {
-        let button = document.createElement("button");
-        button.innerHTML = num;
-        button.id = num;
-        if(num == currentPageNum){
-            button.classList.add("selectedPage")
+    rightSkip.addEventListener("click", () => {
+        if(lastNumber != pages){
+            buttonsArea.innerHTML = ""
+            firstNumber = firstNumber + 10;
+            assignNumber(displayButtons, firstNumber, currentPageNum)
+            pageNumberFunctionality()
         }
-        buttonsArea.appendChild(button);
+    })
+
+    leftSkip.addEventListener('click', () => {
+        if(firstNumber != 1){
+            buttonsArea.innerHTML = ""
+            firstNumber = firstNumber - 10;
+            assignNumber(displayButtons, firstNumber, currentPageNum)
+            pageNumberFunctionality()
+        }
+    })
+    pageNumberFunctionality()
+
+    function assignNumber(displayButtons, firstNumber, currentNum){
+        displayButtonsArray = Array.from({ length: displayButtons }, (_, i) => firstNumber + i);
+
+        for (let num of displayButtonsArray) {
+            let button = document.createElement("button");
+            button.innerHTML = num;
+            button.id = num;
+            if(num == currentNum){
+                button.classList.add("selectedPage")
+            }
+            buttonsArea.appendChild(button);
+        }
+    }
+
+    function pageNumberFunctionality(){
+        let buttonsAreaId = buttonsArea.id;
+        let buttonClicks = document.querySelectorAll(`#${buttonsAreaId} button`)
+        for(let eachButton of buttonClicks){
+           eachButton.addEventListener("click", () => {
+               sessionStorage.setItem("pageIndex", eachButton.id)
+               window.location.reload()
+           })
+        }
     }
 
 }

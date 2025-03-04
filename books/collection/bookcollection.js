@@ -78,8 +78,7 @@ async function updateBookData(booleanValue, page = 1){
         resultPages: {totalPages, index, navigationButtons},
         collectionNavigation: {collectionBackward, collectionForward},
         pageValues: {pageIndex, totalPagesUI},
-        category: categoryData,
-        updateFunction: updateBookData
+        skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
     }
     buildNavArea(navigationComponents)
 
