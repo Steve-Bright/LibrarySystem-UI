@@ -44,6 +44,62 @@ export async function buildCollectionNavigation(area, backward, forward, index, 
     
 }
 
+export async function buildNavArea({resultPages, collectionNavigation, pageValues, category, updateFunction, onIndexChange}){
+    let {totalPages, index, navigationButtons} = resultPages
+    let {collectionBackward, collectionForward} = collectionNavigation
+    let {pageIndex, totalPagesUI} = pageValues;
+
+
+    // let index = 92;
+    pageIndex.value =index;
+    totalPagesUI.innerHTML = totalPages
+
+    if(totalPages > 1){
+        if(index == 1){
+            collectionForward.innerHTML = `<img src=${forwardButtonIcon} class="backButton">`
+        }else if(index == totalPages){
+            collectionBackward.innerHTML = `<img src=${backwardButtonIcon} class="backButton">`
+        }else{
+            collectionBackward.innerHTML = `<img src=${backwardButtonIcon} class="backButton">`
+            collectionForward.innerHTML = `<img src=${forwardButtonIcon} class="backButton">`
+        }
+    }else{
+
+    }
+
+    buildNumberButtons(totalPages, index, navigationButtons)
+
+    function buildNumberButtons(pages, currentPageNum, buttonsArea){
+        let displayButtons;
+        let numberString = JSON.stringify(currentPageNum)
+        let checkNumber = "";
+        for(let i = 0; i < numberString.length - 1; i ++){
+            checkNumber += numberString[i]
+        }
+        checkNumber+= "0"
+        let firstNumber;
+        let lastDigitNumber;
+        
+        if(checkNumber.length === 1){
+            firstNumber = Number(checkNumber) + 1;
+            lastDigitNumber = firstNumber + 9;
+        }else{
+            firstNumber = Number(checkNumber)
+            lastDigitNumber = firstNumber + 10;
+        }
+
+        if(pages >= 10){
+            displayButtons = 10;
+        }else{
+            displayButtons = pages
+        }
+
+        for(let i = 0; i < displayButtons; i++){
+
+        }
+    }
+}
+
 export function buildBarcodeCollectionView(views, totalData, tr, td, trArrays){
     let j = 0;
     let totalViews = views-1;

@@ -1,5 +1,5 @@
 import {getAllBooksFunction, searchBook} from "../../controllers/book.controller.js"
-import {buildCollectionNavigation} from "../../utils/extra.js"
+import {buildCollectionNavigation, buildNavArea} from "../../utils/extra.js"
 import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
 import { dotImages } from "../../utils/extra.js"
 import { todayDate } from "../../utils/extra.js"
@@ -9,6 +9,11 @@ const callNoBtn = document.getElementById('callNoBtn')
 const addBookBtn = document.getElementById("addBookBtn")
 const totalData = document.getElementById("totalData")
 const collectionNavigationArea = document.getElementById("collectionNavigationArea")
+const pageIndex = document.getElementById("pageIndex")
+const totalPagesUI = document.getElementById("totalPages")
+const navAreaBook = document.getElementById("navAreaBook")
+const collectionBackward = document.getElementById("collectionBackward")
+const collectionForward = document.getElementById("collectionForward")
 const bookDataHeadings = document.getElementById("bookDataHeadings")
 const bookDataEl = document.getElementById("bookData")
 const filePath = window.imagePaths.shareFilePath();
@@ -66,18 +71,26 @@ async function updateBookData(booleanValue, page = 1){
     let totalPages = result.result.totalPages;
     totalData.innerHTML = `Books (${totalLength})`
 
-    
-    if(totalPages > 1) {
-        if(page == 1){
-            buildCollectionNavigation(collectionNavigationArea, false, true, index, categoryData, updateBookData, updateNewIndex)
-        }else if(page === totalPages){
-            buildCollectionNavigation(collectionNavigationArea, true, false, index, categoryData, updateBookData, updateNewIndex)
-        }else{
-            buildCollectionNavigation(collectionNavigationArea, true, true, index, categoryData, updateBookData, updateNewIndex)
-        }
-    }else{
-        buildCollectionNavigation(collectionNavigationArea, false, false, index, categoryData, updateBookData, updateNewIndex)
+    let navigationComponents = {
+        resultPages: {totalPages, index},
+        collectionNavigation: {collectionBackward, collectionForward},
+        pageValues: {pageIndex, totalPagesUI},
+        categoryData,
+        updateBookData,
+        updateNewIndex
     }
+    buildNavArea(navigationComponents)
+    // if(totalPages > 1) {
+    //     if(page == 1){
+    //         buildCollectionNavigation(collectionNavigationArea, false, true, index, categoryData, updateBookData, updateNewIndex)
+    //     }else if(page === totalPages){
+    //         buildCollectionNavigation(collectionNavigationArea, true, false, index, categoryData, updateBookData, updateNewIndex)
+    //     }else{
+    //         buildCollectionNavigation(collectionNavigationArea, true, true, index, categoryData, updateBookData, updateNewIndex)
+    //     }
+    // }else{
+    //     buildCollectionNavigation(collectionNavigationArea, false, false, index, categoryData, updateBookData, updateNewIndex)
+    // }
 
     
     let totalBookData = result.result.items;

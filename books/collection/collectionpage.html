@@ -77,9 +77,18 @@
             <div class="tableFormat">
                 <div class="tableTitle">
                     <h2 id="totalData">Books</h2>
-                    <div id="collectionNavigationArea">
-                        <!-- <img src="./assets/arrow.png" class="backButton" id="collectionBackward">
-                        <img src="./assets/arrow_right.png" class="backButton" id="collectionForward"> -->
+                    <div id="navAreaBook">
+                        <div id="collectionBackward" class="pageButtons">
+                            <!-- <img src="../../assets/arrow.png" class="backButton"> -->
+                        </div>
+                        <div id="pageIndexArea">
+                            Page
+                            <input type="number" id="pageIndex" value="0">
+                            of <span id="totalPages">xxx</span> pages
+                        </div>
+                        <div id="collectionForward" class="pageButtons">
+                            <!-- <img src="../../assets/arrow_right.png" class="backButton"> -->
+                        </div> 
                     </div>
                 </div>
                 
@@ -90,6 +99,33 @@
                     <tbody id="bookData">
                     </tbody>
                 </table>
+
+                <div id="collectionNavigationArea">
+                    <div id="collectionBackward" class="pageButtons">
+                        <!-- <img src="../../assets/arrow.png" class="backButton"> -->
+                    </div>
+                    <div id="buttonsBackward" class="pageButtons">
+                        <!-- <img src="../../assets/jump_left.png" class="backButton"> -->
+                    </div>
+                    <div id="navigationButtons" class="pageButtons">
+                        <!-- <button class="selectedPage">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button>
+                        <button>6</button>
+                        <button>7</button>
+                        <button>8</button>
+                        <button>9</button>
+                        <button>10</button> -->
+                    </div>
+                    <div id="buttonsForward" class="pageButtons">
+                        <!-- <img src="../../assets/jump_right.png"  class="backButton"> -->
+                    </div>
+                    <div id="collectionForward" class="pageButtons">
+                        <!-- <img src="../../assets/arrow_right.png" class="backButton"> -->
+                    </div>
+                </div>
             </div>
         </main>
     </body>

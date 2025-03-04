@@ -43,8 +43,8 @@ main{
     padding: 1.5em 0 0 15em
 }
 
-.pageInput::-webkit-outer-spin-button,
-.pageInput::-webkit-inner-spin-button {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
@@ -100,7 +100,8 @@ main{
 }
 
 .backButton{
-    width: 4vh
+    width: 4vh;
+    height: 4vh
 }
 
 .backButton:hover{
@@ -139,19 +140,68 @@ main{
 
 .tableTitle h2{
     float: left;
-    width: 92%;
+    width: 70%;
 }
-
-#collectionNavigationArea, #barcodeNavigationArea {
-    width: 8%;
+#barcodeNavigationArea, #memberNavigationArea, #loanNavigationArea{
+    width: 80%;
     display: flex;
     height: 60%;
     margin:auto;
     justify-content: flex-end;
 }
 
-#collectionBackward{
-    margin-right: auto;
+#navAreaBook{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#pageIndexArea{
+    margin: auto 0;
+}
+
+#pageIndex{
+    width: 4em;
+    height: 2.5em;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#collectionNavigationArea{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 1em 0px;
+}
+
+#navigationButtons{
+    width: 55%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#navigationButtons button{
+    width: 3em;
+    height: 2.7em;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    font-weight: bolder;
+    border: 2px solid #1E3FAD;
+}
+
+#navigationButtons .selectedPage{    
+    background-color: #1E3FAD;
+    color: white;
+}
+
+
+.pageButtons{
+    margin: 0px 0.5em;
+    display: flex;
 }
 
 button{
@@ -204,6 +254,18 @@ input:focus{
         width: 30%;
     }
 
+    .tableTitle h2{
+        float: left;
+        width: 60%;
+    }
+
+    #navAreaBook{
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
     main{
         padding: 1.5em 0 0 12em
     }
@@ -220,8 +282,25 @@ input:focus{
         width: 30%;
     }
 
+    .tableTitle h2{
+        float: left;
+        width: 60%;
+    }
+
+    #navAreaBook{
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
     main{
         padding: 1.5em 0 0 14em
     }
   }
 
+@media (min-width: 1090px) and (max-width: 1200px){
+    #pageIndexArea{
+        font-size: 0.9em;
+    }
+}
