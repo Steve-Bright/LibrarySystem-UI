@@ -15,6 +15,7 @@ const navAreaBook = document.getElementById("navAreaBook")
 const collectionBackward = document.getElementById("collectionBackward")
 const collectionForward = document.getElementById("collectionForward")
 const bookDataHeadings = document.getElementById("bookDataHeadings")
+const navigationButtons = document.getElementById('navigationButtons')
 const bookDataEl = document.getElementById("bookData")
 const filePath = window.imagePaths.shareFilePath();
 
@@ -72,7 +73,7 @@ async function updateBookData(booleanValue, page = 1){
     totalData.innerHTML = `Books (${totalLength})`
 
     let navigationComponents = {
-        resultPages: {totalPages, index},
+        resultPages: {totalPages, index, navigationButtons},
         collectionNavigation: {collectionBackward, collectionForward},
         pageValues: {pageIndex, totalPagesUI},
         categoryData,

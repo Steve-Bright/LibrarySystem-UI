@@ -50,7 +50,8 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
     let {pageIndex, totalPagesUI} = pageValues;
 
 
-    // let index = 92;
+    navigationButtons.innerHTML = ""
+    // let index = 1834;
     pageIndex.value =index;
     totalPagesUI.innerHTML = totalPages
 
@@ -72,30 +73,39 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
     function buildNumberButtons(pages, currentPageNum, buttonsArea){
         let displayButtons;
         let numberString = JSON.stringify(currentPageNum)
+        let lastDigit = numberString[numberString.length-1]
         let checkNumber = "";
         for(let i = 0; i < numberString.length - 1; i ++){
             checkNumber += numberString[i]
         }
         checkNumber+= "0"
         let firstNumber;
-        let lastDigitNumber;
-        
-        if(checkNumber.length === 1){
+        let lastNumber;
+        if(lastDigit != 0){
             firstNumber = Number(checkNumber) + 1;
-            lastDigitNumber = firstNumber + 9;
+            lastNumber = firstNumber + 9;
         }else{
-            firstNumber = Number(checkNumber)
-            lastDigitNumber = firstNumber + 10;
+            lastNumber = Number(checkNumber);
+            firstNumber = lastNumber - 9;
         }
 
         if(pages >= 10){
             displayButtons = 10;
+            if(pages >= firstNumber && pages <= lastNumber){
+                lastNumber = pages;
+                displayButtons = (lastNumber - firstNumber) + 1;
+            }
         }else{
             displayButtons = pages
         }
 
-        for(let i = 0; i < displayButtons; i++){
 
+        let displayButtonsArray = Array.from({ length: displayButtons }, (_, i) => firstNumber + i);
+
+        for (let num of displayButtonsArray) {
+            let button = document.createElement("button");
+            button.innerHTML = num;
+            buttonsArea.appendChild(button);
         }
     }
 }
