@@ -12,8 +12,10 @@ const collectionNavigationArea = document.getElementById("collectionNavigationAr
 const pageIndex = document.getElementById("pageIndex")
 const totalPagesUI = document.getElementById("totalPages")
 const navAreaBook = document.getElementById("navAreaBook")
-const collectionBackward = document.getElementById("collectionBackward")
-const collectionForward = document.getElementById("collectionForward")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("buttonsForward")
+const buttonsBackward = document.getElementById("buttonsBackward")
 const bookDataHeadings = document.getElementById("bookDataHeadings")
 const navigationButtons = document.getElementById('navigationButtons')
 const bookDataEl = document.getElementById("bookData")
@@ -21,13 +23,13 @@ const filePath = window.imagePaths.shareFilePath();
 
 let searchedHistory = sessionStorage.getItem("searchBookResult")
 let searchedKeyword = sessionStorage.getItem("searchBookData")
-let index = 1;
+let index = Number(cachePageIndex())
 let category = cacheCategory();
 collectionCategory.value = category;
 await searchBookFunction(category)
 
 if(!searchedHistory){
-    updateBookData(category)
+    updateBookData(category, index)
 }else{
     placeItemsInSearchForm(category, searchedKeyword)
     showSearchResults(category, searchedHistory)
@@ -76,22 +78,10 @@ async function updateBookData(booleanValue, page = 1){
         resultPages: {totalPages, index, navigationButtons},
         collectionNavigation: {collectionBackward, collectionForward},
         pageValues: {pageIndex, totalPagesUI},
-        categoryData,
-        updateBookData,
-        updateNewIndex
+        category: categoryData,
+        updateFunction: updateBookData
     }
     buildNavArea(navigationComponents)
-    // if(totalPages > 1) {
-    //     if(page == 1){
-    //         buildCollectionNavigation(collectionNavigationArea, false, true, index, categoryData, updateBookData, updateNewIndex)
-    //     }else if(page === totalPages){
-    //         buildCollectionNavigation(collectionNavigationArea, true, false, index, categoryData, updateBookData, updateNewIndex)
-    //     }else{
-    //         buildCollectionNavigation(collectionNavigationArea, true, true, index, categoryData, updateBookData, updateNewIndex)
-    //     }
-    // }else{
-    //     buildCollectionNavigation(collectionNavigationArea, false, false, index, categoryData, updateBookData, updateNewIndex)
-    // }
 
     
     let totalBookData = result.result.items;
@@ -224,6 +214,17 @@ function cacheCategory(booleanValue = null){
         return "english";
     }
     return cachedCategoryValue; 
+}
+
+function cachePageIndex(indexValue = null){
+    if(indexValue !== null){
+        sessionStorage.setItem("pageIndex", indexValue)
+    }
+    let cachedPageIndexValue = sessionStorage.getItem("pageIndex")
+    if(cachedPageIndexValue === null){
+        return 1;
+    }
+    return cachedPageIndexValue;
 }
 
 function updateBookHeading(categoryData){

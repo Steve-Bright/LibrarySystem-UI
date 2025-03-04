@@ -44,70 +44,108 @@ export async function buildCollectionNavigation(area, backward, forward, index, 
     
 }
 
-export async function buildNavArea({resultPages, collectionNavigation, pageValues, category, updateFunction, onIndexChange}){
+export async function buildNavArea({resultPages, collectionNavigation, pageValues, category, updateFunction}){
     let {totalPages, index, navigationButtons} = resultPages
     let {collectionBackward, collectionForward} = collectionNavigation
     let {pageIndex, totalPagesUI} = pageValues;
 
 
     navigationButtons.innerHTML = ""
-    // let index = 1834;
     pageIndex.value =index;
     totalPagesUI.innerHTML = totalPages
 
     if(totalPages > 1){
         if(index == 1){
-            collectionForward.innerHTML = `<img src=${forwardButtonIcon} class="backButton">`
+            collectionForward[0].innerHTML = `<img src=${forwardButtonIcon} class="backButton">`
+            collectionForward[1].innerHTML = `<img src=${forwardButtonIcon} class="backButton">`
         }else if(index == totalPages){
-            collectionBackward.innerHTML = `<img src=${backwardButtonIcon} class="backButton">`
+            collectionBackward[0].innerHTML = `<img src=${backwardButtonIcon} class="backButton">`
+            collectionBackward[1].innerHTML = `<img src=${backwardButtonIcon} class="backButton">`
         }else{
-            collectionBackward.innerHTML = `<img src=${backwardButtonIcon} class="backButton">`
-            collectionForward.innerHTML = `<img src=${forwardButtonIcon} class="backButton">`
+            collectionBackward[0].innerHTML = `<img src=${backwardButtonIcon} class="backButton">`
+            collectionBackward[1].innerHTML = `<img src=${backwardButtonIcon} class="backButton">`
+            collectionForward[0].innerHTML = `<img src=${forwardButtonIcon} class="backButton">`
+            collectionForward[1].innerHTML = `<img src=${forwardButtonIcon} class="backButton">`
         }
     }else{
 
     }
 
     buildNumberButtons(totalPages, index, navigationButtons)
+    buttonFunctionality()
 
-    function buildNumberButtons(pages, currentPageNum, buttonsArea){
-        let displayButtons;
-        let numberString = JSON.stringify(currentPageNum)
-        let lastDigit = numberString[numberString.length-1]
-        let checkNumber = "";
-        for(let i = 0; i < numberString.length - 1; i ++){
-            checkNumber += numberString[i]
-        }
-        checkNumber+= "0"
-        let firstNumber;
-        let lastNumber;
-        if(lastDigit != 0){
-            firstNumber = Number(checkNumber) + 1;
-            lastNumber = firstNumber + 9;
-        }else{
-            lastNumber = Number(checkNumber);
-            firstNumber = lastNumber - 9;
-        }
+    function buttonFunctionality(){
+         const collectionForwardButton = document.querySelectorAll(`.collectionForward img`)
 
-        if(pages >= 10){
-            displayButtons = 10;
-            if(pages >= firstNumber && pages <= lastNumber){
-                lastNumber = pages;
-                displayButtons = (lastNumber - firstNumber) + 1;
+         if(collectionForwardButton){
+            for(let eachForwardButton of collectionForwardButton){
+                eachForwardButton.addEventListener("click", ()=> {
+                    let updatedIndex = index+1;
+                    sessionStorage.setItem("pageIndex", updatedIndex)
+                    window.location.reload()
+                 })
             }
-        }else{
-            displayButtons = pages
-        }
+         }
 
+         const collectionBackwardButton = document.querySelectorAll(`.collectionBackward img`)
+         if(collectionBackwardButton){
+            for(let eachBackwardButton of collectionBackwardButton){
+                eachBackwardButton.addEventListener("click", ()=> {
+                    let updatedIndex = index-1;
+                    sessionStorage.setItem("pageIndex", updatedIndex)
+                    window.location.reload()
+                 })
+            }
+         }
 
-        let displayButtonsArray = Array.from({ length: displayButtons }, (_, i) => firstNumber + i);
-
-        for (let num of displayButtonsArray) {
-            let button = document.createElement("button");
-            button.innerHTML = num;
-            buttonsArea.appendChild(button);
-        }
+         const buttonsAreaId = navigationButtons.id;
+         const buttonClicks = document.querySelectorAll(`#${buttonsAreaId} button`)
+         for(let eachButton of buttonClicks){
+            eachButton.addEventListener("click", () => {
+                sessionStorage.setItem("pageIndex", eachButton.id)
+                window.location.reload()
+            })
+         }
     }
+}
+function buildNumberButtons(pages, currentPageNum, buttonsArea, skipArea){
+    let displayButtons;
+    let numberString = JSON.stringify(currentPageNum)
+    let lastDigit = numberString[numberString.length-1]
+    let checkNumber = "";
+    for(let i = 0; i < numberString.length - 1; i ++){
+        checkNumber += numberString[i]
+    }
+    checkNumber+= "0"
+    let firstNumber;
+    let lastNumber;
+    if(lastDigit != 0){
+        firstNumber = Number(checkNumber) + 1;
+        lastNumber = firstNumber + 9;
+    }else{
+        lastNumber = Number(checkNumber);
+        firstNumber = lastNumber - 9;
+    }
+
+        displayButtons = Math.min(10, pages)
+        if(pages >= firstNumber && pages <= lastNumber){
+            lastNumber = pages;
+            displayButtons = (lastNumber - firstNumber) + 1;
+        }
+    
+
+    let displayButtonsArray = Array.from({ length: displayButtons }, (_, i) => firstNumber + i);
+
+    for (let num of displayButtonsArray) {
+        let button = document.createElement("button");
+        button.innerHTML = num;
+        button.id = num;
+        if(num == currentPageNum){
+            button.classList.add("selectedPage")
+        }
+        buttonsArea.appendChild(button);
+    }
+
 }
 
 export function buildBarcodeCollectionView(views, totalData, tr, td, trArrays){
