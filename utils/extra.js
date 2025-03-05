@@ -52,7 +52,6 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
     let {pageIndex, totalPagesUI} = pageValues;
 
 
-     console.log("index page " + index)
     let sessionData;
     if(category === "myanmar"){
         sessionData = "mmPageIndex"
@@ -62,6 +61,10 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
         sessionData = "memberPageIndex"
     }else if(category == "loan"){
         sessionData = "loanPageIndex"
+    }else if(category == "myanmarCallNo"){
+        sessionData = "myanmarCallNoPageIndex"
+    }else if(category == "englishCallNo"){
+        sessionData  = "englishCallNoPageIndex"
     }
 
     navigationButtons.innerHTML = ""
@@ -115,8 +118,6 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
 }
 function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, skipArea){
     let {leftSkip, rightSkip} = skipArea
-    // leftSkip.innerHTML =  `<img src=${leftSkipIcon} class="backButton">`
-    // rightSkip.innerHTML =  `<img src=${rightSkipIcon} class="backButton">`
     let numberString = JSON.stringify(currentPageNum)
     let lastDigit = numberString[numberString.length-1]
     let checkNumber = "";
