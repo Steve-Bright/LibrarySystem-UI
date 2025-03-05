@@ -51,6 +51,8 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
     let {collectionBackward, collectionForward} = collectionNavigation
     let {pageIndex, totalPagesUI} = pageValues;
 
+
+     console.log("index page " + index)
     let sessionData;
     if(category === "myanmar"){
         sessionData = "mmPageIndex"
@@ -58,6 +60,8 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
         sessionData = "engPageIndex"
     }else if(category == "member"){
         sessionData = "memberPageIndex"
+    }else if(category == "loan"){
+        sessionData = "loanPageIndex"
     }
 
     navigationButtons.innerHTML = ""

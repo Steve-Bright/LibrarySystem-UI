@@ -82,9 +82,16 @@
             <div class="tableFormat">
                 <div class="tableTitle">
                     <h2 id="totalData">Total Loans</h2>
-
-                    <div id="loanNavigationArea">
-
+                    <div class="navAreaBook">
+                        <div class="collectionBackward pageButtons">
+                        </div>
+                        <div id="loanPageIndexArea">
+                            Page
+                            <input type="number" id="loanPageIndex" value="0">
+                            of <span id="loanTotalPages">...</span> pages
+                        </div>
+                        <div class="collectionForward pageButtons">
+                        </div> 
                     </div>
 
                 </div>
@@ -106,6 +113,20 @@
                     <tbody id="loanData">
                     </tbody>
                 </table>
+
+                <div id="loanNavigationArea">
+                    <div class="pageButtons collectionBackward">
+                    </div>
+                    <div id="loanButtonsBackward" class="pageButtons">
+                    </div>
+                    <div id="loanNavigationButtons" class="pageButtons">
+
+                    </div>
+                    <div id="loanButtonsForward" class="pageButtons">
+                    </div>
+                    <div class="pageButtons collectionForward">
+                    </div>
+                </div>
             </div>
         </main>
 

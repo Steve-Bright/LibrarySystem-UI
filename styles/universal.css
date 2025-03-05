@@ -150,25 +150,25 @@ input::-webkit-inner-spin-button {
     justify-content: flex-end;
 }
 
-#navAreaBook{
+.navAreaBook{
     width: 30%;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-#pageIndexArea, memberPageIndexArea{
+#pageIndexArea, #memberPageIndexArea, #loanPageIndexArea{
     margin: auto 0;
 }
 
-#pageIndex, #memberPageIndex{
+#pageIndex, #memberPageIndex, #loanPageIndex{
     width: 4em;
     height: 2.5em;
     text-align: center;
     border-radius: 5px;
 }
 
-#collectionNavigationArea, #memberNavigationArea{
+#collectionNavigationArea, #memberNavigationArea, #loanNavigationArea{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -177,13 +177,13 @@ input::-webkit-inner-spin-button {
     margin: 1em 0px;
 }
 
-#navigationButtons, #memberNavigationButtons{
+#navigationButtons, #memberNavigationButtons, #loanNavigationButtons{
     min-width: 10%;
     display: flex;
     /* justify-content: space-around; */
 }
 
-#navigationButtons button, #memberNavigationButtons button{
+#navigationButtons button, #memberNavigationButtons button, #loanNavigationButtons button{
     width: 3em;
     height: 2.7em;
     margin: 0 0.7em;
@@ -194,7 +194,7 @@ input::-webkit-inner-spin-button {
     border: 2px solid #1E3FAD;
 }
 
-#navigationButtons .selectedPage, #memberNavigationButtons .selectedPage{    
+#navigationButtons .selectedPage, #memberNavigationButtons .selectedPage, #loanNavigationButtons .selectedPage{    
     background-color: #1E3FAD;
     color: white;
 }
@@ -260,7 +260,7 @@ input:focus{
         width: 60%;
     }
 
-    #navAreaBook{
+    .navAreaBook{
         width: 40%;
         display: flex;
         align-items: center;
@@ -288,7 +288,7 @@ input:focus{
         width: 60%;
     }
 
-    #navAreaBook{
+    .navAreaBook{
         width: 40%;
         display: flex;
         align-items: center;
