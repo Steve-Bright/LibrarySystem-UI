@@ -109,9 +109,8 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
 }
 function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, skipArea){
     let {leftSkip, rightSkip} = skipArea
-    leftSkip.innerHTML =  `<img src=${leftSkipIcon} class="backButton">`
-    rightSkip.innerHTML =  `<img src=${rightSkipIcon} class="backButton">`
-    let displayButtons;
+    // leftSkip.innerHTML =  `<img src=${leftSkipIcon} class="backButton">`
+    // rightSkip.innerHTML =  `<img src=${rightSkipIcon} class="backButton">`
     let numberString = JSON.stringify(currentPageNum)
     let lastDigit = numberString[numberString.length-1]
     let checkNumber = "";
@@ -128,38 +127,36 @@ function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, ski
         lastNumber = Number(checkNumber);
         firstNumber = lastNumber - 9;
     }
+     
+    assignNumber( firstNumber, lastNumber, currentPageNum, pages)
+    rightAndLeftFunctionality()
 
-        displayButtons = Math.min(10, pages)
+    pageNumberFunctionality(sessionData)
+
+    function assignNumber(firstNumber, lastNumber, currentNum, pages){
+
+        if(firstNumber != 1){
+            leftSkip.innerHTML =  `<img src=${leftSkipIcon} class="backButton">`
+        }else{
+            leftSkip.innerHTML = ''
+        }
+
+        if(lastNumber != pages){
+            rightSkip.innerHTML =  `<img src=${rightSkipIcon} class="backButton">`
+        }else{
+            rightSkip.innerHTML = ""
+        }
+         
+        let  displayButtons = Math.min(10, pages)
+        if(pages >= firstNumber && pages <= lastNumber){
+            lastNumber = pages;
+            displayButtons = (lastNumber - firstNumber) + 1;
+        }displayButtons = Math.min(10, pages)
         if(pages >= firstNumber && pages <= lastNumber){
             lastNumber = pages;
             displayButtons = (lastNumber - firstNumber) + 1;
         }
-    
-
-    let displayButtonsArray 
-    assignNumber(displayButtons, firstNumber, currentPageNum)
-
-    rightSkip.addEventListener("click", () => {
-        if(lastNumber != pages){
-            buttonsArea.innerHTML = ""
-            firstNumber = firstNumber + 10;
-            assignNumber(displayButtons, firstNumber, currentPageNum)
-            pageNumberFunctionality(sessionData)
-        }
-    })
-
-    leftSkip.addEventListener('click', () => {
-        if(firstNumber != 1){
-            buttonsArea.innerHTML = ""
-            firstNumber = firstNumber - 10;
-            assignNumber(displayButtons, firstNumber, currentPageNum)
-            pageNumberFunctionality(sessionData)
-        }
-    })
-    pageNumberFunctionality(sessionData)
-
-    function assignNumber(displayButtons, firstNumber, currentNum){
-        displayButtonsArray = Array.from({ length: displayButtons }, (_, i) => firstNumber + i);
+        let displayButtonsArray = Array.from({ length: displayButtons }, (_, i) => firstNumber + i);
 
         for (let num of displayButtonsArray) {
             let button = document.createElement("button");
@@ -170,6 +167,33 @@ function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, ski
             }
             buttonsArea.appendChild(button);
         }
+    }
+
+    function rightAndLeftFunctionality(){
+        
+        rightSkip.addEventListener("click", () => {
+            if(lastNumber <= pages){
+                buttonsArea.innerHTML = ""
+                firstNumber = firstNumber + 10;
+                if(pages - lastNumber  >= 10 ){
+                    lastNumber = lastNumber + 10;
+                }else{
+                    lastNumber = lastNumber + (pages - lastNumber)
+                }
+                assignNumber(firstNumber, lastNumber, currentPageNum, pages)
+                pageNumberFunctionality(sessionData)
+            }
+        })
+     
+        leftSkip.addEventListener('click', () => {
+            if(firstNumber > 1){
+                buttonsArea.innerHTML = ""
+                firstNumber = firstNumber - 10;
+                lastNumber = lastNumber -10; 
+                assignNumber(firstNumber, lastNumber, currentPageNum, pages)
+                pageNumberFunctionality (sessionData)
+            }
+        })
     }
 
     function pageNumberFunctionality(sessionData){
