@@ -54,8 +54,10 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
     let sessionData;
     if(category === "myanmar"){
         sessionData = "mmPageIndex"
-    }else{
-        sessionData = "engEngIndex"
+    }else if(category == "english"){
+        sessionData = "engPageIndex"
+    }else if(category == "member"){
+        sessionData = "memberPageIndex"
     }
 
     navigationButtons.innerHTML = ""
@@ -141,7 +143,7 @@ function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, ski
             leftSkip.innerHTML = ''
         }
 
-        if(lastNumber != pages){
+        if(lastNumber < pages){
             rightSkip.innerHTML =  `<img src=${rightSkipIcon} class="backButton">`
         }else{
             rightSkip.innerHTML = ""

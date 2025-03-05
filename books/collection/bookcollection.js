@@ -11,7 +11,6 @@ const totalData = document.getElementById("totalData")
 const collectionNavigationArea = document.getElementById("collectionNavigationArea")
 const pageIndex = document.getElementById("pageIndex")
 const totalPagesUI = document.getElementById("totalPages")
-const navAreaBook = document.getElementById("navAreaBook")
 const collectionBackward = document.querySelectorAll(".collectionBackward")
 const collectionForward = document.querySelectorAll(".collectionForward")
 const buttonsForward = document.getElementById("buttonsForward")
@@ -231,7 +230,7 @@ function cachePageIndex(category, indexValue = null){
     if(category === "myanmar"){
         sessionData = "mmPageIndex"
     }else{
-        sessionData = "engEngIndex"
+        sessionData = "engPageIndex"
     }
     if(indexValue !== null){
         sessionStorage.setItem(sessionData, indexValue)

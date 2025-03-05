@@ -1,14 +1,20 @@
 import { getAllMembersFunction, searchMemberFunction } from "../../controllers/member.controller.js";
 import {buildMemberNavigation} from "../../utils/extra.js"
-
+import { buildNavArea } from "../../utils/extra.js";
 const filePath = window.imagePaths.shareFilePath();
 const memberType = document.getElementById("memberType")
 const memberNavigationArea = document.getElementById("memberNavigationArea");
 const memberDataEl = document.getElementById("memberData");
 const searchMemberForm = document.getElementById("searchMemberForm")
 const addMemberBtn = document.getElementById("addMemberBtn");
-
-let index = 1;
+const pageIndex = document.getElementById("memberPageIndex")
+const totalPagesUI = document.getElementById("memberTotalPages")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("memberButtonsForward")
+const buttonsBackward = document.getElementById("memberButtonsBackward")
+const navigationButtons = document.getElementById('memberNavigationButtons')
+let index = Number(cachePageIndex())
 let searchedHistory = sessionStorage.getItem("searchMemberResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberData")
 const memberCards = document.getElementById("memberCards")
@@ -18,7 +24,7 @@ memberType.value = memberTypeValue;
 await searchMemberFormFunction()
 
 if(!searchedHistory){
-  updateMemberData(memberTypeValue)
+  updateMemberData(memberTypeValue, index)
 }else{
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
@@ -36,18 +42,23 @@ async function updateMemberData(memberValue, page = 1){
   let totalPages = result.result.totalPages;
   totalData.innerText = `Total Members: ${totalLength}`
 
-  if(totalPages > 1){
-    if(page == 1){
-       buildMemberNavigation(memberNavigationArea, false, true, memberTypeValue, index, updateMemberData, updateNewIndex)
-    }else if (page === totalPages){
-      buildMemberNavigation(memberNavigationArea, true, false, memberTypeValue, index, updateMemberData, updateNewIndex)
-    }else{
-      buildMemberNavigation(memberNavigationArea, true, true, memberTypeValue, index, updateMemberData, updateNewIndex)
-    }
-  }else{
-     buildMemberNavigation(memberNavigationArea, false, false, memberTypeValue, index, updateMemberData, updateNewIndex)
+  let navigationComponents = {
+    resultPages: {totalPages, index, navigationButtons},
+    collectionNavigation: {collectionBackward, collectionForward},
+    pageValues: {pageIndex, totalPagesUI},
+    category: "member", 
+    skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
   }
+  buildNavArea(navigationComponents)
 
+  pageIndex.addEventListener("change", () => {
+    if(pageIndex.value <= totalPages){
+        cachePageIndex(pageIndex.value)
+        window.location.reload()
+    }else{
+        window.showMessageApi.alertMsg("Invalid page")
+    }
+  })
   let totalMemberData = result.result.items
 
   if(totalMemberData.length > 0){
@@ -151,6 +162,18 @@ function cacheMemberType(booleanValue = null){
     return "all"
   }
   return cachedMemberTypeValue;
+}
+
+function cachePageIndex(indexValue = null){
+  let sessionData = "memberPageIndex"
+  if(indexValue !== null){
+      sessionStorage.setItem(sessionData, indexValue)
+  }
+  let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+  if(cachedPageIndexValue === null){
+      return 1;
+  }
+  return cachedPageIndexValue;
 }
 
 async function searchMemberFormFunction(){
