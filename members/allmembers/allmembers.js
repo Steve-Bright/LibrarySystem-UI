@@ -14,12 +14,12 @@ const collectionForward = document.querySelectorAll(".collectionForward")
 const buttonsForward = document.getElementById("memberButtonsForward")
 const buttonsBackward = document.getElementById("memberButtonsBackward")
 const navigationButtons = document.getElementById('memberNavigationButtons')
-let index = Number(cachePageIndex())
 let searchedHistory = sessionStorage.getItem("searchMemberResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberData")
 const memberCards = document.getElementById("memberCards")
 let memberTypeValue = cacheMemberType()
 memberType.value = memberTypeValue;
+let index = Number(cachePageIndex(memberTypeValue))
 
 await searchMemberFormFunction()
 
@@ -31,7 +31,8 @@ if(!searchedHistory){
 }
 
 memberType.addEventListener("change", () => {
-  updateMemberData(memberType.value)
+  updateMemberData(memberType.value, index)
+  window.location.reload()
 })
 
 async function updateMemberData(memberValue, page = 1){
@@ -46,14 +47,14 @@ async function updateMemberData(memberValue, page = 1){
     resultPages: {totalPages, index, navigationButtons},
     collectionNavigation: {collectionBackward, collectionForward},
     pageValues: {pageIndex, totalPagesUI},
-    category: "member", 
+    category: `${memberTypeValue}Member`, 
     skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
   }
   buildNavArea(navigationComponents)
 
   pageIndex.addEventListener("change", () => {
     if(pageIndex.value <= totalPages){
-        cachePageIndex(pageIndex.value)
+        cachePageIndex(memberTypeValue, pageIndex.value)
         window.location.reload()
     }else{
         window.showMessageApi.alertMsg("Invalid page")
@@ -164,8 +165,20 @@ function cacheMemberType(booleanValue = null){
   return cachedMemberTypeValue;
 }
 
-function cachePageIndex(indexValue = null){
-  let sessionData = "memberPageIndex"
+function cachePageIndex(memberType, indexValue = null){
+  let sessionData;
+  switch(memberType){
+    case "all": sessionData = "allMemberPageIndex"
+    break;
+    case "staff": sessionData = "staffMemberPageIndex"
+    break;
+    case "teacher": sessionData = "teacherMemberPageIndex"
+    break;
+    case "public": sessionData = "publicMemberPageIndex"
+    break;
+    case "student": sessionData = "studentMemberPageIndex"
+    break;
+  }
   if(indexValue !== null){
       sessionStorage.setItem(sessionData, indexValue)
   }

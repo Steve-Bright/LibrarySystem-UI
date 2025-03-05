@@ -104,7 +104,7 @@ async function updateBookData(booleanValue, page = 1){
       buildNavArea(navigationComponents)
       pageIndex.addEventListener("change", () => {
         if(pageIndex.value <= totalPages){
-            cachePageIndex(pageIndex.value)
+            cachePageIndex(categoryData, pageIndex.value)
             window.location.reload()
         }else{
             window.showMessageApi.alertMsg("Invalid page")

@@ -52,20 +52,55 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
     let {pageIndex, totalPagesUI} = pageValues;
 
 
-    let sessionData;
-    if(category === "myanmar"){
-        sessionData = "mmPageIndex"
-    }else if(category == "english"){
-        sessionData = "engPageIndex"
-    }else if(category == "member"){
-        sessionData = "memberPageIndex"
-    }else if(category == "loan"){
-        sessionData = "loanPageIndex"
-    }else if(category == "myanmarCallNo"){
-        sessionData = "myanmarCallNoPageIndex"
-    }else if(category == "englishCallNo"){
-        sessionData  = "englishCallNoPageIndex"
+    let navData = {
+        "myanmar": "mmPageIndex", 
+        "english": "engPageIndex",
+        "myanmarCallNo": "myanmarCallNoPageIndex",
+        "englishCallNo": "englishCallNoPageIndex",
+        "allMember": "allMemberPageIndex",
+        "staffMember": "staffMemberPageIndex",
+        "teacherMember": "teacherMemberPageIndex",
+        "publicMember": "publicMemberPageIndex",
+        "studentMember": "studentMemberPageIndex",
+        "allMemberCard": "allMemCardPageIndex",
+        "staffMemberCard": "staffMemCardPageIndex",
+        "teacherMemberCard": "teacherMemCardPageIndex",
+        "publicMemberCard": "publicMemCardPageIndex",
+        "studentMemberCard": "studentMemCardPageIndex",
+        "allLoan": "allLoanPageIndex",
+        "todayLoan": "todayLoanPageIndex",
+        "overdueLoan": "overdueLoanPageIndex",
+        "otherLoan": "otherLoanPageIndex",
+        "allPrintLoan": "allPrintLoanPageIndex",
+        "todayPrintLoan": "todayPrintLoanPageIndex",
+        "overduePrintLoan": "overduePrintLoanPageIndex",
+        "otherPrintLoan": "otherPrintLoanPageIndex",
     }
+
+    let sessionData;
+    let allNavKeys = Object.keys(navData)
+    for(let eachKey of allNavKeys){
+        if(eachKey === category){
+            sessionData = navData[eachKey]
+        }
+    }
+
+
+    // if(category === "myanmar"){
+    //     sessionData = "mmPageIndex"
+    // }else if(category == "english"){
+    //     sessionData = "engPageIndex"
+    // }else if(category == "member"){
+    //     sessionData = "memberPageIndex"
+    // }else if(category == "loan"){
+    //     sessionData = "loanPageIndex"
+    // }else if(category == "myanmarCallNo"){
+    //     sessionData = "myanmarCallNoPageIndex"
+    // }else if(category == "englishCallNo"){
+    //     sessionData  = "englishCallNoPageIndex"
+    // }else if(category == "memberCard"){
+    //     sessionData = "memberCardPageIndex"
+    // }
 
     navigationButtons.innerHTML = ""
     pageIndex.value =index;

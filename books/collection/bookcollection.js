@@ -36,7 +36,7 @@ if(!searchedHistory){
 
 
 collectionCategory.addEventListener("change", () => {
-  updateBookData(collectionCategory.value)
+  updateBookData(collectionCategory.value, index)
   window.location.reload()
 })
 
