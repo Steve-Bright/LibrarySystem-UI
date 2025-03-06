@@ -51,12 +51,16 @@ async function updateMemberData(memberValue, page = 1){
     skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
   }
   buildNavArea(navigationComponents)
+  if(totalLength === 0){
+    pageIndex.value = "0"
+  }
 
   pageIndex.addEventListener("change", () => {
     if(pageIndex.value <= totalPages){
         cachePageIndex(memberTypeValue, pageIndex.value)
         window.location.reload()
     }else{
+      pageIndex.value = cachePageIndex(memberTypeValue) 
         window.showMessageApi.alertMsg("Invalid page")
     }
   })

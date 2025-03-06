@@ -1,14 +1,24 @@
 import { getBookLoanHis } from "../../controllers/book.controller.js"
 import { buildLoanHistoryNavigation } from "../../utils/extra.js"
 const backToCollection = document.getElementById("backToCollection")
+import { buildNavArea } from "../../utils/extra.js";
 const totalData = document.getElementById("totalData")
 const loanNavigationArea = document.getElementById("loanNavigationArea")
 const loanDataEl = document.getElementById("loanData")
+
+const pageIndex = document.getElementById("bookLoanHisPageIndex")
+const totalPagesUI = document.getElementById("bookLoanHisTotalPages")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("bookLoanHisButtonsForward")
+const buttonsBackward = document.getElementById("bookLoanHisButtonsBackward")
+const navigationButtons = document.getElementById('bookLoanHisNavigationButtons')
+
 let detailedBook = JSON.parse(sessionStorage.getItem("bookId"))
 let bookId = detailedBook.id
-let index = 1;
+let index = Number(cachePageIndex(bookId))
 
-updateLoanData()
+updateLoanData(index)
 
 backToCollection.addEventListener("click", () => {
   window.navigationApi.toAnotherPage("./books/viewBook/viewBook.html")
@@ -20,17 +30,23 @@ async function updateLoanData(page = 1){
     let totalPages = result.result.totalPages;
     totalData.innerHTML = `Loans (${totalLength})`
 
-    if(totalPages > 1){
-        if(page == 1){
-            buildLoanHistoryNavigation(loanNavigationArea, false, true, index, updateLoanData, updateNewIndex)
-        }else if (page === totalPages){
-            buildLoanHistoryNavigation(loanNavigationArea, true, false, index, updateLoanData, updateNewIndex)
-        }else{
-            buildLoanHistoryNavigation(loanNavigationArea, true, true, index, updateLoanData, updateNewIndex)
-        }
-    }else{
-        buildLoanHistoryNavigation(loanNavigationArea, false, false, index, updateLoanData, updateNewIndex)
+    let navigationComponents = {
+      resultPages: {totalPages, index, navigationButtons},
+      collectionNavigation: {collectionBackward, collectionForward},
+      pageValues: {pageIndex, totalPagesUI},
+      category: `${bookId}LoanHis`, 
+      skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
     }
+    buildNavArea(navigationComponents)
+    pageIndex.addEventListener("change", () => {
+      if(pageIndex.value <= totalPages){
+          cachePageIndex(bookId, pageIndex.value)
+          window.location.reload()
+      }else{
+          pageIndex.value = cachePageIndex(bookId) 
+          window.showMessageApi.alertMsg("Invalid page")
+      }
+    })
 
     let totalLoanData = result.result.items;
     if(totalLoanData.length > 0){
@@ -47,6 +63,18 @@ async function updateLoanData(page = 1){
 
 function updateNewIndex(newIndex){
   index = newIndex;
+}
+
+function cachePageIndex(bookId, indexValue = null){
+  let sessionData = `${bookId}LoanHis`
+  if(indexValue !== null){
+      sessionStorage.setItem(sessionData, indexValue)
+  }
+  let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+  if(cachedPageIndexValue === null){
+      return 1;
+  }
+  return cachedPageIndexValue;
 }
 
 function showEachLoan(placerDiv, loanData){

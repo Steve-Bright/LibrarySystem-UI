@@ -1,12 +1,22 @@
 import { getMemLoanHis } from "../../controllers/member.controller.js";
 import { buildLoanHistoryNavigation } from "../../utils/extra.js"
+import { buildNavArea } from "../../utils/extra.js";
 const backToCollection = document.getElementById("backToCollection")
 const totalData = document.getElementById("totalData")
 const loanNavigationArea = document.getElementById("loanNavigationArea")
 const loanDataEl = document.getElementById("loanData")
+
+const pageIndex = document.getElementById("memLoanHisPageIndex")
+const totalPagesUI = document.getElementById("memLoanHisTotalPages")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("memLoanHisButtonsForward")
+const buttonsBackward = document.getElementById("memLoanHisButtonsBackward")
+const navigationButtons = document.getElementById('memLoanHisNavigationButtons')
+
 let detailedMember = JSON.parse(sessionStorage.getItem("memberId"))
 let memberId = detailedMember.id
-let index = 1;
+let index = Number(cachePageIndex(memberId))
 
 updateLoanData()
 
@@ -20,17 +30,23 @@ async function updateLoanData(page = 1){
     let totalPages = result.result.totalPages;
     totalData.innerHTML = `Loans (${totalLength})`
 
-    if(totalPages > 1){
-        if(page == 1){
-            buildLoanHistoryNavigation(loanNavigationArea, false, true, index, updateLoanData, updateNewIndex)
-        }else if (page === totalPages){
-            buildLoanHistoryNavigation(loanNavigationArea, true, false, index, updateLoanData, updateNewIndex)
-        }else{
-            buildLoanHistoryNavigation(loanNavigationArea, true, true, index, updateLoanData, updateNewIndex)
-        }
-    }else{
-        buildLoanHistoryNavigation(loanNavigationArea, false, false, index, updateLoanData, updateNewIndex)
+    let navigationComponents = {
+      resultPages: {totalPages, index, navigationButtons},
+      collectionNavigation: {collectionBackward, collectionForward},
+      pageValues: {pageIndex, totalPagesUI},
+      category: `${memberId}LoanHis`,
+      skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
     }
+    buildNavArea(navigationComponents)
+    pageIndex.addEventListener("change", () => {
+      if(pageIndex.value <= totalPages){
+          cachePageIndex(memberId, pageIndex.value)
+          window.location.reload()
+      }else{
+          pageIndex.value = cachePageIndex(memberId) 
+          window.showMessageApi.alertMsg("Invalid page")
+      }
+    })
 
     let totalLoanData = result.result.items;
     if(totalLoanData.length > 0){
@@ -47,6 +63,18 @@ async function updateLoanData(page = 1){
 
 function updateNewIndex(newIndex){
   index = newIndex;
+}
+
+function cachePageIndex(memberId, indexValue = null){
+  let sessionData = `${memberId}LoanHis`
+  if(indexValue !== null){
+      sessionStorage.setItem(sessionData, indexValue)
+  }
+  let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+  if(cachedPageIndexValue === null){
+      return 1;
+  }
+  return cachedPageIndexValue;
 }
 
 function showEachLoan(placerDiv, loanData){

@@ -52,6 +52,8 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
     let {pageIndex, totalPagesUI} = pageValues;
 
 
+    console.log('currnt num ' + index)
+
     let navData = {
         "myanmar": "mmPageIndex", 
         "english": "engPageIndex",
@@ -85,22 +87,9 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
         }
     }
 
-
-    // if(category === "myanmar"){
-    //     sessionData = "mmPageIndex"
-    // }else if(category == "english"){
-    //     sessionData = "engPageIndex"
-    // }else if(category == "member"){
-    //     sessionData = "memberPageIndex"
-    // }else if(category == "loan"){
-    //     sessionData = "loanPageIndex"
-    // }else if(category == "myanmarCallNo"){
-    //     sessionData = "myanmarCallNoPageIndex"
-    // }else if(category == "englishCallNo"){
-    //     sessionData  = "englishCallNoPageIndex"
-    // }else if(category == "memberCard"){
-    //     sessionData = "memberCardPageIndex"
-    // }
+    if(!sessionData){
+        sessionData = category;
+    }
 
     navigationButtons.innerHTML = ""
     pageIndex.value =index;

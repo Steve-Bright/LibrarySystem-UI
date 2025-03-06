@@ -21,9 +21,10 @@ const navigationButtons = document.getElementById('loanNavigationButtons')
 
 let searchedHistory = sessionStorage.getItem("searchLoanResult")
 let searchedKeyword = sessionStorage.getItem("searchLoanData")
-let index = Number(cachePageIndex());
+
 let loanTypeValue = cacheLoanType();
 loanType.value = loanTypeValue;
+let index = Number(cachePageIndex(loanTypeValue));
 await searchLoanFunction(loanTypeValue)
 
 if(!searchedHistory){
@@ -34,7 +35,8 @@ if(!searchedHistory){
 }
 
 loanType.addEventListener("change", () => {
-  updateLoanData(loanType.value)
+  updateLoanData(loanType.value, index)
+  window.location.reload()
 } )
 
 printLoan.addEventListener("click", () => {
@@ -66,16 +68,21 @@ async function updateLoanData(loanValue, page = 1){
     resultPages: {totalPages, index, navigationButtons},
     collectionNavigation: {collectionBackward, collectionForward},
     pageValues: {pageIndex, totalPagesUI},
-    category: "loan", 
+    category: `${loanTypeValue}Loan`, 
     skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
   }
   buildNavArea(navigationComponents)
+
+  if(totalLength === 0){
+    pageIndex.value = "0"
+  }
   
   pageIndex.addEventListener("change", () => {
     if(pageIndex.value <= totalPages){
-        cachePageIndex(pageIndex.value)
+        cachePageIndex(loanTypeValue, pageIndex.value)
         window.location.reload()
     }else{
+      pageIndex.value = cachePageIndex(loanTypeValue) 
         window.showMessageApi.alertMsg("Invalid page")
     }
   })
@@ -195,8 +202,22 @@ function cacheLoanType(booleanValue = null){
   return cachedLoanTypeValue;
 }
 
-function cachePageIndex(indexValue = null){
-  let sessionData = "loanPageIndex"
+function cachePageIndex(loanType, indexValue = null){
+  // "allLoan": "allLoanPageIndex",
+  // "todayLoan": "todayLoanPageIndex",
+  // "overdueLoan": "overdueLoanPageIndex",
+  // "otherLoan": "otherLoanPageIndex",
+  let sessionData;
+  switch(loanType){
+    case "all": sessionData = "allLoanPageIndex"
+    break;
+    case "today": sessionData = "todayLoanPageIndex"
+    break;
+    case "overdue": sessionData = "overdueLoanPageIndex"
+    break;
+    case "other": sessionData = "otherLoanPageIndex"
+    break;
+  }
   if(indexValue !== null){
       sessionStorage.setItem(sessionData, indexValue)
   }

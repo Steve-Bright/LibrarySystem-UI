@@ -95,11 +95,16 @@ async function updateMemberCardData(memberValue, page = 1){
     }
     buildNavArea(navigationComponents)
 
+    if(totalMembersLength === 0){
+      pageIndex.value = "0"
+    }
+
     pageIndex.addEventListener("change", () => {
       if(pageIndex.value <= totalPages){
           cachePageIndex(memberTypeData, pageIndex.value)
           window.location.reload()
       }else{
+        pageIndex.value = cachePageIndex(memberTypeValue) 
           window.showMessageApi.alertMsg("Invalid page")
       }
   })
