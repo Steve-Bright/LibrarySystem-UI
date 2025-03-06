@@ -2,11 +2,20 @@ import { getAllBooksFunction, searchBook } from "../../controllers/book.controll
 import {buildCollectionNavigation, buildBarcodeCollectionView} from "../../utils/extra.js"
 const backToCollection = document.getElementById("backToCollection")
 const totalData = document.getElementById("totalData")
+import { buildNavArea } from "../../utils/extra.js";
 const collectionCategory = document.getElementById("collectionCategory")
 const barcodeData = document.getElementById("barcodeData")
 const barcodeNavigationArea = document.getElementById("barcodeNavigationArea")
 const searchBookForm = document.getElementById("searchBookForm")
 const printPreview = document.getElementById("printPreview")
+
+const pageIndex = document.getElementById("callNoPageIndex")
+const totalPagesUI = document.getElementById("callNoTotalPages")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("callNoButtonsForward")
+const buttonsBackward = document.getElementById("callNoButtonsBackward")
+const navigationButtons = document.getElementById('callNoNavigationButtons')
 
 let searchedHistory = sessionStorage.getItem("searchCallNumResult")
 let searchedKeyword = sessionStorage.getItem("searchCallNumData")
@@ -16,7 +25,7 @@ const currentFile = window.imagePaths.shareCurrentFile();
 let category = cacheCategory();
 collectionCategory.value = category;
 await searchCallNumFunction(category)
-let index = 1;
+let index = Number(cachePageIndex(category));
 let selectedCallNums = [];
 
 if(printMaterials){
@@ -30,7 +39,7 @@ if(printMaterials){
 }
 
 if(!searchedHistory){
-    await updateBookData(category)
+    await updateBookData(category, index)
 }else{
     placeItemsInSearchForm(searchedKeyword)
     showSearchResults(category, searchedHistory)
@@ -85,17 +94,28 @@ async function updateBookData(booleanValue, page = 1){
     let rowData = buildBarcodeCollectionView(2, eachBookData, tr, td, trArrays)
     rowData.forEach((eachBarcode) => barcodeData.appendChild(eachBarcode))
 
-    if(totalPages > 1) {
-        if(page == 1){
-            buildCollectionNavigation(barcodeNavigationArea, false, true, index, category, updateBookData, updateNewIndex)
-        }else if(page === totalPages){
-            buildCollectionNavigation(barcodeNavigationArea, true, false, index, category, updateBookData, updateNewIndex)
+      let navigationComponents = {
+        resultPages: {totalPages, index, navigationButtons},
+        collectionNavigation: {collectionBackward, collectionForward},
+        pageValues: {pageIndex, totalPagesUI},
+        category: `${category}CallNo`, 
+        skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
+      }
+      buildNavArea(navigationComponents)
+
+      if(totalLength === 0){
+        pageIndex.value = "0"
+      }
+
+      pageIndex.addEventListener("change", () => {
+        if(pageIndex.value <= totalPages){
+            cachePageIndex(categoryData, pageIndex.value)
+            window.location.reload()
         }else{
-            buildCollectionNavigation(barcodeNavigationArea, true, true, index, category, updateBookData, updateNewIndex)
+            pageIndex.value = cachePageIndex(categoryData) 
+            window.showMessageApi.alertMsg("Invalid page")
         }
-    }else{
-        buildCollectionNavigation(barcodeNavigationArea, false, false, index, category, updateBookData, updateNewIndex)
-    }
+      })
 
     barcodeSelection(categoryData)
 
@@ -201,3 +221,20 @@ function cacheCategory(booleanValue = null){
     }
     return cachedCategoryValue
 }
+
+function cachePageIndex(category, indexValue = null){
+    let sessionData;
+    if(category === "myanmar"){
+        sessionData = "myanmarCallNoPageIndex"
+    }else{
+        sessionData = "englishCallNoPageIndex"
+    }
+    if(indexValue !== null){
+        sessionStorage.setItem(sessionData, indexValue)
+    }
+    let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+    if(cachedPageIndexValue === null){
+        return 1;
+    }
+    return cachedPageIndexValue;
+  }

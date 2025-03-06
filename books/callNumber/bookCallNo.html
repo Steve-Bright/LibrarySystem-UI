@@ -68,7 +68,16 @@
             <div class="tableFormat">
                 <div class="tableTitle">
                     <h2 id="totalData">Books</h2>
-                    <div id="barcodeNavigationArea">
+                    <div class="navAreaBook">
+                        <div class="collectionBackward pageButtons">
+                        </div>
+                        <div id="callNoIndexArea">
+                            Page
+                            <input type="number" id="callNoPageIndex" value="0">
+                            of <span id="callNoTotalPages">...</span> pages
+                        </div>
+                        <div class="collectionForward pageButtons">
+                        </div> 
                     </div>
                 </div>
                 
@@ -76,6 +85,20 @@
                     <tbody id="barcodeData">
                     </tbody>
                 </table>
+
+                <div id="callNoNavigationArea">
+                    <div class="pageButtons collectionBackward">
+                    </div>
+                    <div id="callNoButtonsBackward" class="pageButtons">
+                    </div>
+                    <div id="callNoNavigationButtons" class="pageButtons">
+
+                    </div>
+                    <div id="callNoButtonsForward" class="pageButtons">
+                    </div>
+                    <div class="pageButtons collectionForward">
+                    </div>
+                </div>
             </div>
         </main>
     </body>

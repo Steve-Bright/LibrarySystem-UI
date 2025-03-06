@@ -150,25 +150,25 @@ input::-webkit-inner-spin-button {
     justify-content: flex-end;
 }
 
-#navAreaBook{
+.navAreaBook{
     width: 30%;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-#pageIndexArea{
+#pageIndexArea, #memberPageIndexArea, #loanPageIndexArea, #callNoIndexArea, #memCardPageIndexArea, #printLoanPageIndexArea, #bookLoanHisPageIndexArea, #memLoanHisPageIndexArea{
     margin: auto 0;
 }
 
-#pageIndex{
+#pageIndex, #memberPageIndex, #loanPageIndex, #callNoPageIndex, #memCardPageIndex, #printLoanPageIndex, #bookLoanHisPageIndex, #memLoanHisPageIndex{
     width: 4em;
     height: 2.5em;
     text-align: center;
     border-radius: 5px;
 }
 
-#collectionNavigationArea{
+#collectionNavigationArea, #memberNavigationArea, #loanNavigationArea, #callNoNavigationArea, #memCardNavigationArea, #printLoanNavigationArea, #bookLoanHisNavigationArea, #memLoanHisNavigationArea{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -177,23 +177,24 @@ input::-webkit-inner-spin-button {
     margin: 1em 0px;
 }
 
-#navigationButtons{
-    width: 55%;
+#navigationButtons, #memberNavigationButtons, #loanNavigationButtons, #callNoNavigationButtons, #memCardNavigationButtons, #printLoanNavigationButtons, #bookLoanHisNavigationButtons, #memLoanHisNavigationButtons{
+    min-width: 10%;
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
-#navigationButtons button{
+#navigationButtons button, #memberNavigationButtons button, #loanNavigationButtons button, #callNoNavigationButtons button, #memCardNavigationButtons button, #printLoanNavigationButtons button, #bookLoanHisNavigationButtons button, #memLoanHisNavigationButtons button{
     width: 3em;
     height: 2.7em;
+    margin: 0 0.7em;
     border-radius: 5px;
     background-color: white;
     color: black;
-    font-weight: bolder;
+    font-size: 0.75em;
     border: 2px solid #1E3FAD;
 }
 
-#navigationButtons .selectedPage{    
+#navigationButtons .selectedPage, #memberNavigationButtons .selectedPage, #loanNavigationButtons .selectedPage, #callNoNavigationButtons .selectedPage, #memCardNavigationButtons .selectedPage, #printLoanNavigationButtons .selectedPage, #bookLoanHisNavigationButtons .selectedPage, #memLoanHisNavigationButtons .selectedPage{    
     background-color: #1E3FAD;
     color: white;
 }
@@ -259,7 +260,7 @@ input:focus{
         width: 60%;
     }
 
-    #navAreaBook{
+    .navAreaBook{
         width: 40%;
         display: flex;
         align-items: center;
@@ -287,7 +288,7 @@ input:focus{
         width: 60%;
     }
 
-    #navAreaBook{
+    .navAreaBook{
         width: 40%;
         display: flex;
         align-items: center;

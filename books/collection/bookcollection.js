@@ -11,22 +11,24 @@ const totalData = document.getElementById("totalData")
 const collectionNavigationArea = document.getElementById("collectionNavigationArea")
 const pageIndex = document.getElementById("pageIndex")
 const totalPagesUI = document.getElementById("totalPages")
-const navAreaBook = document.getElementById("navAreaBook")
-const collectionBackward = document.getElementById("collectionBackward")
-const collectionForward = document.getElementById("collectionForward")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("buttonsForward")
+const buttonsBackward = document.getElementById("buttonsBackward")
 const bookDataHeadings = document.getElementById("bookDataHeadings")
+const navigationButtons = document.getElementById('navigationButtons')
 const bookDataEl = document.getElementById("bookData")
 const filePath = window.imagePaths.shareFilePath();
 
 let searchedHistory = sessionStorage.getItem("searchBookResult")
 let searchedKeyword = sessionStorage.getItem("searchBookData")
-let index = 1;
 let category = cacheCategory();
+let index = Number(cachePageIndex(category))
 collectionCategory.value = category;
 await searchBookFunction(category)
 
 if(!searchedHistory){
-    updateBookData(category)
+    updateBookData(category, index)
 }else{
     placeItemsInSearchForm(category, searchedKeyword)
     showSearchResults(category, searchedHistory)
@@ -34,7 +36,8 @@ if(!searchedHistory){
 
 
 collectionCategory.addEventListener("change", () => {
-  updateBookData(collectionCategory.value)
+  updateBookData(collectionCategory.value, index)
+  window.location.reload()
 })
 
 callNoBtn.addEventListener("click", () => {
@@ -72,26 +75,27 @@ async function updateBookData(booleanValue, page = 1){
     totalData.innerHTML = `Books (${totalLength})`
 
     let navigationComponents = {
-        resultPages: {totalPages, index},
+        resultPages: {totalPages, index, navigationButtons},
         collectionNavigation: {collectionBackward, collectionForward},
         pageValues: {pageIndex, totalPagesUI},
-        categoryData,
-        updateBookData,
-        updateNewIndex
+        category: categoryData,
+        skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
     }
     buildNavArea(navigationComponents)
-    // if(totalPages > 1) {
-    //     if(page == 1){
-    //         buildCollectionNavigation(collectionNavigationArea, false, true, index, categoryData, updateBookData, updateNewIndex)
-    //     }else if(page === totalPages){
-    //         buildCollectionNavigation(collectionNavigationArea, true, false, index, categoryData, updateBookData, updateNewIndex)
-    //     }else{
-    //         buildCollectionNavigation(collectionNavigationArea, true, true, index, categoryData, updateBookData, updateNewIndex)
-    //     }
-    // }else{
-    //     buildCollectionNavigation(collectionNavigationArea, false, false, index, categoryData, updateBookData, updateNewIndex)
-    // }
 
+    if(totalLength === 0){
+        pageIndex.value = "0"
+    }
+
+    pageIndex.addEventListener("change", () => {
+        if(pageIndex.value <= totalPages){
+            cachePageIndex(categoryData, pageIndex.value)
+            window.location.reload()
+        }else{
+            pageIndex.value = cachePageIndex(categoryData) 
+            window.showMessageApi.alertMsg("Invalid page")
+        }
+    })
     
     let totalBookData = result.result.items;
    
@@ -223,6 +227,23 @@ function cacheCategory(booleanValue = null){
         return "english";
     }
     return cachedCategoryValue; 
+}
+
+function cachePageIndex(category, indexValue = null){
+    let sessionData;
+    if(category === "myanmar"){
+        sessionData = "mmPageIndex"
+    }else{
+        sessionData = "engPageIndex"
+    }
+    if(indexValue !== null){
+        sessionStorage.setItem(sessionData, indexValue)
+    }
+    let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+    if(cachedPageIndexValue === null){
+        return 1;
+    }
+    return cachedPageIndexValue;
 }
 
 function updateBookHeading(categoryData){

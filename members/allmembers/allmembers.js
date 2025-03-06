@@ -1,31 +1,38 @@
 import { getAllMembersFunction, searchMemberFunction } from "../../controllers/member.controller.js";
 import {buildMemberNavigation} from "../../utils/extra.js"
-
+import { buildNavArea } from "../../utils/extra.js";
 const filePath = window.imagePaths.shareFilePath();
 const memberType = document.getElementById("memberType")
 const memberNavigationArea = document.getElementById("memberNavigationArea");
 const memberDataEl = document.getElementById("memberData");
 const searchMemberForm = document.getElementById("searchMemberForm")
 const addMemberBtn = document.getElementById("addMemberBtn");
-
-let index = 1;
+const pageIndex = document.getElementById("memberPageIndex")
+const totalPagesUI = document.getElementById("memberTotalPages")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("memberButtonsForward")
+const buttonsBackward = document.getElementById("memberButtonsBackward")
+const navigationButtons = document.getElementById('memberNavigationButtons')
 let searchedHistory = sessionStorage.getItem("searchMemberResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberData")
 const memberCards = document.getElementById("memberCards")
 let memberTypeValue = cacheMemberType()
 memberType.value = memberTypeValue;
+let index = Number(cachePageIndex(memberTypeValue))
 
 await searchMemberFormFunction()
 
 if(!searchedHistory){
-  updateMemberData(memberTypeValue)
+  updateMemberData(memberTypeValue, index)
 }else{
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
 }
 
 memberType.addEventListener("change", () => {
-  updateMemberData(memberType.value)
+  updateMemberData(memberType.value, index)
+  window.location.reload()
 })
 
 async function updateMemberData(memberValue, page = 1){
@@ -36,18 +43,27 @@ async function updateMemberData(memberValue, page = 1){
   let totalPages = result.result.totalPages;
   totalData.innerText = `Total Members: ${totalLength}`
 
-  if(totalPages > 1){
-    if(page == 1){
-       buildMemberNavigation(memberNavigationArea, false, true, memberTypeValue, index, updateMemberData, updateNewIndex)
-    }else if (page === totalPages){
-      buildMemberNavigation(memberNavigationArea, true, false, memberTypeValue, index, updateMemberData, updateNewIndex)
-    }else{
-      buildMemberNavigation(memberNavigationArea, true, true, memberTypeValue, index, updateMemberData, updateNewIndex)
-    }
-  }else{
-     buildMemberNavigation(memberNavigationArea, false, false, memberTypeValue, index, updateMemberData, updateNewIndex)
+  let navigationComponents = {
+    resultPages: {totalPages, index, navigationButtons},
+    collectionNavigation: {collectionBackward, collectionForward},
+    pageValues: {pageIndex, totalPagesUI},
+    category: `${memberTypeValue}Member`, 
+    skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
+  }
+  buildNavArea(navigationComponents)
+  if(totalLength === 0){
+    pageIndex.value = "0"
   }
 
+  pageIndex.addEventListener("change", () => {
+    if(pageIndex.value <= totalPages){
+        cachePageIndex(memberTypeValue, pageIndex.value)
+        window.location.reload()
+    }else{
+      pageIndex.value = cachePageIndex(memberTypeValue) 
+        window.showMessageApi.alertMsg("Invalid page")
+    }
+  })
   let totalMemberData = result.result.items
 
   if(totalMemberData.length > 0){
@@ -151,6 +167,30 @@ function cacheMemberType(booleanValue = null){
     return "all"
   }
   return cachedMemberTypeValue;
+}
+
+function cachePageIndex(memberType, indexValue = null){
+  let sessionData;
+  switch(memberType){
+    case "all": sessionData = "allMemberPageIndex"
+    break;
+    case "staff": sessionData = "staffMemberPageIndex"
+    break;
+    case "teacher": sessionData = "teacherMemberPageIndex"
+    break;
+    case "public": sessionData = "publicMemberPageIndex"
+    break;
+    case "student": sessionData = "studentMemberPageIndex"
+    break;
+  }
+  if(indexValue !== null){
+      sessionStorage.setItem(sessionData, indexValue)
+  }
+  let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+  if(cachedPageIndexValue === null){
+      return 1;
+  }
+  return cachedPageIndexValue;
 }
 
 async function searchMemberFormFunction(){

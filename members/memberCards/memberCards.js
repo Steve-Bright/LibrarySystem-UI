@@ -1,6 +1,6 @@
 import { getAllMembersFunction, searchMemberFunction } from "../../controllers/member.controller.js"
 import { buildCardDesign, attachMemberCardToDiv, buildMemberNavigation } from "../../utils/extra.js"
-
+import { buildNavArea } from "../../utils/extra.js";
 const memberType = document.getElementById("memberType")
 const backToCollection = document.getElementById("backToCollection")
 const printPreview = document.getElementById("printPreview")
@@ -8,13 +8,22 @@ const totalData = document.getElementById("totalData")
 const memberCardData = document.getElementById("memberCardData")
 const memberNavigationArea = document.getElementById("memberNavigationArea")
 const searchMemberForm = document.getElementById("searchMemberForm")
-let index = 1;
+
+const pageIndex = document.getElementById("memCardPageIndex")
+const totalPagesUI = document.getElementById("memCardTotalPages")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("memCardButtonsForward")
+const buttonsBackward = document.getElementById("memCardButtonsBackward")
+const navigationButtons = document.getElementById('memCardNavigationButtons')
+
 let searchedHistory = sessionStorage.getItem("searchMemberCardResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberCardData")
 let printMaterials = localStorage.getItem("toPrintMemberCards")
 const currentFile = window.imagePaths.shareCurrentFile();
 let memberTypeValue = cacheMemberType()
 memberType.value = memberTypeValue;
+let index = Number(cachePageIndex(memberTypeValue))
 
 let cardIds = []
 await searchMemberFormFunction()
@@ -24,14 +33,15 @@ if(printMaterials){
 }
 
 if(!searchedHistory){
-  await updateMemberCardData(memberTypeValue)
+  await updateMemberCardData(memberTypeValue, index)
 }else{
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
 }
 
 memberType.addEventListener("change", () => {
-  updateMemberCardData(memberType.value)
+  updateMemberCardData(memberType.value, index)
+  window.location.reload()
 })
 
 backToCollection.addEventListener("click", () => {
@@ -76,17 +86,28 @@ async function updateMemberCardData(memberValue, page = 1){
   let cardDesigns = buildCardDesign(totalMembers)
   attachMemberCardToDiv(memberCardData, cardDesigns)
 
-  if(totalMembersLength > 1){
-    if(page == 1){
-      buildMemberNavigation(memberNavigationArea, false, true, memberTypeValue,  index, updateMemberCardData, updateNewIndex)
-    }else if(page == totalPages){
-      buildMemberNavigation(memberNavigationArea, true, false, memberTypeValue, index, updateMemberCardData, updateNewIndex)
-    }else{
-      buildMemberNavigation(memberNavigationArea, true, true, memberTypeValue, index, updateMemberCardData, updateNewIndex)
+   let navigationComponents = {
+      resultPages: {totalPages, index, navigationButtons},
+      collectionNavigation: {collectionBackward, collectionForward},
+      pageValues: {pageIndex, totalPagesUI},
+      category: `${memberTypeValue}MemberCard`,
+      skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
     }
-  }else{
-    buildMemberNavigation(memberNavigationArea, false, false, memberTypeValue, index,  updateMemberCardData, updateNewIndex)
-  }
+    buildNavArea(navigationComponents)
+
+    if(totalMembersLength === 0){
+      pageIndex.value = "0"
+    }
+
+    pageIndex.addEventListener("change", () => {
+      if(pageIndex.value <= totalPages){
+          cachePageIndex(memberTypeData, pageIndex.value)
+          window.location.reload()
+      }else{
+        pageIndex.value = cachePageIndex(memberTypeValue) 
+          window.showMessageApi.alertMsg("Invalid page")
+      }
+  })
   memberCardSelection()
 }
 
@@ -135,6 +156,36 @@ function cacheMemberType(booleanValue = null){
   }
 
   return cachedMemberTypeValue;
+}
+
+function cachePageIndex(memberType, indexValue = null){
+  // "allMemberCard": "allMemCardPageIndex",
+  // "staffMemberCard": "staffMemCardPageIndex",
+  // "teacherMemberCard": "teacherMemCardPageIndex",
+  // "publicMemberCard": "publicMemCardPageIndex",
+  // "studentMemberCard": "studentMemCardPageIndex",
+  let sessionData;
+  switch(memberType){
+    case "all": sessionData = "allMemCardPageIndex"
+    break;
+    case "staff": sessionData = "staffMemCardPageIndex"
+    break;
+    case "teacher": sessionData = "teacherMemCardPageIndex"
+    break;
+    case "public": sessionData = "publicMemCardPageIndex"
+    break;
+    case "student": sessionData = "studentMemCardPageIndex"
+    break;
+  }
+  // let sessionData = "memberCardPageIndex"
+  if(indexValue !== null){
+      sessionStorage.setItem(sessionData, indexValue)
+  }
+  let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+  if(cachedPageIndexValue === null){
+      return 1;
+  }
+  return cachedPageIndexValue;
 }
 
 async function searchMemberFormFunction(){

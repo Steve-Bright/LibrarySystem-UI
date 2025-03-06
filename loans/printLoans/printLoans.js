@@ -1,5 +1,6 @@
 import { getAllLoansFunction, searchLoan } from "../../controllers/loan.controller.js";
-import { buildMemberNavigation } from "../../utils/extra.js";
+// import { navigationComponents, } from "../../utils/extra.js";
+import { buildNavArea } from "../../utils/extra.js";
 const backToCollection = document.getElementById("backToCollection")
 const loanType = document.getElementById("loanType")
 const searchLoanForm = document.getElementById("searchLoanForm")
@@ -8,14 +9,23 @@ const loanNavigationArea = document.getElementById("loanNavigationArea")
 const loanDataEl = document.getElementById("loanData")
 const printPreview = document.getElementById("printPreview")
 
+const pageIndex = document.getElementById("printLoanPageIndex")
+const totalPagesUI = document.getElementById("printLoanTotalPages")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("printLoanButtonsForward")
+const buttonsBackward = document.getElementById("printLoanButtonsBackward")
+const navigationButtons = document.getElementById('printLoanNavigationButtons')
+
 let searchedHistory = sessionStorage.getItem("searchPrintLoanResult")
 let searchedKeyword = sessionStorage.getItem("searchPrintLoanData")
 let printMaterials = localStorage.getItem("toPrintLoan")
 const currentFile = window.imagePaths.shareCurrentFile();
-let index = 1;
 let selectedLoans = [];
 let loanTypeValue = cacheLoanType();
 loanType.value = loanTypeValue;
+
+let index = Number(cachePageIndex(loanTypeValue))
 await searchLoanFunction(loanTypeValue)
 
 if(printMaterials){
@@ -23,7 +33,7 @@ if(printMaterials){
 }
 
 if(!searchedHistory){
-  updateLoanData(loanTypeValue)
+  updateLoanData(loanTypeValue, index)
 }else{
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
@@ -61,17 +71,17 @@ async function updateLoanData(loanValue, page = 1){
   let totalPages = result.result.totalPages;
   totalData.innerHTML = `Loans (${totalLength})`
 
-    if(totalPages > 1){
-        if(page == 1){
-            buildMemberNavigation(loanNavigationArea, false, true, index, loanTypeValue,  updateLoanData, updateNewIndex)
-        }else if (page === totalPages){
-            buildMemberNavigation(loanNavigationArea, true, false, index, loanTypeValue,  updateLoanData, updateNewIndex)
-        }else{
-            buildMemberNavigation(loanNavigationArea, true, true, index, loanTypeValue, updateLoanData, updateNewIndex)
-        }
-    }else{
-        buildMemberNavigation(loanNavigationArea, false, false, index, loanTypeValue, updateLoanData, updateNewIndex)
-    }
+  let navigationComponents = {
+    resultPages: {totalPages, index, navigationButtons},
+    collectionNavigation: {collectionBackward, collectionForward},
+    pageValues: {pageIndex, totalPagesUI},
+    category: `${loanTypeValue}PrintLoan`,
+    skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
+  }
+  buildNavArea(navigationComponents)
+  if(totalLength === 0){
+    pageIndex.value = "0"
+  }
 
     let totalLoanData = result.result.items;
 
@@ -108,10 +118,11 @@ function showEachLoan(placerDiv, loanData){
     const newRow = document.createElement("tr")
     newRow.innerHTML = `
       <td><input type="checkbox" id=${eachLoan._id}  value=${eachLoan._id} class="eachLoan"></td>
-      <td>${eachLoan.memberId.name}</td>            
-      <td>${eachLoan.memberId.memberId}</td>
-      <td>${eachLoan.bookId.bookTitle}</td>
-      <td>${eachLoan.bookId.callNo}</td>
+      <td>${eachLoan.name}</td>            
+      <td>${eachLoan.memberId}</td>
+      <td>${eachLoan.bookTitle}</td>
+      <td>${eachLoan.callNo}</td>
+      <td>${eachLoan.category}</td>
       <td>${formattedLoanDate}</td>
       <td>${formattedDueDate}</td>
 
@@ -160,6 +171,32 @@ function cacheLoanType(booleanValue = null){
     return "all"
   }
   return cachedLoanTypeValue;
+}
+
+function cachePageIndex(loanType, indexValue = null){
+  // "allLoan": "allLoanPageIndex",
+  // "todayLoan": "todayLoanPageIndex",
+  // "overdueLoan": "overdueLoanPageIndex",
+  // "otherLoan": "otherLoanPageIndex",
+  let sessionData;
+  switch(loanType){
+    case "all": sessionData = "allPrintLoanPageIndex"
+    break;
+    case "today": sessionData = "todayPrintLoanPageIndex"
+    break;
+    case "overdue": sessionData = "overduePrintLoanPageIndex"
+    break;
+    case "other": sessionData = "otherPrintLoanPageIndex"
+    break;
+  }
+  if(indexValue !== null){
+      sessionStorage.setItem(sessionData, indexValue)
+  }
+  let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+  if(cachedPageIndexValue === null){
+      return 1;
+  }
+  return cachedPageIndexValue;
 }
 
 

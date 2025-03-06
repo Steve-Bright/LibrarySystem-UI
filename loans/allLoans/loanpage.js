@@ -1,5 +1,6 @@
 import { getAllLoansFunction, searchLoan } from "../../controllers/loan.controller.js";
 import { buildMemberNavigation } from "../../utils/extra.js";
+import { buildNavArea } from "../../utils/extra.js";
 import { dotImages } from "../../utils/extra.js";
 import { todayDate } from "../../utils/extra.js";
 const loanType = document.getElementById("loanType")
@@ -10,22 +11,32 @@ const totalData = document.getElementById("totalData")
 const loanNavigationArea = document.getElementById("loanNavigationArea")
 const loanDataEl = document.getElementById("loanData")
 
+const pageIndex = document.getElementById("loanPageIndex")
+const totalPagesUI = document.getElementById("loanTotalPages")
+const collectionBackward = document.querySelectorAll(".collectionBackward")
+const collectionForward = document.querySelectorAll(".collectionForward")
+const buttonsForward = document.getElementById("loanButtonsForward")
+const buttonsBackward = document.getElementById("loanButtonsBackward")
+const navigationButtons = document.getElementById('loanNavigationButtons')
+
 let searchedHistory = sessionStorage.getItem("searchLoanResult")
 let searchedKeyword = sessionStorage.getItem("searchLoanData")
-let index = 1;
+
 let loanTypeValue = cacheLoanType();
 loanType.value = loanTypeValue;
+let index = Number(cachePageIndex(loanTypeValue));
 await searchLoanFunction(loanTypeValue)
 
 if(!searchedHistory){
-  updateLoanData(loanTypeValue)
+  updateLoanData(loanTypeValue, index)
 }else{
   placeItemsInSearchForm(searchedKeyword)
   showSearchResults(searchedHistory)
 }
 
 loanType.addEventListener("change", () => {
-  updateLoanData(loanType.value)
+  updateLoanData(loanType.value, index)
+  window.location.reload()
 } )
 
 printLoan.addEventListener("click", () => {
@@ -53,19 +64,29 @@ async function updateLoanData(loanValue, page = 1){
   let totalLength = result.result.totalItems;
   let totalPages = result.result.totalPages;
   totalData.innerHTML = `Loans (${totalLength})`
+  let navigationComponents = {
+    resultPages: {totalPages, index, navigationButtons},
+    collectionNavigation: {collectionBackward, collectionForward},
+    pageValues: {pageIndex, totalPagesUI},
+    category: `${loanTypeValue}Loan`, 
+    skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
+  }
+  buildNavArea(navigationComponents)
 
-    if(totalPages > 1){
-        if(page == 1){
-            buildMemberNavigation(loanNavigationArea, false, true, index, loanTypeValue, updateLoanData, updateNewIndex)
-        }else if (page === totalPages){
-            buildMemberNavigation(loanNavigationArea, true, false, index, loanTypeValue, updateLoanData, updateNewIndex)
-        }else{
-            buildMemberNavigation(loanNavigationArea, true, true, index, loanTypeValue, updateLoanData, updateNewIndex)
-        }
+  if(totalLength === 0){
+    pageIndex.value = "0"
+  }
+  
+  pageIndex.addEventListener("change", () => {
+    if(pageIndex.value <= totalPages){
+        cachePageIndex(loanTypeValue, pageIndex.value)
+        window.location.reload()
     }else{
-        buildMemberNavigation(loanNavigationArea, false, false, index, loanTypeValue, updateLoanData, updateNewIndex)
+      pageIndex.value = cachePageIndex(loanTypeValue) 
+        window.showMessageApi.alertMsg("Invalid page")
     }
-
+  })
+  
     let totalLoanData = result.result.items;
 
     if(totalLoanData.length > 0){
@@ -179,6 +200,32 @@ function cacheLoanType(booleanValue = null){
     return "all"
   }
   return cachedLoanTypeValue;
+}
+
+function cachePageIndex(loanType, indexValue = null){
+  // "allLoan": "allLoanPageIndex",
+  // "todayLoan": "todayLoanPageIndex",
+  // "overdueLoan": "overdueLoanPageIndex",
+  // "otherLoan": "otherLoanPageIndex",
+  let sessionData;
+  switch(loanType){
+    case "all": sessionData = "allLoanPageIndex"
+    break;
+    case "today": sessionData = "todayLoanPageIndex"
+    break;
+    case "overdue": sessionData = "overdueLoanPageIndex"
+    break;
+    case "other": sessionData = "otherLoanPageIndex"
+    break;
+  }
+  if(indexValue !== null){
+      sessionStorage.setItem(sessionData, indexValue)
+  }
+  let cachedPageIndexValue = sessionStorage.getItem(sessionData)
+  if(cachedPageIndexValue === null){
+      return 1;
+  }
+  return cachedPageIndexValue;
 }
 
 function viewDetailedLoanFunction(){

@@ -69,7 +69,16 @@
             <div class="tableFormat">
                 <div class="tableTitle">
                     <h2 id="totalData">Members</h2>
-                    <div id="memberNavigationArea">
+                    <div class="navAreaBook">
+                        <div class="collectionBackward pageButtons">
+                        </div>
+                        <div id="memCardPageIndexArea">
+                            Page
+                            <input type="number" id="memCardPageIndex" value="0">
+                            of <span id="memCardTotalPages">...</span> pages
+                        </div>
+                        <div class="collectionForward pageButtons">
+                        </div> 
                     </div>
                 </div>
 
@@ -77,6 +86,19 @@
                     <tbody id="memberCardData">
                     </tbody>
                 </table>
+                <div id="memCardNavigationArea">
+                    <div class="pageButtons collectionBackward">
+                    </div>
+                    <div id="memCardButtonsBackward" class="pageButtons">
+                    </div>
+                    <div id="memCardNavigationButtons" class="pageButtons">
+
+                    </div>
+                    <div id="memCardButtonsForward" class="pageButtons">
+                    </div>
+                    <div class="pageButtons collectionForward">
+                    </div>
+                </div>
             </div>
         </main>
 
