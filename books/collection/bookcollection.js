@@ -132,7 +132,8 @@ function showEachBook(placerDiv, bookData){
     for(let eachBook of bookData){
         let imageCondition = ``;
         if(eachBook.loanStatus == true){
-            if(eachBook.latestLoanId.overdue){
+            let overdueStatus = eachBook.latestLoanId.overdue
+            if(overdueStatus){
                 imageCondition = `<img src=${dotImages.red_dot} class="dotSize"></img>`
             }else{
                 let bookDueDate = new Date(eachBook.latestLoanId.dueDate)

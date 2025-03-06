@@ -8,6 +8,7 @@ const totalData = document.getElementById("totalData")
 const loanNavigationArea = document.getElementById("loanNavigationArea")
 const loanDataEl = document.getElementById("loanData")
 const printPreview = document.getElementById("printPreview")
+const clearSelectedLoan = document.getElementById("clearSelectedLoans")
 
 const pageIndex = document.getElementById("printLoanPageIndex")
 const totalPagesUI = document.getElementById("printLoanTotalPages")
@@ -19,7 +20,8 @@ const navigationButtons = document.getElementById('printLoanNavigationButtons')
 
 let searchedHistory = sessionStorage.getItem("searchPrintLoanResult")
 let searchedKeyword = sessionStorage.getItem("searchPrintLoanData")
-let printMaterials = localStorage.getItem("toPrintLoan")
+let printLoanStorage = "toPrintLoan"
+let printMaterials = localStorage.getItem(printLoanStorage)
 const currentFile = window.imagePaths.shareCurrentFile();
 let selectedLoans = [];
 let loanTypeValue = cacheLoanType();
@@ -45,9 +47,9 @@ backToCollection.addEventListener("click", () => {
 
 printPreview.addEventListener("click", () => {
   if(selectedLoans!=[]){
-    localStorage.setItem("toPrintLoan", selectedLoans)
+    localStorage.setItem(printLoanStorage, selectedLoans)
   }else{
-    localStorage.removeItem("toPrintLoan")
+    localStorage.removeItem(printLoanStorage)
   }
   let windowFeatures = {
     "width":725,
@@ -61,6 +63,37 @@ printPreview.addEventListener("click", () => {
   }
 
   window.navigationApi.openWindow(data);
+})
+
+for(let eachIcon of collectionForward){
+  eachIcon.addEventListener("click", () => {
+      if(selectedLoans != []){
+          localStorage.setItem(printLoanStorage, selectedLoans)
+      }else{
+          localStorage.removeItem(printLoanStorage)
+      }
+  })
+}
+
+for(let eachIcon of collectionBackward){
+  eachIcon.addEventListener("click", () => {
+      if(selectedLoans != []){
+          localStorage.setItem(printLoanStorage, selectedLoans)
+      }else{
+          localStorage.removeItem(printLoanStorage)
+      }
+  })
+}
+
+clearSelectedLoan.addEventListener("click", ()=> {
+  window.showMessageApi.confirmMsg("Do you really want to delete?")
+})
+
+window.showMessageApi.dialogResponse(async(event, response) =>{
+  if(!response){
+      localStorage.removeItem(printLoanStorage)
+      window.location.reload()
+  }
 })
 
 async function updateLoanData(loanValue, page = 1){
@@ -203,7 +236,7 @@ function cachePageIndex(loanType, indexValue = null){
 async function searchLoanFunction(loanType){
   searchLoanForm.addEventListener("submit", async(e) => {
     e.preventDefault()
-    localStorage.setItem("toPrintLoan", selectedLoans)
+    localStorage.setItem(printLoanStorage, selectedLoans)
     let searchData = {
       accNo: e.target.accNoInput.value,
       memberId: e.target.memberIdInput.value,

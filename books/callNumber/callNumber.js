@@ -8,6 +8,7 @@ const barcodeData = document.getElementById("barcodeData")
 const barcodeNavigationArea = document.getElementById("barcodeNavigationArea")
 const searchBookForm = document.getElementById("searchBookForm")
 const printPreview = document.getElementById("printPreview")
+const clearSelectedCallNo = document.getElementById("clearSelectedCallNo")
 
 const pageIndex = document.getElementById("callNoPageIndex")
 const totalPagesUI = document.getElementById("callNoTotalPages")
@@ -19,14 +20,15 @@ const navigationButtons = document.getElementById('callNoNavigationButtons')
 
 let searchedHistory = sessionStorage.getItem("searchCallNumResult")
 let searchedKeyword = sessionStorage.getItem("searchCallNumData")
-let printMaterials = localStorage.getItem("toPrintBarcode")
+let barcodeStorage = "toPrintBarcode"
+let printMaterials = localStorage.getItem(barcodeStorage)
 const filePath = window.imagePaths.shareFilePath();
 const currentFile = window.imagePaths.shareCurrentFile();
 let category = cacheCategory();
 collectionCategory.value = category;
 await searchCallNumFunction(category)
-let index = Number(cachePageIndex(category));
 let selectedCallNums = [];
+let index = Number(cachePageIndex(category));
 
 if(printMaterials){
     let testing = JSON.parse(`[${printMaterials}]`)
@@ -59,9 +61,9 @@ if(backToCollection){
 
 printPreview.addEventListener("click", () => {
     if(selectedCallNums != []){
-        localStorage.setItem("toPrintBarcode", selectedCallNums)
+        localStorage.setItem(barcodeStorage, selectedCallNums)
     }else{
-        localStorage.removeItem("toPrintBarcode")
+        localStorage.removeItem(barcodeStorage)
     }
      
     let windowFeatures = {
@@ -75,6 +77,37 @@ printPreview.addEventListener("click", () => {
     }
     window.navigationApi.openWindow(data);
     document.close()
+})
+
+for(let eachIcon of collectionForward){
+    eachIcon.addEventListener("click", () => {
+        if(selectedCallNums != []){
+            localStorage.setItem(barcodeStorage, selectedCallNums)
+        }else{
+            localStorage.removeItem(barcodeStorage)
+        }
+    })
+}
+
+for(let eachIcon of collectionBackward){
+    eachIcon.addEventListener("click", () => {
+        if(selectedCallNums != []){
+            localStorage.setItem(barcodeStorage, selectedCallNums)
+        }else{
+            localStorage.removeItem(barcodeStorage)
+        }
+    })
+}
+
+clearSelectedCallNo.addEventListener("click", ()=> {
+    window.showMessageApi.confirmMsg("Do you really want to remove selected items?")
+})
+
+ window.showMessageApi.dialogResponse(async(event, response) =>{
+    if(!response){
+        localStorage.removeItem(barcodeStorage)
+        window.location.reload()
+    }
 })
 
 async function updateBookData(booleanValue, page = 1){
@@ -161,7 +194,7 @@ searchBookForm.addEventListener("reset", () => {
 async function searchCallNumFunction(categoryData){
     searchBookForm.addEventListener("submit", async(e) => {
       e.preventDefault();
-      localStorage.setItem("toPrintBarcode", selectedCallNums)
+      localStorage.setItem(barcodeStorage, selectedCallNums)
       let searchData = {
         category: categoryData,
         bookTitle: e.target.bookTitleInput.value,
@@ -205,7 +238,7 @@ function barcodeSelection(category){
                 selectedCallNums.push(objectData)
             }
             
-            // console.log("this is all the call numbers " + selectedCallNums)
+            console.log("this is all the call numbers " + selectedCallNums)
         })
     })
 }

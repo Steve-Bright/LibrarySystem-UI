@@ -12,6 +12,7 @@ loginForm.addEventListener("submit", async(e) => {
 
     if(statusCode === 200){
         localStorage.clear()
+        sessionStorage.clear();
         window.cookieApi.setCookie(response.result.token)
         window.sharingDataApi.sendData(response.result.userData)
         await checkBannedMembers();

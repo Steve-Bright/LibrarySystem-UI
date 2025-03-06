@@ -60,10 +60,10 @@
           });
           const newRow = document.createElement("tr")
           newRow.innerHTML = `
-            <td>${eachLoan.memberId.name}</td>            
-            <td>${eachLoan.memberId.memberId}</td>
-            <td>${eachLoan.bookId.bookTitle}</td>
-            <td>${eachLoan.bookId.callNo}</td>
+            <td>${eachLoan.name}</td>            
+            <td>${eachLoan.memberId}</td>
+            <td>${eachLoan.bookTitle}</td>
+            <td>${eachLoan.callNo}</td>
             <td>${formattedLoanDate}</td>
             <td>${formattedDueDate}</td>
           `
