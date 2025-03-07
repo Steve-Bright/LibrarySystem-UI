@@ -4,6 +4,7 @@ import { convertEngToMM, convertMMToEng } from "../../utils/burmese.mapper.js"
 import { bookUIMapping } from "../../utils/book.mapper.js"
 import {loanMappingInBook} from "../../utils/loan.mapper.js"
 import { capitalizeFirstLetter } from "../../utils/extra.js"
+import showErrorImage from "../../js/error.image.js"
 
 const loanArea = document.getElementById("loanArea")
 const isbnViewArea = document.getElementById("viewIsbnArea")
@@ -103,6 +104,7 @@ Object.keys(cleanedBookData).forEach((eachKey) => {
                    
     }
 })
+showErrorImage(true)
 
 if(loanedData.con){
     loanedPeriod.textContent = (new Date(cleanedLoanData.dueDate)).toDateString()

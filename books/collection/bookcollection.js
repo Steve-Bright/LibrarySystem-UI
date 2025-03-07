@@ -3,6 +3,7 @@ import {buildCollectionNavigation, buildNavArea} from "../../utils/extra.js"
 import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
 import { dotImages } from "../../utils/extra.js"
 import { todayDate } from "../../utils/extra.js"
+import showErrorImage from "../../js/error.image.js"
 const collectionCategory = document.getElementById("collectionCategory")
 const searchBookForm = document.getElementById("searchBookForm")
 const callNoBtn = document.getElementById('callNoBtn')
@@ -181,6 +182,7 @@ function showEachBook(placerDiv, bookData){
             
         viewDetailedBookFunction(category)
     }
+    showErrorImage()
 }
 
 searchBookForm.addEventListener("reset", () => {

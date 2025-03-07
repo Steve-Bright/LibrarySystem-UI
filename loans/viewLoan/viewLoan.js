@@ -3,6 +3,7 @@ import { getDetailedBook } from "../../controllers/book.controller.js";
 import { getDetailedMember } from "../../controllers/member.controller.js";
 import {loanUIMapping} from "../../utils/loan.mapper.js";
 import { todayDate } from "../../utils/extra.js";
+import showErrorImage from "../../js/error.image.js"
 const backToCollection = document.getElementById("backToCollection");
 const filePath = window.imagePaths.shareFilePath();
 let detailedLoan = JSON.parse(sessionStorage.getItem("loanId"))
@@ -101,6 +102,8 @@ Object.keys(cleanedLoanData).forEach((eachKey) => {
     }
   }
 })
+
+showErrorImage(true)
 
 goToMemberDetails.addEventListener("click", async() =>{
   const result = await getDetailedMember(cleanedLoanData.memberDatabaseId)
