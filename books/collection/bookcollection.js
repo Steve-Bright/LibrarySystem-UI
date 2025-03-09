@@ -147,6 +147,7 @@ function showEachBook(placerDiv, bookData){
         }
         let accNo;
         let classNo;
+        let conditionalAccNo;
         if(!eachBook.isbn){
             accNo = convertEngToMM(eachBook.accNo, true)
             classNo = convertEngToMM(eachBook.classNo, true)
@@ -158,6 +159,12 @@ function showEachBook(placerDiv, bookData){
             placerDiv.classList.remove("burmeseSize")
             placerDiv.classList.add("englishSize")
         }
+
+        if(eachBook.catalogOwner == "1"){
+        }else{
+            conditionalAccNo = `class ="accNoDesign"`
+        }
+
         let conditionalCell = eachBook.isbn 
                 ? `
                 <td>${eachBook.isbn}</td>
@@ -170,7 +177,7 @@ function showEachBook(placerDiv, bookData){
         newRow.innerHTML = 
             `
                 <td>${imageCondition}</td>
-                <td>${accNo}</td>
+                <td ${conditionalAccNo}>${accNo}</td>
                 <td><img src="${imagePath}" class="displayBookCover"></td> 
                 <td>${eachBook.bookTitle}</td>
                 <td>${eachBook.sor}</td>

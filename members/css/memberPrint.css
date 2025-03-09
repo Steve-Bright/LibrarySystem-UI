@@ -177,28 +177,42 @@ button{
   font-family: "Berlin-Sans"
 }
 
+.thirdRow > div > div:nth-child(2){
+  text-align: left;
+  height: 1em;
+  overflow: hidden;
+}
+
+
 
 .thirdRow{
   font-size: 1em;
 }
 
 .barcode{
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px; */
+  position: absolute;
+  bottom: 10px; /* Adjust as needed */
+  /* left: 0; */
+  width: 80%; /* Or specify exact width */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0px;
+  justify-content: flex-end;
+  z-index: 10; 
 }
 
 .footLine{
-  width: 80%;
+  width: 70%;
   display: flex;
-  position: absolute;
   font-size: 8px;
   justify-content: space-between;
   font-weight: bold;
   letter-spacing: 4px;
   color: red;
-  right: 0.38in;
   bottom: 0.055in;
   line-height: 1.2;
 }

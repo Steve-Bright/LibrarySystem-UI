@@ -21,7 +21,7 @@ let memberTypeValue = cacheMemberType()
 memberType.value = memberTypeValue;
 let index = Number(cachePageIndex(memberTypeValue))
 
-await searchMemberFormFunction()
+await searchMemberFormFunction(memberTypeValue)
 
 if(!searchedHistory){
   updateMemberData(memberTypeValue, index)
@@ -90,7 +90,7 @@ memberCards.addEventListener("click", () => {
 
 function placeItemsInSearchForm(searchedCache){
   searchedCache = JSON.parse(searchedCache)
-  searchMemberForm.memberType.value = searchedCache.memberType
+  searchMemberForm.email.value = searchedCache.email
   searchMemberForm.memberId.value = searchedCache.memberId
   searchMemberForm.name.value = searchedCache.name
   searchMemberForm.personalId.value = searchedCache.personalId
@@ -193,11 +193,12 @@ function cachePageIndex(memberType, indexValue = null){
   return cachedPageIndexValue;
 }
 
-async function searchMemberFormFunction(){
+async function searchMemberFormFunction(memberTypeData){
   searchMemberForm.addEventListener("submit", async(e) => {
     e.preventDefault()
     let searchData = {
-      memberType: e.target.memberType.value,
+      memberType: memberTypeData,
+      email: e.target.email.value,
       name: e.target.name.value,
       memberId: e.target.memberId.value,
       personalId: e.target.personalId.value

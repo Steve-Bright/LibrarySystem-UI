@@ -43,6 +43,11 @@
     display: block;
 }
 
+.accNoDesign{
+    color: #C80001;
+    font-weight: bolder;
+}
+
 .subTitle{
     display: flex;
     width: 100%;

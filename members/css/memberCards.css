@@ -204,7 +204,11 @@ button {
   font-weight: bold;
   font-size: 1.15em;
 }
-
+.thirdRow > div > div:nth-child(2){
+  height: 1em;
+  overflow: hidden;
+  text-align: left;
+}
 
 .thirdRow{
   font-size: 1em;
