@@ -256,6 +256,10 @@ input:focus{
     padding-left: 4px;
 }
 
+textarea{
+    min-height: 5em;
+}
+
 @media (max-width: 920px) {
 
     #navigationPanel{

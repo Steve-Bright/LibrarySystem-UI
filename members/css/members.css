@@ -42,14 +42,15 @@ tr:hover{
   height: 0.5in;
 }
 
-.tableFormat td, .tableFormat th:not(tableFormat th:nth-child(2), tableFormat td:nth-child(2)){
+.tableFormat td {
+  height: 0.5in;
+  box-sizing: border-box;
   padding-left: 5px;
   text-align: left;
 }
 
-.tableFormat td {
-  height: 0.5in;
-  box-sizing: border-box;
+.tableFormat td:nth-child(2){
+  padding: 0;
 }
 
 .tableFormat tr {
