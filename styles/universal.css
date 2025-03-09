@@ -237,6 +237,19 @@ button:hover{
     width: 8em;
 }
 
+.clearSelected{
+    float: right;
+    width: 9em;
+    height: 2.5em;
+    border-radius: 5px;
+    background-color: #C80003;
+    margin: 0 1em 1em 0;
+}
+
+.clearSelected:hover{
+    background-color: #d80004;
+}
+
 input:focus{
     border: 3px solid #3a68ff;
     outline: none;  

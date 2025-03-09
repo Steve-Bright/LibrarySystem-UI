@@ -3,6 +3,7 @@ import {buildCollectionNavigation, buildNavArea} from "../../utils/extra.js"
 import { convertMMToEng, convertEngToMM } from "../../utils/burmese.mapper.js"
 import { dotImages } from "../../utils/extra.js"
 import { todayDate } from "../../utils/extra.js"
+import showErrorImage from "../../js/error.image.js"
 const collectionCategory = document.getElementById("collectionCategory")
 const searchBookForm = document.getElementById("searchBookForm")
 const callNoBtn = document.getElementById('callNoBtn')
@@ -132,7 +133,8 @@ function showEachBook(placerDiv, bookData){
     for(let eachBook of bookData){
         let imageCondition = ``;
         if(eachBook.loanStatus == true){
-            if(eachBook.latestLoanId.overdue){
+            let overdueStatus = eachBook.latestLoanId.overdue
+            if(overdueStatus){
                 imageCondition = `<img src=${dotImages.red_dot} class="dotSize"></img>`
             }else{
                 let bookDueDate = new Date(eachBook.latestLoanId.dueDate)
@@ -145,6 +147,7 @@ function showEachBook(placerDiv, bookData){
         }
         let accNo;
         let classNo;
+        let conditionalAccNo;
         if(!eachBook.isbn){
             accNo = convertEngToMM(eachBook.accNo, true)
             classNo = convertEngToMM(eachBook.classNo, true)
@@ -156,6 +159,12 @@ function showEachBook(placerDiv, bookData){
             placerDiv.classList.remove("burmeseSize")
             placerDiv.classList.add("englishSize")
         }
+
+        if(eachBook.catalogOwner == "1"){
+        }else{
+            conditionalAccNo = `class ="accNoDesign"`
+        }
+
         let conditionalCell = eachBook.isbn 
                 ? `
                 <td>${eachBook.isbn}</td>
@@ -168,7 +177,7 @@ function showEachBook(placerDiv, bookData){
         newRow.innerHTML = 
             `
                 <td>${imageCondition}</td>
-                <td>${accNo}</td>
+                <td ${conditionalAccNo}>${accNo}</td>
                 <td><img src="${imagePath}" class="displayBookCover"></td> 
                 <td>${eachBook.bookTitle}</td>
                 <td>${eachBook.sor}</td>
@@ -180,6 +189,7 @@ function showEachBook(placerDiv, bookData){
             
         viewDetailedBookFunction(category)
     }
+    showErrorImage()
 }
 
 searchBookForm.addEventListener("reset", () => {

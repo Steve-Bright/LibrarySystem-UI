@@ -89,13 +89,6 @@ export async function getLatestAccNo(category){
 export async function generateBarCode(category, accNo){
     return new Promise((resolve, reject) => {
         const canvas = document.createElement('canvas');
-        // let bookCategory;
-        // if(category == "english"){
-        //     bookCategory = "eng"   
-        // }else{
-        //     bookCategory = "mm"
-        // }
-        // let storedData = `${ bookCategory +","+ accNo }`;
         let storedData = `${ category +","+ accNo }`;
         
         JsBarcode(canvas, storedData, { displayValue: false });

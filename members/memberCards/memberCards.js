@@ -8,6 +8,7 @@ const totalData = document.getElementById("totalData")
 const memberCardData = document.getElementById("memberCardData")
 const memberNavigationArea = document.getElementById("memberNavigationArea")
 const searchMemberForm = document.getElementById("searchMemberForm")
+const clearSelectedMemCard = document.getElementById("clearSelectedMemCard")
 
 const pageIndex = document.getElementById("memCardPageIndex")
 const totalPagesUI = document.getElementById("memCardTotalPages")
@@ -19,7 +20,8 @@ const navigationButtons = document.getElementById('memCardNavigationButtons')
 
 let searchedHistory = sessionStorage.getItem("searchMemberCardResult")
 let searchedKeyword = sessionStorage.getItem("searchMemberCardData")
-let printMaterials = localStorage.getItem("toPrintMemberCards")
+let memberStorage = "toPrintMemberCards"
+let printMaterials = localStorage.getItem(memberStorage)
 const currentFile = window.imagePaths.shareCurrentFile();
 let memberTypeValue = cacheMemberType()
 memberType.value = memberTypeValue;
@@ -51,9 +53,9 @@ backToCollection.addEventListener("click", () => {
 printPreview.addEventListener("click",() => {
 
   if(cardIds!=[]){
-    localStorage.setItem("toPrintMemberCards", cardIds)
+    localStorage.setItem(memberStorage, cardIds)
   }else{
-    localStorage.removeItem("toPrintMemberCards")
+    localStorage.removeItem(memberStorage)
   }
 
   let windowFeatures = {
@@ -69,6 +71,37 @@ printPreview.addEventListener("click",() => {
 
   window.navigationApi.openWindow(data);
   document.close()
+})
+
+for(let eachIcon of collectionForward){
+  eachIcon.addEventListener("click", () => {
+      if(cardIds != []){
+          localStorage.setItem(memberStorage, cardIds)
+      }else{
+          localStorage.removeItem(memberStorage)
+      }
+  })
+}
+
+for(let eachIcon of collectionBackward){
+  eachIcon.addEventListener("click", () => {
+      if(cardIds != []){
+          localStorage.setItem(memberStorage, cardIds)
+      }else{
+          localStorage.removeItem(memberStorage)
+      }
+  })
+}
+
+clearSelectedMemCard.addEventListener("click", ()=> {
+  window.showMessageApi.confirmMsg("Do you really want to remove selected items?")
+})
+
+window.showMessageApi.dialogResponse(async(event, response) =>{
+  if(!response){
+      localStorage.removeItem(memberStorage)
+      window.location.reload()
+  }
 })
 
 async function updateMemberCardData(memberValue, page = 1){
@@ -191,7 +224,7 @@ function cachePageIndex(memberType, indexValue = null){
 async function searchMemberFormFunction(){
   searchMemberForm.addEventListener("submit", async(e) => {
     e.preventDefault();
-    localStorage.setItem("toPrintMemberCards", cardIds)
+    localStorage.setItem(memberStorage, cardIds)
     let searchData = {
       name: e.target.name.value,
       memberType: e.target.memberType.value,
