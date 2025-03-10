@@ -100,6 +100,7 @@ async function updateLoanData(loanValue, page = 1){
   loanTypeValue = loanValue;
   let loanData = cacheLoanType(loanValue);
   let result = await getAllLoansFunction(loanData, page)
+  console.log('result is ' + JSON.stringify(result))
   let totalLength = result.result.totalItems;
   let totalPages = result.result.totalPages;
   totalData.innerHTML = `Loans (${totalLength})`
@@ -115,6 +116,21 @@ async function updateLoanData(loanValue, page = 1){
   if(totalLength === 0){
     pageIndex.value = "0"
   }
+
+  pageIndex.addEventListener("change", () => {
+    if(selectedLoans != []){
+      localStorage.setItem(printLoanStorage, selectedLoans)
+    }else{
+        localStorage.removeItem(printLoanStorage)
+    }
+    if(pageIndex.value <= totalPages){
+        cachePageIndex(loanTypeValue, pageIndex.value)
+        window.location.reload()
+    }else{
+      pageIndex.value = cachePageIndex(loanTypeValue) 
+        window.showMessageApi.alertMsg("Invalid page")
+    }
+  })
 
     let totalLoanData = result.result.items;
 

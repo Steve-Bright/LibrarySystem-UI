@@ -33,6 +33,7 @@ await searchMemberFormFunction()
 if(printMaterials){
   cardIds = printMaterials.split(",")
 }
+console.log('card ids are ' + cardIds)
 
 if(!searchedHistory){
   await updateMemberCardData(memberTypeValue, index)
@@ -124,7 +125,8 @@ async function updateMemberCardData(memberValue, page = 1){
       collectionNavigation: {collectionBackward, collectionForward},
       pageValues: {pageIndex, totalPagesUI},
       category: `${memberTypeValue}MemberCard`,
-      skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
+      skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward},
+      printArray: cardIds
     }
     buildNavArea(navigationComponents)
 
@@ -133,8 +135,17 @@ async function updateMemberCardData(memberValue, page = 1){
     }
 
     pageIndex.addEventListener("change", () => {
-      if(pageIndex.value <= totalPages){
-          cachePageIndex(memberTypeData, pageIndex.value)
+      if(cardIds != []){
+        localStorage.setItem(memberStorage, cardIds)
+      }else{
+          localStorage.removeItem(memberStorage)
+      }
+      let pageNumber = Number(pageIndex.value)
+      if(pageNumber == 0){
+        pageIndex.value = cachePageIndex(memberTypeData) 
+        window.showMessageApi.alertMsg("Invalid page number")
+      }else if(pageNumber <= totalPages){
+          cachePageIndex(memberTypeData, pageNumber)
           window.location.reload()
       }else{
         pageIndex.value = cachePageIndex(memberTypeValue) 
