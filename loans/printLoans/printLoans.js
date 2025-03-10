@@ -100,7 +100,6 @@ async function updateLoanData(loanValue, page = 1){
   loanTypeValue = loanValue;
   let loanData = cacheLoanType(loanValue);
   let result = await getAllLoansFunction(loanData, page)
-  console.log('result is ' + JSON.stringify(result))
   let totalLength = result.result.totalItems;
   let totalPages = result.result.totalPages;
   totalData.innerHTML = `Loans (${totalLength})`
