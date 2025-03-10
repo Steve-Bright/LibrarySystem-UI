@@ -51,12 +51,23 @@ if(!searchedHistory){
 
 if(collectionCategory){
     collectionCategory.addEventListener("change", () => {
+        if(selectedCallNums!=[]){
+            localStorage.setItem(barcodeStorage, selectedCallNums)
+          }else{
+            localStorage.removeItem(barcodeStorage)
+          }
         updateBookData(collectionCategory.value)
+        window.location.reload()
     })
 }
 
 if(backToCollection){
     backToCollection.addEventListener("click", () => {
+        if(selectedCallNums!=[]){
+            localStorage.setItem(barcodeStorage, selectedCallNums)
+        }else{
+            localStorage.removeItem(barcodeStorage)
+        }
         window.navigationApi.toAnotherPage("./books/collection/collectionpage.html")
     })
 }
@@ -150,10 +161,7 @@ async function updateBookData(booleanValue, page = 1){
             localStorage.removeItem(barcodeStorage)
         }
         let pageNumber = Number(pageIndex.value)
-        if(pageNumber == 0){
-            pageIndex.value = cachePageIndex(categoryData) 
-            window.showMessageApi.alertMsg("Invalid page number")
-        }else if(pageNumber <= totalPages){
+        if(pageNumber <= totalPages && pageNumber > 0){
             cachePageIndex(categoryData, pageNumber)
             window.location.reload()
         }else{

@@ -33,7 +33,6 @@ await searchMemberFormFunction()
 if(printMaterials){
   cardIds = printMaterials.split(",")
 }
-console.log('card ids are ' + cardIds)
 
 if(!searchedHistory){
   await updateMemberCardData(memberTypeValue, index)
@@ -43,11 +42,21 @@ if(!searchedHistory){
 }
 
 memberType.addEventListener("change", () => {
+  if(cardIds!=[]){
+    localStorage.setItem(memberStorage, cardIds)
+  }else{
+    localStorage.removeItem(memberStorage)
+  }
   updateMemberCardData(memberType.value, index)
   window.location.reload()
 })
 
 backToCollection.addEventListener("click", () => {
+  if(cardIds!=[]){
+    localStorage.setItem(memberStorage, cardIds)
+  }else{
+    localStorage.removeItem(memberStorage)
+  }
   window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
 })
 
@@ -141,10 +150,7 @@ async function updateMemberCardData(memberValue, page = 1){
           localStorage.removeItem(memberStorage)
       }
       let pageNumber = Number(pageIndex.value)
-      if(pageNumber == 0){
-        pageIndex.value = cachePageIndex(memberTypeData) 
-        window.showMessageApi.alertMsg("Invalid page number")
-      }else if(pageNumber <= totalPages){
+      if(pageNumber <= totalPages && pageNumber > 0){
           cachePageIndex(memberTypeData, pageNumber)
           window.location.reload()
       }else{

@@ -56,8 +56,9 @@ async function updateMemberData(memberValue, page = 1){
   }
 
   pageIndex.addEventListener("change", () => {
-    if(pageIndex.value <= totalPages){
-        cachePageIndex(memberTypeValue, pageIndex.value)
+    let pageNumber = Number(pageIndex.value)
+    if(pageNumber <= totalPages && pageNumber > 0){
+        cachePageIndex(memberTypeValue, pageNumber)
         window.location.reload()
     }else{
       pageIndex.value = cachePageIndex(memberTypeValue) 
