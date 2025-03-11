@@ -3,3 +3,21 @@
   height: 2em;
   border-radius: 10px;
 }
+
+#ack-section h1{
+  text-align: center;
+}
+
+#ack-section ul{
+  margin-left: 1em;
+}
+
+#ack-section footer{
+  text-align: right;
+  margin-right: 5em;
+  font-size: 0.9em;
+}
+
+#ack-section #name{
+  text-decoration: underline;
+}
