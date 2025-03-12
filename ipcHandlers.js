@@ -123,7 +123,11 @@ export default function setupIpcHandlers(win) {
   })
 
   ipcMain.on("setCookies", (event, data) => {
-    const cookie = { url: mainWebsite, name: "token", value: data, expirationDate: (Date.now() / 1000) + (7 * 24 * 60 * 60), httpOnly: true, secure: false};
+    const now = new Date();
+    const tomorrowMidnight = new Date(now);
+    tomorrowMidnight.setDate(now.getDate() + 1); // Move to next day
+    tomorrowMidnight.setHours(0, 0, 0, 0);
+    const cookie = { url: mainWebsite, name: "token", value: data, expirationDate: Math.floor(tomorrowMidnight.getTime() / 1000) , httpOnly: true, secure: false};
     session.defaultSession.cookies
       .set(cookie)
       .then(() => {

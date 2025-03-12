@@ -133,5 +133,7 @@ addMemberForm.addEventListener("submit", async(e) => {
   window.showMessageApi.alertMsg(result.msg)
   if(result.con){
     window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
+  }else if(result.errorCode == "CM001"){
+    memberId.value = await getLatestMemberId(memberType.value)
   }
 })

@@ -108,9 +108,15 @@ document.addEventListener("DOMContentLoaded", async() => {
     const {statusCode} = window.cookieApi.checkCookie();
     if(statusCode == 200){
         token = await window.cookieApi.getCookie()
-        // window.showMessageApi.alertMsg("you have a token")
+        console.log("expire date " + token[0].expirationDate)
+        const currentTimestamp = Math.floor(Date.now() / 1000);
+
+        // if(currentTimestamp > token[0].expirationDate){
+        //     alert("your token is expired")
+        //     window.cookieApi.signOut();
+        //     // window.location.reload()
+        // }
     }else{
-        // window.showMessageApi.alertMsg("you don't have a token")
         window.navigationApi.toAnotherPage("./auth/signIn.html")
     }
 })

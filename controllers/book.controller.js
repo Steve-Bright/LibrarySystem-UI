@@ -1,4 +1,4 @@
-import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint, searchBookEndpoint, getBookLoanHistoryEndpoint, getBookNumsEndpoint, importBookEndpoint, getBookLatestLoanEndpoint} from "../utils/links.js"
+import {addBookEndpoint, getBookEndpoint, getBookDetailEndpoint, editBookEndpoint, deleteBookEndpoint, getLatestAccNoEndpoint, getBookFromAccNoEndpoint, searchBookEndpoint, getBookLoanHistoryEndpoint, getBookNumsEndpoint, importBookEndpoint, getBookLatestLoanEndpoint, deleteTempEndpoint} from "../utils/links.js"
 
 const token = await window.cookieApi.getCookie()
 
@@ -163,6 +163,18 @@ export async function getLatestLoanFunction(category, bookId){
         headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${token[0].value}`
+        }
+    })
+
+    let result = await res.json()
+    return (result)
+}
+
+export async function deleteTemp(){
+    const res = await fetch(deleteTempEndpoint, {
+        method: "GET", 
+        headers: {
+            "Content-Type": "application/json"
         }
     })
 
