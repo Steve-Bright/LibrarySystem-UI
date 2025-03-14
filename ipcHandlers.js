@@ -6,13 +6,12 @@ import csvParser from "csv-parser";
 import fs from "fs";
 import { fileURLToPath } from 'url';
 import { mainWebsite } from "./utils/links.js";
+import { exec } from "child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 let sharedData;
 let confirmedAns;
-
-console.log("current file name " + __filename + " and dir name " + __dirname)
 
 export default function setupIpcHandlers(win) {
   ipcMain.on("navigate-to-page", (event, page) => {
@@ -123,7 +122,11 @@ export default function setupIpcHandlers(win) {
   })
 
   ipcMain.on("setCookies", (event, data) => {
-    const cookie = { url: mainWebsite, name: "token", value: data, expirationDate: (Date.now() / 1000) + (7 * 24 * 60 * 60), httpOnly: true, secure: false};
+    const now = new Date();
+    const tomorrowMidnight = new Date(now);
+    tomorrowMidnight.setDate(now.getDate() + 1); // Move to next day
+    tomorrowMidnight.setHours(0, 0, 0, 0);
+    const cookie = { url: mainWebsite, name: "token", value: data, expirationDate: Math.floor(tomorrowMidnight.getTime() / 1000) , httpOnly: true, secure: false};
     session.defaultSession.cookies
       .set(cookie)
       .then(() => {
@@ -183,5 +186,17 @@ export default function setupIpcHandlers(win) {
 
   ipcMain.on("searchNRC", (event, data) => {
     event.returnValue = `${JSON.stringify(NRCData.data[data])}`
+  })
+
+  ipcMain.on("runGit", (event, data) => {
+    const repoUrl = `https://github.com/Steve-Bright/LibrarySystem-UI.git`;
+
+    exec(`git status`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(` Update failed: ${stderr}`);
+        } else {
+            console.log(` Successful ` + stdout);
+        }
+    });
   })
 }

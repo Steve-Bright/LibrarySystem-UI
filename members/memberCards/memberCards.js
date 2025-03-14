@@ -42,11 +42,21 @@ if(!searchedHistory){
 }
 
 memberType.addEventListener("change", () => {
+  if(cardIds!=[]){
+    localStorage.setItem(memberStorage, cardIds)
+  }else{
+    localStorage.removeItem(memberStorage)
+  }
   updateMemberCardData(memberType.value, index)
   window.location.reload()
 })
 
 backToCollection.addEventListener("click", () => {
+  if(cardIds!=[]){
+    localStorage.setItem(memberStorage, cardIds)
+  }else{
+    localStorage.removeItem(memberStorage)
+  }
   window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
 })
 
@@ -124,7 +134,8 @@ async function updateMemberCardData(memberValue, page = 1){
       collectionNavigation: {collectionBackward, collectionForward},
       pageValues: {pageIndex, totalPagesUI},
       category: `${memberTypeValue}MemberCard`,
-      skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
+      skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward},
+      printArray: cardIds
     }
     buildNavArea(navigationComponents)
 
@@ -133,8 +144,14 @@ async function updateMemberCardData(memberValue, page = 1){
     }
 
     pageIndex.addEventListener("change", () => {
-      if(pageIndex.value <= totalPages){
-          cachePageIndex(memberTypeData, pageIndex.value)
+      if(cardIds != []){
+        localStorage.setItem(memberStorage, cardIds)
+      }else{
+          localStorage.removeItem(memberStorage)
+      }
+      let pageNumber = Number(pageIndex.value)
+      if(pageNumber <= totalPages && pageNumber > 0){
+          cachePageIndex(memberTypeData, pageNumber)
           window.location.reload()
       }else{
         pageIndex.value = cachePageIndex(memberTypeValue) 

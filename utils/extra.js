@@ -46,13 +46,12 @@ export async function buildCollectionNavigation(area, backward, forward, index, 
     
 }
 
-export async function buildNavArea({resultPages, collectionNavigation, pageValues, category, skipArea}){
+export async function buildNavArea({resultPages, collectionNavigation, pageValues, category, skipArea, printArray = null}){
     let {totalPages, index, navigationButtons} = resultPages
     let {collectionBackward, collectionForward} = collectionNavigation
     let {pageIndex, totalPagesUI} = pageValues;
 
-
-    console.log('currnt num ' + index)
+    console.log("category is " + category)
 
     let navData = {
         "myanmar": "mmPageIndex", 
@@ -112,7 +111,7 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
 
     }
 
-    buildNumberButtons(sessionData, totalPages, index, navigationButtons, skipArea)
+    buildNumberButtons(sessionData, totalPages, index, navigationButtons, skipArea, category, printArray)
     buttonFunctionality(sessionData)
 
     function buttonFunctionality(sessionData){
@@ -140,7 +139,7 @@ export async function buildNavArea({resultPages, collectionNavigation, pageValue
          }
     }
 }
-function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, skipArea){
+function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, skipArea, category, printArray = null){
     let {leftSkip, rightSkip} = skipArea
     let numberString = JSON.stringify(currentPageNum)
     let lastDigit = numberString[numberString.length-1]
@@ -228,11 +227,30 @@ function buildNumberButtons(sessionData, pages, currentPageNum, buttonsArea, ski
     }
 
     function pageNumberFunctionality(sessionData){
+        let printData = {
+            "myanmarCallNo": "toPrintBarcode",
+            "englishCallNo": "toPrintBarcode",
+            "allMemberCard": "toPrintMemberCards",
+            "staffMemberCard": "toPrintMemberCards",
+            "teacherMemberCard": "toPrintMemberCards",
+            "publicMemberCard": "toPrintMemberCards",
+            "studentMemberCard": "toPrintMemberCards",
+            "allPrintLoan": "toPrintLoan",
+            "todayPrintLoan": "toPrintLoan",
+            "overduePrintLoan": "toPrintLoan",
+            "otherPrintLoan": "toPrintLoan",
+        }
+        let printKeys = Object.keys(printData)
         let buttonsAreaId = buttonsArea.id;
         let buttonClicks = document.querySelectorAll(`#${buttonsAreaId} button`)
         for(let eachButton of buttonClicks){
            eachButton.addEventListener("click", () => {
                sessionStorage.setItem(sessionData, eachButton.id)
+               for(let eachPrintKey of printKeys){
+                if(eachPrintKey === category){
+                    localStorage.setItem(printData[eachPrintKey], printArray)
+                }
+               }
                window.location.reload()
            })
         }

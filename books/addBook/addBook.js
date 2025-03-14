@@ -126,6 +126,11 @@ addBookFormEl.addEventListener("submit", async(e)=> {
     window.showMessageApi.alertMsg(result.msg)
     if(result.con){
         window.location.reload()
+    }else if(result.errorCode == "CB001"){
+        accNoInput.value = await getLatestAccNo(categorySelect.value)
+        if(categorySelect.value == "myanmar"){
+            accNoInput.value = convertEngToMM(accNoInput.value, true)
+        }
     }
         // window.location.reload();
 })

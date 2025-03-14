@@ -6,6 +6,10 @@ const navigationFunction = {
     loadWindow: (fileName) => ipcRenderer.send("reload-parent-window", fileName)
 }
 
+const gitFunction = {
+    runGitTest: (message) => ipcRenderer.send('runGit', message)
+}
+
 const alertBoxFunction = {
     alertMsg: (message) => ipcRenderer.send("alertBox", message),
     confirmMsg: (message) => ipcRenderer.send("openDialog", message),
@@ -52,5 +56,6 @@ contextBridge.exposeInMainWorld("navigationApi", navigationFunction)
 contextBridge.exposeInMainWorld("showMessageApi", alertBoxFunction)
 contextBridge.exposeInMainWorld("sharingDataApi", sharingDataFunction)
 contextBridge.exposeInMainWorld("cookieApi", cookieFunction)
+contextBridge.exposeInMainWorld("gitApi", gitFunction)
 contextBridge.exposeInMainWorld("imagePaths", fileSharingFunction)
 contextBridge.exposeInMainWorld("printApi", printFunction)

@@ -89,8 +89,9 @@ async function updateBookData(booleanValue, page = 1){
     }
 
     pageIndex.addEventListener("change", () => {
-        if(pageIndex.value <= totalPages){
-            cachePageIndex(categoryData, pageIndex.value)
+        let pageNumber = Number(pageIndex.value)
+        if(pageNumber <= totalPages && pageNumber > 0){
+            cachePageIndex(categoryData, pageNumber)
             window.location.reload()
         }else{
             pageIndex.value = cachePageIndex(categoryData) 

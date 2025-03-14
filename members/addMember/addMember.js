@@ -85,7 +85,10 @@ function changePlace(placeDiv, regionNum){
 addMemberForm.addEventListener("submit", async(e) => {
   e.preventDefault()
   const nrcPlaceValue = document.querySelector('input[list="nrcPlace"]');
-  let nrcData = `${regionNumber.value}/${nrcPlaceValue.value}(${nrcType.value})${mainNum.value}`
+  let nrcData
+  if(nrcPlaceValue.value && mainNum.value){
+    nrcData = `${regionNumber.value}/${nrcPlaceValue.value}(${nrcType.value})${mainNum.value}`
+  }
   let barcodeImage = await generateBarCode(e.target.memberId.value);
   const newMember = new Member({
     photo: document.getElementById("memberPhoto").files[0],
@@ -130,5 +133,7 @@ addMemberForm.addEventListener("submit", async(e) => {
   window.showMessageApi.alertMsg(result.msg)
   if(result.con){
     window.navigationApi.toAnotherPage("./members/allmembers/memberspage.html")
+  }else if(result.errorCode == "CM001"){
+    memberId.value = await getLatestMemberId(memberType.value)
   }
 })

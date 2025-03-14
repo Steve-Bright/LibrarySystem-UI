@@ -40,6 +40,8 @@ if(printMaterials){
     // selectedCallNums = printMaterials.split(",")
 }
 
+console.log('selected call numbers are ' + selectedCallNums)
+
 if(!searchedHistory){
     await updateBookData(category, index)
 }else{
@@ -49,12 +51,23 @@ if(!searchedHistory){
 
 if(collectionCategory){
     collectionCategory.addEventListener("change", () => {
+        if(selectedCallNums!=[]){
+            localStorage.setItem(barcodeStorage, selectedCallNums)
+          }else{
+            localStorage.removeItem(barcodeStorage)
+          }
         updateBookData(collectionCategory.value)
+        window.location.reload()
     })
 }
 
 if(backToCollection){
     backToCollection.addEventListener("click", () => {
+        if(selectedCallNums!=[]){
+            localStorage.setItem(barcodeStorage, selectedCallNums)
+        }else{
+            localStorage.removeItem(barcodeStorage)
+        }
         window.navigationApi.toAnotherPage("./books/collection/collectionpage.html")
     })
 }
@@ -132,7 +145,8 @@ async function updateBookData(booleanValue, page = 1){
         collectionNavigation: {collectionBackward, collectionForward},
         pageValues: {pageIndex, totalPagesUI},
         category: `${category}CallNo`, 
-        skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
+        skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward},
+        printArray: selectedCallNums
       }
       buildNavArea(navigationComponents)
 
@@ -140,9 +154,15 @@ async function updateBookData(booleanValue, page = 1){
         pageIndex.value = "0"
       }
 
-      pageIndex.addEventListener("change", () => {
-        if(pageIndex.value <= totalPages){
-            cachePageIndex(categoryData, pageIndex.value)
+      pageIndex.addEventListener("change", (e) => {
+        if(selectedCallNums != []){
+            localStorage.setItem(barcodeStorage, selectedCallNums)
+        }else{
+            localStorage.removeItem(barcodeStorage)
+        }
+        let pageNumber = Number(pageIndex.value)
+        if(pageNumber <= totalPages && pageNumber > 0){
+            cachePageIndex(categoryData, pageNumber)
             window.location.reload()
         }else{
             pageIndex.value = cachePageIndex(categoryData) 

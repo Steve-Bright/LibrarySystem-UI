@@ -78,8 +78,9 @@ async function updateLoanData(loanValue, page = 1){
   }
   
   pageIndex.addEventListener("change", () => {
-    if(pageIndex.value <= totalPages){
-        cachePageIndex(loanTypeValue, pageIndex.value)
+    let pageNumber = Number(pageIndex.value)
+    if(pageNumber <= totalPages && pageNumber > 0){
+        cachePageIndex(loanTypeValue, pageNumber)
         window.location.reload()
     }else{
       pageIndex.value = cachePageIndex(loanTypeValue) 

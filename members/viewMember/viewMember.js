@@ -74,6 +74,12 @@ Object.keys(cleanedMemberData).forEach((eachKey) => {
       eachInput.value = cleanedMemberData[eachKey]
     }else if((eachKey == "issueDate" && eachInput.id == "issueDate")|| (eachKey == "expiryDate" && eachInput.id == "expiryDate")){
       let date = new Date(cleanedMemberData[eachKey])
+      let todayDate = new Date()
+      if(eachKey == "expiryDate" && todayDate >= date){
+        eachInput.classList.add("expiredMember")
+      }else if(eachKey == "expiryDate" && todayDate.getMonth() == date.getMonth()){
+        eachInput.classList.add("nearExpired")
+      }
       eachInput.value = date.toDateString();
     }
     else if(eachInput.id == eachKey){

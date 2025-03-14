@@ -1,3 +1,4 @@
+import { deleteTemp } from "../controllers/book.controller.js";
 import { checkLoanFunction } from "../controllers/loan.controller.js";
 import { checkBannedMembers } from "../controllers/member.controller.js";
 import { loginEndpoint } from "../utils/links.js";
@@ -17,6 +18,7 @@ loginForm.addEventListener("submit", async(e) => {
         window.sharingDataApi.sendData(response.result.userData)
         await checkBannedMembers();
         await checkLoanFunction()
+        await deleteTemp()
         window.navigationApi.toAnotherPage("./dashboard/index.html")
     }
  

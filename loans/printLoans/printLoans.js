@@ -109,12 +109,29 @@ async function updateLoanData(loanValue, page = 1){
     collectionNavigation: {collectionBackward, collectionForward},
     pageValues: {pageIndex, totalPagesUI},
     category: `${loanTypeValue}PrintLoan`,
-    skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward}
+    skipArea: {leftSkip: buttonsBackward, rightSkip: buttonsForward},
+    printArray: selectedLoans
   }
   buildNavArea(navigationComponents)
   if(totalLength === 0){
     pageIndex.value = "0"
   }
+
+  pageIndex.addEventListener("change", () => {
+    if(selectedLoans != []){
+      localStorage.setItem(printLoanStorage, selectedLoans)
+    }else{
+        localStorage.removeItem(printLoanStorage)
+    }
+    let pageNumber = Number(pageIndex.value)
+    if(pageNumber <= totalPages && pageNumber > 0){
+        cachePageIndex(loanTypeValue, pageNumber)
+        window.location.reload()
+    }else{
+      pageIndex.value = cachePageIndex(loanTypeValue) 
+        window.showMessageApi.alertMsg("Invalid page")
+    }
+  })
 
     let totalLoanData = result.result.items;
 
