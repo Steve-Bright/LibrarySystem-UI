@@ -3,6 +3,7 @@ const importCSVForm = document.getElementById("importCSVForm")
 const importCSVData = document.getElementById('importCSVData')
 const currentFile = window.imagePaths.shareCurrentFile();
 const importStatus = document.getElementById("importStatus")
+const gitPullButton = document.getElementById("gitPull")
 
 importCSVForm.addEventListener("submit", async(e) => {
   e.preventDefault()
@@ -17,4 +18,8 @@ importCSVForm.addEventListener("submit", async(e) => {
     importStatus.innerHTML = "Something went wrong"
   }
   alert(result.msg)
+})
+
+gitPullButton.addEventListener("click", () => {
+  window.gitApi.runGitTest()
 })

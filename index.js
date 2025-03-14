@@ -3,7 +3,6 @@ import NRCData from "./assets/nrc.json" with {type: "json"}
 import path from "path"
 import { fileURLToPath } from 'url';
 import ipcHandlers from "./ipcHandlers.js";
-import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -52,8 +51,6 @@ app.on('window-all-closed', () => {
 
   ipcMain.on("reload-parent-window", (event, htmlFile) => {
       const currentWindow = win;
-      console.log("this should work " + path.join(__dirname, htmlFile))
-      console.log("focused window " + currentWindow)
       currentWindow.loadFile(path.join(__dirname, htmlFile))
     })
 

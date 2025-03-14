@@ -110,12 +110,6 @@ document.addEventListener("DOMContentLoaded", async() => {
         token = await window.cookieApi.getCookie()
         console.log("expire date " + token[0].expirationDate)
         const currentTimestamp = Math.floor(Date.now() / 1000);
-
-        // if(currentTimestamp > token[0].expirationDate){
-        //     alert("your token is expired")
-        //     window.cookieApi.signOut();
-        //     // window.location.reload()
-        // }
     }else{
         window.navigationApi.toAnotherPage("./auth/signIn.html")
     }
