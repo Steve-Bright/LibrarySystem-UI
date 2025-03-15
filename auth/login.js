@@ -1,7 +1,13 @@
 import { deleteTemp } from "../controllers/book.controller.js";
 import { checkLoanFunction } from "../controllers/loan.controller.js";
 import { checkBannedMembers } from "../controllers/member.controller.js";
-import { loginEndpoint } from "../utils/links.js";
+import { loginEndpoint, cacheLocalLink} from "../utils/links.js";
+const linkToSeverInput  = document.getElementById("linkToServer")
+let localKey;
+linkToSeverInput.addEventListener("change", () => {
+    localKey = linkToSeverInput.value;
+    cacheLocalLink(linkToSeverInput.value)
+})
 
 const loginForm = document.getElementById("loginForm")
 loginForm.addEventListener("submit", async(e) => {
@@ -19,6 +25,7 @@ loginForm.addEventListener("submit", async(e) => {
         await checkBannedMembers();
         await checkLoanFunction()
         await deleteTemp()
+        cacheLocalLink(localKey)
         window.navigationApi.toAnotherPage("./dashboard/index.html")
     }
  

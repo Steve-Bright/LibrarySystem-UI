@@ -1,5 +1,5 @@
 
-const apiEndpoint = "http://127.0.0.1:3000/"
+const apiEndpoint  = cacheLocalLink()
 export const mainWebsite = "http://localhost"
 
 export const loginEndpoint = apiEndpoint + "accounts/authentication/login"
@@ -49,3 +49,15 @@ export const getLoanNumsEndpoint = (duration) => `${apiEndpoint}loan/totalNum/${
 
 //import book
 export const importBookEndpoint = `${apiEndpoint}book/importData`
+
+export function cacheLocalLink(link = null) {
+  if(link !== null){
+    localStorage.setItem("steveswam", link)
+  }
+
+  let localLinkValue = sessionStorage.getItem("steveswam")
+  if(localLinkValue === null){
+      return "http://127.0.0.1:3000/";
+  }
+  return localLinkValue 
+}
